@@ -7,11 +7,11 @@
 
 <body>
 <?php
-	<form action="welcome.php" method="post">
-	Name: <input type="text" name="name"> <br>
-	E-mail: <input type="text" name="email"><br>
-	<input type="submit">
-	</form>
+	echo "<form action='welcome.php' method='post'>";
+	echo "Name: <input type='text' name='name'> <br>";
+	echo "E-mail: <input type='text' name='email'><br>";
+	echo "<input type='submit'>";
+	echo "</form>";
 ?>	
 </body>
 </html>
