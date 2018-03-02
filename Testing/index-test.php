@@ -10,19 +10,19 @@
 	
 	<form name="form" id="form" method="post" action="signup-inc.php">
 	
-		<input type="text" name="first" placeholder="Firstname">
+		<input type="text" name="first" id="first" placeholder="Firstname">
 		<br>
 		
-		<input type="text" name="last" placeholder="Lastname">
+		<input type="text" name="last" id="last" placeholder="Lastname">
 		<br>
 		
-		<input type="text" name="email" placeholder="E-mail">
+		<input type="text" name="email" id="email" placeholder="E-mail">
 		<br>
 		
-		<input type="text" name="uid" placeholder="Username">
+		<input type="text" name="uid" id="uid" placeholder="Username">
 		<br>
 		
-		<input type="pwd" name="pwd" placeholder="Password">
+		<input type="pwd" name="pwd" id="pwd" placeholder="Password">
 		<br>
 		
 		<input type="submit" name="submit" value="Sign up">
