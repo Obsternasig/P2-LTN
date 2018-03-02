@@ -21,7 +21,7 @@ require_once '../dbconnection.php';
 				 die("Could not query the database" .mysqli_error()); 
 			}
 
-		header("Location: ../index.php?signup=success");
+		header("Location: ../index.php");
 
 		}
 	
