@@ -13,7 +13,7 @@ require_once '../dbconnection.php';
 
 		if(!empty($first)&&!empty($last)){
 
-			$query = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd) VALUES ('$first', '$last', '$email', '$uid', '$pwd')";
+			$query = "INSERT INTO users VALUES ('', $first', '$last', '$email', '$uid', '$pwd')";
 			$results = mysqli_query($connection, $query);
 
 			if(!$results){
