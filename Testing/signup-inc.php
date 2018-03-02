@@ -11,7 +11,7 @@ require_once '../dbconnection.php';
 				$pwd = htmlentities($_POST['pwd']);
 
 
-		if(!empty($first)&&!empty($last)){
+		if(!empty($first)&&!empty($last)&&!empty($email)&&!empty($uid)&&!empty($pwd)){
 
 			$query = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd) VALUES ('$first', '$last', '$email', '$uid', '$pwd')";
 			$results = mysqli_query($connection, $query);
