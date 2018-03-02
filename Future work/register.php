@@ -13,7 +13,7 @@
 <body>
 	<?php
 // Include config file
-include_once 'p2-ltn/config.php';
+include_once '../p2-ltn/config.php';
  
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
