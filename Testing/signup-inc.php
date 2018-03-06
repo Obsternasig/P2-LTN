@@ -11,7 +11,7 @@ require_once '../dbconnection.php';
 
 		if(!empty($first)&&!empty($last)&&!empty($email)){
 
-			$query = "INSERT INTO users (user_id, user_first, user_last, user_email) VALUES ('$first', '$last', '$email')";
+			$query = "INSERT INTO users (user_first, user_last, user_email) VALUES ('$first', '$last', '$email')";
 			$results = mysqli_query($connection, $query);
 
 			if(!$results){
@@ -19,7 +19,7 @@ require_once '../dbconnection.php';
 				 die("Could not query the database" .mysqli_error()); 
 			}
 
-		header("Location: 'index-test.php");
+		header('Location: index-test.php');
 
 		}
 	
