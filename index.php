@@ -8,10 +8,18 @@
 
 <body>
 	<div class="grid">
-			<div class="box1"><input maxlength="1" size="1" autofocus></div>
-			<div class="box2"><input maxlength="1" size="1"></div>
-			<div class="box3"><input maxlength="1" size="1"></div>
-			<div class="box4"><input maxlength="1" size="1"></div>
+			<div class="box1"><input onkeyup="autoTab(this)" maxlength="1" size="1" autofocus></div>
+			<div class="box2"><input onkeyup="autoTab(this)" maxlength="1" size="1"></div>
+			<div class="box3"><input onkeyup="autoTab(this)" maxlength="1" size="1"></div>
+			<div class="box4"><input onkeyup="autoTab(this)" maxlength="1" size="1"></div>
 	</div>
+
+    <script type="text/javascript">
+
+        function autoTab( obj ) {
+            if ( obj.value.length >= obj.maxLength && obj.nextElementSibling )
+                obj.nextElementSibling.focus();
+        }
+    </script>
 </body>
 </html>

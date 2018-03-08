@@ -1,4 +1,4 @@
-<?php
+g<?php
 //Our custom function.
 function generatePIN($digits = 4){
     $i = 0; //counter
