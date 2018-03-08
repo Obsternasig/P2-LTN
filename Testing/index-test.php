@@ -20,7 +20,8 @@
 		<br>
 		
 		<input type="submit" name="submit" value="Sign up">
+		
 	</form>
-
+	
 </body>
 </html>
