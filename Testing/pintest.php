@@ -1,10 +1,10 @@
 <?php
-//Our custom function.
+//Custom function.
 function generatePIN($digits = 4){
     $i = 0; //counter
-    $pin = ""; //default pin is blank.
+    $pin = ""; //Default pin is blank.
     while($i < $digits){
-        //generates a random number between 0 and 9.
+        //Generates a random number between 0 and 9.
         $pin .= mt_rand(0, 9);
         $i++;
     }
@@ -12,22 +12,25 @@ function generatePIN($digits = 4){
 }
 
 //4-digit PIN code.
-$pin = generatePIN() ;
+$pin = generatePIN(4) ;
 echo $pin, '<br>';
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "loginsystem";
 
 // Create connection
 $conn = mysqli_connect('localhost', 'root', '', 'loginsystem');
 
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
+echo "Connected successfully", '<br>';
 
-
-   
+$query = "SELECT * FROM users WHERE column_name = user_id";
+if ($result = mysqli_query($conn, $query))
+{
+	if (mysql_num_rows($result) > 0);
+}
+{
+	echo "$pin";
+}
+?>
