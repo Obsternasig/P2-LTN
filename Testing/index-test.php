@@ -19,12 +19,6 @@
 		<input type="text" name="email" id="email" placeholder="E-mail">
 		<br>
 		
-		<input type="text" name="uid" id="uid" placeholder="Username">
-		<br>
-		
-		<input type="pwd" name="pwd" id="pwd" placeholder="Password">
-		<br>
-		
 		<input type="submit" name="submit" value="Sign up">
 	</form>
 
