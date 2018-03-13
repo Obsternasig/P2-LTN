@@ -19,10 +19,7 @@
 	</div>
 
     <script type="text/javascript">
-        var x;
         function autoTab( obj ) {
-            x = obj;
-
             if ( obj.value.length >= obj.maxLength && obj.parentElement.nextElementSibling )
                 obj.parentElement.nextElementSibling.firstElementChild.focus();
         }
