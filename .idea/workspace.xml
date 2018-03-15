@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="70d78a42-9163-4f96-b6c2-5a38e0ab99e7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/LTN.css" afterPath="$PROJECT_DIR$/LTN.css" />
-      <change beforePath="$PROJECT_DIR$/Testing/pintest.php" afterPath="$PROJECT_DIR$/Testing/pintest.php" />
-      <change beforePath="$PROJECT_DIR$/Testing/signup-inc.php" afterPath="$PROJECT_DIR$/Testing/signup-inc.php" />
-      <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-    </list>
+    <list default="true" id="70d78a42-9163-4f96-b6c2-5a38e0ab99e7" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -279,16 +273,15 @@
       <workItem from="1520947592081" duration="63000" />
       <workItem from="1520949895155" duration="538000" />
       <workItem from="1521112748774" duration="3189000" />
-      <workItem from="1521135634594" duration="2010000" />
+      <workItem from="1521135634594" duration="2028000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12219000" />
+    <option name="totallyTimeSpent" value="12237000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
