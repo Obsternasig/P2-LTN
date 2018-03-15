@@ -1,4 +1,4 @@
-<?php
+
 /**
  * Created by IntelliJ IDEA.
  * User: Stevn
