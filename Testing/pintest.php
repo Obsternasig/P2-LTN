@@ -4,7 +4,6 @@ g<?php
 =======
 <?php
 //Custom function.
->>>>>>> 1cd9fb5e9dca0d5e92c30469b1b45793e47facd2
 function generatePIN($digits = 4){
     $i = 0; //counter
     $pin = ""; //Default pin is blank.
