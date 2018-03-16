@@ -7,6 +7,7 @@
 </head>
 
 <body>
+<form id="login" method="post" action="loginvalidation.php">
 	<div class="grid">
 			<div class="box1"><input onkeyup="autoTab(this)" maxlength="1" size="1" autofocus></div>
 			<div class="box2"><input onkeyup="autoTab(this)" maxlength="1" size="1"></div>
@@ -15,8 +16,8 @@
 			<div class="box4"><input onkeyup="autoTab(this)" maxlength="1" size="1"></div>
 			<div class="box5"><input onkeyup="autoTab(this)" maxlength="1" size="1"></div>
 			<div class="box6"><input onkeyup="autoTab(this)" maxlength="1" size="1"></div>
-			
 	</div>
+</form>
 
     <script type="text/javascript">
         var x;
@@ -27,5 +28,7 @@
                 obj.parentElement.nextElementSibling.firstElementChild.focus();
         }
     </script>
+	
+	
 </body>
 </html>
