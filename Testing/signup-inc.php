@@ -1,4 +1,4 @@
-h<?php
+<?php
 
 require_once '../dbconnection.php';
 
