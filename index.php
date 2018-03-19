@@ -7,18 +7,15 @@
 </head>
 
 <body>
-<form id="login" method="post" action="loginvalidation.php">
 	<div class="grid">
-			<input id="box1" onkeyup="autoTab(this)" maxlength="1" size="1" autofocus>
-			<input id="box2" onkeyup="autoTab(this)" maxlength="1" size="1">
-            <div id="dash"><p>&#x2015;</p></div>
-			<input id="box3" onkeyup="autoTab(this)" maxlength="1" size="1">
-			<input id="box4" onkeyup="autoTab(this)" maxlength="1" size="1">
-			<input id="box5" onkeyup="autoTab(this)" maxlength="1" size="1">
-			<input id="box6" onkeyup="autoTab(this)" maxlength="1" size="1">
-		<input type="submit" name="submit" value="login">
+			<input class="box1" onkeyup="autoTab(this)" maxlength="1" size="1" autofocus>
+			<input class="box2" onkeyup="autoTab(this)" maxlength="1" size="1">
+            <div class="dash"><p>&#x2015;</p></div>
+			<input class="box3" onkeyup="autoTab(this)" maxlength="1" size="1">
+			<input class="box4" onkeyup="autoTab(this)" maxlength="1" size="1">
+			<input class="box5" onkeyup="autoTab(this)" maxlength="1" size="1">
+			<input class="box6" onkeyup="autoTab(this)" maxlength="1" size="1">
 	</div>
-</form>
 
     <script type="text/javascript">
         function autoTab( obj ) {
