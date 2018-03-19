@@ -1,4 +1,4 @@
-<?php
+h<?php
 
 require_once '../dbconnection.php';
 
@@ -22,9 +22,22 @@ require_once '../dbconnection.php';
 		$pin = generatePIN(4);
 		
 		
-		if(!empty($first)&&!empty($last)&&!empty($email)){
+		$string = "$first";
 
-			$query = "INSERT INTO users (ltn_pin, user_first, user_last, user_email) VALUES ('$pin', '$first', '$last', '$email')";
+		
+		function initials ($str) {
+			$ret = '';
+    			
+			foreach (explode(' ', $str) as $word)
+        	$ret .= strtoupper($word[0]);
+    	
+			return $ret;
+		}
+		
+		
+		if(!empty($first)&&!empty($last)&&!empty($email)){
+			
+			$query = "INSERT INTO users (initials, ltn_pin, user_first, user_last, user_email) VALUES ('$string', '$pin', '$first', '$last', '$email')";
 			$results = mysqli_query($connection, $query);
 
 			if(!$results){
