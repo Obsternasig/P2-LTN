@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="knap">
-		<form action="Specifikation.php">
+		<form action="Testing/Specifikation.php">
 			<input type="submit" value="Tilføj"/>
 		</form> 
 	</div>
