@@ -1,6 +1,6 @@
 <?php
 
-require_once 'dbconnection.php';
+require_once '../dbconnection.php';
 
 	if(isset($_POST['first'])&&isset($_POST['last'])&&isset($_POST['email'])){
 				

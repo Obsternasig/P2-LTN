@@ -8,7 +8,7 @@
 
 <body>
 	
-	<form name="form" id="form" method="post" action="/Testing/signup-inc.php">
+	<form name="form" id="form" method="post" action="signup-inc.php">
 	
 		<input type="text" name="first" id="first" placeholder="Firstname">
 		<br>
