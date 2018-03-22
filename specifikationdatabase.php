@@ -1,21 +1,31 @@
 <?php
-	require_once 'specifikationdatabase.php';
+	require_once 'specifikationconnection.php';
+
+
+	if(isset($_POST['navn'])&&isset($_POST['lokation'])&&isset($_POST['antal'])&&isset($_POST['beskrivelse'])) {
+
+			$navn = htmlentities($_POST['navn']);
+			$lokation = htmlentities($_POST['lokation']);
+			$antal = htmlentities($_POST['antal']);
+			$beskrivelse = htmlentities($_POST['beskrivelse']);
 	
-	if(isset($_POST['Navn'])&&isset($_POST['Lokation'])&&isset($_POST['Antal'])&&isset($_POST['Beskrivelse'])){
-
-			$Navn = htmlentities($_POST['Navn']);
-			$Lokation = htmlentities($_POST['Lokation']);
-			$Antal = htmlentities($_POST['Antal']);
-			$Beskrivelse = htmlentities($_POST['Beskrivelse']);
 		
-	if(!empty($Navn)&&!empty($Lokation)&&!empty($Antal)&&!empty($Beskrivelse)){
+	if(!empty($navn)&&!empty($lokation)&&!empty($antal)&&!empty($beskrivelse)) {
 
-	$query = "INSERT INTO /VALUES/ ('', '', '', '', '') VALUES ('$Navn', '$Lokation', '$Antal', '$Beskrivelse')";
-	$results = mysqli_query($connection, $query);
+		$query = "INSERT INTO dingenoter ('ltn_navn', 'ltn_lokation', 'ltn_antal', 'ltn_beskrivelse') VALUES ('$navn', '$lokation', '$antal', '$beskrivelse')";
+		
+		$results = mysqli_query($connection, $query);
 
 		
-	if(!$results){
-		die("cannot connect to database".mysqli_connect_error());
+			if(!$results){
+				die("cannot connect to database" .mysqli_connect_error());
+			}
+		}
+		else {
+		
+		echo "Something went wrong...";
 	}
-mysqli_close($connection);		
+	}
+mysqli_close($connection);
+	
 ?>
