@@ -1,0 +1,88 @@
+/* Her bliver margin fjernet fra alt html og alle body elementer, således at alle sider går helt ud til kanten */
+html, body {
+	margin: 0;
+}
+
+.grid {
+	/* Dette er blot nogle tekstændringer som ikke bliver en del af det endelige produkt, men kun er her for at vise teksten ordentligt i eksemplet */
+	text-align: center;
+	font-size: 2vw;
+	color: white;
+	
+	/* Her defineres den div med classen .grid til at være et grid som består af 3 kolonner og 3 rækker. Ved kolonnerne bliver der brugt en unit kaldet fr som står for fraction, altså dele, dvs. at 1 fr vil svare til 1 del af siden. Ved rækkerne bliver der brugt en unit kaldet vh som står for viewport height, således at den tilpasser sig vinduets højde */
+	display: grid;
+	grid-template-columns: 1fr 4fr 2fr;
+	grid-template-rows: 15vh 50vh 35vh;
+}
+
+.logo {
+	background-color: orangered;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.search {
+	background-color: coral;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.end {
+	background-color: lightsalmon;
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.functions {
+	background-color: cadetblue;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+.shoppinglist {
+	background-color: darkorange;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 3;
+	grid-row-end: 4;
+}
+
+.list {
+	background-color: grey;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 4;
+	
+	/* Dette gør for det første at hvis listen går ud over siden så tilføjes der en scrollbar, således at man ikke skal scrolle på selve siden men blot i div'en hvor selve listen egentlig er. Derudover gør det også sådan at scrollbaren altid er synlig, selv hvis der ikke er nok elementer til at der kan scrolles. I kan prøve at fjerne et par elementer i listen på html siden, så i kan se at scrollbaren stadig er tilstede, selvom at der ikke kan scrolles længere */
+	overflow-y: scroll;
+}
+
+.list ul {
+	/* Der tilføjes lidt padding til alle ul elementer inde i den div med classen .list således at listen ikke sidder helt ud til kanten i div'en */
+	padding: 1vw;
+}
+
+/* Dette henvender sig til alle li elementer inde i den div med classen .list og der bliver her tilføjet padding i toppen og bunden af hvert li element således at der er mellemrum mellem dem, og de ikke sidder lige i numsen af hinanden. Altså bliver der tydeliggjort hvornår et nyt element i listen starter og slutter, så det er let at se hvilke og hvor mange elementer der er, og så det er let at adskille dem fra hinanden */
+
+/* Ydermere bliver teksten i listen også gjort en smule mindre end teksten på resten af siden */
+.list li {
+	padding: 2vh 0;
+	font-size: 1.5vw;
+}
+
+.information {
+	background-color: dimgrey;
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 2;
+	grid-row-end: 4;
+}
