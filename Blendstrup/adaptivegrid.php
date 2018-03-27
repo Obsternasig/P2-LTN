@@ -1,5 +1,5 @@
 <?php
-	require_once "connection.php";
+	require_once "../Adaptive Grid/connection.php";
 
 	$results = mysqli_query($connection, "SELECT * FROM Contacts");
 
@@ -14,7 +14,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Adaptive Grid</title>
-	<link rel="stylesheet" href="adaptivegrid.css">
+	<link rel="stylesheet" href="../Adaptive Grid/adaptivegrid.css">
 </head>
 
 <body>
