@@ -1,7 +1,7 @@
 <?php
-	require_once "../Adaptive Grid/connection.php";
+	require_once "../Blendstrup/connection.php";
 
-	$results = mysqli_query($connection, "SELECT * FROM Contacts");
+	$results = mysqli_query($connection, "SELECT * FROM switches");
 
 	if(!$results) {
 		die("Could not query the database" .mysqli_error());
@@ -14,7 +14,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Adaptive Grid</title>
-	<link rel="stylesheet" href="../Adaptive Grid/adaptivegrid.css">
+	<link rel="stylesheet" href="../Blendstrup/adaptivegrid.css">
 </head>
 
 <body>
