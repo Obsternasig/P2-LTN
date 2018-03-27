@@ -1,9 +1,9 @@
 <?php
 	require_once "../Blendstrup/connection.php";
 
-	$results = mysqli_query($connection, "SELECT * FROM switches");
+	$switches = mysqli_query($connection, "SELECT * FROM switches");
 
-	if(!$results) {
+	if(!$switches) {
 		die("Could not query the database" .mysqli_error());
 	}
 ?>
@@ -29,17 +29,13 @@
 		
  		<div class="list"> 
 			
-			List
-			
 			<ul type="none">
 				
 				<?php 
 				
-					while ($row = mysqli_fetch_assoc($results)) {
+					while ($row = mysqli_fetch_assoc($switches)) {
 						
-						$id = $row['ID'];
-						echo "<li><a href='contact.php?name=$id'>" . $row['Name'] . " " 
-							. $row['Surname'] . "</a></li>";
+						echo "<li>" . $row['kategori'] . " " . $row['brand'] . "</li>";
 					}
 				
 				?>

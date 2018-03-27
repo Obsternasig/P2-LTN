@@ -2,7 +2,7 @@
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="tilfoej.css">
+<link rel="stylesheet" href="../tilfoej.css">
 <title>Tilføj komponent</title>
 </head>
 	
