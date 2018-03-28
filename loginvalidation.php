@@ -1,3 +1,9 @@
+<?php
+
+	require_once "connection.php";
+
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -7,9 +13,6 @@
 
 <body>
 <?php
-	
-	require_once 'dbconnection.php';
-	
    
 	if(isset($_POST["name"], $_POST["password"])) 
     {     

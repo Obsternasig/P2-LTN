@@ -28,7 +28,7 @@
   		<div class="shoppinglist"> Shopping-list </div>
 		
  		<div class="list"> 
-			
+			 
 			<ul type="none">
 				
 				<?php 
