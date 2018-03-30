@@ -61,22 +61,6 @@ html, body {
 	grid-column-end: 3;
 	grid-row-start: 2;
 	grid-row-end: 4;
-	
-	/* Dette gør for det første at hvis listen går ud over siden så tilføjes der en scrollbar, således at man ikke skal scrolle på selve siden men blot i div'en hvor selve listen egentlig er. Derudover gør det også sådan at scrollbaren altid er synlig, selv hvis der ikke er nok elementer til at der kan scrolles. I kan prøve at fjerne et par elementer i listen på html siden, så i kan se at scrollbaren stadig er tilstede, selvom at der ikke kan scrolles længere */
-	overflow-y: scroll;
-}
-
-.list ul {
-	/* Der tilføjes lidt padding til alle ul elementer inde i den div med classen .list således at listen ikke sidder helt ud til kanten i div'en */
-	padding: 1vw;
-}
-
-/* Dette henvender sig til alle li elementer inde i den div med classen .list og der bliver her tilføjet padding i toppen og bunden af hvert li element således at der er mellemrum mellem dem, og de ikke sidder lige i numsen af hinanden. Altså bliver der tydeliggjort hvornår et nyt element i listen starter og slutter, så det er let at se hvilke og hvor mange elementer der er, og så det er let at adskille dem fra hinanden */
-
-/* Ydermere bliver teksten i listen også gjort en smule mindre end teksten på resten af siden */
-.list li {
-	padding: 2vh 0;
-	font-size: 1.5vw;
 }
 
 .information {
@@ -85,9 +69,4 @@ html, body {
 	grid-column-end: 4;
 	grid-row-start: 2;
 	grid-row-end: 4;
-}
-	
-.roundedborders {
-	border-style: solid;
-	border-width: 5px;
 }	
