@@ -55,32 +55,44 @@ html, body {
 }
 
 .list {
-	background-color: grey;
+	background-color: #909090;
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 2;
 	grid-row-end: 4;
 	
 	overflow-y: scroll;
+	overflow-x: hidden;
 	text-align: left;
 }
 
 .list ul {
-	margin: 3vw;
+	margin-left: -0.6vw;
 }
 
 .list li {
 	font-size: 1.5vw;
-	margin: 5vh 0;
+	margin: 2vh 0 4vh 0;
 }
 
 #kate {
-	display: inline;
+	display: inline-block;
+	overflow: hidden;
+	width: 12vw;
+	height: 3vh;
+	text-align: right;
 	text-transform: uppercase;
-	margin: 0 2vh 0 10vh;
-	padding-right: 2vh;
+	margin: 0 1vw 0 ;
+	padding-right: 1vw;
 	border-right: solid;
-	border-right-color: #404040;
+	border-right-color: #505050;
+}
+
+hr {
+	border: none;
+	background-color: #404040;
+	margin-left: -2vw;
+	height: 0.6vh;
 }
 
 .information {

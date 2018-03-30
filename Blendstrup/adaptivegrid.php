@@ -67,18 +67,19 @@
 
 		<div class="list"> 
 
-			<ul type="none">
-
 				<?php 
-
+					echo "<ul type='none'>";
+				
 					while ($row = mysqli_fetch_assoc($switches)) {
 
-						echo "<li>" . "<div id='kate'>" . $row['kategori'] . "</div>" . $row['brand'] . "</li>";
+						echo "<li>" . "<input type='checkbox'>" . "<div id='kate'>" . $row['kategori'] . "</div>" . $row['brand'] . "</li>";
+						echo "<hr>";
 					}
+					
+					echo "</ul>"
 
 				?>
-
-			</ul>	
+	
 		</div>
 		
 		<div class="information"> Information </div>
