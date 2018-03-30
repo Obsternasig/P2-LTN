@@ -11,22 +11,22 @@
 	require_once 'dbconnection.php';
 	
    
-	if(isset($_POST["name"], $_POST["password"])) 
+	if(isset($_POST["initials"], $_POST["ltn_pin"]))
     {     
 
-        $name = $_POST["name"]; 
-        $password = $_POST["password"]; 
+        $ini = $_POST["initials"];
+        $pin = $_POST["ltn_pin"];
 
-        $result1 = mysql_query("SELECT username, password FROM Users WHERE username = '".$name."' AND  password = '".$password."'");
+        $result1 = mysql_query("SELECT initials, ltn_pin FROM users WHERE initials = '".$ini."' AND  ltn_pin = '".$pin."'");
 
         if(mysql_num_rows($result1) > 0 )
         { 
             $_SESSION["logged_in"] = true;
-			$_SESSION["naam"] = $name; 
+			$_SESSION["initials"] = $ini;
         }
         else
         {
-            echo 'The username or password are incorrect!';
+            echo 'Your initials or pin are incorrect!';
         }
 	}
  
