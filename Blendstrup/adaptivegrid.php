@@ -6,6 +6,23 @@
 	if(!$komp) {
 		die("Could not query the database" .mysqli_error());
 	}
+
+
+	function getColorAway($var) {
+    		if ($var <= 0)
+        		return '#ffffff';
+		
+    		else if ($var >= 1)
+				return '#334488';
+		}
+			
+	function getColorBroken($var) {
+    		if ($var <= 0)
+  				return '#ffffff';
+		
+   			else if ($var >= 1)
+				return '#e95522';
+		}
 ?>
 
 <!doctype html>
@@ -31,32 +48,38 @@
 		<div class="list">
 
 				<?php 
+	
 					echo "<ul type='none'>";
 				
-					while ($row = mysqli_fetch_assoc($komp)) {
-
-						echo "<li>";
-						
-							echo "<input type='checkbox'>";
-						
-							echo "<div id='kate'>" . $row['kategori'] . "</div>";
-						
-							echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-							echo "<div>" . " Porte: " . $row['porte']  . "</div>";
-							echo "<div>" . " Antal: " . $row['antal'] . "</div>";
+						while ($row = mysqli_fetch_assoc($komp)) {
 							
-						echo "<br>";
-						
-							echo "<div class='status' id='firststatus'>" . "<input type='checkbox'>" . " Udlånt: " . $row['away'] . "</div>";
-							echo "<div class='status' id='secondstatus'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
-						
-						echo "</li>";
-						
-						echo "<hr>";
-					}
+							$away = $row['away'];
+							$broken = $row['broken'];
+							
+							echo "<li>";
+
+								echo "<input type='checkbox'>";
+
+								echo "<div id='kate'>" . $row['kategori'] . "</div>";
+
+								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
+								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
+								echo "<div>" . " Antal: " . $row['antal'] . "</div>";
+
+							echo "<br>";
+
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
+							
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
+
+							
+							echo "</li>";
+							echo "<hr>";
+							
+						}
 					
-					echo "</ul>"
-				?>
+					echo "</ul>";
+			?>
 		</div>
 		
 		<div class="information"> 

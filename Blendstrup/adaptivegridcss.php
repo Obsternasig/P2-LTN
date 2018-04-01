@@ -118,7 +118,6 @@ html, body {
 
 #firststatus {
 	margin: 1vh 0  0 16.2vw;
-	color: <?php if($away == 0) { echo "$white"; } else { echo "$blue"; } ?>
 }
 
 #kate {
