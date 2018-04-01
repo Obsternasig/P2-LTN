@@ -29,7 +29,7 @@
 
 ?>
 
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i|Roboto:300,500');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i|Roboto:300,700');
 
 html, body {
 	margin: 0;
@@ -87,7 +87,7 @@ html, body {
 }
 
 .list {
-	background-color: #909090;
+	background-color: <?= $g9 ?>;
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 2;
@@ -110,7 +110,7 @@ html, body {
 
 .status {
 	border-top: solid;
-	border-top-color: #505050;
+	border-top-color: <?= $g5 ?>;
 	padding-top: 1vh;
 	height: 3.5vh;
 	font-style: italic;
@@ -123,19 +123,19 @@ html, body {
 
 #kate {
 	font-family: 'Roboto', sans-serif;
-	font-weight: 500;
+	font-weight: 700;
 	font-size: 1.5vw;
 	text-align: right;
 	text-transform: uppercase;
 	margin: 0 1vw;
 	padding-right: 1vw;
 	border-right: solid;
-	border-right-color: #505050;
+	border-right-color: <?= $g5 ?>;
 }
 
 hr {
 	border: none;
-	background-color: #404040;
+	background-color: <?= $g4 ?>;
 	margin-left: -2vw;
 	height: 0.7vh;
 }
