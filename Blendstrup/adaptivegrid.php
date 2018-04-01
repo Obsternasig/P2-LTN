@@ -1,20 +1,21 @@
 <?php
 	require_once "../Blendstrup/connection.php";
 
-	$switches = mysqli_query($connection, "SELECT * FROM switches");
+	$komp = mysqli_query($connection, "SELECT * FROM switches");
 
-	if(!$switches) {
+	if(!$komp) {
 		die("Could not query the database" .mysqli_error());
 	}
 ?>
 
 <!doctype html>
 <html>
-	
+
 <head>
 	<meta charset="utf-8">
 	<title> Adaptive Grid </title>
-	<link rel="stylesheet" href="../Blendstrup/adaptivegrid.css">
+	<link rel="stylesheet" href="adaptivegridcss.php">
+	<script type="text/javascript" src="adaptivegrid.js"></script>
 </head>
 
 <body>
@@ -24,8 +25,42 @@
   		<div class="logo"> Logo </div>
   		<div class="search"> Search </div>
   		<div class="end"> End </div>
-		<div class="functions">
+		<div class="functions"> Functions </div>
+  		<div class="shoppinglist"> Shopping-list </div>
 
+		<div class="list">
+
+				<?php 
+					echo "<ul type='none'>";
+				
+					while ($row = mysqli_fetch_assoc($komp)) {
+
+						echo "<li>";
+						
+							echo "<input type='checkbox'>";
+						
+							echo "<div id='kate'>" . $row['kategori'] . "</div>";
+						
+							echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
+							echo "<div>" . " Porte: " . $row['porte']  . "</div>";
+							echo "<div>" . " Antal: " . $row['antal'] . "</div>";
+							
+						echo "<br>";
+						
+							echo "<div class='status' id='firststatus'>" . "<input type='checkbox'>" . " Udlånt: " . $row['away'] . "</div>";
+							echo "<div class='status' id='secondstatus'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
+						
+						echo "</li>";
+						
+						echo "<hr>";
+					}
+					
+					echo "</ul>"
+				?>
+		</div>
+		
+		<div class="information"> 
+			
 			<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
 				<div>
 					<p>Kategori:</p>
@@ -60,31 +95,14 @@
 				<div>
 					<input type="submit" id="ok" value="OK">
 				</div>
-
-			</form> 
+			</form>
 		</div>
-  		<div class="shoppinglist"> Shopping-list </div>
-
-		<div class="list"> 
-
-				<?php 
-					echo "<ul type='none'>";
-				
-					while ($row = mysqli_fetch_assoc($switches)) {
-
-						echo "<li>" . "<input type='checkbox'>" . "<div id='kate'>" . $row['kategori'] . "</div>" . $row['brand'] . "</li>";
-						echo "<hr>";
-					}
-					
-					echo "</ul>"
-
-				?>
-	
-		</div>
-		
-		<div class="information"> Information </div>
 		
 	</div>
 </body>
 	
 </html>
+
+<?php
+	mysqli_close($connection);
+?>
