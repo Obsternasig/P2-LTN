@@ -31,8 +31,8 @@
 <head>
 	<meta charset="utf-8">
 	<title> Adaptive Grid </title>
-	<link rel="stylesheet" href="adaptivegridcss.php">
-	<script type="text/javascript" src="adaptivegrid.js"></script>
+	<link rel="stylesheet" href="adaptivegrid.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -122,6 +122,20 @@
 		</div>
 		
 	</div>
+	
+	
+	<script>
+		$("document").ready(function(){
+			
+			var $li = $('li').click(function() {
+				
+				$li.removeClass('selected');
+    			$(this).addClass('selected');
+			});
+			
+		});
+	</script>
+	
 </body>
 </html>
 

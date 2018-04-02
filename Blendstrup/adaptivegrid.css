@@ -1,34 +1,3 @@
-<?php header("Content-type: text/css"); 
-
-	require_once "../Blendstrup/connection.php";
-
-	$results = mysqli_query($connection, "SELECT * FROM switches");
-
-	if(!$results) {
-		die("Could not query the database" .mysqli_error());
-	}
-
-
-	$row = mysqli_fetch_assoc($results);
-		
-		$away = $row['away'];
-		$broken = $row['broken'];
-
-	$white = "#ffffff";
-	$blue = "#334488";
-	$red = "#e95522";
-	$g9 = "#909090";
-	$g8 = "#808080";
-	$g7 = "#707070";
-	$g6 = "#606060";
-	$g5 = "#505050";
-	$g4 = "#404040";
-	$g3 = "#303030";
-	$g2 = "#202020";
-	$g1 = "#101010";
-
-?>
-
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i|Roboto:300,700');
 
 html, body {
@@ -87,7 +56,7 @@ html, body {
 }
 
 .list {
-	background-color: <?= $g9 ?>;
+	background-color: #909090;
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 2;
@@ -108,9 +77,14 @@ html, body {
 	font-size: 1.2vw;
 }
 
+li.selected {
+    background-color: #606060;
+	border-radius: 5vh;
+}
+
 .status {
 	border-top: solid;
-	border-top-color: <?= $g5 ?>;
+	border-top-color: #404040;
 	padding-top: 1vh;
 	height: 3.5vh;
 	font-style: italic;
@@ -129,12 +103,12 @@ html, body {
 	margin: 0 1vw;
 	padding-right: 1vw;
 	border-right: solid;
-	border-right-color: <?= $g5 ?>;
+	border-right-color: #404040;
 }
 
 hr {
 	border: none;
-	background-color: <?= $g4 ?>;
+	background-color: #404040;
 	margin-left: -2vw;
 	height: 0.7vh;
 }
@@ -149,7 +123,3 @@ hr {
 	font-size: 1vw;
 	overflow-y: scroll;
 }
-
-<?php
-	mysqli_close($connection);
-?>
