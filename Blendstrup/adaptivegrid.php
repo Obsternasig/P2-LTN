@@ -1,20 +1,38 @@
 <?php
 	require_once "../Blendstrup/connection.php";
 
-	$switches = mysqli_query($connection, "SELECT * FROM switches");
+	$komp = mysqli_query($connection, "SELECT * FROM switches");
 
-	if(!$switches) {
+	if(!$komp) {
 		die("Could not query the database" .mysqli_error());
 	}
+
+
+	function getColorAway($var) {
+    		if ($var <= 0)
+        		return '#ffffff';
+		
+    		else if ($var >= 1)
+				return '#334488';
+		}
+			
+	function getColorBroken($var) {
+    		if ($var <= 0)
+  				return '#ffffff';
+		
+   			else if ($var >= 1)
+				return '#e95522';
+		}
 ?>
 
 <!doctype html>
 <html>
-	
+
 <head>
 	<meta charset="utf-8">
 	<title> Adaptive Grid </title>
-	<link rel="stylesheet" href="../Blendstrup/adaptivegrid.css">
+	<link rel="stylesheet" href="adaptivegrid.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -24,8 +42,48 @@
   		<div class="logo"> Logo </div>
   		<div class="search"> Search </div>
   		<div class="end"> End </div>
-		<div class="functions">
+		<div class="functions"> Functions </div>
+  		<div class="shoppinglist"> Shopping-list </div>
 
+		<div class="list">
+
+				<?php 
+	
+					echo "<ul type='none'>";
+				
+						while ($row = mysqli_fetch_assoc($komp)) {
+							
+							$away = $row['away'];
+							$broken = $row['broken'];
+							
+							echo "<li>";
+
+								echo "<input type='checkbox'>";
+
+								echo "<div id='kate'>" . $row['kategori'] . "</div>";
+
+								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
+								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
+								echo "<div>" . " Antal: " . $row['antal'] . "</div>";
+
+							echo "<br>";
+
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
+							
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
+
+							
+							echo "</li>";
+							echo "<hr>";
+							
+						}
+					
+					echo "</ul>";
+			?>
+		</div>
+		
+		<div class="information"> 
+			
 			<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
 				<div>
 					<p>Kategori:</p>
@@ -60,31 +118,27 @@
 				<div>
 					<input type="submit" id="ok" value="OK">
 				</div>
-
-			</form> 
+			</form>
 		</div>
-  		<div class="shoppinglist"> Shopping-list </div>
-
-		<div class="list"> 
-
-				<?php 
-					echo "<ul type='none'>";
-				
-					while ($row = mysqli_fetch_assoc($switches)) {
-
-						echo "<li>" . "<input type='checkbox'>" . "<div id='kate'>" . $row['kategori'] . "</div>" . $row['brand'] . "</li>";
-						echo "<hr>";
-					}
-					
-					echo "</ul>"
-
-				?>
-	
-		</div>
-		
-		<div class="information"> Information </div>
 		
 	</div>
-</body>
 	
+	
+	<script>
+		$("document").ready(function(){
+			
+			var $li = $('li').click(function() {
+				
+				$li.removeClass('selected');
+    			$(this).addClass('selected');
+			});
+			
+		});
+	</script>
+	
+</body>
 </html>
+
+<?php
+	mysqli_close($connection);
+?>

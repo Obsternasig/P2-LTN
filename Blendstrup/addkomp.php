@@ -39,7 +39,7 @@
 
 
 				if(!$results){
-					die("cannot connect to database" .mysqli_connect_error());
+					die("Cannot connect to the database" .mysqli_connect_error());
 				}
 
 			header("Location: adaptivegrid.php");

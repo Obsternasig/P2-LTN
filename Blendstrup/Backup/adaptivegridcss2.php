@@ -1,4 +1,35 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i|Roboto:300,700');
+<?php header("Content-type: text/css"); 
+
+	require_once "../connection.php";
+
+	$results = mysqli_query($connection, "SELECT * FROM switches");
+
+	if(!$results) {
+		die("Could not query the database" .mysqli_error());
+	}
+
+
+	$row = mysqli_fetch_assoc($results);
+		
+		$away = $row['away'];
+		$broken = $row['broken'];
+
+	$white = "#ffffff";
+	$blue = "#334488";
+	$red = "#e95522";
+	$g9 = "#909090";
+	$g8 = "#808080";
+	$g7 = "#707070";
+	$g6 = "#606060";
+	$g5 = "#505050";
+	$g4 = "#404040";
+	$g3 = "#303030";
+	$g2 = "#202020";
+	$g1 = "#101010";
+
+?>
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i|Roboto:300,500');
 
 html, body {
 	margin: 0;
@@ -77,14 +108,9 @@ html, body {
 	font-size: 1.2vw;
 }
 
-li.selected {
-    background-color: #606060;
-	border-radius: 5vh;
-}
-
 .status {
 	border-top: solid;
-	border-top-color: #404040;
+	border-top-color: #505050;
 	padding-top: 1vh;
 	height: 3.5vh;
 	font-style: italic;
@@ -92,18 +118,19 @@ li.selected {
 
 #firststatus {
 	margin: 1vh 0  0 16.2vw;
+	color: <?php if($away === 0) { echo "$white"; } else { echo "$blue"; } ?>
 }
 
 #kate {
 	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
+	font-weight: 500;
 	font-size: 1.5vw;
 	text-align: right;
 	text-transform: uppercase;
 	margin: 0 1vw;
 	padding-right: 1vw;
 	border-right: solid;
-	border-right-color: #404040;
+	border-right-color: #505050;
 }
 
 hr {
@@ -123,3 +150,7 @@ hr {
 	font-size: 1vw;
 	overflow-y: scroll;
 }
+
+<?php
+	mysqli_close($connection);
+?>
