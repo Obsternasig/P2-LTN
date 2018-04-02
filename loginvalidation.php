@@ -20,7 +20,7 @@
         $ini = $_POST["initials"];
         $pin = $_POST["ltn_pin"];
 
-        $result1 = mysql_query("SELECT initials, ltn_pin FROM users WHERE initials = '".$ini."' AND  ltn_pin = '".$pin."'");
+        $result1 = mysql_query("SELECT initials, ltn_pin FROM users WHERE initials = '$ini' AND  ltn_pin = '$pin'");
 
         if(mysql_num_rows($result1) > 0 )
         { 
