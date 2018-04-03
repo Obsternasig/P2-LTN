@@ -97,6 +97,7 @@ html, body {
 .dropshadow {
 	background-blend-mode: multiply;
 	box-shadow: 4px 4px 4.5px 0.5px black;
+	outline: none;
 }	
 
 ::placeholder {
@@ -108,7 +109,7 @@ html, body {
 	width: 38vw;
 	margin-top: 1.8vh;
 	margin-bottom: 0.5vh;
-	padding-left: 2vw
+	padding-left: 2vw;
 }
 #categories {
 	width: 32vw;
