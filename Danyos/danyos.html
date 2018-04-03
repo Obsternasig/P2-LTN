@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Adaptive Grid</title>
-	<link rel="stylesheet" href="../Adaptive Grid/adaptivegrid.css">
+	<link rel="stylesheet" href="../Danyos/danyos.css">
 </head>
 
 <body>
@@ -13,10 +13,22 @@
 		
   		<div class="logo"> Logo </div>
   		<div class="search"> 
-			<input type="text" class="roundedborders" placeholder="Søg...">
+			<input type="text" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
+			<select size="1" id="categories" class="roundedborders dropshadow">
+				<option>Alle</option>
+				<option value="1">Switches</option>
+				<option value="2">Ramblokke</option>
+				<option value="3">Kategori 3</option>
+			</select>
 		</div>
   		<div class="end"> End </div>
-  		<div class="functions"> Functions </div>
+  		<div class="functions">
+			<form>
+				<input type="button" class="buttons" value="Tilføj"
+				onclick="window.location.href='Specifikation.php'"	   
+				/>
+			</form>
+		</div>
   		<div class="shoppinglist"> Shopping-list </div>
 		
  		<div class="list"> 
