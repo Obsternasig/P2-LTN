@@ -49,7 +49,7 @@
 
 				<?php 
 	
-					echo "<ul type='none'>";
+					echo "<ul>";
 				
 						while ($row = mysqli_fetch_assoc($komp)) {
 							
@@ -129,8 +129,15 @@
 			
 			var $li = $('li').click(function() {
 				
-				$li.removeClass('selected');
-    			$(this).addClass('selected');
+					if($(this).hasClass('selected')) {
+
+						$(this).removeClass('selected');
+
+					} else {
+
+					$li.removeClass('selected');
+					$(this).addClass('selected');
+				}
 			});
 			
 		});

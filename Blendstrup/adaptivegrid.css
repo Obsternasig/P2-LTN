@@ -67,7 +67,8 @@ html, body {
 }
 
 .list ul {
-	margin-left: -0.6vw;
+    padding: 0;
+    list-style-type: none;
 }
 
 .list div {
@@ -109,7 +110,6 @@ li.selected {
 hr {
 	border: none;
 	background-color: #404040;
-	margin-left: -2vw;
 	height: 0.7vh;
 }
 
