@@ -16,7 +16,7 @@ html, body {
 }
 
 .logo {
-	background-color: orangered;
+	background-color: #303030;
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start: 1;
@@ -24,7 +24,7 @@ html, body {
 }
 
 .search {
-	background-color: #323232;
+	background-color: #303030;
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 1;
@@ -32,7 +32,7 @@ html, body {
 }
 
 .end {
-	background-color: lightsalmon;
+	background-color: #303030;
 	grid-column-start: 3;
 	grid-column-end: 4;
 	grid-row-start: 1;
@@ -40,7 +40,7 @@ html, body {
 }
 
 .functions {
-	background-color: #323232;
+	background-color: #303030;
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start: 2;
@@ -48,7 +48,7 @@ html, body {
 }
 
 .shoppinglist {
-	background-color: darkorange;
+	background-color: #404040;
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start: 3;
@@ -56,7 +56,7 @@ html, body {
 }
 
 .list {
-	background-color: grey;
+	background-color: #909090;
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 2;
@@ -80,7 +80,7 @@ html, body {
 }
 
 .information {
-	background-color: dimgrey;
+	background-color: #707070;
 	grid-column-start: 3;
 	grid-column-end: 4;
 	grid-row-start: 2;
