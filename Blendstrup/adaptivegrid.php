@@ -50,7 +50,7 @@
 					<option value="2">Ramblokke</option>
 					<option value="3">Kategori 3</option>
 				</select>
-			
+
 		</div>
   		<div class="end"> End </div>
 		<div class="functions"> Functions </div>

@@ -6,7 +6,7 @@ html, body {
 
 .dropshadow {
 	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(00, 00, 00, 0.5); 
-	
+	outline: none;
 	/* box-shadow: 4px 4px 5px 0px rgba(80, 80, 80, 0.5); 
 	text-shadow: 4px 4px 5px rgba(80, 80, 80, 0.5); */
 }
@@ -48,7 +48,7 @@ html, body {
 }
 
 .logo {
-	background-color: orangered;
+	background-color: #303030;
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start: 1;
@@ -64,7 +64,7 @@ html, body {
 }
 
 .end {
-	background-color: lightsalmon;
+	background-color: #303030;
 	grid-column-start: 3;
 	grid-column-end: 4;
 	grid-row-start: 1;
