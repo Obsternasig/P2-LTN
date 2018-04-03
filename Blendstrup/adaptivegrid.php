@@ -40,7 +40,18 @@
 	<div class="grid">
 		
   		<div class="logo"> Logo </div>
-  		<div class="search"> Search </div>
+  		<div class="search">
+		
+			<input type="text" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
+		
+				<select size="1" id="categories" class="roundedborders dropshadow">
+					<option>Alle</option>
+					<option value="1">Switches</option>
+					<option value="2">Ramblokke</option>
+					<option value="3">Kategori 3</option>
+				</select>
+			
+		</div>
   		<div class="end"> End </div>
 		<div class="functions"> Functions </div>
   		<div class="shoppinglist"> Shopping-list </div>

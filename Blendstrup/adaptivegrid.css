@@ -4,6 +4,38 @@ html, body {
 	margin: 0;
 }
 
+.dropshadow {
+	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(00, 00, 00, 0.5); 
+	
+	/* box-shadow: 4px 4px 5px 0px rgba(80, 80, 80, 0.5); 
+	text-shadow: 4px 4px 5px rgba(80, 80, 80, 0.5); */
+}
+
+.roundedborders {
+	border-radius: 5vw;
+	background-color: #606060;
+	color: white;
+	border-style: none;
+}
+
+::placeholder {
+	color: white;
+}
+
+#searchfield {
+	font-size: 1.5vw;
+	width: 38vw;
+	margin-top: 1.8vh;
+	margin-bottom: 0.5vh;
+	padding: 0.75vh 0 0.75vh 2vw;
+}
+
+#categories {
+	width: 32vw;
+	font-size: 1.3vw;
+	text-align-last: center;
+}
+
 .grid {
 	text-align: center;
 	font-size: 2vw;
@@ -24,7 +56,7 @@ html, body {
 }
 
 .search {
-	background-color: coral;
+	background-color: #303030;
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 1;
@@ -71,16 +103,22 @@ html, body {
     list-style-type: none;
 }
 
+.list li {
+	margin: 0 1vw;
+	padding: 0 0 0 1.5vw;
+}
+
 .list div {
 	display: inline-block;
 	overflow: hidden;
-	width: 12vw;
+	width: 11.5vw;
 	font-size: 1.2vw;
 }
 
 li.selected {
     background-color: #606060;
 	border-radius: 5vh;
+	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(80, 80, 80, 0.5);
 }
 
 .status {
