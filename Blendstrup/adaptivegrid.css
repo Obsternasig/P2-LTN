@@ -42,13 +42,14 @@ html, body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #757575; 
-} 
+}
 
 #imglogo {
 	margin-top: 3vh;
 	width: 40%;
     height: auto;
 }
+
 #searchfield {
 	font-size: 1.5vw;
 	width: 38vw;
