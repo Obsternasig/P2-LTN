@@ -31,7 +31,7 @@
 <head>
 	<meta charset="utf-8">
 	<title> Adaptive Grid </title>
-	<link rel="stylesheet" href="adaptivegrid.css">
+	<link rel="stylesheet" href="adaptivedanyos.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -41,14 +41,13 @@
 		
   		<div class="logo">
 		
-			<img id="imglogo" src="images/logo.png" />
+			<img id="imglogo" src="Images/logo.png" />
 			
 		</div>
 		
   		<div class="search">
 		
-			<input type="search" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
-		
+			<input type="search" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">														   		
 				<select size="1" id="categories" class="roundedborders dropshadow">
 					<option>Alle</option>
 					<option value="1">Switches</option>
@@ -57,11 +56,8 @@
 				</select>
 
 		</div>
-  		<div class="end"> 
-			
-			<button id="endbutton" class="roundedborders dropshadow">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> Børge Knudsen </div>
-			
+  		<div class="end">  
+			<button class="roundedborders dropshadow" type="endbutton" id=button>Afslut</button> 
 		</div>
 		<div class="functions">  </div>
   		<div class="shoppinglist">  </div>
