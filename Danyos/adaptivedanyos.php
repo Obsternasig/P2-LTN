@@ -1,7 +1,7 @@
 <?php
 	require_once "../Blendstrup/connection.php";
 
-	$komp = mysqli_query($connection, "SELECT * FROM switches");
+	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 
 	if(!$komp) {
 		die("Could not query the database" .mysqli_error());
@@ -47,8 +47,7 @@
 		
   		<div class="search">
 		
-			<input type="text" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
-		
+			<input type="search" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">														   		
 				<select size="1" id="categories" class="roundedborders dropshadow">
 					<option>Alle</option>
 					<option value="1">Switches</option>
@@ -57,7 +56,9 @@
 				</select>
 
 		</div>
-  		<div class="end">  </div>
+  		<div class="end">  
+			<button class="roundedborders dropshadow" type="endbutton" id=button>Afslut</button> 
+		</div>
 		<div class="functions">  </div>
   		<div class="shoppinglist">  </div>
 

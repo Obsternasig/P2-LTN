@@ -22,6 +22,28 @@ html, body {
 	color: white;
 }
 
+::-webkit-scrollbar {
+	width: 1.2vw;
+}
+
+::-webkit-scrollbar-track {
+    background: #505050;
+}
+
+::-webkit-scrollbar-track-piece {
+	width: 30px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #707070;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0vw 0vw 0vw 0.28vw #505050;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #757575; 
+} 
+
 #imglogo {
 	margin-top: 3vh;
 	width: 40%;
@@ -33,6 +55,10 @@ html, body {
 	margin-top: 1.8vh;
 	margin-bottom: 0.5vh;
 	padding: 0.75vh 0 0.75vh 2vw;
+	background-image: url(Images/searchicon.png);
+	background-repeat: no-repeat;
+	background-size: 4%;
+	background-position: 97%;
 }
 
 #categories {
@@ -41,6 +67,11 @@ html, body {
 	text-align-last: center;
 }
 
+#endbutton {
+	font-size: 1.5vw;
+	padding: 0.5vh 3vw;
+	margin: 1.8vh auto 0;
+}
 .grid {
 	text-align: center;
 	font-size: 2vw;
@@ -90,6 +121,7 @@ html, body {
 	grid-column-end: 2;
 	grid-row-start: 3;
 	grid-row-end: 4;
+	overflow-y: scroll;
 }
 
 .list {
@@ -101,6 +133,7 @@ html, body {
 	
 	overflow-y: scroll;
 	text-align: left;
+	box-shadow: inset 0.7vw 0 1vw -0.7vw rgba(5,5,5,0.8), inset 0 0.7vw 1vw -0.7vw rgba(5,5,5,0.8);
 }
 
 .list ul {
@@ -165,4 +198,5 @@ hr {
 	text-transform: uppercase;
 	font-size: 1vw;
 	overflow-y: scroll;
+	box-shadow: inset 0 0.7vw 1vw -0.7vw rgba(5,5,5,0.8);
 }

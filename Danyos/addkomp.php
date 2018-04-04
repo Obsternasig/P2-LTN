@@ -34,7 +34,7 @@
 		
 		if(!empty($kategori)&&!empty($brand)) {
 
-			$query = "INSERT INTO switches VALUES ('$kategori', '$brand', '$porte', '$antal', '$away', '$broken', '')";
+			$query = "INSERT INTO komponenter VALUES ('$kategori', '$brand', '$porte', '$antal', '$away', '$broken', '')";
 			$results = mysqli_query($connection, $query);
 
 
