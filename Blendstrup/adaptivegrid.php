@@ -6,6 +6,7 @@
 		
 		$userrows = mysqli_fetch_assoc($users);
 
+
 	if(!$komp) {
 		die("Could not query the database" .mysqli_error());
 	}
