@@ -1,7 +1,7 @@
 <?php
 	require_once "../Blendstrup/connection.php";
 
-	$komp = mysqli_query($connection, "SELECT * FROM switches");
+	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 
 	if(!$komp) {
 		die("Could not query the database" .mysqli_error());
@@ -41,13 +41,13 @@
 		
   		<div class="logo">
 		
-			<img id="imglogo" src="Images/logo.png" />
+			<img id="imglogo" src="images/logo.png" />
 			
 		</div>
 		
   		<div class="search">
 		
-			<input type="text" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
+			<input type="search" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
 		
 				<select size="1" id="categories" class="roundedborders dropshadow">
 					<option>Alle</option>
@@ -57,7 +57,12 @@
 				</select>
 
 		</div>
-  		<div class="end">  </div>
+  		<div class="end"> 
+			
+			<button id="endbutton" class="roundedborders dropshadow">Afslut</button>
+			<div class="person"> <img src="images/mand.png"> Børge Knudsen </div>
+			
+		</div>
 		<div class="functions">  </div>
   		<div class="shoppinglist">  </div>
 
