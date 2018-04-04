@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i|Roboto:300,700');
+
+html, body {
+	margin: 0;
+}
+
+.dropshadow {
+	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(00, 00, 00, 0.5); 
+	outline: none;
+	/* box-shadow: 4px 4px 5px 0px rgba(80, 80, 80, 0.5); 
+	text-shadow: 4px 4px 5px rgba(80, 80, 80, 0.5); */
+}
+
+.roundedborders {
+	border-radius: 5vw;
+	background-color: #606060;
+	color: white;
+	border-style: none;
+}
+
+::placeholder {
+	color: white;
+}
+
+#imglogo {
+	margin-top: 3vh;
+	width: 40%;
+    height: auto;
+}
+#searchfield {
+	font-size: 1.5vw;
+	width: 38vw;
+	margin-top: 1.8vh;
+	margin-bottom: 0.5vh;
+	padding: 0.75vh 0 0.75vh 2vw;
+}
+
+#categories {
+	width: 32vw;
+	font-size: 1.3vw;
+	text-align-last: center;
+}
+
+.grid {
+	text-align: center;
+	font-size: 2vw;
+	color: white;
+	font-family: 'Noto Sans', sans-serif;
+
+	display: grid;
+	grid-template-columns: 1fr 4fr 2fr;
+	grid-template-rows: 15vh 50vh 35vh;
+}
+
+.logo {
+	background-color: #303030;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.search {
+	background-color: #303030;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.end {
+	background-color: #303030;
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.functions {
+	background-color: #303030;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+.shoppinglist {
+	background-color: #404040;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 3;
+	grid-row-end: 4;
+}
+
+.list {
+	background-color: #909090;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 4;
+	
+	overflow-y: scroll;
+	text-align: left;
+}
+
+.list ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.list li {
+	margin: 0 1vw;
+	padding: 0 0 0 1.5vw;
+}
+
+.list div {
+	display: inline-block;
+	overflow: hidden;
+	width: 11.5vw;
+	font-size: 1.2vw;
+}
+
+li.selected {
+    background-color: #606060;
+	border-radius: 5vh;
+	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(80, 80, 80, 0.5);
+}
+
+.status {
+	border-top: solid;
+	border-top-color: #404040;
+	padding-top: 1vh;
+	height: 3.5vh;
+	font-style: italic;
+}
+
+#firststatus {
+	margin: 1vh 0  0 16.2vw;
+}
+
+#kate {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	font-size: 1.5vw;
+	text-align: right;
+	text-transform: uppercase;
+	margin: 0 1vw;
+	padding-right: 1vw;
+	border-right: solid;
+	border-right-color: #404040;
+}
+
+hr {
+	border: none;
+	background-color: #404040;
+	height: 0.7vh;
+}
+
+.information {
+	background-color: dimgrey;
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 2;
+	grid-row-end: 4;
+	text-transform: uppercase;
+	font-size: 1vw;
+	overflow-y: scroll;
+}
