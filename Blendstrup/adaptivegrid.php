@@ -2,8 +2,15 @@
 	require_once "../Blendstrup/connection.php";
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
+	$users = mysqli_query($connection, "SELECT * FROM users");
+		
+		$userrows = mysqli_fetch_assoc($users);
 
 	if(!$komp) {
+		die("Could not query the database" .mysqli_error());
+	}
+
+	if(!$users) {
 		die("Could not query the database" .mysqli_error());
 	}
 
@@ -15,7 +22,7 @@
     		else if ($var >= 1)
 				return '#334488';
 		}
-			
+	
 	function getColorBroken($var) {
     		if ($var <= 0)
   				return '#ffffff';
@@ -60,7 +67,7 @@
   		<div class="end"> 
 			
 			<button id="endbutton" class="roundedborders dropshadow">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> Børge Knudsen </div>
+			<div class="person"> <img src="images/mand.png"> <?php echo $userrows['user_first'] . " " . $userrows['user_last']; ?> </div>
 			
 		</div>
 		<div class="functions">  </div>
