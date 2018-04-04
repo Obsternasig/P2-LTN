@@ -27,7 +27,7 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(70,70,70,1);
+    background: #505050;
 }
 
 ::-webkit-scrollbar-track-piece {
@@ -37,7 +37,7 @@ html, body {
 ::-webkit-scrollbar-thumb {
     background: #707070;
 	border-radius: 10px;
-	-webkit-box-shadow: inset 0vw 0vw 0vw 0.28vw rgba(70,70,70,1);
+	-webkit-box-shadow: inset 0vw 0vw 0vw 0.28vw #505050;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -113,6 +113,7 @@ html, body {
 	grid-column-end: 2;
 	grid-row-start: 3;
 	grid-row-end: 4;
+	overflow-y: scroll;
 }
 
 .list {
