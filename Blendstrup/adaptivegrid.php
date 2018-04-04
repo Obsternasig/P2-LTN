@@ -39,7 +39,12 @@
 	
 	<div class="grid">
 		
-  		<div class="logo"> Logo </div>
+  		<div class="logo">
+		
+			<img id="imglogo" src="Images/logo.png" />
+			
+		</div>
+		
   		<div class="search">
 		
 			<input type="text" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
@@ -52,9 +57,9 @@
 				</select>
 
 		</div>
-  		<div class="end"> End </div>
-		<div class="functions"> Functions </div>
-  		<div class="shoppinglist"> Shopping-list </div>
+  		<div class="end">  </div>
+		<div class="functions">  </div>
+  		<div class="shoppinglist">  </div>
 
 		<div class="list">
 
@@ -133,7 +138,7 @@
 		</div>
 		
 	</div>
-	
+
 	
 	<script>
 		$("document").ready(function(){
