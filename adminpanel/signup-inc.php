@@ -21,19 +21,10 @@ require_once 'connection.php';
  
 		$pin = generatePIN(4);
 		
-		
-		$words = explode("$last", "$first");
-$acronym = "" ;
-
-foreach ($words as $w) {
-  $acronym = $w[0];
-}
-		
-		$test = "$acronym" + "$acronym1";
 	
 		if(!empty($first)&&!empty($last)&&!empty($email)){
 			
-			$query = "INSERT INTO users (initials, ltn_pin, user_first, user_last, user_email) VALUES ('$acronym', '$pin', '$first', '$last', '$email')";
+			$query = "INSERT INTO users (initials, ltn_pin, user_first, user_last, user_email) VALUES ('$east', '$pin', '$first', '$last', '$email')";
 			$results = mysqli_query($connection, $query);
 
 			if(!$results){
