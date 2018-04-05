@@ -4,12 +4,11 @@
 <head>
 	<meta charset="utf-8">
 	<title>Ny bruger</title>
-	<link rel="stylesheet" href="../Marcus/registrer.css">
 </head>
 
 <body>
 	
-	<form name="form" id="form" method="post" action="/adminpanel/signup-inc.php">
+	<form name="form" id="form" method="post" action="signup-inc.php">
 	
 		<input type="text" name="first" id="first" placeholder="Firstname">
 		<br>

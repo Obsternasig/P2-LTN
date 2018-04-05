@@ -1,6 +1,6 @@
 <?php
 
-require_once 'dbconnection.php';
+require_once 'connection.php';
 
 	if(isset($_POST['first'])&&isset($_POST['last'])&&isset($_POST['email'])){
 				
@@ -21,23 +21,10 @@ require_once 'dbconnection.php';
  
 		$pin = generatePIN(4);
 		
-		
-		$string = "$first";
-
-		
-		function initials ($str) {
-			$ret = '';
-    			
-			foreach (explode(' ', $str) as $word)
-        	$ret .= strtoupper($word[0]);
-    	
-			return $ret;
-		}
-		
-		
+	
 		if(!empty($first)&&!empty($last)&&!empty($email)){
 			
-			$query = "INSERT INTO users (initials, ltn_pin, user_first, user_last, user_email) VALUES ('$string', '$pin', '$first', '$last', '$email')";
+			$query = "INSERT INTO users (initials, ltn_pin, user_first, user_last, user_email) VALUES ('$east', '$pin', '$first', '$last', '$email')";
 			$results = mysqli_query($connection, $query);
 
 			if(!$results){
@@ -45,7 +32,7 @@ require_once 'dbconnection.php';
 				 die("Could not query the database" .mysqli_error()); 
 			}
 
-		header('Location: index-test.php');
+		header('Location: registrer.php');
 
 		}
 	

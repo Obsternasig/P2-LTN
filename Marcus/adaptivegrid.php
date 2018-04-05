@@ -1,39 +1,29 @@
 <?php
-	require_once "../Blendstrup/connection.php";
+	require_once "../Marcus/connection.php";
 
-	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
-	$users = mysqli_query($connection, "SELECT * FROM users");
+	$komp = mysqli_query($connection, "SELECT * FROM switches");
+
+	if(!$komp) {
+		die("Could not query the database" .mysqli_error());
+	}
 
 
-		if(!$komp) {
-			die("Could not query the database" .mysqli_error());
+	function getColorAway($var) {
+    		if ($var <= 0)
+        		return '#ffffff';
+		
+    		else if ($var >= 1)
+				return '#334488';
 		}
-
-		if(!$users) {
-			die("Could not query the database" .mysqli_error());
+			
+	function getColorBroken($var) {
+    		if ($var <= 0)
+  				return '#ffffff';
+		
+   			else if ($var >= 1)
+				return '#e95522';
 		}
-
-
-	$userassoc = mysqli_fetch_assoc($users);
-
-
-		function getColorAway($var) {
-				if ($var <= 0)
-					return '#ffffff';
-
-				else if ($var >= 1)
-					return '#334488';
-			}
-
-		function getColorBroken($var) {
-				if ($var <= 0)
-					return '#ffffff';
-
-				else if ($var >= 1)
-					return '#e95522';
-			}
 ?>
-
 
 <!doctype html>
 <html>
@@ -49,65 +39,17 @@
 	
 	<div class="grid">
 		
-  		<div class="logo">
-		
-			<img id="imglogo" src="images/logo.png" />
-			
-		</div>
-		
-  		<div class="search">
-		
-			<input type="search" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
-		
-				<select size="1" id="categories" class="roundedborders dropshadow">
-					<option>Alle</option>
-					<option value="1">Switches</option>
-					<option value="2">Ramblokke</option>
-					<option value="3">Kategori 3</option>
-				</select>
-
-		</div>
-		
-  		<div class="end"> 
-			
-			<button id="endbutton" class="roundedborders dropshadow">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
-			
-		</div>
-		
-		<div class="functions"> 
-		
-			<form name="adduser" id="adduser" method="post" action="adduser.php">
-				<div>
-					<p>First name:</p>
-					<input type="text" name="addfirstname" id="addfirstname" maxlength="20">
-				</div>
-
-				<div>
-					<p>Last name:</p>
-					<input type="text" name="addlastname" id="addlastname" maxlength="20">
-				</div>
-
-				<div>
-					<p>E-mail:</p>
-					<input type="email" name="addemail" id="addemail" maxlength="50">
-				</div>
-
-				<div>
-					<input type="submit" id="ok" value="OK">
-				</div>
-			</form>
-		
-		</div>
-		
-		
-  		<div class="shoppinglist">  </div>
+  		<div class="logo"> Logo </div>
+  		<div class="search"> Search </div>
+  		<div class="end"> End </div>
+		<div class="functions"> Functions </div>
+  		<div class="shoppinglist"> Shopping-list </div>
 
 		<div class="list">
 
 				<?php 
 	
-					echo "<ul>";
+					echo "<ul type='none'>";
 				
 						while ($row = mysqli_fetch_assoc($komp)) {
 							
@@ -179,23 +121,36 @@
 			</form>
 		</div>
 		
-	</div>
-
 	
+	
+		<div class="function">
+	
+			<form name="addbutton" id="threefunctions" method="post" action="">
+			
+			<div>
+				<input type="submit" name="button" id="add" value="Tilføj" >
+			</div>
+				
+			<div>
+				<input type="submit" name="button" id="group" value="Gruppér">
+			</div>
+
+			<div>
+				<input type="submit" name="button" id="edit" value="Redigér">
+			</div>
+				<br>
+			<div class="chosen">Valgte:</div>
+				</br>
+			</form>
+		</div>
+	</div>
 	<script>
 		$("document").ready(function(){
 			
 			var $li = $('li').click(function() {
 				
-					if($(this).hasClass('selected')) {
-
-						$(this).removeClass('selected');
-
-					} else {
-
-					$li.removeClass('selected');
-					$(this).addClass('selected');
-				}
+				$li.removeClass('selected');
+    			$(this).addClass('selected');
 			});
 			
 		});
