@@ -3,34 +3,35 @@
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
-		
-		$userrows = mysqli_fetch_assoc($users);
 
 
-	if(!$komp) {
-		die("Could not query the database" .mysqli_error());
-	}
-
-	if(!$users) {
-		die("Could not query the database" .mysqli_error());
-	}
-
-
-	function getColorAway($var) {
-    		if ($var <= 0)
-        		return '#ffffff';
-		
-    		else if ($var >= 1)
-				return '#334488';
+		if(!$komp) {
+			die("Could not query the database" .mysqli_error());
 		}
-	
-	function getColorBroken($var) {
-    		if ($var <= 0)
-  				return '#ffffff';
-		
-   			else if ($var >= 1)
-				return '#e95522';
+
+		if(!$users) {
+			die("Could not query the database" .mysqli_error());
 		}
+
+
+	$userassoc = mysqli_fetch_assoc($users);
+
+
+		function getColorAway($var) {
+				if ($var <= 0)
+					return '#ffffff';
+
+				else if ($var >= 1)
+					return '#334488';
+			}
+
+		function getColorBroken($var) {
+				if ($var <= 0)
+					return '#ffffff';
+
+				else if ($var >= 1)
+					return '#e95522';
+			}
 ?>
 
 <!doctype html>
@@ -65,13 +66,40 @@
 				</select>
 
 		</div>
+		
   		<div class="end"> 
 			
 			<button id="endbutton" class="roundedborders dropshadow">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userrows['user_first'] . " " . $userrows['user_last']; ?> </div>
+			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
 			
 		</div>
-		<div class="functions">  </div>
+		
+		<div class="functions"> 
+		
+			<form name="adduser" id="adduser" method="post" action="adduser.php">
+				<div>
+					<p>First name:</p>
+					<input type="text" name="addfirstname" id="addfirstname" maxlength="20">
+				</div>
+
+				<div>
+					<p>Last name:</p>
+					<input type="text" name="addlastname" id="addlastname" maxlength="20">
+				</div>
+
+				<div>
+					<p>E-mail:</p>
+					<input type="email" name="addemail" id="addemail" maxlength="50">
+				</div>
+
+				<div>
+					<input type="submit" id="ok" value="OK">
+				</div>
+			</form>
+		
+		</div>
+		
+		
   		<div class="shoppinglist">  </div>
 
 		<div class="list">
