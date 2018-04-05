@@ -57,7 +57,8 @@
 
 		</div>
   		<div class="end">  
-			<button class="roundedborders dropshadow" type="endbutton" id=button>Afslut</button> 
+			<button class="roundedborders dropshadow" type="button" id="endbutton">Afslut</button>
+			<div class="person"> <img id="mand" src="Images/mand.png" /> Dany Huynh </div>
 		</div>
 		<div class="functions">  </div>
   		<div class="shoppinglist">  </div>

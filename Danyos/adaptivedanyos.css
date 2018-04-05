@@ -72,6 +72,16 @@ html, body {
 	padding: 0.5vh 3vw;
 	margin: 1.8vh auto 0;
 }
+
+.person {
+	margin-top: 2vh;
+	font-size: 1.5vw;
+}
+
+.person img {
+	width: 5%;
+	height: auto;
+}
 .grid {
 	text-align: center;
 	font-size: 2vw;
