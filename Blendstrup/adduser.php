@@ -1,7 +1,7 @@
 <?php
 	
 	require_once 'connection.php';
-
+	header('Content-type: text/html; charset=utf-8');
 			
 	function initials($first, $last) {
 			$firstini = mb_substr($first, 0, 1, 'utf-8');
