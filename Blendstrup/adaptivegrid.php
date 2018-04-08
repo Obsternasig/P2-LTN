@@ -57,49 +57,33 @@
 		
   		<div class="search">
 		
-			<input type="search" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
+			<input type="search" id="searchfield" class="interactive" placeholder="Søg...">
 		
-				<select size="1" id="categories" class="roundedborders dropshadow">
-					<option>Alle</option>
-					<option value="1">Switches</option>
-					<option value="2">Ramblokke</option>
-					<option value="3">Kategori 3</option>
-				</select>
+			<select size="1" id="searchcategories" class="interactive">
+				<option>Alle</option>
+				<option value="1">Switches</option>
+				<option value="2">Ramblokke</option>
+				<option value="3">Kategori 3</option>
+			</select>
 
 		</div>
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="roundedborders dropshadow">Afslut</button>
+			<button id="endbutton" class="interactive b">Afslut</button>
 			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
 			
 		</div>
 		
 		<div class="functions"> 
-		
-			<form name="adduser" id="adduser" method="post" action="adduser.php">
-				<div>
-					<p>First name:</p>
-					<input type="text" name="addfirstname" id="addfirstname" maxlength="20">
-				</div>
-
-				<div>
-					<p>Last name:</p>
-					<input type="text" name="addlastname" id="addlastname" maxlength="20">
-				</div>
-
-				<div>
-					<p>E-mail:</p>
-					<input type="email" name="addemail" id="addemail" maxlength="50">
-				</div>
-
-				<div>
-					<input type="submit" id="ok" value="OK">
-				</div>
-			</form>
+	
+			<button id="addbutt" class="interactive b"> Tilføj </button>
+			
+			<button id="editbutt" class="interactive b"> Rediger </button>
+			
+			<button id="groupbutt" class="interactive b"> Gruppér </button>
 		
 		</div>
-		
 		
   		<div class="shoppinglist">  </div>
 
@@ -142,41 +126,78 @@
 		
 		<div class="information"> 
 			
-			<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
-				<div>
-					<p>Kategori:</p>
-					<input type="text" name="kategori" id="kategori" maxlength="30">
-				</div>
+			<select size="1" id="addwhat" class="interactive">
+				<option> Vælg hvad der skal tilføjes </option>
+				<option value="adduser">Tilføj bruger</option>
+				<option value="addkomp">Tilføj komponent</option>
+			</select>
+			
+			<button id="addcancel" class="interactive b"> Annuller </button>
+			
+			<div id="addkomp" class="addhidingclass">
+				
+				<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
+					<div>
+						<p>Kategori:</p>
+						<input type="text" name="kategori" id="kategori" maxlength="30">
+					</div>
 
-				<div>
-					<p>Brand:</p>
-					<input type="text" name="brand" id="brand" maxlength="30">
-				</div>
+					<div>
+						<p>Brand:</p>
+						<input type="text" name="brand" id="brand" maxlength="30">
+					</div>
 
-				<div>
-					<p>Porte:</p>
-					<input type="number" name="porte" id="porte" maxlength="4">
-				</div>
+					<div>
+						<p>Porte:</p>
+						<input type="number" name="porte" id="porte" maxlength="4">
+					</div>
 
-				<div>
-					<p>Antal:</p>
-					<input type="number" name="antal" id="antal" maxlength="4">
-				</div>
+					<div>
+						<p>Antal:</p>
+						<input type="number" name="antal" id="antal" maxlength="4">
+					</div>
 
-				<div>
-					<p>Udlånt:</p>
-					<input type="number" name="away" id="away" maxlength="4">
-				</div>
+					<div>
+						<p>Udlånt:</p>
+						<input type="number" name="away" id="away" maxlength="4">
+					</div>
 
-				<div>
-					<p>Ødelagte:</p>
-					<input type="number" name="broken" id="broken" maxlength="4">
-				</div>
+					<div>
+						<p>Ødelagte:</p>
+						<input type="number" name="broken" id="broken" maxlength="4">
+					</div>
 
-				<div>
-					<input type="submit" id="ok" value="OK">
-				</div>
-			</form>
+					<div>
+						<input type="submit" id="ok" value="OK">
+					</div>
+				</form>
+				
+			</div>
+			
+			<div id="adduser" class="addhidingclass">
+				
+				<form name="adduser" id="adduser" method="post" action="adduser.php">
+					<div>
+						<p>First name:</p>
+						<input type="text" name="addfirstname" id="addfirstname" maxlength="20">
+					</div>
+
+					<div>
+						<p>Last name:</p>
+						<input type="text" name="addlastname" id="addlastname" maxlength="20">
+					</div>
+
+					<div>
+						<p>E-mail:</p>
+						<input type="email" name="addemail" id="addemail" maxlength="50">
+					</div>
+
+					<div>
+						<input type="submit" id="ok" value="OK">
+					</div>
+				</form>
+				
+			</div>
 		</div>
 		
 	</div>
@@ -185,7 +206,7 @@
 	<script>
 		$("document").ready(function(){
 			
-			var $li = $('li').click(function() {
+				var $li = $('li').click(function() {
 				
 					if($(this).hasClass('selected')) {
 
@@ -193,12 +214,29 @@
 
 					} else {
 
-					$li.removeClass('selected');
-					$(this).addClass('selected');
-				}
+						$li.removeClass('selected');
+						$(this).addClass('selected');
+					}
+				});
+			
+			$("#addbutt").click(function() {
+				
+				$("#addwhat, #addcancel").slideDown("fast");
+				
 			});
 			
+			$('#addwhat').change(function(){
+				
+            	$('.addhidingclass').slideUp();
+            	$('#' + $(this).val()).slideDown();
+        	});
+			
+			$('#addcancel').click(function() {
+				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
+			})
+
 		});
+		
 	</script>
 	
 </body>
