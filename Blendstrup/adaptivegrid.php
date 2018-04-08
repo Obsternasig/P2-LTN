@@ -127,7 +127,7 @@
 		<div class="information"> 
 			
 			<select size="1" id="addwhat" class="interactive">
-				<option> Vælg hvad der skal tilføjes </option>
+				<option value="0"> Vælg hvad der skal tilføjes </option>
 				<option value="adduser">Tilføj bruger</option>
 				<option value="addkomp">Tilføj komponent</option>
 			</select>
@@ -234,6 +234,9 @@
 			$('#addcancel').click(function() {
 				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
 			})
+				$('#addcancel').click(function() {
+					$("#addwhat").val('0');
+				})
 
 		});
 		
