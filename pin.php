@@ -17,7 +17,7 @@
 			<input class="box6" onkeyup="autoTab(this)" maxlength="1" size="1">
 	</div>
 
-    <script type="text/javascript">
+    <script>
         function autoTab( obj ) {
             if ( obj.value.length >= obj.maxLength && obj.nextElementSibling ) {
                 nextElementSiblingInput(obj).focus();

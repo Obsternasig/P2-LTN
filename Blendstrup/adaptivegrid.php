@@ -234,9 +234,10 @@
 			$('#addcancel').click(function() {
 				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
 			})
-				$('#addcancel').click(function() {
-					$("#addwhat").val('0');
-				})
+			
+			$('#addcancel').click(function() {
+				$("#addwhat").val('0');
+			})
 
 		});
 		

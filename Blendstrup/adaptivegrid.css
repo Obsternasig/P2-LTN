@@ -17,6 +17,38 @@ html, body {
 	grid-template-rows: 15vh 50vh 35vh;
 }
 
+.pingrid {
+	display: grid;
+	grid-gap: 3vw;
+	grid-template-columns: 1fr 9fr 1fr;
+	grid-template-rows: 30vh 5vh 65vh;
+	background-color: #303030;
+}
+
+.pingrid input {
+	height: 20vh;
+	width: 10vw;
+	border-radius: 2vw;
+	margin: 1vh 0.5vw;
+	text-align: center;
+	font-size: 10vh;
+	color: orange;
+}
+
+.pingrid form {
+	grid-area: 2/2/3/3;
+	display: inline-block;
+    text-align: center;
+}
+
+.dash {
+	/*grid-area: 2/5/3/6;*/
+	color: orange;
+	font-size: 2.5vw;
+	padding-botoom: 5vh;
+	display: inline-block;
+}
+
 .interactive {
 	border-radius: 5vw;
 	background-color: #606060;
