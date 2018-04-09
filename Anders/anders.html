@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<title> Anders </title>
 	<link rel="stylesheet" href="../Anders/anders.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -20,26 +21,24 @@
 		<div class="information"> Information </div>
 
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<input class="button" type="button" value="Click">
-		<br>
-		<div class="fn" hidden>aaaa :
-			<input type="text" />
-		</div>
-		<br>
-		<div class="ln" hidden>bbb :
-			<input type="text" />
-		</div>
-		<div class="ln" hidden>ccc :
-			<input type="text" />
-		</div>
-		<div class="ln" hidden>ddd :
-			<input type="text" />
-		</div>
-		<div class="ln" hidden>eee :
-			<input type="text" />
+
+		<input class="button" type="button" value="Tilføj ny"><br>
+		<div class="div_ctrl" hidden>
+			<div class="fn" >AAA : <input type="text" /></div><br>
+			<div class="ln" >BBB : <input type="text" /></div>
+			<input class="button2" type="button" value="Tilføj" ><br>
 		</div>
 
+		<div class="success" hidden>
+			<div> Komponent tilføjet </div>
+		</div>
+
+
+		$("#button").click(function() {
+		$("#div_ctrl").show();
+		$("#success").hide();
+		$("#button").hide();
+		});
 
 		$("#button2").click(function() {
 		$("#success").show();
@@ -48,8 +47,6 @@
 		});
 
 
-
-	</div>
 </body>
 	
 </html>
