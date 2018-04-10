@@ -53,7 +53,7 @@
   		<div class="logo">
 		
 			<img id="imglogo" src="images/logo.png" />
-			
+		
 		</div>
 		
   		<div class="search">
@@ -71,7 +71,7 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b">Afslut</button>
+			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
 			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
 			
 		</div>
@@ -205,6 +205,7 @@
 
 	
 	<script>
+		
 		$("document").ready(function(){
 			
 				var $li = $('li').click(function() {
@@ -219,6 +220,8 @@
 						$(this).addClass('selected');
 					}
 				});
+			
+			
 			
 			$("#addbutt").click(function() {
 				
