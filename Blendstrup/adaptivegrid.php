@@ -1,5 +1,6 @@
 <?php
-	require_once "../Blendstrup/connection.php";
+	require_once "connection.php";
+	header('Content-type: text/html; charset=utf-8');
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
@@ -102,11 +103,11 @@
 
 								echo "<input type='checkbox'>";
 
-								echo "<div id='kate'>" . $row['kategori'] . "</div>";
+								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
-								echo "<div>" . " Antal: " . $row['antal'] . "</div>";
+								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
+								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
 							echo "<br>";
 
@@ -121,7 +122,7 @@
 						}
 					
 					echo "</ul>";
-			?>
+				?>
 		</div>
 		
 		<div class="information"> 
@@ -139,7 +140,7 @@
 				<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
 					<div>
 						<p>Kategori:</p>
-						<input type="text" name="kategori" id="kategori" maxlength="30">
+						<input type="text" name="category" id="category" maxlength="30">
 					</div>
 
 					<div>
@@ -149,12 +150,12 @@
 
 					<div>
 						<p>Porte:</p>
-						<input type="number" name="porte" id="porte" maxlength="4">
+						<input type="number" name="ports" id="ports" maxlength="4">
 					</div>
 
 					<div>
 						<p>Antal:</p>
-						<input type="number" name="antal" id="antal" maxlength="4">
+						<input type="number" name="amount" id="amount" maxlength="4">
 					</div>
 
 					<div>

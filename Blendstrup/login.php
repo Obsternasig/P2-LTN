@@ -34,7 +34,7 @@
 			});
 
 			
-			$(document).on('change', '#pin4', function() {
+			$(document).on('keyup', '#pin4', function() {
    				
 				$("#pincheck").submit();
 				
