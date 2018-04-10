@@ -17,7 +17,6 @@
 
 	$userassoc = mysqli_fetch_assoc($users);
 
-
 		function getColorAway($var) {
 				if ($var <= 0)
 					return '#ffffff';
@@ -61,10 +60,14 @@
 			<input type="search" id="searchfield" class="interactive" placeholder="Søg...">
 		
 			<select size="1" id="searchcategories" class="interactive">
-				<option>Alle</option>
-				<option value="1">Switches</option>
-				<option value="2">Ramblokke</option>
-				<option value="3">Kategori 3</option>
+				<option value="0">Alle</option>
+		<?php
+				while ($kompkat = mysqli_fetch_assoc($komp)) {
+				$category = $kompkat['category'];
+				
+				echo "<option value=" . $category . ">" . $category . "</option>";
+				}
+		?>
 			</select>
 
 		</div>
@@ -72,7 +75,7 @@
   		<div class="end"> 
 			
 			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
+			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['firstname'] . " " . $userassoc['lastname']; ?> </div>
 			
 		</div>
 		
@@ -91,7 +94,8 @@
 		<div class="list">
 
 				<?php 
-	
+					mysqli_data_seek($komp, 0);
+			
 					echo "<ul>";
 				
 						while ($row = mysqli_fetch_assoc($komp)) {

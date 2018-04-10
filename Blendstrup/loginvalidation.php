@@ -19,7 +19,7 @@
 		if(!empty($initialer)&&!empty($pinkode)) {
 
 		
-			$query = "SELECT * FROM users WHERE initials = '" . $initialer . "' AND ltn_pin = '" . $pinkode . "'";
+			$query = "SELECT * FROM users WHERE initials = '" . $initialer . "' AND pin = '" . $pinkode . "'";
 			$result = mysqli_query($connection, $query);
 			
 			if (mysqli_num_rows($result) == 1) {
