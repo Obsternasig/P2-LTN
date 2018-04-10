@@ -14,7 +14,7 @@
 			die("Could not query the database" .mysqli_error());
 		}
 
-	
+
 	$userassoc = mysqli_fetch_assoc($users);
 
 		function getColorAway($var) {
@@ -41,18 +41,17 @@
 		$idquery = "SELECT * FROM users WHERE ID =$ID";
 		$idresults = mysqli_query($connection, $idquery);
 
-			if(!$idresults){
+			/* if(!$idresults){
 				
 				 die("Could not query the database" .mysqli_error());
-			}
-	}
-
-	$idrow = mysqli_fetch_assoc($idresults);
+			} */
+		$idrow = mysqli_fetch_assoc($idresults);
 	
 			$firstname = $idrow['firstname'];
 			$lastname = $idrow['lastname'];
-?>
+	}
 
+?>
 
 <!doctype html>
 <html>
@@ -82,9 +81,10 @@
 				<option value="0">Alle</option>
 		<?php
 				while ($kompkat = mysqli_fetch_assoc($komp)) {
-				$category = $kompkat['category'];
+					
+					$category = $kompkat['category'];
+					echo "<option value=" . $category . ">" . $category . "</option>";
 				
-				echo "<option value=" . $category . ">" . $category . "</option>";
 				}
 		?>
 			</select>
