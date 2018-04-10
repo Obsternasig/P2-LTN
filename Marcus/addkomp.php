@@ -1,6 +1,7 @@
 <?php
+
 	require_once 'connection.php';
-	
+	header('Content-type: text/html; charset=utf-8');
 
 	if(isset($_POST['kategori'])&&isset($_POST['brand'])){
 			
