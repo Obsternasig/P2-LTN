@@ -19,7 +19,6 @@ html, body {
 
 .pingrid {
 	display: grid;
-	grid-gap: 3vw;
 	grid-template-columns: 1fr 9fr 1fr;
 	grid-template-rows: 30vh 5vh 65vh;
 	background-color: #303030;
@@ -39,14 +38,6 @@ html, body {
 	grid-area: 2/2/3/3;
 	display: inline-block;
     text-align: center;
-}
-
-.dash {
-	/*grid-area: 2/5/3/6;*/
-	color: orange;
-	font-size: 2.5vw;
-	padding-botoom: 5vh;
-	display: inline-block;
 }
 
 .interactive {
