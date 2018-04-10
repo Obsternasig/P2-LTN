@@ -3,7 +3,7 @@
 	require_once "connection.php";
 
    
-	if(isset($_POST['ini1'])&&isset($_POST['ini2'])&&isset($_POST['pin1'])&&isset($_POST['pin2'])&&isset($_POST['pin3'])&&isset($_POST['pin4'])){
+	if(isset($_POST['ini1'])&&isset($_POST['ini2'])&&isset($_POST['pin1'])&&isset($_POST['pin2'])&&isset($_POST['pin3'])&&isset($_POST['pin4'])){     
 
 		$ini1 = htmlentities($_POST['ini1']);
 		$ini2 = htmlentities($_POST['ini2']);
@@ -14,7 +14,7 @@
 		
 		$initialer = $ini1 . $ini2;
 		$pinkode = $pin1 . $pin2 . $pin3 . $pin4;
-		
+
 		
 		if(!empty($initialer)&&!empty($pinkode)) {
 
@@ -24,16 +24,20 @@
 			
 			if (mysqli_num_rows($result) == 1) {
 				
-				$ID = $result['ID'];
-				header("Location: adaptivegrid.php?=id[$ID]");
+				$resultid = mysqli_fetch_assoc($result);
+				$id = $resultid['ID'];
 				
-			} else {
+				if(!empty($id)) {
+					
+					header("Location: adaptivegrid.php?id=$id");
 				
-				header("Location: login.php");
+				} else {
+				
+					header("Location: login.php");
+				}
 			}
 		}
-		}
-	
+	}
 		
 	mysqli_close($connection);
 ?>
