@@ -14,7 +14,7 @@
 			die("Could not query the database" .mysqli_error());
 		}
 
-
+	
 	$userassoc = mysqli_fetch_assoc($users);
 
 		function getColorAway($var) {
@@ -32,6 +32,25 @@
 				else if ($var >= 1)
 					return '#e95522';
 			}
+
+	
+	if(isset($_GET['id'])){
+		
+		$ID = htmlentities($_GET['id']);
+
+		$idquery = "SELECT * FROM users WHERE ID =$ID";
+		$idresults = mysqli_query($connection, $idquery);
+
+			if(!$idresults){
+				
+				 die("Could not query the database" .mysqli_error());
+			}
+	}
+
+	$idrow = mysqli_fetch_assoc($idresults);
+	
+			$firstname = $idrow['firstname'];
+			$lastname = $idrow['lastname'];
 ?>
 
 
@@ -75,7 +94,7 @@
   		<div class="end"> 
 			
 			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['firstname'] . " " . $userassoc['lastname']; ?> </div>
+			<div class="person"> <img src="images/mand.png"> <?php echo $firstname . " " . $lastname; ?> </div>
 			
 		</div>
 		
