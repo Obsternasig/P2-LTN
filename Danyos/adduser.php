@@ -46,7 +46,7 @@
 					die("Cannot connect to the database" .mysqli_connect_error());
 				}
 
-			header("Location: adaptivegrid.php");
+			header("Location: adaptivedanyos.php");
 
 
 			} else {
