@@ -51,6 +51,12 @@
 	
 			$firstname = $idrow['firstname'];
 			$lastname = $idrow['lastname'];
+			$admin = $idrow['adminon'];
+	
+			
+	
+
+		
 ?>
 
 
@@ -95,17 +101,27 @@
 			
 			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
 			<div class="person"> <img src="images/mand.png"> <?php echo $firstname . " " . $lastname; ?> </div>
-			
-		</div>
-		
-		<div class="functions"> 
 	
+		</div>
+
+		<div class="functions"> 
+			
 			<button id="addbutt" class="interactive b"> Tilføj </button>
 			
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
 			<button id="groupbutt" class="interactive b"> Gruppér </button>
-		
+			
+			<?php 
+			
+			if ($admin == 1)
+			
+			echo "<button id='adminbutt' class='interactive b'> Admin </button>"
+			
+			?>
+				
+			<text id="chosenbutt"> Valgte: </text>
+			
 		</div>
 		
   		<div class="shoppinglist">  </div>

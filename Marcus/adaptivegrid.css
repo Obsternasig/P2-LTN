@@ -141,14 +141,26 @@ html, body {
 .functions {
 	background-color: #303030;
 	grid-area: 2/1/3/2;
+	font-size: 1.5vw;
+	text-transform: uppercase;
+	position: relative;
+	
+	
 }
 
 .functions button {
-	padding: 1vh 1vw;
-	margin: 2vh 1vw;
+	margin: 0.5vw;
 	font-size: 1.5vw;
 	text-transform: uppercase;
 	width: 10vw;
+}
+
+#chosenbutt {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	padding-left: 0.5vw;
+	
 }
 
 .information select, #addcancel {
