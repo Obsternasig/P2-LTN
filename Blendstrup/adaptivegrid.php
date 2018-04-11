@@ -41,15 +41,20 @@
 		$idquery = "SELECT * FROM users WHERE ID =$ID";
 		$idresults = mysqli_query($connection, $idquery);
 
-			/* if(!$idresults){
+			if(!$idresults){
 				
 				 die("Could not query the database" .mysqli_error());
-			} */
-		$idrow = mysqli_fetch_assoc($idresults);
+			} else {
+				
+				$idrow = mysqli_fetch_assoc($idresults);
 	
-			$firstname = $idrow['firstname'];
-			$lastname = $idrow['lastname'];
+					$firstname = $idrow['firstname'];
+					$lastname = $idrow['lastname'];
+					$admin = $idrow['adminon'];
+			}
+			
 	}
+
 
 ?>
 
@@ -79,14 +84,18 @@
 		
 			<select size="1" id="searchcategories" class="interactive">
 				<option value="0">Alle</option>
-		<?php
-				while ($kompkat = mysqli_fetch_assoc($komp)) {
-					
-					$category = $kompkat['category'];
-					echo "<option value=" . $category . ">" . $category . "</option>";
 				
-				}
-		?>
+					<?php
+							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
+
+							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
+
+								$category = ucfirst($kompkat['category']);
+								echo "<option value=" . $category . ">" . $category . "</option>";
+
+							}
+					?>
+				
 			</select>
 
 		</div>
@@ -94,7 +103,16 @@
   		<div class="end"> 
 			
 			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $firstname . " " . $lastname; ?> </div>
+			<div class="person"> 
+				<?php 
+					
+					if (isset($firstname)&&isset($lastname)) { 
+						
+						echo "<img src='images/mand.png'>" . " ";
+						echo $firstname . " " . $lastname; 
+					} 
+				?> 
+			</div>
 			
 		</div>
 		
@@ -105,6 +123,19 @@
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
 			<button id="groupbutt" class="interactive b"> Gruppér </button>
+			
+			<?php 
+			
+			if (isset($admin)) {
+				
+				if ($admin == 1) {
+			
+					echo "<button id='adminbutt' class='interactive b'> Admin </button>";
+				}
+			}
+			?>
+				
+			<text id="chosenbutt"> Valgte: </text>
 		
 		</div>
 		
