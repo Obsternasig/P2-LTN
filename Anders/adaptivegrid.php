@@ -96,7 +96,7 @@
 							echo "<li>";
 
 								echo "<input name='udlaan' type='checkbox'>";
-							    echo "<input name='showthis' size='3' type='number'>";
+							    echo "<input name='showthis' size='1' type='number'>";
 							
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
@@ -128,7 +128,7 @@
         $('input[name="showthis"]').fadeIn();
     } else {
         $('input[name="showthis"]').hide();
-    }
+	}
 		
     $('input[name="udlaan"]').on('click', function () {
         if ($(this).prop('checked')) {
@@ -137,10 +137,10 @@
             $('input[name="showthis"]').hide();
         }
     });
-});
+	});
+		
 	</script>
-		
-		
+	
 		
 		<div class="information"> 
 			
