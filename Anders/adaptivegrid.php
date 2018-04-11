@@ -1,5 +1,5 @@
 <?php
-	require_once "../anders/connection.php";
+	require_once "../Anders/connection.php";
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
@@ -34,10 +34,6 @@
 			}
 ?>
 
-
-<!doctype html>
-<html>
-
 <head>
 	<meta charset="utf-8">
 	<title> Adaptive Grid </title>
@@ -69,9 +65,8 @@
 		</div>
 		
   		<div class="end"> 
-			
 			<button id="endbutton" class="interactive b">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
+			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['firstname'] . " " . $userassoc['lastname']; ?> </div>
 			
 		</div>
 		
@@ -100,13 +95,14 @@
 							
 							echo "<li>";
 
-								echo "<input type='checkbox'>";
-
-								echo "<div id='kate'>" . $row['kategori'] . "</div>";
+								echo "<input name='udlaan' type='checkbox'>";
+							    echo "<input name='showthis' size='1' type='number'>";
+							
+								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
-								echo "<div>" . " Antal: " . $row['antal'] . "</div>";
+								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
+								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
 							echo "<br>";
 
@@ -123,6 +119,28 @@
 					echo "</ul>";
 			?>
 		</div>
+		
+		
+	<script>
+		//Viser tekstfelt når checkbox er clicked
+	$(function () {
+    if($('input[name="udlaan"]').prop('checked')){
+        $('input[name="showthis"]').fadeIn();
+    } else {
+        $('input[name="showthis"]').hide();
+	}
+		
+    $('input[name="udlaan"]').on('click', function () {
+        if ($(this).prop('checked')) {
+            $('input[name="showthis"]').fadeIn();
+        } else {
+            $('input[name="showthis"]').hide();
+        }
+    });
+	});
+		
+	</script>
+	
 		
 		<div class="information"> 
 			
@@ -249,3 +267,42 @@
 <?php
 	mysqli_close($connection);
 ?>
+<script>
+		$("document").ready(function(){
+			
+				var $li = $('li').click(function() {
+				
+					if($(this).hasClass('selected')) {
+
+						$(this).removeClass('selected');
+
+					} else {
+
+						$li.removeClass('selected');
+						$(this).addClass('selected');
+					}
+				});
+			
+			$("#addbutt").click(function() {
+				
+				$("#addwhat, #addcancel").slideDown("fast");
+				
+			});
+			
+			$('#addwhat').change(function(){
+				
+            	$('.addhidingclass').slideUp();
+            	$('#' + $(this).val()).slideDown();
+        	});
+			
+			$('#addcancel').click(function() {
+				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
+			})
+			
+			$('#addcancel').click(function() {
+				$("#addwhat").val('0');
+			})
+
+		});
+		
+	</script>

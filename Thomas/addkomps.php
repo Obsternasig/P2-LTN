@@ -1,5 +1,5 @@
 <?php
-	require_once '../projekt/connection.php';
+	require_once 'connection.php';
 	
 
 	if(isset($_POST['kategori'])&&isset($_POST['brand'])){
@@ -14,27 +14,27 @@
 				}
 
 				if(isset($_POST['broken'])){
-					$antal = $_POST['broken'];
+					$broken = $_POST['broken'];
 				}else{
-					$antal = "";
+					$broken = "";
 				}
 
-				if(isset($_POST['serial'])){
-					$away = $_POST['serial'];
+				if(isset($_POST['away'])){
+					$away = $_POST['away'];
 				}else{
 					$away = "";
 				}
 
-				if(isset($_POST['away'])){
-					$broken = $_POST['away'];
+				if(isset($_POST['serial'])){
+					$serial = $_POST['serial'];
 				}else{
-					$broken = "";
+					$serial = "";
 				}
 	
 		
 		if(!empty($kategori)&&!empty($brand)) {
 
-			$query = "INSERT INTO komponent VALUES ('$kategori', '$brand', '$porte', '$broken', '$serial', '$away', '')";
+			$query = "INSERT INTO komponent VALUES ('$kategori', '$brand', '$porte', '$broken', '$away', '$serial', '')";
 			$results = mysqli_query($connection, $query);
 
 

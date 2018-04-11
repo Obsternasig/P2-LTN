@@ -97,14 +97,17 @@ html, body {
 
 /* Links */
 a {
+	color: White;
     text-decoration: none;
 }
 
 a:visited {
+	color: White;
     text-decoration: none;
 }
 
 a:hover {
+	color: White;
     text-decoration: none;
 }
 	
