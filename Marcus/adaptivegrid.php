@@ -1,29 +1,58 @@
 <?php
-	require_once "../Marcus/connection.php";
+	require_once "connection.php";
+	header('Content-type: text/html; charset=utf-8');
 
-	$komp = mysqli_query($connection, "SELECT * FROM switches");
+	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
+	$users = mysqli_query($connection, "SELECT * FROM users");
 
-	if(!$komp) {
-		die("Could not query the database" .mysqli_error());
+
+		if(!$komp) {
+			die("Could not query the database" .mysqli_error());
+		}
+
+		if(!$users) {
+			die("Could not query the database" .mysqli_error());
+		}
+
+	
+	$userassoc = mysqli_fetch_assoc($users);
+
+		function getColorAway($var) {
+				if ($var <= 0)
+					return '#ffffff';
+
+				else if ($var >= 1)
+					return '#334488';
+			}
+
+		function getColorBroken($var) {
+				if ($var <= 0)
+					return '#ffffff';
+
+				else if ($var >= 1)
+					return '#e95522';
+			}
+
+	
+	if(isset($_GET['id'])){
+		
+		$ID = htmlentities($_GET['id']);
+
+		$idquery = "SELECT * FROM users WHERE ID =$ID";
+		$idresults = mysqli_query($connection, $idquery);
+
+			if(!$idresults){
+				
+				 die("Could not query the database" .mysqli_error());
+			}
 	}
 
-
-	function getColorAway($var) {
-    		if ($var <= 0)
-        		return '#ffffff';
-		
-    		else if ($var >= 1)
-				return '#334488';
-		}
-			
-	function getColorBroken($var) {
-    		if ($var <= 0)
-  				return '#ffffff';
-		
-   			else if ($var >= 1)
-				return '#e95522';
-		}
+	$idrow = mysqli_fetch_assoc($idresults);
+	
+			$firstname = $idrow['firstname'];
+			$lastname = $idrow['lastname'];
 ?>
+
 
 <!doctype html>
 <html>
@@ -39,17 +68,54 @@
 	
 	<div class="grid">
 		
-  		<div class="logo"> Logo </div>
-  		<div class="search"> Search </div>
-  		<div class="end"> End </div>
-		<div class="functions"> Functions </div>
-  		<div class="shoppinglist"> Shopping-list </div>
+  		<div class="logo">
+		
+			<img id="imglogo" src="images/logo.png" />
+		
+		</div>
+		
+  		<div class="search">
+		
+			<input type="search" id="searchfield" class="interactive" placeholder="Søg...">
+		
+			<select size="1" id="searchcategories" class="interactive">
+				<option value="0">Alle</option>
+		<?php
+				while ($kompkat = mysqli_fetch_assoc($komp)) {
+				$category = $kompkat['category'];
+				
+				echo "<option value=" . $category . ">" . $category . "</option>";
+				}
+		?>
+			</select>
+
+		</div>
+		
+  		<div class="end"> 
+			
+			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
+			<div class="person"> <img src="images/mand.png"> <?php echo $firstname . " " . $lastname; ?> </div>
+			
+		</div>
+		
+		<div class="functions"> 
+	
+			<button id="addbutt" class="interactive b"> Tilføj </button>
+			
+			<button id="editbutt" class="interactive b"> Rediger </button>
+			
+			<button id="groupbutt" class="interactive b"> Gruppér </button>
+		
+		</div>
+		
+  		<div class="shoppinglist">  </div>
 
 		<div class="list">
 
 				<?php 
-	
-					echo "<ul type='none'>";
+					mysqli_data_seek($komp, 0);
+			
+					echo "<ul>";
 				
 						while ($row = mysqli_fetch_assoc($komp)) {
 							
@@ -60,11 +126,11 @@
 
 								echo "<input type='checkbox'>";
 
-								echo "<div id='kate'>" . $row['kategori'] . "</div>";
+								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
-								echo "<div>" . " Antal: " . $row['antal'] . "</div>";
+								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
+								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
 							echo "<br>";
 
@@ -79,81 +145,129 @@
 						}
 					
 					echo "</ul>";
-			?>
+				?>
 		</div>
 		
 		<div class="information"> 
 			
-			<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
-				<div>
-					<p>Kategori:</p>
-					<input type="text" name="kategori" id="kategori" maxlength="30">
-				</div>
+			<select size="1" id="addwhat" class="interactive">
+				<option value="0"> Vælg hvad der skal tilføjes </option>
+				<option value="adduser">Tilføj bruger</option>
+				<option value="addkomp">Tilføj komponent</option>
+			</select>
+			
+			<button id="addcancel" class="interactive b"> Annuller </button>
+			
+			<div id="addkomp" class="addhidingclass">
+				
+				<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
+					<div>
+						<p>Kategori:</p>
+						<input type="text" name="category" id="category" maxlength="30">
+					</div>
 
-				<div>
-					<p>Brand:</p>
-					<input type="text" name="brand" id="brand" maxlength="30">
-				</div>
+					<div>
+						<p>Brand:</p>
+						<input type="text" name="brand" id="brand" maxlength="30">
+					</div>
 
-				<div>
-					<p>Porte:</p>
-					<input type="number" name="porte" id="porte" maxlength="4">
-				</div>
+					<div>
+						<p>Porte:</p>
+						<input type="number" name="ports" id="ports" maxlength="4">
+					</div>
 
-				<div>
-					<p>Antal:</p>
-					<input type="number" name="antal" id="antal" maxlength="4">
-				</div>
+					<div>
+						<p>Antal:</p>
+						<input type="number" name="amount" id="amount" maxlength="4">
+					</div>
 
-				<div>
-					<p>Udlånt:</p>
-					<input type="number" name="away" id="away" maxlength="4">
-				</div>
+					<div>
+						<p>Udlånt:</p>
+						<input type="number" name="away" id="away" maxlength="4">
+					</div>
 
-				<div>
-					<p>Ødelagte:</p>
-					<input type="number" name="broken" id="broken" maxlength="4">
-				</div>
+					<div>
+						<p>Ødelagte:</p>
+						<input type="number" name="broken" id="broken" maxlength="4">
+					</div>
 
-				<div>
-					<input type="submit" id="ok" value="OK">
-				</div>
-			</form>
+					<div>
+						<input type="submit" id="ok" value="OK">
+					</div>
+				</form>
+				
+			</div>
+			
+			<div id="adduser" class="addhidingclass">
+				
+				<form name="adduser" id="adduser" method="post" action="adduser.php">
+					<div>
+						<p>First name:</p>
+						<input type="text" name="addfirstname" id="addfirstname" maxlength="20">
+					</div>
+
+					<div>
+						<p>Last name:</p>
+						<input type="text" name="addlastname" id="addlastname" maxlength="20">
+					</div>
+
+					<div>
+						<p>E-mail:</p>
+						<input type="email" name="addemail" id="addemail" maxlength="50">
+					</div>
+
+					<div>
+						<input type="submit" id="ok" value="OK">
+					</div>
+				</form>
+				
+			</div>
 		</div>
 		
-	
-	
-		<div class="function">
-	
-			<form name="addbutton" id="threefunctions" method="post" action="">
-			
-			<div>
-				<input type="submit" name="button" id="add" value="Tilføj" >
-			</div>
-				
-			<div>
-				<input type="submit" name="button" id="group" value="Gruppér">
-			</div>
-
-			<div>
-				<input type="submit" name="button" id="edit" value="Redigér">
-			</div>
-				<br>
-			<div class="chosen">Valgte:</div>
-				</br>
-			</form>
-		</div>
 	</div>
+
+	
 	<script>
+		
 		$("document").ready(function(){
 			
-			var $li = $('li').click(function() {
+				var $li = $('li').click(function() {
 				
-				$li.removeClass('selected');
-    			$(this).addClass('selected');
+					if($(this).hasClass('selected')) {
+
+						$(this).removeClass('selected');
+
+					} else {
+
+						$li.removeClass('selected');
+						$(this).addClass('selected');
+					}
+				});
+			
+			
+			
+			$("#addbutt").click(function() {
+				
+				$("#addwhat, #addcancel").slideDown("fast");
+				
 			});
 			
+			$('#addwhat').change(function(){
+				
+            	$('.addhidingclass').slideUp();
+            	$('#' + $(this).val()).slideDown();
+        	});
+			
+			$('#addcancel').click(function() {
+				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
+			})
+			
+			$('#addcancel').click(function() {
+				$("#addwhat").val('0');
+			})
+
 		});
+		
 	</script>
 	
 </body>

@@ -3,21 +3,21 @@
 	require_once 'connection.php';
 	header('Content-type: text/html; charset=utf-8');
 
-	if(isset($_POST['kategori'])&&isset($_POST['brand'])){
+	if(isset($_POST['category'])&&isset($_POST['brand'])){
 			
-			$kategori = htmlentities($_POST['kategori']);
+			$category = htmlentities($_POST['category']);
 			$brand = htmlentities($_POST['brand']);
 				
-				if(isset($_POST['porte'])){
-					$porte = $_POST['porte'];
+				if(isset($_POST['ports'])){
+					$ports = $_POST['ports'];
 				}else{
-					$porte = "";
+					$ports = "";
 				}
 
-				if(isset($_POST['antal'])){
-					$antal = $_POST['antal'];
+				if(isset($_POST['amount'])){
+					$amount = $_POST['amount'];
 				}else{
-					$antal = "";
+					$amount = "";
 				}
 
 				if(isset($_POST['away'])){
@@ -31,16 +31,24 @@
 				}else{
 					$broken = "";
 				}
-	
+				
+			
+			$serialnb = "";
+			$location = "";
+			$comment ="";
+			$speed = "";
+			$type = "";
+			$length = "";
 		
-		if(!empty($kategori)&&!empty($brand)) {
+		
+		if(!empty($category)&&!empty($brand)) {
 
-			$query = "INSERT INTO komponenter VALUES ('$kategori', '$brand', '$porte', '$antal', '$away', '$broken', '')";
+			$query = "INSERT INTO komponenter VALUES ('', '$category', '$brand', '$serialnb', '$amount', '$away', '$broken', '$location', '$comment', '$ports', '$speed', '$type', '$length')";
 			$results = mysqli_query($connection, $query);
 
 
 				if(!$results){
-					die("Cannot connect to the database" .mysqli_connect_error());
+					die("Cannot connect to the database WTF" .mysqli_connect_error());
 				}
 
 			header("Location: adaptivegrid.php");

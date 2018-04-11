@@ -16,9 +16,6 @@
 		<input type="text" name="last" id="last" placeholder="Lastname">
 		<br>
 		
-		<input type="text" name="email" id="email" placeholder="E-mail">
-		<br>
-		
 		<input type="submit" name="submit" id="submit" value="Sign up">
 		
 	</form>

@@ -14,30 +14,24 @@
 		
 		$initialer = $ini1 . $ini2;
 		$pinkode = $pin1 . $pin2 . $pin3 . $pin4;
-
+		
 		
 		if(!empty($initialer)&&!empty($pinkode)) {
 
 		
-			$query = "SELECT * FROM users WHERE initials = '" . $initialer . "' AND pin = '" . $pinkode . "'";
+			$query = "SELECT * FROM users WHERE initials = '" . $initialer . "' AND ltn_pin = '" . $pinkode . "'";
 			$result = mysqli_query($connection, $query);
 			
 			if (mysqli_num_rows($result) == 1) {
 				
-				$resultid = mysqli_fetch_assoc($result);
-				$id = $resultid['ID'];
+				header("Location: adaptivegrid.php");
 				
-				if(!empty($id)) {
-					
-					header("Location: adaptivegrid.php?id=$id");
+			} else {
 				
-				} else {
-				
-					header("Location: login.php");
-				}
+				header("Location: login.php");
 			}
 		}
-	}
+		}
 		
 	mysqli_close($connection);
 ?>

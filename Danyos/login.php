@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="adaptivegrid.css">
+	<link rel="stylesheet" href="adaptivedanyos.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<title> Blendstrup </title>
 </head>
@@ -20,7 +20,6 @@
 	</div>
 
     <script>
-		
 		$("document").ready(function(){
 			
 			$('input').keyup(function () {
@@ -41,7 +40,29 @@
 				
 			});
 		});
-		
+		/*
+        function autoTab( obj ) {
+            if ( obj.value.length >= obj.maxLength && obj.nextElementSibling ) {
+                nextElementSiblingInput(obj).focus();
+            } else if(obj.value.length === 0) {
+                previousElementSiblingInput(obj).focus();
+            }
+        }
+
+        function nextElementSiblingInput(element) {
+            do {
+                element = element.nextElementSibling;
+            } while (element.nodeName !== "INPUT");
+            return element;
+        }
+
+        function previousElementSiblingInput(element) {
+            do {
+                element = element.previousElementSibling;
+            } while (element.nodeName !== "INPUT");
+            return element;
+        }
+		*/
     </script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 <?php
-	require_once "connection.php";
-	header('Content-type: text/html; charset=utf-8');
+	require_once "../Anders/connection.php";
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
@@ -35,14 +34,10 @@
 			}
 ?>
 
-
-<!doctype html>
-<html>
-
 <head>
 	<meta charset="utf-8">
 	<title> Adaptive Grid </title>
-	<link rel="stylesheet" href="adaptivedanyos.css">
+	<link rel="stylesheet" href="adaptivegrid.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -70,9 +65,8 @@
 		</div>
 		
   		<div class="end"> 
-			
 			<button id="endbutton" class="interactive b">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
+			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['firstname'] . " " . $userassoc['lastname']; ?> </div>
 			
 		</div>
 		
@@ -101,8 +95,9 @@
 							
 							echo "<li>";
 
-								echo "<input type='checkbox'>";
-
+								echo "<input name='udlaan' type='checkbox'>";
+							    echo "<input name='showthis' size='1' type='number'>";
+							
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
@@ -122,8 +117,30 @@
 						}
 					
 					echo "</ul>";
-				?>
+			?>
 		</div>
+		
+		
+	<script>
+		//Viser tekstfelt når checkbox er clicked
+	$(function () {
+    if($('input[name="udlaan"]').prop('checked')){
+        $('input[name="showthis"]').fadeIn();
+    } else {
+        $('input[name="showthis"]').hide();
+	}
+		
+    $('input[name="udlaan"]').on('click', function () {
+        if ($(this).prop('checked')) {
+            $('input[name="showthis"]').fadeIn();
+        } else {
+            $('input[name="showthis"]').hide();
+        }
+    });
+	});
+		
+	</script>
+	
 		
 		<div class="information"> 
 			
@@ -140,7 +157,7 @@
 				<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
 					<div>
 						<p>Kategori:</p>
-						<input type="text" name="category" id="category" maxlength="30">
+						<input type="text" name="kategori" id="kategori" maxlength="30">
 					</div>
 
 					<div>
@@ -150,12 +167,12 @@
 
 					<div>
 						<p>Porte:</p>
-						<input type="number" name="ports" id="ports" maxlength="4">
+						<input type="number" name="porte" id="porte" maxlength="4">
 					</div>
 
 					<div>
 						<p>Antal:</p>
-						<input type="number" name="amount" id="amount" maxlength="4">
+						<input type="number" name="antal" id="antal" maxlength="4">
 					</div>
 
 					<div>
@@ -250,3 +267,42 @@
 <?php
 	mysqli_close($connection);
 ?>
+<script>
+		$("document").ready(function(){
+			
+				var $li = $('li').click(function() {
+				
+					if($(this).hasClass('selected')) {
+
+						$(this).removeClass('selected');
+
+					} else {
+
+						$li.removeClass('selected');
+						$(this).addClass('selected');
+					}
+				});
+			
+			$("#addbutt").click(function() {
+				
+				$("#addwhat, #addcancel").slideDown("fast");
+				
+			});
+			
+			$('#addwhat').change(function(){
+				
+            	$('.addhidingclass').slideUp();
+            	$('#' + $(this).val()).slideDown();
+        	});
+			
+			$('#addcancel').click(function() {
+				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
+			})
+			
+			$('#addcancel').click(function() {
+				$("#addwhat").val('0');
+			})
+
+		});
+		
+	</script>
