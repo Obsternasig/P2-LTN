@@ -1,5 +1,5 @@
 <?php 
-	require_once "connection.php";
+	require_once "ssconnection.php";
 	header('Content-type: text/html; charset=utf-8');
 
 	if (isset($_POST['submit-search'])) {

@@ -1,5 +1,5 @@
 <?php
-	require_once "connection.php";
+	require_once "ssconnection.php";
 	header('Content-type: text/html; charset=utf-8');
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
@@ -64,7 +64,7 @@
 <head>
 	<meta charset="utf-8">
 	<title> Adaptive Grid </title>
-	<link rel="stylesheet" href="adaptivegrid.css">
+	<link rel="stylesheet" href="superstorage.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -80,7 +80,7 @@
 		
   		<div class="search">
 		
-			<form action="searchengine.php" method="POST">
+			<form action="sssearchengine.php" method="POST">
 			<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
 			<button type="submit" name="submit-search">Search</button>
 			</form>
@@ -105,7 +105,7 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
+			<button id="endbutton" class="interactive b" onclick="window.location.href='sslogin.php'">Afslut</button>
 			<div class="person"> 
 				<?php 
 					
@@ -194,7 +194,7 @@
 			
 			<div id="addkomp" class="addhidingclass">
 				
-				<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
+				<form name="addkomp" id="addkomp" method="post" action="ssaddkomp.php">
 					<div>
 						<p>Kategori:</p>
 						<input type="text" name="category" id="category" maxlength="30">
@@ -234,7 +234,7 @@
 			
 			<div id="adduser" class="addhidingclass">
 				
-				<form name="adduser" id="adduser" method="post" action="adduser.php">
+				<form name="adduser" id="adduser" method="post" action="ssadduser.php">
 					<div>
 						<p>First name:</p>
 						<input type="text" name="addfirstname" id="addfirstname" maxlength="20">
