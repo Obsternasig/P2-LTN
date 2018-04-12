@@ -310,7 +310,7 @@
 
 					} else {
 
-						$li.hasClass('selected');
+						$li.removeClass('selected');
 						$(this).addClass('selected');
 					}
 				});
