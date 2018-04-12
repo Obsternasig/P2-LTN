@@ -80,7 +80,10 @@
 		
   		<div class="search">
 		
-			<input type="search" id="searchfield" class="interactive" placeholder="Søg...">
+			<form action="searchengine.php" method="POST">
+			<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
+			<button type="submit" name="submit-search">Search</button>
+			</form>
 		
 			<select size="1" id="searchcategories" class="interactive">
 				<option value="0">Alle</option>
