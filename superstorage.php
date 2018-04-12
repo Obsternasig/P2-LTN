@@ -281,7 +281,7 @@
 		
 	</script>
 	<script>
-		$(function(){
+		$("document").ready(function(){
 			
 				var $la = $('la').click(function() {
 				
@@ -291,7 +291,7 @@
 
 					} else {
 
-						$li.removeClass('cbox');
+						$la.removeClass('cbox');
 						$(this).addClass('cbox');
 					}
 				});
