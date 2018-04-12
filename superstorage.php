@@ -51,8 +51,7 @@
 					$firstname = $idrow['firstname'];
 					$lastname = $idrow['lastname'];
 					$admin = $idrow['adminon'];
-			}
-			
+			}	
 	}
 
 
@@ -104,7 +103,7 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.href='sslogin.php'">Afslut</button>
+			<button id="endbutton" class="interactive b" onclick="window.location.href='/sslogin.php'">Afslut</button>
 			<div class="person"> 
 				<?php 
 					
@@ -138,7 +137,6 @@
 			?>
 				
 			<text id="chosenbutt"> Valgte: </text>
-		
 		</div>
 		
   		<div class="shoppinglist">  </div>
@@ -156,9 +154,9 @@
 							$broken = $row['broken'];
 							
 							echo "<li>";
-
-								echo "<input name='udenne' type='checkbox'>";
-							    echo "<input name='uantal' size='1' type='number'>";
+							
+								echo "<input id='udenne' name='udenne' type='checkbox'>";
+							    echo "<input id='uantal' name='uantal' type='text'>";
 
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
@@ -261,7 +259,7 @@
 	</div>
 
 	
-	<script>
+    <script>
 	
 		//Viser tekstfelt når checkbox er clicked
 	$(function () {
@@ -280,9 +278,27 @@
     });
 	});
 		
-</script>
+	</script>
+	<script>
+						
+						
+			//tilføjer og fjerne class når der bliver klikket.
+		$(function(){
+			var $la = $('la').click(function() {
+				if($(this).hasClass('cbox')) {
+					$(this).removeClass('cbox');
+
+					} else {	
+					
+						$la.hasClass('cbox');
+						$(this).addClass('cbox');
+					}
+				});
+		
+	</script>
 	
 	<script>
+		  //tilføjer og fjerne class når der bliver klikket.
 		$("document").ready(function(){
 			
 				var $li = $('li').click(function() {
