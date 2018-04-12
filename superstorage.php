@@ -281,18 +281,8 @@
 		
 	</script>
 	<script>
-<<<<<<< HEAD
-		$("document").ready(function(){
-			
-				var $la = $('la').click(function() {
-				
-					if($(this).hasClass('cbox')) {
-
-						$(this).removeClass('cbox');
-
-					} else {
-
-=======
+						
+						
 			//tilføjer og fjerne class når der bliver klikket.
 		$(function(){
 			var $la = $('la').click(function() {
@@ -301,7 +291,6 @@
 
 					} else {	
 					
->>>>>>> 617ca2779a3dbc6dd0b02ee8a82f0f0fcf94329e
 						$la.removeClass('cbox');
 						$(this).addClass('cbox');
 					}
