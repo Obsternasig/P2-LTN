@@ -1,5 +1,5 @@
 <?php
-	require_once "../anders/connection.php";
+	require_once "../Anders/connection.php";
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
@@ -34,10 +34,6 @@
 			}
 ?>
 
-
-<!doctype html>
-<html>
-
 <head>
 	<meta charset="utf-8">
 	<title> Adaptive Grid </title>
@@ -69,9 +65,8 @@
 		</div>
 		
   		<div class="end"> 
-			
 			<button id="endbutton" class="interactive b">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
+			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['firstname'] . " " . $userassoc['lastname']; ?> </div>
 			
 		</div>
 		
@@ -100,19 +95,20 @@
 							
 							echo "<li>";
 
-								echo "<input type='checkbox'>";
-
-								echo "<div id='kate'>" . $row['kategori'] . "</div>";
+								echo "<input name='udenne' type='checkbox'>";
+							    echo "<input name='uantal' size='1' type='number'>";
+							
+								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
-								echo "<div>" . " Antal: " . $row['antal'] . "</div>";
+								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
+								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
 							echo "<br>";
 
 								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
 							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>" . " Ødelagte: " . $row['broken'] . "</div>";
 
 							
 							echo "</li>";
@@ -123,6 +119,7 @@
 					echo "</ul>";
 			?>
 		</div>
+	
 		
 		<div class="information"> 
 			
@@ -201,9 +198,33 @@
 		</div>
 		
 	</div>
-
 	
-	<script>
+</body>
+</html>
+
+
+
+<script>
+	
+		//Viser tekstfelt når checkbox er clicked
+	$(function () {
+    if($('input[name="udenne"]').prop('checked')){
+        $(this).find('input[name="uantal"]').fadeIn();
+    } else {
+        $('input[name="uantal"]').hide();
+	}
+		
+    $('input[name="udenne"]').on('click', function () {
+        if ($(this).prop('checked')) {
+            $('input[name="uantal"]').fadeIn();
+        } else {
+            $('input[name="uantal"]').hide();
+        }
+    });
+	});
+		
+</script>
+<script>
 		$("document").ready(function(){
 			
 				var $li = $('li').click(function() {
@@ -241,11 +262,7 @@
 
 		});
 		
-	</script>
-	
-</body>
-</html>
-
+</script>
 <?php
 	mysqli_close($connection);
 ?>

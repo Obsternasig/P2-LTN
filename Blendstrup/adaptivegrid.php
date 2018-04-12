@@ -17,7 +17,6 @@
 
 	$userassoc = mysqli_fetch_assoc($users);
 
-
 		function getColorAway($var) {
 				if ($var <= 0)
 					return '#ffffff';
@@ -33,8 +32,31 @@
 				else if ($var >= 1)
 					return '#e95522';
 			}
-?>
 
+	
+	if(isset($_GET['id'])){
+		
+		$ID = htmlentities($_GET['id']);
+
+		$idquery = "SELECT * FROM users WHERE ID =$ID";
+		$idresults = mysqli_query($connection, $idquery);
+
+			if(!$idresults){
+				
+				 die("Could not query the database" .mysqli_error());
+			} else {
+				
+				$idrow = mysqli_fetch_assoc($idresults);
+	
+					$firstname = $idrow['firstname'];
+					$lastname = $idrow['lastname'];
+					$admin = $idrow['adminon'];
+			}
+			
+	}
+
+
+?>
 
 <!doctype html>
 <html>
@@ -61,10 +83,19 @@
 			<input type="search" id="searchfield" class="interactive" placeholder="Søg...">
 		
 			<select size="1" id="searchcategories" class="interactive">
-				<option>Alle</option>
-				<option value="1">Switches</option>
-				<option value="2">Ramblokke</option>
-				<option value="3">Kategori 3</option>
+				<option value="0">Alle</option>
+				
+					<?php
+							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
+
+							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
+
+								$category = ucfirst($kompkat['category']);
+								echo "<option value=" . $category . ">" . $category . "</option>";
+
+							}
+					?>
+				
 			</select>
 
 		</div>
@@ -72,7 +103,16 @@
   		<div class="end"> 
 			
 			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
+			<div class="person"> 
+				<?php 
+					
+					if (isset($firstname)&&isset($lastname)) { 
+						
+						echo "<img src='images/mand.png'>" . " ";
+						echo $firstname . " " . $lastname; 
+					} 
+				?> 
+			</div>
 			
 		</div>
 		
@@ -83,6 +123,19 @@
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
 			<button id="groupbutt" class="interactive b"> Gruppér </button>
+			
+			<?php 
+			
+			if (isset($admin)) {
+				
+				if ($admin == 1) {
+			
+					echo "<button id='adminbutt' class='interactive b'> Admin </button>";
+				}
+			}
+			?>
+				
+			<text id="chosenbutt"> Valgte: </text>
 		
 		</div>
 		
@@ -91,7 +144,8 @@
 		<div class="list">
 
 				<?php 
-	
+					mysqli_data_seek($komp, 0);
+			
 					echo "<ul>";
 				
 						while ($row = mysqli_fetch_assoc($komp)) {

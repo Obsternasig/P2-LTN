@@ -9,13 +9,13 @@
 
 <body>
 	<div class="pingrid">
-		<form name="pincheck" id="pincheck" method="post" action="loginvalidation.php">
-			<input class="interactive" id="ini1" name="ini1" maxlength="1" autocomplete="off" autofocus>
-			<input class="interactive" id="ini2" name="ini2" maxlength="1" autocomplete="off">
-			<input class="interactive" id="pin1" name="pin1" maxlength="1" autocomplete="off">
-			<input class="interactive" id="pin2" name="pin2" maxlength="1" autocomplete="off">
-			<input class="interactive" id="pin3" name="pin3" maxlength="1" autocomplete="off">
-			<input class="interactive" id="pin4" name="pin4" maxlength="1" autocomplete="off">
+		<form name="pincheck" id="pincheck" method="post" action="loginvalidation.php" autocomplete="off">
+			<input class="interactive" id="ini1" name="ini1" maxlength="1" autofocus>
+			<input class="interactive" id="ini2" name="ini2" maxlength="1">
+			<input class="interactive" id="pin1" name="pin1" maxlength="1">
+			<input class="interactive" id="pin2" name="pin2" maxlength="1">
+			<input class="interactive" id="pin3" name="pin3" maxlength="1">
+			<input class="interactive" id="pin4" name="pin4" maxlength="1">
 		</form>
 	</div>
 

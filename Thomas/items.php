@@ -94,12 +94,13 @@
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
 								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
+								echo "<div>" . " Serial: " . $row['serial']  . "</div>";
 
 							echo "<br>";
 
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånt: " . $row['away'] . "</div>";
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånt </div>";
 							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagt: " . $row['broken'] . "</div>";
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagt </div>";
 
 							
 							echo "</li>";
@@ -135,13 +136,13 @@
 				</div>
 
 				<div>
-					<p>Serienummer:</p>
-					<input type="number" name="serial" id="serial" maxlength="30">
+					<p>Udlånet:</p>
+					<input type="number" name="away" id="away" maxlength="1">
 				</div>
 
 				<div>
-					<p>Udlånt:</p>
-					<input type="number" name="away" id="away" maxlength="1">
+					<p>Serienummer	:</p>
+					<input type="number" name="serial" id="serial" maxlength="20">
 				</div>
 
 				<div>

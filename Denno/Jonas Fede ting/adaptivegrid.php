@@ -14,7 +14,7 @@
 			die("Could not query the database" .mysqli_error());
 		}
 
-	
+
 	$userassoc = mysqli_fetch_assoc($users);
 
 		function getColorAway($var) {
@@ -32,31 +32,6 @@
 				else if ($var >= 1)
 					return '#e95522';
 			}
-
-	
-	if(isset($_GET['id'])){
-		
-		$ID = htmlentities($_GET['id']);
-
-		$idquery = "SELECT * FROM users WHERE ID =$ID";
-		$idresults = mysqli_query($connection, $idquery);
-
-			if(!$idresults){
-				
-				 die("Could not query the database" .mysqli_error());
-			}
-	}
-
-	$idrow = mysqli_fetch_assoc($idresults);
-	
-			$firstname = $idrow['firstname'];
-			$lastname = $idrow['lastname'];
-			$admin = $idrow['adminon'];
-	
-			
-	
-
-		
 ?>
 
 
@@ -87,8 +62,9 @@
 			<select size="1" id="searchcategories" class="interactive">
 				<option value="0">Alle</option>
 		<?php
-				while ($kompkat = mysqli_fetch_assoc($komp)) {
-				$category = $kompkat['category'];
+				$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter");
+				while ($kompkat = mysqli_fetch_assoc($kompsort)) {
+				$category = ucfirst($kompkat['category']);
 				
 				echo "<option value=" . $category . ">" . $category . "</option>";
 				}
@@ -100,28 +76,18 @@
   		<div class="end"> 
 			
 			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $firstname . " " . $lastname; ?> </div>
-	
-		</div>
-
-		<div class="functions"> 
+			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['firstname'] . " " . $userassoc['lastname']; ?> </div>
 			
+		</div>
+		
+		<div class="functions"> 
+	
 			<button id="addbutt" class="interactive b"> Tilføj </button>
 			
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
 			<button id="groupbutt" class="interactive b"> Gruppér </button>
-			
-			<?php 
-			
-			if ($admin == 1)
-			
-			echo "<button id='adminbutt' class='interactive b'> Admin </button>"
-			
-			?>
-				
-			<text id="chosenbutt"> Valgte: </text>
-			
+		
 		</div>
 		
   		<div class="shoppinglist">  </div>
@@ -131,7 +97,7 @@
 				<?php 
 					mysqli_data_seek($komp, 0);
 			
-					echo "<ul>";
+					echo "<ul>";			
 				
 						while ($row = mysqli_fetch_assoc($komp)) {
 							
