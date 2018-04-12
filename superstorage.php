@@ -281,17 +281,15 @@
 		
 	</script>
 	<script>
+			//tilføjer og fjerne class når der bliver klikket.
 		$(function(){
-			
-				var $la = $('la').click(function() {
-				
-					if($(this).hasClass('cbox')) {
+			var $la = $('la').click(function() {
+				if($(this).hasClass('cbox')) {
+					$(this).removeClass('cbox');
 
-						$(this).removeClass('cbox');
-
-					} else {
-
-						$li.removeClass('cbox');
+					} else {	
+					
+						$la.removeClass('cbox');
 						$(this).addClass('cbox');
 					}
 				});
