@@ -53,12 +53,15 @@
   		<div class="logo">
 		
 			<img id="imglogo" src="images/logo.png" />
-			
+		
 		</div>
 		
   		<div class="search">
-		
-			<input type="search" id="searchfield" class="interactive" placeholder="Søg...">
+
+			<form action="searchengine.php" method="POST">
+			<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg..."/>
+			<button type="submit" name="submit-search">Search</button>
+			</form>
 		
 			<select size="1" id="searchcategories" class="interactive">
 				<option>Alle</option>
@@ -71,7 +74,7 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b">Afslut</button>
+			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
 			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
 			
 		</div>
@@ -126,6 +129,8 @@
 		</div>
 		
 		<div class="information"> 
+			
+	
 			
 			<select size="1" id="addwhat" class="interactive">
 				<option value="0"> Vælg hvad der skal tilføjes </option>
@@ -205,6 +210,7 @@
 
 	
 	<script>
+		
 		$("document").ready(function(){
 			
 				var $li = $('li').click(function() {
@@ -219,6 +225,8 @@
 						$(this).addClass('selected');
 					}
 				});
+			
+			
 			
 			$("#addbutt").click(function() {
 				
