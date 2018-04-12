@@ -291,7 +291,7 @@
 
 					} else {	
 					
-						$la.removeClass('cbox');
+						$la.hasClass('cbox');
 						$(this).addClass('cbox');
 					}
 				});
@@ -299,7 +299,7 @@
 	</script>
 	
 	<script>
-		//tilføjer og fjerne class når der bliver klikket.
+		  //tilføjer og fjerne class når der bliver klikket.
 		$("document").ready(function(){
 			
 				var $li = $('li').click(function() {
@@ -310,7 +310,7 @@
 
 					} else {
 
-						$li.removeClass('selected');
+						$li.hasClass('selected');
 						$(this).addClass('selected');
 					}
 				});
