@@ -81,26 +81,27 @@
   		<div class="search">
 		
 			<form action="searchengine.php" method="POST">
-			<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
-			<button type="submit" name="submit-search">Search</button>
+				<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
 			</form>
-		
-			<select size="1" id="searchcategories" class="interactive">
-				<option value="0">Alle</option>
-				
-					<?php
-							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
+			
+			<form id="cateform" method="post">
+				<select size="1" id="cateopt" name="cateopt" class="interactive" onchange="document.getElementById('cateform').submit();">
+					<option value="0">Alle</option>
 
-							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
+						<?php
+								$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
 
-								$category = ucfirst($kompkat['category']);
-								echo "<option value=" . $category . ">" . $category . "</option>";
+								while ($kompkat = mysqli_fetch_assoc($kompsort)) {
 
-							}
-					?>
-				
-			</select>
+									$category = $kompkat['category'];
+									echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
 
+								}
+
+						?>
+
+				</select>
+			</form>
 		</div>
 		
   		<div class="end"> 
@@ -148,10 +149,19 @@
 
 				<?php 
 					mysqli_data_seek($komp, 0);
+					
+					if(isset($_POST['cateopt'])) {
+						$cateval = $_POST['cateopt'];
+					} else {
+						$cateval = null;
+					}
+					
+					$listquery = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE '" . $cateval . "'");
+			
 			
 					echo "<ul>";
-				
-						while ($row = mysqli_fetch_assoc($komp)) {
+			
+						while ($row = mysqli_fetch_assoc($listquery)) {
 							
 							$away = $row['away'];
 							$broken = $row['broken'];
@@ -168,9 +178,9 @@
 
 							echo "<br>";
 
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . " Udlånte: " . $row['away'] . "</div>";
 							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . " Ødelagte: " . $row['broken'] . "</div>";
 
 							
 							echo "</li>";

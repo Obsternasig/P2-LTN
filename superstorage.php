@@ -82,7 +82,6 @@
 		
 			<form action="sssearchengine.php" method="POST">
 			<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
-			<button type="submit" name="submit-search">Search</button>
 			</form>
 		
 			<select size="1" id="searchcategories" class="interactive">
