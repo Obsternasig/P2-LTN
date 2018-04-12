@@ -66,7 +66,7 @@
 		
   		<div class="end"> 
 			<button id="endbutton" class="interactive b">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['firstname'] . " " . $userassoc['lastname']; ?> </div>
+			<div class="person"> <img src="Images/mand.png"> <?php echo $userassoc['firstname'] . " " . $userassoc['lastname']; ?> </div>
 			
 		</div>
 		
@@ -209,16 +209,16 @@
 		//Viser tekstfelt når checkbox er clicked
 	$(function () {
     if($('input[name="udenne"]').prop('checked')){
-        $(this).find('input[name="uantal"]').fadeIn();
+        $('input[name="uantal"]').fadeIn();
     } else {
         $('input[name="uantal"]').hide();
 	}
 		
     $('input[name="udenne"]').on('click', function () {
         if ($(this).prop('checked')) {
-            $('input[name="uantal"]').fadeIn();
+            $(this).parent().find('input[name="uantal"]').fadeIn();
         } else {
-            $('input[name="uantal"]').hide();
+            $(this).parent().find('input[name="uantal"]').hide();
         }
     });
 	});
