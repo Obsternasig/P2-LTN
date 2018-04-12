@@ -95,8 +95,8 @@
 							
 							echo "<li>";
 
-								echo "<input name='udlaan' type='checkbox'>";
-							    echo "<input name='showthis' size='1' type='number'>";
+								echo "<input name='udenne' type='checkbox'>";
+							    echo "<input name='uantal' size='1' type='number'>";
 							
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
@@ -108,7 +108,7 @@
 
 								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
 							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>" . " Ødelagte: " . $row['broken'] . "</div>";
 
 							
 							echo "</li>";
@@ -119,27 +119,6 @@
 					echo "</ul>";
 			?>
 		</div>
-		
-		
-	<script>
-		//Viser tekstfelt når checkbox er clicked
-	$(function () {
-    if($('input[name="udlaan"]').prop('checked')){
-        $('input[name="showthis"]').fadeIn();
-    } else {
-        $('input[name="showthis"]').hide();
-	}
-		
-    $('input[name="udlaan"]').on('click', function () {
-        if ($(this).prop('checked')) {
-            $('input[name="showthis"]').fadeIn();
-        } else {
-            $('input[name="showthis"]').hide();
-        }
-    });
-	});
-		
-	</script>
 	
 		
 		<div class="information"> 
@@ -219,54 +198,32 @@
 		</div>
 		
 	</div>
-
-	
-	<script>
-		$("document").ready(function(){
-			
-				var $li = $('li').click(function() {
-				
-					if($(this).hasClass('selected')) {
-
-						$(this).removeClass('selected');
-
-					} else {
-
-						$li.removeClass('selected');
-						$(this).addClass('selected');
-					}
-				});
-			
-			$("#addbutt").click(function() {
-				
-				$("#addwhat, #addcancel").slideDown("fast");
-				
-			});
-			
-			$('#addwhat').change(function(){
-				
-            	$('.addhidingclass').slideUp();
-            	$('#' + $(this).val()).slideDown();
-        	});
-			
-			$('#addcancel').click(function() {
-				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
-			})
-			
-			$('#addcancel').click(function() {
-				$("#addwhat").val('0');
-			})
-
-		});
-		
-	</script>
 	
 </body>
 </html>
 
-<?php
-	mysqli_close($connection);
-?>
+
+
+<script>
+	
+		//Viser tekstfelt når checkbox er clicked
+	$(function () {
+    if($('input[name="udenne"]').prop('checked')){
+        $(this).find('input[name="uantal"]').fadeIn();
+    } else {
+        $('input[name="uantal"]').hide();
+	}
+		
+    $('input[name="udenne"]').on('click', function () {
+        if ($(this).prop('checked')) {
+            $('input[name="uantal"]').fadeIn();
+        } else {
+            $('input[name="uantal"]').hide();
+        }
+    });
+	});
+		
+</script>
 <script>
 		$("document").ready(function(){
 			
@@ -305,4 +262,7 @@
 
 		});
 		
-	</script>
+</script>
+<?php
+	mysqli_close($connection);
+?>
