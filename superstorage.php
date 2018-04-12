@@ -297,6 +297,7 @@
 	</script>
 	
 	<script>
+		//tilføjer og fjerne class når der bliver klikket.
 		$("document").ready(function(){
 			
 				var $li = $('li').click(function() {
