@@ -155,9 +155,9 @@
 							$broken = $row['broken'];
 							
 							echo "<li>";
-
-								echo "<input name='udenne' type='checkbox'>";
-							    echo "<input name='uantal' size='1' type='number'>";
+							
+								echo "<input id='udenne' name='udenne' type='checkbox'>";
+							    echo "<input id='uantal' name='uantal' type='text'>";
 
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
