@@ -23,7 +23,7 @@
 		
 		$("document").ready(function(){
 			
-			$('input').keyup(function () {
+			$('input').keydown(function () {
 				
 				if (this.value.length == this.maxLength) {
 					$(this).next('input').focus();
