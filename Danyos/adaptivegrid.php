@@ -80,8 +80,8 @@
 		
   		<div class="search">
 		
-			<form action="searchengine.php" method="POST">
-			<input type="search" autocomplete="off" id="searchfield" name="search" class="interactive" placeholder="Søg...">
+			<form action="adaptivegrid.php" method="POST">
+			<input type="text" id="searchfield" name="submit-search" class="interactive" placeholder="Søg...">
 			</form>
 		
 			<select size="1" id="searchcategories" class="interactive">
@@ -146,6 +146,7 @@
 		<div class="list">
 
 				<?php 
+			/*
 					mysqli_data_seek($komp, 0);
 			
 					echo "<ul>";
@@ -177,7 +178,59 @@
 							
 						}
 					
+					echo "</ul>";  
+					nedenunder er listen så søgeresultater kommer frem, men den kan ikke vise liste uden søgeresultater.. højst sandsynligt et IF statement der skal til, hvor ifet skal være hvis der er indput i søgefeltet*/
+			
+			if (isset($_POST['submit-search'])) {
+		$search = mysqli_real_escape_string($connection, $_POST['submit-search']);
+		/*forhindre MYSQl injection, så brugeren ikke skriver noget mærkeligt og ikke fucker med vores DB*/
+		$sql = "SELECT * FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%'";
+		/*Tager data fra tables*/
+		
+		$result = mysqli_query($connection, $sql);
+		$queryResult = mysqli_num_rows($result);
+		
+		echo "Der er ".$queryResult." resultater ved det søgte!";
+		
+		if ($queryResult > 0) {
+			while ($row = mysqli_fetch_assoc($result)){
+				echo "<ul>";
+							
+							$away = $row['away'];
+							$broken = $row['broken'];
+							
+							echo "<li>";
+
+								echo "<input type='checkbox'>";
+
+								echo "<div id='kate'>" . $row['category'] . "</div>";
+
+								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
+								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
+								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
+
+							echo "<br>";
+
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
+							
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
+
+							
+							echo "</li>";
+							echo "<hr>";
+							
+						}
+					
 					echo "</ul>";
+				echo "<div>
+					<h3>" .$row['category']."</h3> 
+					<p>" .$row['brand']. "</p>
+					</div>";
+			}
+		} else {
+			echo "There are no results matching your search";
+		}
+		
 				?>
 		</div>
 		

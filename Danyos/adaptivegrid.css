@@ -101,6 +101,7 @@ html, body {
 .search {
 	background-color: #303030;
 	grid-area: 1/2/2/3;
+	
 }
 
 #searchfield {
