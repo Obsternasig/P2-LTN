@@ -1,36 +1,62 @@
 <?php
-	require_once "../projekt/connection.php";
+	require_once "connection.php";
+	header('Content-type: text/html; charset=utf-8');
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
-		
-		$userrows = mysqli_fetch_assoc($users);
+	$komps = mysqli_query($connection, "SELECT * FROM komponent");
 
 
-	if(!$komp) {
-		die("Could not query the database" .mysqli_error());
-	}
-
-	if(!$users) {
-		die("Could not query the database" .mysqli_error());
-	}
-
-
-	function getColorAway($var) {
-    		if ($var <= 0)
-        		return '#ffffff';
-		
-    		else if ($var >= 1)
-				return '#334488';
+		if(!$komp) {
+			die("Could not query the database" .mysqli_error());
 		}
+
+		if(!$users) {
+			die("Could not query the database" .mysqli_error());
+		}
+
+
+	$userassoc = mysqli_fetch_assoc($users);
+
+		function getColorAway($var) {
+				if ($var <= 0)
+					return '#ffffff';
+
+				else if ($var >= 1)
+					return '#334488';
+			}
+
+		function getColorBroken($var) {
+				if ($var <= 0)
+					return '#ffffff';
+
+				else if ($var >= 1)
+					return '#e95522';
+			}
+
 	
-	function getColorBroken($var) {
-    		if ($var <= 0)
-  				return '#ffffff';
+	if(isset($_GET['id'])){
 		
-   			else if ($var >= 1)
-				return '#e95522';
-		}
+		$ID = htmlentities($_GET['id']);
+
+		$idquery = "SELECT * FROM users WHERE ID =$ID";
+		$idresults = mysqli_query($connection, $idquery);
+
+			if(!$idresults){
+				
+				 die("Could not query the database" .mysqli_error());
+			} else {
+				
+				$idrow = mysqli_fetch_assoc($idresults);
+	
+					$firstname = $idrow['firstname'];
+					$lastname = $idrow['lastname'];
+					$admin = $idrow['adminon'];
+			}
+			
+	}
+
+
 ?>
 
 <!doctype html>
@@ -50,35 +76,95 @@
   		<div class="logo">
 		
 			<img id="imglogo" src="images/logo.png" />
-			
+		
 		</div>
 		
   		<div class="search">
 		
-			<input type="search" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
+			<input type="search" id="searchfield" class="interactive" placeholder="Søg...">
 		
-				<select size="1" id="categories" class="roundedborders dropshadow">
-					<option>Alle</option>
-					<option value="1">Switches</option>
-					<option value="2">Ramblokke</option>
-					<option value="3">Kategori 3</option>
-				</select>
+			<select size="1" id="searchcategories" class="interactive">
+				<option value="0">Alle</option>
+				
+					<?php
+							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
+
+							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
+
+								$category = ucfirst($kompkat['category']);
+								echo "<option value=" . $category . ">" . $category . "</option>";
+
+							}
+					?>
+				
+			</select>
 
 		</div>
+		
   		<div class="end"> 
 			
-			<button id="endbutton" class="roundedborders dropshadow">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userrows['user_first'] . " " . $userrows['user_last']; ?> </div>
+			<button id="endbutton" class="interactive b" onclick="window.location.replace ('login.php')">Afslut</button>
+			<div class="person"> 
+				<?php 
+					
+					if (isset($firstname)&&isset($lastname)) { 
+						
+						echo "<img src='images/mand.png'>" . " ";
+						echo $firstname . " " . $lastname; 
+					} 
+				?> 
+			</div>
 			
 		</div>
-		<div class="functions">  </div>
+		
+		<div class="functions"> 
+	
+			<button id="addbutt" class="interactive b"> Tilføj </button>
+			
+			<button id="editbutt" class="interactive b"> Rediger </button>
+			
+			<button id="groupbutt" class="interactive b"> Gruppér </button>
+			
+			<?php 
+			
+			if (isset($admin)) {
+				
+				if ($admin == 1) {
+			
+					echo "<button id='adminbutt' class='interactive b'> Admin </button>";
+				}
+			}
+			?>
+				
+			<text id="chosenbutt"> Valgte: </text>
+		
+		</div>
+		
   		<div class="shoppinglist">  </div>
 
 		<div class="list">
+			<script>
+				$(document).ready(function() {
+					$('.second-list').hide();
+					$('#next').dblclick(function() {
+						$('.second-list').show();
+						$('.first-list').hide();
+					});
+			});
+			
+				$(document).ready(function() {
+					$('#back').dblclick(function() {
+						$('.first-list').show();
+						$('.second-list').hide();
+					});
+			});
+			</script>
+
 
 				<?php 
-	
-					echo "<ul>";
+					mysqli_data_seek($komp, 0);
+			
+					echo "<ul class='first-list' id='next'>";
 				
 						while ($row = mysqli_fetch_assoc($komp)) {
 							
@@ -86,84 +172,147 @@
 							$broken = $row['broken'];
 							
 							echo "<li>";
+								
 							
-							
-								echo "<a href='items.php?id=".$row['kategori']."'>";
 								echo "<input type='checkbox'>";
-								
-								
-								
 
-								echo "<div id='kate'>" . $row['kategori'] . "</div>";
+								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
-								echo "<div>" . " Antal: " . $row['antal'] . "</div>";
-								
+								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
+								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
 							echo "<br>";
 
 								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
 							
 								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
-
+							
 							
 							echo "</li>";
-							echo "</a>";
 							echo "<hr>";
 							
 						}
+						echo "</ul>";
+							
+							echo "<ul class='second-list' id='back'>";
 					
+							while ($rows = mysqli_fetch_assoc($komps)) {
+							
+							$loan = $rows['away'];
+							$broke = $rows['broken'];
+							
+							echo "<li>";
+
+								echo "<input type='checkbox'>";
+
+								echo "<div id='kate'>" . $rows['kategori'] . "</div>";
+
+								echo "<div>" . " Mærke: " . $rows['brand'] . "</div>";
+								echo "<div>" . " Porte: " . $rows['porte']  . "</div>";
+								echo "<div>" . " Serial: " . $rows['serial']  . "</div>";
+
+							echo "<br>";
+								
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($loan) . "'>" . "<input type='checkbox'>" . " Udlånt </div>";
+								echo "<div class='status' style='color: " . getColorBroken($broke) . "'>" . "<input type='checkbox'>"  . " Ødelagt </div>";
+								
+							
+							echo "</li>";
+							echo "<hr>";
+							
+						}
+						
 					echo "</ul>";
-			?>
+					
+					
+				?>
 		</div>
 		
 		<div class="information"> 
 			
-			<form name="addkomp" id="addkomp" method="post" action="../projekt/addkomp.php">
-				<div>
-					<p>Kategori:</p>
-					<input type="text" name="kategori" id="kategori" maxlength="30">
-				</div>
+			<select size="1" id="addwhat" class="interactive">
+				<option value="0"> Vælg hvad der skal tilføjes </option>
+				<option value="adduser">Tilføj bruger</option>
+				<option value="addkomp">Tilføj komponent</option>
+			</select>
+			
+			<button id="addcancel" class="interactive b"> Annuller </button>
+			
+			<div id="addkomp" class="addhidingclass">
+				
+				<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
+					<div>
+						<p>Kategori:</p>
+						<input type="text" name="category" id="category" maxlength="30">
+					</div>
 
-				<div>
-					<p>Brand:</p>
-					<input type="text" name="brand" id="brand" maxlength="30">
-				</div>
+					<div>
+						<p>Brand:</p>
+						<input type="text" name="brand" id="brand" maxlength="30">
+					</div>
 
-				<div>
-					<p>Porte:</p>
-					<input type="number" name="porte" id="porte" maxlength="4">
-				</div>
+					<div>
+						<p>Porte:</p>
+						<input type="number" name="ports" id="ports" maxlength="4">
+					</div>
 
-				<div>
-					<p>Antal:</p>
-					<input type="number" name="antal" id="antal" maxlength="4">
-				</div>
+					<div>
+						<p>Antal:</p>
+						<input type="number" name="amount" id="amount" maxlength="4">
+					</div>
 
-				<div>
-					<p>Udlånt:</p>
-					<input type="number" name="away" id="away" maxlength="4">
-				</div>
+					<div>
+						<p>Udlånt:</p>
+						<input type="number" name="away" id="away" maxlength="4">
+					</div>
 
-				<div>
-					<p>Ødelagte:</p>
-					<input type="number" name="broken" id="broken" maxlength="4">
-				</div>
+					<div>
+						<p>Ødelagte:</p>
+						<input type="number" name="broken" id="broken" maxlength="4">
+					</div>
 
-				<div>
-					<input type="submit" id="ok" value="OK">
-				</div>
-			</form>
+					<div>
+						<input type="submit" id="ok" value="OK">
+					</div>
+				</form>
+				
+			</div>
+			
+			<div id="adduser" class="addhidingclass">
+				
+				<form name="adduser" id="adduser" method="post" action="adduser.php">
+					<div>
+						<p>First name:</p>
+						<input type="text" name="addfirstname" id="addfirstname" maxlength="20">
+					</div>
+
+					<div>
+						<p>Last name:</p>
+						<input type="text" name="addlastname" id="addlastname" maxlength="20">
+					</div>
+
+					<div>
+						<p>E-mail:</p>
+						<input type="email" name="addemail" id="addemail" maxlength="50">
+					</div>
+
+					<div>
+						<input type="submit" id="ok" value="OK">
+					</div>
+				</form>
+				
+			</div>
 		</div>
 		
 	</div>
 
 	
 	<script>
+		
 		$("document").ready(function(){
 			
-			var $li = $('li').click(function() {
+				var $li = $('li').click(function() {
 				
 					if($(this).hasClass('selected')) {
 
@@ -171,12 +320,35 @@
 
 					} else {
 
-					$li.removeClass('selected');
-					$(this).addClass('selected');
-				}
+						$li.removeClass('selected');
+						$(this).addClass('selected');
+					}
+				});
+			
+			
+			
+			$("#addbutt").click(function() {
+				
+				$("#addwhat, #addcancel").slideDown("fast");
+				
 			});
 			
+			$('#addwhat').change(function(){
+				
+            	$('.addhidingclass').slideUp();
+            	$('#' + $(this).val()).slideDown();
+        	});
+			
+			$('#addcancel').click(function() {
+				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
+			})
+			
+			$('#addcancel').click(function() {
+				$("#addwhat").val('0');
+			})
+
 		});
+		
 	</script>
 	
 </body>

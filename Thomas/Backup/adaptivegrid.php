@@ -1,8 +1,7 @@
 <?php
-	require_once "connection.php";
+	require_once "../projekt/connection.php";
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
-	$komps = mysqli_query($connection, "SELECT * FROM komponent");
 	$users = mysqli_query($connection, "SELECT * FROM users");
 		
 		$userrows = mysqli_fetch_assoc($users);
@@ -81,29 +80,36 @@
 	
 					echo "<ul>";
 				
-						while ($row = mysqli_fetch_assoc($komps)) {
+						while ($row = mysqli_fetch_assoc($komp)) {
 							
 							$away = $row['away'];
 							$broken = $row['broken'];
 							
 							echo "<li>";
-
+							
+							
+								echo "<a href='items.php?id=".$row['kategori']."'>";
 								echo "<input type='checkbox'>";
+								
+								
+								
 
 								echo "<div id='kate'>" . $row['kategori'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
 								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
-								echo "<div>" . " Serial: " . $row['serial']  . "</div>";
+								echo "<div>" . " Antal: " . $row['antal'] . "</div>";
+								
 
 							echo "<br>";
 
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånt </div>";
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
 							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagt </div>";
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
 
 							
 							echo "</li>";
+							echo "</a>";
 							echo "<hr>";
 							
 						}
@@ -114,7 +120,7 @@
 		
 		<div class="information"> 
 			
-			<form name="addkomp" id="addkomp" method="post" action="../projekt/addkomps.php">
+			<form name="addkomp" id="addkomp" method="post" action="../projekt/addkomp.php">
 				<div>
 					<p>Kategori:</p>
 					<input type="text" name="kategori" id="kategori" maxlength="30">
@@ -131,18 +137,18 @@
 				</div>
 
 				<div>
-					<p>Ødelagt:</p>
-					<input type="number" name="broken" id="broken" maxlength="1">
+					<p>Antal:</p>
+					<input type="number" name="antal" id="antal" maxlength="4">
 				</div>
 
 				<div>
-					<p>Udlånet:</p>
-					<input type="number" name="away" id="away" maxlength="1">
+					<p>Udlånt:</p>
+					<input type="number" name="away" id="away" maxlength="4">
 				</div>
 
 				<div>
-					<p>Serienummer	:</p>
-					<input type="number" name="serial" id="serial" maxlength="20">
+					<p>Ødelagte:</p>
+					<input type="number" name="broken" id="broken" maxlength="4">
 				</div>
 
 				<div>
@@ -166,7 +172,7 @@
 					} else {
 
 					$li.removeClass('selected');
-					$(this).addClass('sele  cted');
+					$(this).addClass('selected');
 				}
 			});
 			
