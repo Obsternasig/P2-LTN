@@ -262,15 +262,12 @@ hr {
 
 #udenne {
 	display: grid;
+	border: 2px solid;
+	
 }
 
 #uantal {
 	position: absolute;
 	max-height: 3vh;
 	max-width: 1vw;
-}
-
-la.cbox {
-	background-color: #404040;
-	border-radius: 5vh;
 }
