@@ -290,11 +290,8 @@
 
 					} else {	
 					
-<<<<<<< HEAD
 						$udenne.removeClass('cbox');
-=======
 						$la.hasClass('cbox');
->>>>>>> 809c1681ed217947a1c5561b0415793513bb1175
 						$(this).addClass('cbox');
 					}
 				});
