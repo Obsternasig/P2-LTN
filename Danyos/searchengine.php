@@ -2,7 +2,7 @@
 	require_once "connection.php";
 	header('Content-type: text/html; charset=utf-8');
 
-	if (isset($_POST['submit-search'])) {
+	if (isset($_POST['search'])) {
 		$search = mysqli_real_escape_string($connection, $_POST['search']);
 		/*forhindre MYSQl injection, så brugeren ikke skriver noget mærkeligt og ikke fucker med vores DB*/
 		$sql = "SELECT * FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%'";
@@ -20,8 +20,6 @@
 					<p>" .$row['brand']. "</p>
 					</div>";
 			}
-		} else {
-			echo "There are no results matching your search";
 		}
 		
 	}
