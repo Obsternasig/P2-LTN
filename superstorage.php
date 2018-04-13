@@ -81,7 +81,6 @@
 		
 			<form action="sssearchengine.php" method="POST">
 			<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
-			<button type="submit" name="submit-search">Search</button>
 			</form>
 		
 			<select size="1" id="searchcategories" class="interactive">
@@ -291,7 +290,11 @@
 
 					} else {	
 					
+<<<<<<< HEAD
 						$udenne.removeClass('cbox');
+=======
+						$la.hasClass('cbox');
+>>>>>>> 809c1681ed217947a1c5561b0415793513bb1175
 						$(this).addClass('cbox');
 					}
 				});
@@ -299,7 +302,7 @@
 	</script>
 	
 	<script>
-		//tilføjer og fjerne class når der bliver klikket.
+		  //tilføjer og fjerne class når der bliver klikket.
 		$("document").ready(function(){
 			
 				var $li = $('li').click(function() {
