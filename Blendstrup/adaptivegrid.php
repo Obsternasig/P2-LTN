@@ -74,7 +74,7 @@
 		
   		<div class="logo">
 		
-			<img id="imglogo" src="images/logo.png" />
+			<a href="adaptivegrid.php"><img id="imglogo" src="images/logo.png"/></a>
 		
 		</div>
 		
@@ -155,7 +155,7 @@
 						$cateval = $_POST['cateopt'];
 						$listquery = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE '" . $cateval . "'");
 					} else {
-						$listquery = mysqli_query($connection, "SELECT * FROM komponenter");
+						$listquery = mysqli_query($connection, "SELECT * FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
 					}
 
 			
@@ -174,7 +174,7 @@
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
 								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
-								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
+								echo "<div>" . " Antal: " . "Who knows" . "</div>";
 
 							echo "<br>";
 
