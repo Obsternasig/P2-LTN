@@ -111,7 +111,7 @@ html, body {
 	grid-area: 1/2/2/3;
 }
 
-#searchfield {
+#search {
 	font-size: 1.3vw;
 	font-weight: 300;
 	width: 38vw;

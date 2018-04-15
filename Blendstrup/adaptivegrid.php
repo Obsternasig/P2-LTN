@@ -80,8 +80,8 @@
 		
   		<div class="search">
 		
-			<form action="searchengine.php" method="POST">
-				<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
+			<form method="POST">
+				<input type="search" id="search" name="search" class="interactive" placeholder="Søg...">
 			</form>
 			
 			<form id="cateform" method="POST" action="">
@@ -152,19 +152,27 @@
 					
 
 					if(isset($_POST['cateopt'])) {
+						
 						$cateval = $_POST['cateopt'];
-						$listquery = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE '" . $cateval . "'");
-					} else {
-						$listquery = mysqli_query($connection, "SELECT * FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
+						$listquery = mysqli_query($connection, "SELECT category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
+						
+					} elseif(isset($_POST['search'])) {
+						
+						$search = mysqli_real_escape_string($connection, $_POST['search']);
+						$listquery = mysqli_query($connection, "SELECT category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
+						
+					} elseif(!isset($_POST['cateopt'])&&!isset($_POST['search'])) {
+						
+						$listquery = mysqli_query($connection, "SELECT category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
 					}
 
-			
+
 					echo "<ul>";
 			
 						while ($row = mysqli_fetch_assoc($listquery)) {
 							
-							$away = $row['away'];
-							$broken = $row['broken'];
+							$away = $row['SUM(away)'];
+							$broken = $row['SUM(broken)'];
 							
 							echo "<li>";
 
@@ -178,9 +186,9 @@
 
 							echo "<br>";
 
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . " Udlånte: " . $row['away'] . "</div>";
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . " Udlånte: " . $row['SUM(away)'] . "</div>";
 							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . " Ødelagte: " . $row['broken'] . "</div>";
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . " Ødelagte: " . $row['SUM(broken)'] . "</div>";
 
 							
 							echo "</li>";
