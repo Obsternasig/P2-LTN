@@ -106,7 +106,7 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">AFSLUT</button>
+			<button id="endbutton" class="interactive b" onclick="window.location.href='index.php'">AFSLUT</button>
 			<div class="person"> 
 				<?php 
 					
