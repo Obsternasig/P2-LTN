@@ -147,9 +147,7 @@
 
 		<div class="list">
 
-				<?php 
-					mysqli_data_seek($komp, 0);
-					
+				<?php
 
 					if(isset($_POST['cateopt'])) {
 						
