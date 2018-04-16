@@ -106,7 +106,7 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">AFSLUT</button>
+			<button id="endbutton" class="interactive b" onclick="window.location.href='index.php'">AFSLUT</button>
 			<div class="person"> 
 				<?php 
 					
@@ -147,23 +147,21 @@
 
 		<div class="list">
 
-				<?php 
-					mysqli_data_seek($komp, 0);
-					
+				<?php
 
 					if(isset($_POST['cateopt'])) {
 						
 						$cateval = $_POST['cateopt'];
-						$listquery = mysqli_query($connection, "SELECT category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
 						
 					} elseif(isset($_POST['search'])) {
 						
 						$search = mysqli_real_escape_string($connection, $_POST['search']);
-						$listquery = mysqli_query($connection, "SELECT category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
 						
 					} elseif(!isset($_POST['cateopt'])&&!isset($_POST['search'])) {
 						
-						$listquery = mysqli_query($connection, "SELECT category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
 					}
 
 
@@ -182,7 +180,7 @@
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
 								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
-								echo "<div>" . " Antal: " . "Who knows" . "</div>";
+								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
 							echo "<br>";
 

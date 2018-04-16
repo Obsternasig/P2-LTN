@@ -1,6 +1,7 @@
 <?php
-	require_once "ssconnection.php";
+	require_once "connection.php";
 	header('Content-type: text/html; charset=utf-8');
+	session_start();
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
@@ -34,9 +35,9 @@
 			}
 
 	
-	if(isset($_GET['id'])){
+	if(isset($_SESSION['loginid'])){
 		
-		$ID = htmlentities($_GET['id']);
+		$ID = $_SESSION['loginid'];
 
 		$idquery = "SELECT * FROM users WHERE ID =$ID";
 		$idresults = mysqli_query($connection, $idquery);
@@ -51,9 +52,9 @@
 					$firstname = $idrow['firstname'];
 					$lastname = $idrow['lastname'];
 					$admin = $idrow['adminon'];
-			}	
+			}
+			
 	}
-
 
 ?>
 
@@ -62,7 +63,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title> Adaptive Grid </title>
+	<title> LTN  - Super Storage </title>
 	<link rel="stylesheet" href="superstorage.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -73,37 +74,40 @@
 		
   		<div class="logo">
 		
-			<img id="imglogo" src="images/logo.png" />
+			<a href="superstorage.php"><img id="imglogo" src="images/logo.png"/></a>
 		
 		</div>
 		
   		<div class="search">
 		
-			<form action="sssearchengine.php" method="POST">
-			<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
+			<form method="POST">
+				<input type="search" id="search" name="search" class="interactive" placeholder="Søg...">
 			</form>
-		
-			<select size="1" id="searchcategories" class="interactive">
-				<option value="0">Alle</option>
-				
-					<?php
-							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
+			
+			<form id="cateform" method="POST" action="">
+				<select size="1" id="cateopt" name="cateopt" class="interactive">
+					<option value="null">Alle</option>
 
-							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
+						<?php
+								$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
+								
+								while ($kompkat = mysqli_fetch_assoc($kompsort)) {
 
-								$category = ucfirst($kompkat['category']);
-								echo "<option value=" . $category . ">" . $category . "</option>";
+									$category = $kompkat['category'];
+									echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
 
-							}
-					?>
-				
-			</select>
+								}
 
+						?>
+
+				</select>
+			</form>
 		</div>
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.href='/sslogin.php'">Afslut</button>
+			<button id="endbutton" class="interactive b" onclick="window.location.href='index.php'">AFSLUT</button>
+			
 			<div class="person"> 
 				<?php 
 					
@@ -137,6 +141,7 @@
 			?>
 				
 			<text id="chosenbutt"> Valgte: </text>
+		
 		</div>
 		
   		<div class="shoppinglist">  </div>
@@ -145,19 +150,35 @@
 
 				<?php 
 					mysqli_data_seek($komp, 0);
-			
+					
+
+					if(isset($_POST['cateopt'])) {
+						
+						$cateval = $_POST['cateopt'];
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
+						
+					} elseif(isset($_POST['search'])) {
+						
+						$search = mysqli_real_escape_string($connection, $_POST['search']);
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
+						
+					} elseif(!isset($_POST['cateopt'])&&!isset($_POST['search'])) {
+						
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
+					}
+
+
 					echo "<ul>";
-				
-						while ($row = mysqli_fetch_assoc($komp)) {
+			
+						while ($row = mysqli_fetch_assoc($listquery)) {
 							
-							$away = $row['away'];
-							$broken = $row['broken'];
+							$away = $row['SUM(away)'];
+							$broken = $row['SUM(broken)'];
 							
 							echo "<li>";
-							
-								echo "<input id='udenne' name='udenne' type='checkbox'>";
-							    echo "<input id='uantal' name='uantal' type='text'>";
-									
+
+								echo "<input type='checkbox'>";
+
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
@@ -166,9 +187,9 @@
 
 							echo "<br>";
 
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . " Udlånte: " . $row['SUM(away)'] . "</div>";
 							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . " Ødelagte: " . $row['SUM(broken)'] . "</div>";
 
 							
 							echo "</li>";
@@ -259,51 +280,13 @@
 	</div>
 
 	
-    <script>
-	
-		//Viser tekstfelt når checkbox er clicked
-	$(function () {
-    if($('input[name="udenne"]').prop('checked')){
-        $('input[name="uantal"]').fadeIn();
-    } else {
-        $('input[name="uantal"]').hide();
-	}
-		
-    $('input[name="udenne"]').on('click', function () {
-        if ($(this).prop('checked')) {
-            $(this).parent().find('input[name="uantal"]').fadeIn();
-        } else {
-            $(this).parent().find('input[name="uantal"]').hide();
-        }
-    });
-	});
-		
-	</script>
 	<script>
-						
-						
-			//tilføjer og fjerne class når der bliver klikket.
-		$(function(){
-			var $udenne = $('udenne').click(function() {
-				if($(this).hasClass('cbox')) {
-					$(this).removeClass('cbox');
-
-					} else {	
-					
-						$udenne.removeClass('cbox');
-						$la.hasClass('cbox');
-						$(this).addClass('cbox');
-					}
-				});
 		
-	</script>
-	
-	<script>
-		  //tilføjer og fjerne class når der bliver klikket.
 		$("document").ready(function(){
 			
-				var $li = $('li').click(function() {
-				
+			var $li = $('li').click(function(e) {
+				if( !$(e.target).is("input") ) {
+
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
@@ -313,7 +296,14 @@
 						$li.removeClass('selected');
 						$(this).addClass('selected');
 					}
-				});
+				}
+			});
+			
+
+			
+			$("#cateopt").change(function(){
+				document.getElementById('cateform').submit();
+			});
 			
 			
 			
