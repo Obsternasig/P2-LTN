@@ -1,44 +1,3 @@
-<<<<<<< HEAD
-<html>
-<head>
-<link type="text/css" rel="stylesheet" href="search_style.css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript">
-function do_search()
-{
- var search_term=$("#search_term").val();
- $.ajax
- ({
-  type:'post',
-  url:'denno.php',
-  data:{
-   search:"search",
-   search_term:search_term
-  },
-  success:function(response) 
-  {
-   document.getElementById("result_div").innerHTML=response;
-  }
- });
- 
- return false;
-}
-</script>
-</head>
-<body>
-<div id="wrapper">
-
-<div id="search_box">
- <form method="post"action="denno.php" onsubmit="return do_search();">
-  <input type="text" id="search_term" name="search_term" placeholder="Enter Search" onkeyup="do_search();">
-  <input type="submit" name="search" value="SEARCH">
- </form>
-</div>
-
-<div id="result_div"></div>
-
-</div>
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,7 +73,5 @@ $(document).ready(function(){
         <div class="result"></div>
     </div>
 	
-	
->>>>>>> e98ce439ae8905eaebd9dd5cad1b548ea88adfd0
 </body>
 </html>
