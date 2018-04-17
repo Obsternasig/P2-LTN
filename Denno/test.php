@@ -1,19 +1,41 @@
-<form method="post" id="report_filter" action="<?= $_SERVER['PHP_SELF'];?>" ><form target="frame">
-    <select name="name" onchange="document.getElementById('report_filter').submit();">
-        <option value="--">Filter by:</option>
-        <option value="1">Andi</option>
-        <option value="2">Katy</option>
-        <option value="3">Max</option>
-    <select>
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="search_style.css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+function do_search()
+{
+ var search_term=$("#search_term").val();
+ $.ajax
+ ({
+  type:'post',
+  url:'denno.php',
+  data:{
+   search:"search",
+   search_term:search_term
+  },
+  success:function(response) 
+  {
+   document.getElementById("result_div").innerHTML=response;
+  }
+ });
+ 
+ return false;
+}
+</script>
+</head>
+<body>
+<div id="wrapper">
 
-    <?
-    if(isset($_POST['name'])):
-        $mem->StaffTodayFilterSummary($_POST['name']); 
-    else :
-      $mem->StaffToday(); 
-    endif;
-    ?>
-</form>
-		
-		
-		<iframe name="frame" style="display: none"><style></style></iframe>
+<div id="search_box">
+ <form method="post"action="denno.php" onsubmit="return do_search();">
+  <input type="text" id="search_term" name="search_term" placeholder="Enter Search" onkeyup="do_search();">
+  <input type="submit" name="search" value="SEARCH">
+ </form>
+</div>
+
+<div id="result_div"></div>
+
+</div>
+</body>
+</html>

@@ -1,25 +1,18 @@
-<!doctype html>
-<html>
-	
-<head>
-	<meta charset="utf-8">
-	<title> Denno </title>
-	<link rel="stylesheet" href="../Denno/denno.css">
-</head>
 
-<body>
+<?php
+require_once"connection.php";
+
+if(isset($_POST['komponenter']))
+{
+
+
+ $search_val=$_POST['brand'];
 	
-	<div class="grid">
-		
-  		<div class="logo"> Logo </div>
-  		<div class="search"> Search </div>
-  		<div class="end"> End </div>
-  		<div class="functions"> Functions </div>
-  		<div class="shoppinglist"> Shopping-list </div>
- 		<div class="list"> List	</div>
-		<div class="information"> Information </div>
-		
-	</div>
-</body>
-	
-</html>
+ $get_result = mysql_query("select * from komponenter where MATCH(brand) AGAINST('$search_val')");
+ while($row=mysql_fetch_array($get_result))
+ {
+  echo "<li><a href='http://talkerscode.com/webtricks/".$row['brans']."'><span class='title'>".$row['brand']."</span><br><span class='desc'>".$row['brand']."</span></a></li>";
+ }
+ exit();
+}
+?>
