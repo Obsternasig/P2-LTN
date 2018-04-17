@@ -81,11 +81,7 @@
   		<div class="search">
 		
 			<form method="POST">
-<<<<<<< HEAD
 				<input type="search" id="search" name="search" class="interactive" placeholder="Søg...">
-=======
-				<input type="search" id="search" name="search" class="interactive" placeholder="Søg..." autocomplete="off">
->>>>>>> e98ce439ae8905eaebd9dd5cad1b548ea88adfd0
 			</form>
 			
 			<form id="cateform" method="POST" action="">
@@ -110,11 +106,7 @@
 		
   		<div class="end"> 
 			
-<<<<<<< HEAD
 			<button id="endbutton" class="interactive b" onclick="window.location.href='index.php'">AFSLUT</button>
-=======
-			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">AFSLUT</button>
->>>>>>> e98ce439ae8905eaebd9dd5cad1b548ea88adfd0
 			<div class="person"> 
 				<?php 
 					
@@ -154,73 +146,22 @@
   		<div class="shoppinglist">  </div>
 
 		<div class="list">
-<<<<<<< HEAD
 
 				<?php
-=======
-			<!-- Det her ligner meget et script vi kan bruge til at lave live search, jeg fatter det bare ikke helt.
-			
-			<script>
-$("document").ready(function(){
-
- "load_data()";
-
- function load_data(query)
- {
-  $.ajax({
-   url:"adaptivegrid.php",
-   method:"POST",
-   data:{listquery:listquery},
-   success:function(data)
-   {
-    $('#result').html(data);
-   }
-  });
- }
- $('#search').keyup(function(){
-  var search = $(this).val();
-  if(search != '')
-  {
-   load_data(search);
-  }
-  else
-  {
-   load_data();
-  }
- });
-});
-</script>
--->
-				<?php 
-					mysqli_data_seek($komp, 0);
-					
->>>>>>> e98ce439ae8905eaebd9dd5cad1b548ea88adfd0
 
 					if(isset($_POST['cateopt'])) {
 						
 						$cateval = $_POST['cateopt'];
-<<<<<<< HEAD
 						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
-=======
-						$listquery = mysqli_query($connection, "SELECT category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
->>>>>>> e98ce439ae8905eaebd9dd5cad1b548ea88adfd0
 						
 					} elseif(isset($_POST['search'])) {
 						
 						$search = mysqli_real_escape_string($connection, $_POST['search']);
-<<<<<<< HEAD
 						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
 						
 					} elseif(!isset($_POST['cateopt'])&&!isset($_POST['search'])) {
 						
 						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
-=======
-						$listquery = mysqli_query($connection, "SELECT category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
-						
-					} elseif(!isset($_POST['cateopt'])&&!isset($_POST['search'])) {
-						
-						$listquery = mysqli_query($connection, "SELECT category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
->>>>>>> e98ce439ae8905eaebd9dd5cad1b548ea88adfd0
 					}
 
 
@@ -239,7 +180,7 @@ $("document").ready(function(){
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
 								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
-								echo "<div>" . " Antal: " . "Who knows" . "</div>";
+								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
 							echo "<br>";
 
@@ -331,7 +272,24 @@ $("document").ready(function(){
 				</form>
 				
 			</div>
+			
+			<div id="info" class="addhidingclass">
+			<button id="sealle" class="interactive b"> Se Alle </button>
+				
+			<p>Kategori:</p>
+			
+			<p>Brand:</p>
+			
+			<p>Antal</P>
+			
+			<p>Udlånt:</p>
+		
+			<p>Ødelagte:</p>
+	
 		</div>
+	</div>
+		
+			 
 		
 	</div>
 
@@ -342,15 +300,22 @@ $("document").ready(function(){
 			
 			var $li = $('li').click(function(e) {
 				if( !$(e.target).is("input") ) {
+					
+					$("#info").show("fast");
+					$("#sealle").show("fast");
+					$("#addwhat, #addcancel").hide("fast");
 
 					if($(this).hasClass('selected')) {
-
+						
 						$(this).removeClass('selected');
+						$('.addhidingclass').hide();
+						
 
 					} else {
 
 						$li.removeClass('selected');
 						$(this).addClass('selected');
+						
 					}
 				}
 			});
@@ -364,8 +329,8 @@ $("document").ready(function(){
 			
 			
 			$("#addbutt").click(function() {
-				
 				$("#addwhat, #addcancel").slideDown("fast");
+				
 				
 			});
 			
@@ -377,10 +342,12 @@ $("document").ready(function(){
 			
 			$('#addcancel').click(function() {
 				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
+				
 			})
 			
 			$('#addcancel').click(function() {
 				$("#addwhat").val('0');
+				
 			})
 
 		});
