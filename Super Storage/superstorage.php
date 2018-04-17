@@ -155,16 +155,16 @@
 					if(isset($_POST['cateopt'])) {
 						
 						$cateval = $_POST['cateopt'];
-						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
-						
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
+
 					} elseif(isset($_POST['search'])) {
 						
 						$search = mysqli_real_escape_string($connection, $_POST['search']);
-						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
 						
 					} elseif(!isset($_POST['cateopt'])&&!isset($_POST['search'])) {
 						
-						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
 					}
 
 
@@ -175,6 +175,30 @@
 							$away = $row['SUM(away)'];
 							$broken = $row['SUM(broken)'];
 							
+							$category = $row['category'];
+							
+							switch($category) {
+								case $category == "switch": $midsec = "Porte"; $midcat = $row['ports'];
+									break;
+								case $category == "router": $midsec = "Hastighed"; $midcat = $row['speed'];
+									break;
+								case $category == "sfp-modul": $midsec = "Type"; $midcat = $row['type'];
+									break;
+								case $category == "el-tavle": $midsec = "Type"; $midcat = $row['type'];
+									break;
+								case $category == "ram-blok": $midsec = "Type"; $midcat = $row['type'];
+									break;
+								case $category == "cpu": $midsec = "Socket"; $midcat = $row['socket'];
+									break;
+								case $category == "kabel": $midsec = "Type"; $midcat = $row['type'];
+									break;
+								case $category == "motherboard": $midsec = "Socket"; $midcat = $row['socket'];
+									break;
+								
+								default: $midsec = "?"; $midcat = "?";
+							}
+							
+							
 							echo "<li>";
 		
 								echo "<input type='checkbox' id='udenne' name='udenne'>";
@@ -183,7 +207,7 @@
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
+								echo "<div>" . " " . $midsec . ": " . $midcat  . "</div>";
 								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
 							echo "<br>";
