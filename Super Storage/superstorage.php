@@ -177,7 +177,8 @@
 							
 							echo "<li>";
 
-								echo "<input type='checkbox'>";
+                            echo "<input id='udenne' name='udenne' type='checkbox'>";
+                            echo "<input id='uantal' name='uantal' type='text'>";
 
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
@@ -278,7 +279,26 @@
 		</div>
 		
 	</div>
+    <script>
 
+        //Viser tekstfelt når checkbox er clicked
+        $(function () {
+            if($('input[name="udenne"]').prop('checked')){
+                $('input[name="uantal"]').fadeIn();
+            } else {
+                $('input[name="uantal"]').hide();
+            }
+
+            $('input[name="udenne"]').on('click', function () {
+                if ($(this).prop('checked')) {
+                    $(this).parent().find('input[name="uantal"]').fadeIn();
+                } else {
+                    $(this).parent().find('input[name="uantal"]').hide();
+                }
+            });
+        });
+
+    </script>
 	
 	<script>
 		
