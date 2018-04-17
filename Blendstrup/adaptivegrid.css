@@ -43,6 +43,16 @@ html, body {
     text-align: center;
 }
 
+.loginfail {
+	grid-area: 3/2/4/3;
+	color: red;
+	font-size: 2vw;
+	font-weight: 500;
+	padding-top: 20vh;
+	text-align: center;
+	margin: 0 auto;
+}
+
 .interactive {
 	border-radius: 5vw;
 	background-color: #606060;
