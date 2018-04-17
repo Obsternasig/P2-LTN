@@ -176,16 +176,13 @@
 							$broken = $row['SUM(broken)'];
 							
 							echo "<li>";
-<<<<<<< HEAD:superstorage.php
-							
+		
 								echo "<input type='checkbox' id='udenne' name='udenne'>";
 							    echo "<input type='text' id='uantal' name='uantal'>";
-									
-=======
+								
 
 								echo "<input type='checkbox'>";
 
->>>>>>> 973a5a7d327ed0c3bfaeadaacca12fb3ab0aa6f8:Super Storage/superstorage.php
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
@@ -288,7 +285,6 @@
 
 	
 	<script>
-<<<<<<< HEAD:superstorage.php
 						
 						
 			//tilføjer og fjerne class når der bliver klikket.
@@ -305,8 +301,7 @@
 					}
 			}
 				)};
-=======
->>>>>>> 973a5a7d327ed0c3bfaeadaacca12fb3ab0aa6f8:Super Storage/superstorage.php
+
 		
 		$("document").ready(function(){
 			
