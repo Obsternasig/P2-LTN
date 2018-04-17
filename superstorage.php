@@ -155,8 +155,8 @@
 							
 							echo "<li>";
 							
-								echo "<input id='udenne' name='udenne' type='checkbox'>";
-							    echo "<input id='uantal' name='uantal' type='text'>";
+								echo "<input type='checkbox' id='udenne' name='udenne'>";
+							    echo "<input type='text' id='uantal' name='uantal'>";
 									
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
@@ -284,17 +284,18 @@
 						
 			//tilføjer og fjerne class når der bliver klikket.
 		$(function(){
-			var $udenne = $('udenne').click(function() {
+			var $la = $('la').click(function() {
 				if($(this).hasClass('cbox')) {
 					$(this).removeClass('cbox');
 
 					} else {	
 					
-						$udenne.removeClass('cbox');
+						$la.removeClass('cbox');
 						$la.hasClass('cbox');
 						$(this).addClass('cbox');
 					}
-				});
+			}
+				)};
 		
 	</script>
 	
