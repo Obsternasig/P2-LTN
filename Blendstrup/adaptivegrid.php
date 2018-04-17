@@ -69,7 +69,7 @@
 </head>
 
 <body>
-	
+
 	<div class="grid">
 		
   		<div class="logo">
@@ -106,7 +106,7 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.href='index.php'">AFSLUT</button>
+			<a href="logout.php"> <button id="endbutton" class="interactive b">AFSLUT</button> </a>
 			<div class="person"> 
 				<?php 
 					
@@ -153,7 +153,7 @@
 						
 						$cateval = $_POST['cateopt'];
 						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
-						
+
 					} elseif(isset($_POST['search'])) {
 						
 						$search = mysqli_real_escape_string($connection, $_POST['search']);
@@ -171,6 +171,8 @@
 							
 							$away = $row['SUM(away)'];
 							$broken = $row['SUM(broken)'];
+							$category = $row['category'];
+							
 							
 							echo "<li>";
 
@@ -180,7 +182,7 @@
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
 								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
-								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
+								echo "<div>" . " Antal: " . $category . "</div>";
 
 							echo "<br>";
 

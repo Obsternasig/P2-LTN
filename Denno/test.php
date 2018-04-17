@@ -73,6 +73,5 @@ $(document).ready(function(){
         <div class="result"></div>
     </div>
 	
-	
 </body>
 </html>

@@ -33,7 +33,7 @@
 					header("Location: superstorage.php");
 				
 				} else {
-				
+					
 					header("Location: index.php");
 				}
 			}
