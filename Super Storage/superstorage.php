@@ -179,10 +179,6 @@
 		
 								echo "<input type='checkbox' id='udenne' name='udenne'>";
 							    echo "<input type='text' id='uantal' name='uantal'>";
-								
-
-                            echo "<input id='udenne' name='udenne' type='checkbox'>";
-                            echo "<input id='uantal' name='uantal' type='text'>";
 
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
