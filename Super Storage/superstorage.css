@@ -272,3 +272,15 @@ hr {
 	overflow-y: scroll;
 	box-shadow: inset 0 0.7vw 1vw -0.7vw rgba(5,5,5,0.8);
 }
+
+#udenne {
+	display: grid;
+	border: 2px solid;
+
+}
+
+#uantal {
+	position: absolute;
+	max-height: 3vh;
+	max-width: 1vw;
+}
