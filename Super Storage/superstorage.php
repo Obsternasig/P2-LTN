@@ -176,6 +176,10 @@
 							$broken = $row['SUM(broken)'];
 							
 							echo "<li>";
+		
+								echo "<input type='checkbox' id='udenne' name='udenne'>";
+							    echo "<input type='text' id='uantal' name='uantal'>";
+								
 
 								echo "<input type='checkbox'>";
 
@@ -281,6 +285,23 @@
 
 	
 	<script>
+						
+						
+			//tilføjer og fjerne class når der bliver klikket.
+		$(function(){
+			var $la = $('la').click(function() {
+				if($(this).hasClass('cbox')) {
+					$(this).removeClass('cbox');
+
+					} else {	
+					
+						$la.removeClass('cbox');
+						$la.hasClass('cbox');
+						$(this).addClass('cbox');
+					}
+			}
+				)};
+
 		
 		$("document").ready(function(){
 			
