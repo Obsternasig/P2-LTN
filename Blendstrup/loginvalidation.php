@@ -29,13 +29,17 @@
 				
 				if(!empty($id)) {
 					
+					unset($_SESSION['loginfail']);
 					$_SESSION['loginid'] = $id;
 					header("Location: adaptivegrid.php");
 				
-				} else {
-				
-					header("Location: login.php");
 				}
+				
+			} else {
+
+					$loginfail = 1;
+					$_SESSION['loginfail'] = $loginfail;	
+					header("Location: index.php");
 			}
 		}
 	}
