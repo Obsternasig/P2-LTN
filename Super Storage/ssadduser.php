@@ -1,6 +1,6 @@
 <?php
 	
-	require_once 'ssconnection.php';
+	require_once 'connection.php';
 	header('Content-type: text/html; charset=utf-8');
 			
 	function initials($first, $last) {
@@ -38,7 +38,7 @@
 		
 		if(!empty($firstname)&&!empty($lastname)&&!empty($email)) {
 
-			$query = "INSERT INTO users VALUES ('$initials', '$pin', '$firstname', '$lastname', '$email', '', '')";
+			$query = "INSERT INTO users VALUES ('$initials', '$pin', '$firstname', '$lastname', '$email', '')";
 			$results = mysqli_query($connection, $query);
 
 

@@ -1,6 +1,7 @@
 <?php
 	require_once "connection.php";
 	header('Content-type: text/html; charset=utf-8');
+	session_start();
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
@@ -17,7 +18,6 @@
 
 	$userassoc = mysqli_fetch_assoc($users);
 
-
 		function getColorAway($var) {
 				if ($var <= 0)
 					return '#ffffff';
@@ -33,8 +33,30 @@
 				else if ($var >= 1)
 					return '#e95522';
 			}
-?>
 
+	
+	if(isset($_SESSION['loginid'])){
+		
+		$ID = $_SESSION['loginid'];
+
+		$idquery = "SELECT * FROM users WHERE ID =$ID";
+		$idresults = mysqli_query($connection, $idquery);
+
+			if(!$idresults){
+				
+				 die("Could not query the database" .mysqli_error());
+			} else {
+				
+				$idrow = mysqli_fetch_assoc($idresults);
+	
+					$firstname = $idrow['firstname'];
+					$lastname = $idrow['lastname'];
+					$admin = $idrow['adminon'];
+			}
+			
+	}
+
+?>
 
 <!doctype html>
 <html>
@@ -42,7 +64,7 @@
 <head>
 	<meta charset="utf-8">
 	<title> Adaptive Grid </title>
-	<link rel="stylesheet" href="adaptivedanyos.css">
+	<link rel="stylesheet" href="adaptivegrid.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -52,30 +74,49 @@
 		
   		<div class="logo">
 		
-			<img id="imglogo" src="images/logo.png" />
+			<a href="adaptivegrid.php"><img id="imglogo" src="images/logo.png"/></a>
 		
 		</div>
 		
   		<div class="search">
-
-			<form action="searchengine.php" method="POST">
-			<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg..."/>
-			<button type="submit" name="submit-search">Search</button>
-			</form>
 		
-			<select size="1" id="searchcategories" class="interactive">
-				<option>Alle</option>
-				<option value="1">Switches</option>
-				<option value="2">Ramblokke</option>
-				<option value="3">Kategori 3</option>
-			</select>
+			<form action="searchengine.php" method="POST">
+				<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
+			</form>
+			
+			<form id="cateform" method="POST" action="">
+				<select size="1" id="cateopt" name="cateopt" class="interactive">
+					<option value="null">Alle</option>
 
+						<?php
+								$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
+								
+								while ($kompkat = mysqli_fetch_assoc($kompsort)) {
+
+									$category = $kompkat['category'];
+									echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
+
+								}
+
+						?>
+
+				</select>
+			</form>
 		</div>
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userassoc['user_first'] . " " . $userassoc['user_last']; ?> </div>
+			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">AFSLUT</button>
+			<div class="person"> 
+				<?php 
+					
+					if (isset($firstname)&&isset($lastname)) { 
+						
+						echo "<img src='images/mand.png'>" . " ";
+						echo $firstname . " " . $lastname; 
+					} 
+				?> 
+			</div>
 			
 		</div>
 		
@@ -86,6 +127,19 @@
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
 			<button id="groupbutt" class="interactive b"> Gruppér </button>
+			
+			<?php 
+			
+			if (isset($admin)) {
+				
+				if ($admin == 1) {
+			
+					echo "<button id='adminbutt' class='interactive b'> Admin </button>";
+				}
+			}
+			?>
+				
+			<text id="chosenbutt"> Valgte: </text>
 		
 		</div>
 		
@@ -94,10 +148,20 @@
 		<div class="list">
 
 				<?php 
-	
+					mysqli_data_seek($komp, 0);
+					
+
+					if(isset($_POST['cateopt'])) {
+						$cateval = $_POST['cateopt'];
+						$listquery = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE '" . $cateval . "'");
+					} else {
+						$listquery = mysqli_query($connection, "SELECT * FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
+					}
+
+			
 					echo "<ul>";
-				
-						while ($row = mysqli_fetch_assoc($komp)) {
+			
+						while ($row = mysqli_fetch_assoc($listquery)) {
 							
 							$away = $row['away'];
 							$broken = $row['broken'];
@@ -110,13 +174,13 @@
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
 								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
-								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
+								echo "<div>" . " Antal: " . "Who knows" . "</div>";
 
 							echo "<br>";
 
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . " Udlånte: " . $row['away'] . "</div>";
 							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . " Ødelagte: " . $row['broken'] . "</div>";
 
 							
 							echo "</li>";
@@ -129,8 +193,6 @@
 		</div>
 		
 		<div class="information"> 
-			
-	
 			
 			<select size="1" id="addwhat" class="interactive">
 				<option value="0"> Vælg hvad der skal tilføjes </option>
@@ -213,8 +275,9 @@
 		
 		$("document").ready(function(){
 			
-				var $li = $('li').click(function() {
-				
+			var $li = $('li').click(function(e) {
+				if( !$(e.target).is("input") ) {
+
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
@@ -224,7 +287,14 @@
 						$li.removeClass('selected');
 						$(this).addClass('selected');
 					}
-				});
+				}
+			});
+			
+
+			
+			$("#cateopt").change(function(){
+				document.getElementById('cateform').submit();
+			});
 			
 			
 			

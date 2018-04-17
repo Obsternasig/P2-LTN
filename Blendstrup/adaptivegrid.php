@@ -1,6 +1,7 @@
 <?php
 	require_once "connection.php";
 	header('Content-type: text/html; charset=utf-8');
+	session_start();
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
@@ -34,9 +35,9 @@
 			}
 
 	
-	if(isset($_GET['id'])){
+	if(isset($_SESSION['loginid'])){
 		
-		$ID = htmlentities($_GET['id']);
+		$ID = $_SESSION['loginid'];
 
 		$idquery = "SELECT * FROM users WHERE ID =$ID";
 		$idresults = mysqli_query($connection, $idquery);
@@ -54,7 +55,6 @@
 			}
 			
 	}
-
 
 ?>
 
@@ -74,23 +74,23 @@
 		
   		<div class="logo">
 		
-			<img id="imglogo" src="images/logo.png" />
+			<a href="adaptivegrid.php"><img id="imglogo" src="images/logo.png"/></a>
 		
 		</div>
 		
   		<div class="search">
 		
-			<form action="searchengine.php" method="POST">
-				<input type="search" id="searchfield" name="search" class="interactive" placeholder="Søg...">
+			<form method="POST">
+				<input type="search" id="search" name="search" class="interactive" placeholder="Søg...">
 			</form>
 			
-			<form id="cateform" method="post">
-				<select size="1" id="cateopt" name="cateopt" class="interactive" onchange="document.getElementById('cateform').submit();">
-					<option value="0">Alle</option>
+			<form id="cateform" method="POST" action="">
+				<select size="1" id="cateopt" name="cateopt" class="interactive">
+					<option value="null">Alle</option>
 
 						<?php
 								$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
-
+								
 								while ($kompkat = mysqli_fetch_assoc($kompsort)) {
 
 									$category = $kompkat['category'];
@@ -106,7 +106,7 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.href='login.php'">Afslut</button>
+			<button id="endbutton" class="interactive b" onclick="window.location.href='index.php'">AFSLUT</button>
 			<div class="person"> 
 				<?php 
 					
@@ -147,24 +147,30 @@
 
 		<div class="list">
 
-				<?php 
-					mysqli_data_seek($komp, 0);
-					
+				<?php
+
 					if(isset($_POST['cateopt'])) {
+						
 						$cateval = $_POST['cateopt'];
-					} else {
-						$cateval = null;
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
+						
+					} elseif(isset($_POST['search'])) {
+						
+						$search = mysqli_real_escape_string($connection, $_POST['search']);
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
+						
+					} elseif(!isset($_POST['cateopt'])&&!isset($_POST['search'])) {
+						
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
 					}
-					
-					$listquery = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE '" . $cateval . "'");
-			
-			
+
+
 					echo "<ul>";
 			
 						while ($row = mysqli_fetch_assoc($listquery)) {
 							
-							$away = $row['away'];
-							$broken = $row['broken'];
+							$away = $row['SUM(away)'];
+							$broken = $row['SUM(broken)'];
 							
 							echo "<li>";
 
@@ -178,9 +184,9 @@
 
 							echo "<br>";
 
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . " Udlånte: " . $row['away'] . "</div>";
+								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . " Udlånte: " . $row['SUM(away)'] . "</div>";
 							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . " Ødelagte: " . $row['broken'] . "</div>";
+								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . " Ødelagte: " . $row['SUM(broken)'] . "</div>";
 
 							
 							echo "</li>";
@@ -275,8 +281,9 @@
 		
 		$("document").ready(function(){
 			
-				var $li = $('li').click(function() {
-				
+			var $li = $('li').click(function(e) {
+				if( !$(e.target).is("input") ) {
+
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
@@ -286,7 +293,14 @@
 						$li.removeClass('selected');
 						$(this).addClass('selected');
 					}
-				});
+				}
+			});
+			
+
+			
+			$("#cateopt").change(function(){
+				document.getElementById('cateform').submit();
+			});
 			
 			
 			

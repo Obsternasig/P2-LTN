@@ -2,14 +2,14 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="superstorage.css">
+	<link rel="stylesheet" href="adaptivegrid.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<title> Blendstrup </title>
 </head>
 
 <body>
 	<div class="pingrid">
-		<form name="pincheck" id="pincheck" method="post" action="ssloginvalidation.php">
+		<form name="pincheck" id="pincheck" method="post" action="loginvalidation.php">
 			<input class="interactive" id="ini1" name="ini1" maxlength="1" autocomplete="off" autofocus>
 			<input class="interactive" id="ini2" name="ini2" maxlength="1" autocomplete="off">
 			<input class="interactive" id="pin1" name="pin1" maxlength="1" autocomplete="off">
@@ -23,7 +23,7 @@
 		
 		$("document").ready(function(){
 			
-			$('input').keyup(function () {
+			$('input').keydown(function () {
 				
 				if (this.value.length == this.maxLength) {
 					$(this).next('input').focus();
