@@ -296,7 +296,24 @@
 				</form>
 				
 			</div> --->
+			
+			<div id="info" class="addhidingclass">
+			<button id="sealle" class="interactive b"> Se Alle </button>
+				
+			<p>Kategori:</p>
+			
+			<p>Brand:</p>
+			
+			<p>Antal</P>
+			
+			<p>Udlånt:</p>
+		
+			<p>Ødelagte:</p>
+	
 		</div>
+		
+		</div>
+		
 		
 	</div>
 
@@ -307,10 +324,14 @@
 			
 			var $li = $('li').click(function(e) {
 				if( !$(e.target).is("input") ) {
+					
+					$("#info").show("fast");
+					$("#addwhat, #addcancel").hide("fast");
 
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
+						$('.addhidingclass').hide();
 
 					} else {
 
@@ -331,6 +352,8 @@
 			$("#addbutt").click(function() {
 				
 				$("#addwhat, #addcancel").slideDown("fast");
+				$("#info").hide("fast");
+				$li.removeClass('selected');
 				
 			});
 			

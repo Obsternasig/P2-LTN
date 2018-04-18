@@ -302,7 +302,6 @@
 				if( !$(e.target).is("input") ) {
 					
 					$("#info").show("fast");
-					$("#sealle").show("fast");
 					$("#addwhat, #addcancel").hide("fast");
 
 					if($(this).hasClass('selected')) {
@@ -330,6 +329,8 @@
 			
 			$("#addbutt").click(function() {
 				$("#addwhat, #addcancel").slideDown("fast");
+				$("#info").hide("fast");
+				$li.removeClass('selected');
 				
 				
 			});
