@@ -275,13 +275,15 @@ hr {
 
 #ancheck {
 	display: grid;
-	border: 2px solid;
+	border: 0.1vw solid;
 	position: relative;
 	border-style: none;
 }
 
 #antalsdiv {
 	width: 2vw;
+	height: 3vh;
+	position: absolute;
 	overflow: hidden;
 }
 

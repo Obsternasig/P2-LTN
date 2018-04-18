@@ -311,15 +311,19 @@
         $(function () {
             if($('input[name="ancheck"]').prop('checked')){
                 $('input[name="aninput"]').show();
+				$('#antalsdiv').addClass('samlet');
             } else {
                 $('input[name="aninput"]').hide();
+				$('#antalsdiv').removeClass('samlet');
             }
 
             $('input[name="ancheck"]').on('click', function () {
                 if ($(this).prop('checked')) {
                     $(this).parent().find('input[name="aninput"]').show();
+					$('#antalsdiv').addClass('samlet');
                 } else {
                     $(this).parent().find('input[name="aninput"]').hide();
+					$('#antalsdiv').removeClass('samlet');
                 }
             });
         });
