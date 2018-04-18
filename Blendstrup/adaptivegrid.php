@@ -326,6 +326,10 @@
 				<button id="sealle" class="interactive b"> Se Alle </button>
 
 				<p>Kategori:</p>
+				<?php 
+					$id1 = $_POST['id1'];
+					echo "$id1";
+				?>
 
 				<p>Brand:</p>
 
@@ -350,7 +354,19 @@
 				if( !$(e.target).is("input") ) {
 					
 					var Id = $(this).attr('id');
-					alert(Id);
+					//alert(Id);
+					
+					$.ajax({                    
+					  url: '',     
+					  type: 'post', // performing a POST request
+					  data : {
+						id1 : Id // will be accessible in $_POST['data1']
+					  },                   
+					  success: function(data)         
+					  {
+						// etc...
+					  } 
+					});
 					
 					$("#addwhat, #addcancel").slideUp("fast");
 					$("#info").slideDown("fast");
@@ -410,7 +426,7 @@
 			$('#addcancel').click(function() {
 				$("#addwhat").val('0');
 			})
-
+			
 		});
 		
 	</script>
