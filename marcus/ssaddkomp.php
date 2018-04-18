@@ -51,7 +51,7 @@
 					die("Cannot connect to the database WTF" .mysqli_connect_error());
 				}
 
-			header("Location: adaptivegrid.php");
+			header("Location: superstorage.php");
 
 
 			} else {

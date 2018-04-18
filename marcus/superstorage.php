@@ -201,7 +201,7 @@
 							
 							echo "<li>";
 								
-								echo "<div id='antalsdiv'>";
+								echo "<div class='samlet'>";
 								echo "<input type='checkbox' id='udenne' name='udenne'>";
 							    echo "<input type='text' id='uantal' name='uantal'>";
 								echo "</div>";
@@ -309,25 +309,21 @@
 
         //Viser tekstfelt når checkbox er clicked
         $(function () {
-            if($('#udenne').prop('checked')){
-                $('#antalsdiv').addClass('.samlet');
+            if($('input[name="udenne"]').prop('checked')){
+                $('input[name="uantal"]').show();
             } else {
-                $('#antalsdiv').removeClass('.samlet');
+                $('input[name="uantal"]').hide();
             }
 
-            $('#udenne').on('click', function () {
+            $('input[name="udenne"]').on('click', function () {
                 if ($(this).prop('checked')) {
-                    $(this).parent().find('.samlet').fadeIn();
+                    $(this).parent().find('input[name="uantal"]').show();
                 } else {
-                    $(this).parent().find('.samlet').hide();
+                    $(this).parent().find('input[name="uantal"]').hide();
                 }
             });
-        });
-
-    </script>
-	
-	<script>
-		
+        });		
+						
 			//tilføjer og fjerne class når der bliver klikket.
 		/*
 		$(function(){

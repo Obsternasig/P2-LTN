@@ -1,7 +1,7 @@
 <?php
 
 	require_once "connection.php";
-
+	session_start();
    
 	if(isset($_POST['ini1'])&&isset($_POST['ini2'])&&isset($_POST['pin1'])&&isset($_POST['pin2'])&&isset($_POST['pin3'])&&isset($_POST['pin4'])){     
 
@@ -29,11 +29,12 @@
 				
 				if(!empty($id)) {
 					
-					header("Location: adaptivegrid.php?id=$id");
+					$_SESSION['loginid'] = $id;
+					header("Location: superstorage.php");
 				
 				} else {
-				
-					header("Location: login.php");
+					
+					header("Location: index.php");
 				}
 			}
 		}
