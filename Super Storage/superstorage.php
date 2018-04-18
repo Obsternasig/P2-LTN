@@ -176,7 +176,7 @@
 							$broken = $row['SUM(broken)'];
 							
 							echo "<li>";
-		
+								
 								echo "<input type='checkbox' id='udenne' name='udenne'>";
 							    echo "<input type='text' id='uantal' name='uantal'>";
 
@@ -304,6 +304,7 @@
 						
 						
 			//tilføjer og fjerne class når der bliver klikket.
+		/*
 		$(function(){
 			var $la = $('la').click(function() {
 				if($(this).hasClass('cbox')) {
@@ -317,6 +318,7 @@
 					}
 			}
 				)};
+				*/
 
 		
 		$("document").ready(function(){

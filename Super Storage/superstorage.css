@@ -276,11 +276,15 @@ hr {
 #udenne {
 	display: grid;
 	border: 2px solid;
-
+	position: absolute;
+	
 }
 
 #uantal {
-	position: absolute;
 	max-height: 3vh;
 	max-width: 1vw;
+	margin-top: 3vh;
+	box-shadow: 0 -0.5vw 0 0.8vw #404040;
+	border-radius: 2px 2px 2px 2px / 11px 11px 11px 11px;
 }
+
