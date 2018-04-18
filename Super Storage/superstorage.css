@@ -276,15 +276,32 @@ hr {
 #udenne {
 	display: grid;
 	border: 2px solid;
-	position: absolute;
-	
+	position: relative;
+	border-style: none;
 }
 
 #uantal {
 	max-height: 3vh;
-	max-width: 1vw;
-	margin-top: 3vh;
-	box-shadow: 0 -0.5vw 0 0.8vw #404040;
-	border-radius: 2px 2px 2px 2px / 11px 11px 11px 11px;
+	max-width: 1.6vw;
+	margin-left: -0.1vw;
+	background-color: #404040;
+	border-style: none;
+	position: absolute;
+	font-size: 1.2vw;
+	margin-top: 0.2vw;
+	color: white;
+	text-align: center;
+}
+
+.samlet {
+	overflow: hidden;
+	background-color: black;
+	background: #404040;
+	border-radius: 0.8vw;
+	padding-top: 0.3vw;
+	padding-bottom: 2.5vw;
+	padding-left: 0.5vw;
+	max-width: 2vw;
+	max-height: 2vw;
 }
 

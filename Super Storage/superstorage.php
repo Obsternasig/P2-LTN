@@ -201,8 +201,10 @@
 							
 							echo "<li>";
 								
+								echo "<div class='samlet'>";
 								echo "<input type='checkbox' id='udenne' name='udenne'>";
 							    echo "<input type='text' id='uantal' name='uantal'>";
+								echo "</div>";
 
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
