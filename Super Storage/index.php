@@ -2,9 +2,9 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="adaptivegrid.css">
+	<link rel="stylesheet" href="superstorage.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<title> Blendstrup </title>
+	<title> LTN - SS Login </title>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 		
 		$("document").ready(function(){
 			
-			$('input').keyup(function () {
+			$('input').keydown(function () {
 				
 				if (this.value.length == this.maxLength) {
 					$(this).next('input').focus();

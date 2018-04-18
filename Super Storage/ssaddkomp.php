@@ -1,6 +1,6 @@
 <?php
 
-	require_once 'ssconnection.php';
+	require_once 'connection.php';
 	header('Content-type: text/html; charset=utf-8');
 
 	if(isset($_POST['category'])&&isset($_POST['brand'])){
