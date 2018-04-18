@@ -71,7 +71,7 @@
 <body>
 
 	<div class="grid">
-		
+
   		<div class="logo">
 		
 			<a href="adaptivegrid.php"><img id="imglogo" src="images/logo.png"/></a>
@@ -272,7 +272,7 @@
 				
 			</div>
 			
-			<div id="adduser" class="addhidingclass">
+			<!-- <div id="adduser" class="addhidingclass">
 				
 				<form name="adduser" id="adduser" method="post" action="adduser.php">
 					<div>
@@ -295,7 +295,7 @@
 					</div>
 				</form>
 				
-			</div>
+			</div> --->
 		</div>
 		
 	</div>
@@ -325,7 +325,7 @@
 			$("#cateopt").change(function(){
 				document.getElementById('cateform').submit();
 			});
-			
+		
 			
 			
 			$("#addbutt").click(function() {
