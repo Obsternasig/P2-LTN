@@ -310,24 +310,19 @@
         //Viser tekstfelt når checkbox er clicked
         $(function () {
             if($('input[name="udenne"]').prop('checked')){
-                $('input[name="uantal"]').fadeIn();
+                $('input[name="uantal"]').show();
             } else {
                 $('input[name="uantal"]').hide();
             }
 
             $('input[name="udenne"]').on('click', function () {
                 if ($(this).prop('checked')) {
-                    $(this).parent().find('input[name="uantal"]').fadeIn();
+                    $(this).parent().find('input[name="uantal"]').show();
                 } else {
                     $(this).parent().find('input[name="uantal"]').hide();
                 }
             });
-        });
-
-    </script>
-	
-	<script>
-						
+        });		
 						
 			//tilføjer og fjerne class når der bliver klikket.
 		/*
