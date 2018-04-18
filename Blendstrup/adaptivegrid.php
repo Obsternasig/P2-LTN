@@ -226,10 +226,16 @@
 			
 			<select size="1" id="addwhat" class="interactive">
 				<option value="0"> Vælg hvad der skal tilføjes </option>
-				<option value="adduser">Tilføj bruger</option>
-				<option value="addkomp">Tilføj komponent</option>
+				<option value="1">Router</option>
+				<option value="2">Switch</option>
+				<option value="3">SFP Modul</option>
+				<option value="4">El tavle</option>
+				<option value="5">Ram blok</option>
+				<option value="6">Processor</option>
+				<option value="7">Motherboard</option>
+				<option value="8">Kabel</option>
 			</select>
-			
+	
 			<button id="addcancel" class="interactive b"> Annuller </button>
 			
 			<div id="addkomp" class="addhidingclass">
@@ -298,19 +304,20 @@
 			</div> --->
 			
 			<div id="info" class="addhidingclass">
-			<button id="sealle" class="interactive b"> Se Alle </button>
 				
-			<p>Kategori:</p>
-			
-			<p>Brand:</p>
-			
-			<p>Antal</P>
-			
-			<p>Udlånt:</p>
-		
-			<p>Ødelagte:</p>
+				<button id="sealle" class="interactive b"> Se Alle </button>
+
+				<p>Kategori:</p>
+
+				<p>Brand:</p>
+
+				<p>Antal</P>
+
+				<p>Udlånt:</p>
+
+				<p>Ødelagte:</p>
 	
-		</div>
+			</div>
 		
 		</div>
 		
@@ -325,13 +332,13 @@
 			var $li = $('li').click(function(e) {
 				if( !$(e.target).is("input") ) {
 					
-					$("#info").show("fast");
-					$("#addwhat, #addcancel").hide("fast");
+					$("#addwhat, #addcancel").slideUp("fast");
+					$("#info").slideDown("fast");
 
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
-						$('.addhidingclass').hide();
+						$('.addhidingclass').slideUp("fast");
 
 					} else {
 
@@ -351,16 +358,16 @@
 			
 			$("#addbutt").click(function() {
 				
+				$("#info").slideUp("fast");
 				$("#addwhat, #addcancel").slideDown("fast");
-				$("#info").hide("fast");
 				$li.removeClass('selected');
 				
 			});
 			
 			$('#addwhat').change(function(){
 				
-            	$('.addhidingclass').slideUp();
-            	$('#' + $(this).val()).slideDown();
+            	$('.addhidingclass').slideUp("fast");
+            	$('#addkomp').slideDown("fast");
         	});
 			
 			$('#addcancel').click(function() {
