@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2018 at 01:56 PM
+-- Generation Time: Apr 17, 2018 at 12:19 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -37,30 +37,30 @@ CREATE TABLE `komponenter` (
   `broken` int(4) NOT NULL,
   `location` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `comment` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ports` int(4) NOT NULL,
+  `ports` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `speed` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `length` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `socket` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `komponenter`
 --
 
-INSERT INTO `komponenter` (`ID`, `category`, `brand`, `serialnb`, `away`, `broken`, `location`, `comment`, `ports`, `speed`, `type`, `length`) VALUES
-(24, 'Switch', 'HP', '542314', 0, 0, '', '', 48, '', '', ''),
-(26, 'el-tavle', 'LTN', '576872', 0, 1, '', '', 0, '', '', ''),
-(27, 'Netværkskabel', 'LTN', '894341', 1, 0, '', '', 0, '', '', ''),
-(29, 'Ram-blok', 'Corsair', '116577', 0, 0, '', '', 0, '', '', ''),
-(32, 'Switch', 'TP-link', '009537', 0, 1, '', '', 48, '', '', ''),
-(33, 'processor', 'Intel', '174296', 0, 0, '', '', 0, '', '', ''),
-(41, 'Switch', 'HP', '241242', 1, 0, '', '', 48, '', '', ''),
-(42, 'Switch', 'HP', '962564', 0, 0, '', '', 48, '', '', ''),
-(43, 'Switch', 'HP', '274895', 0, 0, '', '', 48, '', '', ''),
-(44, 'el-tavle', 'LTN', '685856', 0, 0, '', '', 0, '', '', ''),
-(45, 'el-tavle', 'LTN', '163146', 1, 1, '', '', 0, '', '', ''),
-(48, 'Switch', 'TP-link', '996433', 0, 0, '', '', 48, '', '', ''),
-(49, 'Netværkskabel', 'LTN', '475635', 0, 0, '', '', 0, '', '', '');
+INSERT INTO `komponenter` (`ID`, `category`, `brand`, `serialnb`, `away`, `broken`, `location`, `comment`, `ports`, `speed`, `type`, `socket`) VALUES
+(24, 'switch', 'HP', '542314', 0, 0, '', '', '48', '', '', ''),
+(26, 'el-tavle', 'LTN', '576872', 0, 1, '', '', '', '', '16 AMP', ''),
+(27, 'kabel', 'LTN', '894341', 1, 0, '', '', '', '', 'Fiber', ''),
+(29, 'ram-blok', 'Corsair', '116577', 0, 0, '', '', '', '', 'DDR3', ''),
+(32, 'switch', 'TP-link', '009537', 0, 1, '', '', '48', '', '', ''),
+(33, 'cpu', 'Intel', '174296', 0, 0, '', '', '', '', '', 'LGA-1150'),
+(41, 'switch', 'HP', '241242', 1, 0, '', '', '48', '', '', ''),
+(42, 'switch', 'HP', '962564', 0, 0, '', '', '48', '', '', ''),
+(43, 'switch', 'HP', '274895', 0, 0, '', '', '48', '', '', ''),
+(44, 'el-tavle', 'LTN', '685856', 0, 0, '', '', '', '', '16 AMP', ''),
+(45, 'el-tavle', 'LTN', '163146', 1, 1, '', '', '', '', '16 AMP', ''),
+(48, 'switch', 'TP-link', '996433', 0, 0, '', '', '48', '', '', ''),
+(49, 'kabel', 'LTN', '475635', 0, 0, '', '', '', '', 'Fiber', '');
 
 --
 -- Indexes for dumped tables

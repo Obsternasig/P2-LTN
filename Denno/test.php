@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>PHP Live MySQL Database Search</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style type="text/css">
     body{
         font-family: Arail, sans-serif;
@@ -42,14 +43,16 @@
         background: #f2f2f2;
     }
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 <script type="text/javascript">
+
 $(document).ready(function(){
     $('.search-box input[type="text"]').on("keyup input", function(){
         /* Get input value on change */
         var inputVal = $(this).val();
         var resultDropdown = $(this).siblings(".result");
-        if(inputVal.length){
+        
+		if(inputVal.length){
             $.get("denno.php", {term: inputVal}).done(function(data){
                 // Display the returned data in browser
                 resultDropdown.html(data);
@@ -65,6 +68,7 @@ $(document).ready(function(){
         $(this).parent(".result").empty();
     });
 });
+	
 </script>
 </head>
 <body>

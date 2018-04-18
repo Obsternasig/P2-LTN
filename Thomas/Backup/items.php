@@ -1,5 +1,5 @@
 <?php
-	require_once "connection.php";
+	require_once "../projekt/connection.php";
 
 	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$komps = mysqli_query($connection, "SELECT * FROM komponent");
