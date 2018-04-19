@@ -227,24 +227,7 @@
 					echo "</ul>";
 				?>
 		</div>
-		
-		<script>
-		$(function() {
-	var offset = $('#ulla ul').length;
 
-	$('#list').endlessScroll({
-		fireOnce: false,
-		fireDelay: false,
-		loader: '',
-		insertAfter: '#list li:last',
-		content: function(i) {
-			return '<ul>' + (i + offset) + '</ul>';
-		}
-	});
-});
-		</script>
-		
-		
 		<div class="information"> 
 			
 			<select size="1" id="addwhat" class="interactive">
@@ -395,6 +378,22 @@
 			})
 
 		});
+		
+		
+			/*infinite scroll
+		$(function() {
+	var offset = $('#ulla ul').length;
+
+	$('#list').endlessScroll({
+		fireOnce: false,
+		fireDelay: false,
+		loader: '',
+		insertAfter: '#list li:last',
+		content: function(i) {
+			return '<ul>' + (i + offset) + '</ul>';
+		}
+	});
+}); */ 
 		
 	</script>
 	

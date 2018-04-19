@@ -21,7 +21,7 @@
 
     <script>
 		
-		$("document").ready(function(){
+		$(function(){
 			
 			$('input').keydown(function () {
 				
