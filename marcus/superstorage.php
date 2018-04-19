@@ -201,9 +201,9 @@
 							
 							echo "<li>";
 								
-								echo "<div class='samlet'>";
-								echo "<input type='checkbox' id='udenne' name='udenne'>";
-							    echo "<input type='text' id='uantal' name='uantal'>";
+								echo "<div id='antalsdiv'>";
+									echo "<input type='checkbox' id='ancheck' name='ancheck'>";
+									echo "<input type='text' id='aninput' name='aninput'>";
 								echo "</div>";
 
 								echo "<div id='kate'>" . $row['category'] . "</div>";
@@ -306,41 +306,31 @@
 		
 	</div>
     <script>
-
-        //Viser tekstfelt når checkbox er clicked
+		
+		 //Viser tekstfelt når checkbox er clicked
         $(function () {
-            if($('input[name="udenne"]').prop('checked')){
-                $('input[name="uantal"]').show();
+            if($('input[name="ancheck"]').prop('checked')){
+                $('input[name="aninput"]').show();
+				$('#antalsdiv').addClass('samlet');
             } else {
-                $('input[name="uantal"]').hide();
+                $('input[name="aninput"]').hide();
+				$('#antalsdiv').removeClass('samlet');
             }
 
-            $('input[name="udenne"]').on('click', function () {
+            $('input[name="ancheck"]').on('click', function () {
                 if ($(this).prop('checked')) {
-                    $(this).parent().find('input[name="uantal"]').show();
+                    $(this).parent().find('input[name="aninput"]').show();
+					$('#antalsdiv').addClass('samlet');
                 } else {
-                    $(this).parent().find('input[name="uantal"]').hide();
+                    $(this).parent().find('input[name="aninput"]').hide();
+					$('#antalsdiv').removeClass('samlet');
                 }
             });
-        });		
-						
-			//tilføjer og fjerne class når der bliver klikket.
-		/*
-		$(function(){
-			var $la = $('la').click(function() {
-				if($(this).hasClass('cbox')) {
-					$(this).removeClass('cbox');
-
-					} else {	
-					
-						$la.removeClass('cbox');
-						$la.hasClass('cbox');
-						$(this).addClass('cbox');
-					}
-			}
-				)};
-				*/
-
+        });
+		
+    </script>
+	
+	<script>
 		
 		$("document").ready(function(){
 			
