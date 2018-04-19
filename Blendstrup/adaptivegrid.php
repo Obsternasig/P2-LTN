@@ -324,21 +324,19 @@
 			<div id="info" class="addhidingclass">
 				
 				<button id="sealle" class="interactive b"> Se Alle </button>
-				
-				<?php
-					if (isset($_POST['id'])) {
-						$idt = $_POST['id'];
-					}
 
-					$queryidd = "SELECT * FROM komponenter WHERE ID = '$idt'";
-					$resultidd = mysql_query($connection, $queryidd);
-
-					while ($row = mysql_fetch_array($resultidd)) {
-						echo "<h3>" . $row['category'] . "</p>";
-						echo "<p>" . $row['brand'] . "</p>";
-					}
-				?>
+				<form>
+					<select name="users" id="selecttest" class="interactive" onchange="showUser(this.value)">
+						<option value="">Select a category:</option>
+						<option value="switch">Switch</option>
+						<option value="el-tavle">El tavle</option>
+						<option value="cpu">Processor</option>
+						<option value="ram-blok">Ram blok</option>
+					</select>
+				</form>
 				
+				<div id="txtHint"><b>Person info will be listed here.</b></div>
+	
 			</div>
 
 		</div>
@@ -350,30 +348,48 @@
 		
 		$("document").ready(function(){
 			
-			var info = $('#info');
-			var content = $('<div class="content"></div>');
 			
-			var $li = $('li').on('click', function(e) {
+			function showUser(str) {
+			if (str=="") {
+				document.getElementById("txtHint").innerHTML="";
+				return;
+			} 
+			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			} else { // code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function() {
+				if (this.readyState==4 && this.status==200) {
+				document.getElementById("txtHint").innerHTML=this.responseText;
+				}
+			}
+			xmlhttp.open("GET","connection.php?q="+str,true);
+			xmlhttp.send();
+			}
+			
+			
+			var $li = $('li').click(function(e) {
+				if( !$(e.target).is("input") ) {
+					
+					var Id = $(this).attr('id');
+					
+					/* $.ajax({                    
+					  url: '',     
+					  type: 'post', // performing a POST request
+					  data : {
+						id1 : Id // will be accessible in $_POST['data1']
+					  },                
+					  success: function(data)         
+					  {
+						// etc...
+					  }
+					} */
 
-					e.stopImmediatePropagation();
 					
-					// var Id = $(this).attr('id');
-					//alert(Id);
-					
-					var dataString = $(this).attr('id');
-
-					$.ajax({
-						type: 'POST',
-						data: dataString,
-						success: function(data) {
-							info.append(content);
-							content.html('');
-							content.append(data);
-						}
-					});
-					
-					/* $("#addwhat, #addcancel").slideUp("fast");
-					$("#info").slideDown("fast");
+					$("#addwhat, #addcancel").slideUp("fast");
+					$("#info, #selecttest").slideDown("fast");
 
 					if($(this).hasClass('selected')) {
 
@@ -384,8 +400,8 @@
 
 						$li.removeClass('selected');
 						$(this).addClass('selected');
-					} */
-				
+					}
+				}
 			});
 			
 
@@ -398,7 +414,7 @@
 			
 			$("#addbutt").click(function() {
 				
-				$("#info").slideUp("fast");
+				$("#info, #selecttest").slideUp("fast");
 				$("#addwhat, #addcancel").slideDown("fast");
 				$li.removeClass('selected');
 				
@@ -409,22 +425,15 @@
             	$('.addhidingclass').slideUp("fast");
 				
 				if (this.selectedIndex==2) {
-					
 					$('.naddkomp').slideDown("fast");
 					$('.naddporte').slideDown("fast");
-					
 				} else if (this.selectedIndex==1) {
-					
 					$('.naddkomp').slideDown("fast");
 					$('.naddspeed').slideDown("fast");
-					
 				} else if (this.selectedIndex==6 || this.selectedIndex==7) {
-					
 					$('.naddkomp').slideDown("fast");
 					$('.naddsocket').slideDown("fast");
-					
 				} else if (this.selectedIndex==3 || this.selectedIndex==4 || this.selectedIndex==5 || this.selectedIndex==8) {
-					
 					$('.naddkomp').slideDown("fast");
 					$('.naddtype').slideDown("fast");
 				}
