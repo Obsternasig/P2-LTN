@@ -306,41 +306,31 @@
 		
 	</div>
     <script>
-
-        //Viser tekstfelt når checkbox er clicked
+		
+		 //Viser tekstfelt når checkbox er clicked
         $(function () {
             if($('input[name="ancheck"]').prop('checked')){
                 $('input[name="aninput"]').show();
+				$('#antalsdiv').addClass('samlet');
             } else {
                 $('input[name="aninput"]').hide();
+				$('#antalsdiv').removeClass('samlet');
             }
 
             $('input[name="ancheck"]').on('click', function () {
                 if ($(this).prop('checked')) {
-                     $(this).parent().find('input[name="aninput"]').show();
+                    $(this).parent().find('input[name="aninput"]').show();
+					$('#antalsdiv').addClass('samlet');
                 } else {
-                     $(this).parent().find('input[name="aninput"]').hide();
+                    $(this).parent().find('input[name="aninput"]').hide();
+					$('#antalsdiv').removeClass('samlet');
                 }
             });
-        });		
-						
-			//tilføjer og fjerne class når der bliver klikket.
-		/*
-		$(function(){
-			var $la = $('la').click(function() {
-				if($(this).hasClass('cbox')) {
-					$(this).removeClass('cbox');
-
-					} else {	
-					
-						$la.removeClass('cbox');
-						$la.hasClass('cbox');
-						$(this).addClass('cbox');
-					}
-			}
-				)};
-				*/
-
+        });
+		
+    </script>
+	
+	<script>
 		
 		$("document").ready(function(){
 			
