@@ -328,11 +328,8 @@
             });
         });
 		
-    </script>
-	
-	<script>
-		
-		$("document").ready(function(){
+		//tilføjer baggrund til valgt element i listen.
+		$(function(){
 			
 			var $li = $('li').click(function(e) {
 				if( !$(e.target).is("input") ) {

@@ -64,7 +64,7 @@
 <head>
 	<meta charset="utf-8">
 	<title> LTN  - Super Storage </title>
-	<link rel="stylesheet" href="adaptivegrid.css">
+	<link rel="stylesheet" href="superstorage.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -168,7 +168,7 @@
 					}
 
 
-					echo "<ul>";
+					echo "<ul id='ulla'>";
 			
 						while ($row = mysqli_fetch_assoc($listquery)) {
 							
@@ -199,10 +199,12 @@
 							}
 							
 							
-							echo "<li>";
+							echo "<li id='list'>";
 								
-								echo "<input type='checkbox' id='udenne' name='udenne'>";
-							    echo "<input type='text' id='uantal' name='uantal'>";
+								echo "<div id='antalsdiv'>";
+									echo "<input type='checkbox' id='ancheck' name='ancheck'>";
+									echo "<input type='text' id='aninput' name='aninput'>";
+								echo "</div>";
 
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
@@ -225,6 +227,23 @@
 					echo "</ul>";
 				?>
 		</div>
+		
+		<script>
+		$(function() {
+	var offset = $('#ulla ul').length;
+
+	$('#list').endlessScroll({
+		fireOnce: false,
+		fireDelay: false,
+		loader: '',
+		insertAfter: '#list li:last',
+		content: function(i) {
+			return '<ul>' + (i + offset) + '</ul>';
+		}
+	});
+});
+		</script>
+		
 		
 		<div class="information"> 
 			
@@ -304,46 +323,31 @@
 		
 	</div>
     <script>
-
-        //Viser tekstfelt når checkbox er clicked
+		
+		 //Viser tekstfelt når checkbox er clicked
         $(function () {
-            if($('input[name="udenne"]').prop('checked')){
-                $('input[name="uantal"]').fadeIn();
+            if($('input[name="ancheck"]').prop('checked')){
+                $('input[name="aninput"]').show();
+				$('#antalsdiv').addClass('samlet');
             } else {
-                $('input[name="uantal"]').hide();
+                $('input[name="aninput"]').hide();
+				$('#antalsdiv').removeClass('samlet');
             }
 
-            $('input[name="udenne"]').on('click', function () {
+            $('input[name="ancheck"]').on('click', function () {
                 if ($(this).prop('checked')) {
-                    $(this).parent().find('input[name="uantal"]').fadeIn();
+                    $(this).parent().find('input[name="aninput"]').show();
+					$(this).addClass('samlet');
                 } else {
-                    $(this).parent().find('input[name="uantal"]').hide();
+                    $(this).parent().find('input[name="aninput"]').hide();
+					$(this).removeClass('samlet');
                 }
             });
         });
-
+		
     </script>
 	
 	<script>
-						
-						
-			//tilføjer og fjerne class når der bliver klikket.
-		/*
-		$(function(){
-			var $la = $('la').click(function() {
-				if($(this).hasClass('cbox')) {
-					$(this).removeClass('cbox');
-
-					} else {	
-					
-						$la.removeClass('cbox');
-						$la.hasClass('cbox');
-						$(this).addClass('cbox');
-					}
-			}
-				)};
-				*/
-
 		
 		$("document").ready(function(){
 			
