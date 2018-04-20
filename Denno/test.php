@@ -1,81 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>PHP Live MySQL Database Search</title>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<style type="text/css">
-    body{
-        font-family: Arail, sans-serif;
-    }
-    /* Formatting search box */
-    .search-box{
-        width: 300px;
-        position: relative;
-        display: inline-block;
-        font-size: 14px;
-    }
-    .search-box input[type="text"]{
-        height: 32px;
-        padding: 5px 10px;
-        border: 1px solid #CCCCCC;
-        font-size: 14px;
-    }
-    .result{
-        position: absolute;        
-        z-index: 999;
-        top: 100%;
-        left: 0;
-    }
-    .search-box input[type="text"], .result{
-        width: 100%;
-        box-sizing: border-box;
-    }
-    /* Formatting result items */
-    .result p{
-        margin: 0;
-        padding: 7px 10px;
-        border: 1px solid #CCCCCC;
-        border-top: none;
-        cursor: pointer;
-    }
-    .result p:hover{
-        background: #f2f2f2;
-    }
-</style>
-
-<script type="text/javascript">
-
-$(document).ready(function(){
-    $('.search-box input[type="text"]').on("keyup input", function(){
-        /* Get input value on change */
-        var inputVal = $(this).val();
-        var resultDropdown = $(this).siblings(".result");
-        
-		if(inputVal.length){
-            $.get("denno.php", {term: inputVal}).done(function(data){
-                // Display the returned data in browser
-                resultDropdown.html(data);
-            });
-        } else{
-            resultDropdown.empty();
+<script>
+function showUser(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-    });
-    
-    // Set search input value on click of result item
-    $(document).on("click", ".result p", function(){
-        $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
-        $(this).parent(".result").empty();
-    });
-});
-	
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","denno.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
 </script>
 </head>
 <body>
-    <div class="search-box">
-        <input type="text" autocomplete="off" placeholder="Søg..." />
-        <div class="result"></div>
-    </div>
-	
+
+<form>
+<select name="users" onchange="showUser(this.value)">
+  <option value="">Select a person:</option>
+  <option value="1">HP</option>
+  <option value="2">Lois Griffin</option>
+  <option value="3">Joseph Swanson</option>
+  <option value="4">Glenn Quagmire</option>
+  </select>
+</form>
+<br>
+<div id="txtHint"><b>Person info will be listed here...</b></div>
+
 </body>
 </html>

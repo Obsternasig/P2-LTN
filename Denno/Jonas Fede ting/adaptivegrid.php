@@ -69,9 +69,9 @@
 </head>
 
 <body>
-	
+
 	<div class="grid">
-		
+
   		<div class="logo">
 		
 			<a href="adaptivegrid.php"><img id="imglogo" src="images/logo.png"/></a>
@@ -106,7 +106,7 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.href='index.php'">AFSLUT</button>
+			<a href="logout.php"> <button id="endbutton" class="interactive b">AFSLUT</button> </a>
 			<div class="person"> 
 				<?php 
 					
@@ -152,16 +152,16 @@
 					if(isset($_POST['cateopt'])) {
 						
 						$cateval = $_POST['cateopt'];
-						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
-						
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
+
 					} elseif(isset($_POST['search'])) {
 						
 						$search = mysqli_real_escape_string($connection, $_POST['search']);
-						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
 						
 					} elseif(!isset($_POST['cateopt'])&&!isset($_POST['search'])) {
 						
-						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, length FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
+						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
 					}
 
 
@@ -172,14 +172,38 @@
 							$away = $row['SUM(away)'];
 							$broken = $row['SUM(broken)'];
 							
-							echo "<li>";
+							$category = $row['category'];
+							
+							switch($category) {
+								case $category == "switch": $midsec = "Porte"; $midcat = $row['ports'];
+									break;
+								case $category == "router": $midsec = "Hastighed"; $midcat = $row['speed'];
+									break;
+								case $category == "sfp-modul": $midsec = "Type"; $midcat = $row['type'];
+									break;
+								case $category == "el-tavle": $midsec = "Type"; $midcat = $row['type'];
+									break;
+								case $category == "ram-blok": $midsec = "Type"; $midcat = $row['type'];
+									break;
+								case $category == "cpu": $midsec = "Socket"; $midcat = $row['socket'];
+									break;
+								case $category == "kabel": $midsec = "Type"; $midcat = $row['type'];
+									break;
+								case $category == "motherboard": $midsec = "Socket"; $midcat = $row['socket'];
+									break;
+								
+								default: $midsec = "?"; $midcat = "?";
+							}
+							
+							
+							echo "<li id=" . $row['ID'] . ">";
 
 								echo "<input type='checkbox'>";
 
 								echo "<div id='kate'>" . $row['category'] . "</div>";
 
 								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
+								echo "<div>" . " " . $midsec . ": " . $midcat  . "</div>";
 								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
 							echo "<br>";
@@ -197,58 +221,82 @@
 					echo "</ul>";
 				?>
 		</div>
-		
+
 		<div class="information"> 
 			
 			<select size="1" id="addwhat" class="interactive">
 				<option value="0"> Vælg hvad der skal tilføjes </option>
-				<option value="adduser">Tilføj bruger</option>
-				<option value="addkomp">Tilføj komponent</option>
+				<option value="router">Router</option>
+				<option value="switch">Switch</option>
+				<option value="sfpmodul">SFP Modul</option>
+				<option value="eltavle">El tavle</option>
+				<option value="ramblok">Ram blok</option>
+				<option value="processor">Processor</option>
+				<option value="motherboard">Motherboard</option>
+				<option value="kabel">Kabel</option>
 			</select>
-			
+
 			<button id="addcancel" class="interactive b"> Annuller </button>
 			
-			<div id="addkomp" class="addhidingclass">
+			<div>
 				
 				<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
-					<div>
-						<p>Kategori:</p>
-						<input type="text" name="category" id="category" maxlength="30">
-					</div>
+					<div class="naddkomp addhidingclass">
+						<div>
+							<p>Kategori:</p>
+							<input type="text" name="category" id="category" maxlength="30">
+						</div>
 
-					<div>
-						<p>Brand:</p>
-						<input type="text" name="brand" id="brand" maxlength="30">
-					</div>
+						<div>
+							<p>Brand:</p>
+							<input type="text" name="brand" id="brand" maxlength="30">
+						</div>
 
-					<div>
+						<div>
+							<p>Serienummer:</p>
+							<input type="text" name="serialnb" id="serialnb" maxlength="30">
+						</div>
+
+						<div>
+							<p>Lokation:</p>
+							<input type="text" name="location" id="location" maxlength="30">
+						</div>
+
+						<div>
+							<p>Kommentar:</p>
+							<input type="text" name="comment" id="comment" maxlength="4">
+						</div>
+					</div>
+					
+					
+					<div class="naddporte addhidingclass">
 						<p>Porte:</p>
-						<input type="number" name="ports" id="ports" maxlength="4">
+						<input type="text" name="ports" id="ports" maxlength="30">
 					</div>
 
-					<div>
-						<p>Antal:</p>
-						<input type="number" name="amount" id="amount" maxlength="4">
+					<div class="naddspeed addhidingclass">
+						<p>Hastighed:</p>
+						<input type="text" name="speed" id="speed" maxlength="30">
 					</div>
 
-					<div>
-						<p>Udlånt:</p>
-						<input type="number" name="away" id="away" maxlength="4">
+					<div class="naddtype addhidingclass">
+						<p>Type:</p>
+						<input type="text" name="type" id="type" maxlength="30">
 					</div>
-
-					<div>
-						<p>Ødelagte:</p>
-						<input type="number" name="broken" id="broken" maxlength="4">
+					
+					<div class="naddsocket addhidingclass">
+						<p>Socket:</p>
+						<input type="text" name="socket" id="socket" maxlength="4">
 					</div>
-
-					<div>
+					
+					<div class="naddkomp addhidingclass">
 						<input type="submit" id="ok" value="OK">
 					</div>
 				</form>
 				
 			</div>
 			
-			<div id="adduser" class="addhidingclass">
+			<!-- <div id="adduser" class="addhidingclass">
 				
 				<form name="adduser" id="adduser" method="post" action="adduser.php">
 					<div>
@@ -271,25 +319,25 @@
 					</div>
 				</form>
 				
-			</div>
+			</div> --->
 			
 			<div id="info" class="addhidingclass">
-			<button id="sealle" class="interactive b"> Se Alle </button>
 				
-			<p>Kategori:</p>
-			
-			<p>Brand:</p>
-			
-			<p>Antal</P>
-			
-			<p>Udlånt:</p>
-		
-			<p>Ødelagte:</p>
+				<button id="sealle" class="interactive b"> Se Alle </button>
+
+				<p>Kategori:</p>
+
+				<p>Brand:</p>
+
+				<p>Antal</P>
+
+				<p>Udlånt:</p>
+
+				<p>Ødelagte:</p>
 	
+			</div>
+
 		</div>
-	</div>
-		
-			 
 		
 	</div>
 
@@ -301,20 +349,21 @@
 			var $li = $('li').click(function(e) {
 				if( !$(e.target).is("input") ) {
 					
-					$("#info").show("fast");
-					$("#addwhat, #addcancel").hide("fast");
+					var Id = $(this).attr('id');
+					alert(Id);
+					
+					$("#addwhat, #addcancel").slideUp("fast");
+					$("#info").slideDown("fast");
 
 					if($(this).hasClass('selected')) {
-						
+
 						$(this).removeClass('selected');
-						$('.addhidingclass').hide();
-						
+						$('.addhidingclass').slideUp("fast");
 
 					} else {
 
 						$li.removeClass('selected');
 						$(this).addClass('selected');
-						
 					}
 				}
 			});
@@ -324,31 +373,42 @@
 			$("#cateopt").change(function(){
 				document.getElementById('cateform').submit();
 			});
-			
+		
 			
 			
 			$("#addbutt").click(function() {
-				$("#addwhat, #addcancel").slideDown("fast");
-				$("#info").hide("fast");
-				$li.removeClass('selected');
 				
+				$("#info").slideUp("fast");
+				$("#addwhat, #addcancel").slideDown("fast");
+				$li.removeClass('selected');
 				
 			});
 			
 			$('#addwhat').change(function(){
 				
-            	$('.addhidingclass').slideUp();
-            	$('#' + $(this).val()).slideDown();
+            	$('.addhidingclass').slideUp("fast");
+				
+				if (this.selectedIndex==2) {
+					$('.naddkomp').slideDown("fast");
+					$('.naddporte').slideDown("fast");
+				} else if (this.selectedIndex==1) {
+					$('.naddkomp').slideDown("fast");
+					$('.naddspeed').slideDown("fast");
+				} else if (this.selectedIndex==6 || this.selectedIndex==7) {
+					$('.naddkomp').slideDown("fast");
+					$('.naddsocket').slideDown("fast");
+				} else if (this.selectedIndex==3 || this.selectedIndex==4 || this.selectedIndex==5 || this.selectedIndex==8) {
+					$('.naddkomp').slideDown("fast");
+					$('.naddtype').slideDown("fast");
+				}
         	});
 			
 			$('#addcancel').click(function() {
 				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
-				
 			})
 			
 			$('#addcancel').click(function() {
 				$("#addwhat").val('0');
-				
 			})
 
 		});
