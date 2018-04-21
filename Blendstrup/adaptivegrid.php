@@ -325,17 +325,13 @@
 				
 				<button id="sealle" class="interactive b"> Se Alle </button>
 
-				<form>
-					<select name="users" id="selecttest" class="interactive" onchange="showUser(this.value)">
-						<option value="">Select a category:</option>
-						<option value="switch">Switch</option>
-						<option value="el-tavle">El tavle</option>
-						<option value="cpu">Processor</option>
-						<option value="ram-blok">Ram blok</option>
-					</select>
-				</form>
-				
-				<div id="txtHint"><b>Person info will be listed here.</b></div>
+				<select name="users" id="selecttest" class="interactive" onchange="showUser(this.value)">
+					<option value="">Select a category:</option>
+					<option value="switch">Switch</option>
+					<option value="el-tavle">El tavle</option>
+					<option value="cpu">Processor</option>
+					<option value="ram-blok">Ram blok</option>
+				</select>
 	
 			</div>
 
@@ -348,43 +344,23 @@
 		
 		$("document").ready(function(){
 			
-			
-			function showUser(str) {
-			if (str=="") {
-				document.getElementById("txtHint").innerHTML="";
-				return;
-			} 
-			if (window.XMLHttpRequest) {
-				// code for IE7+, Firefox, Chrome, Opera, Safari
-				xmlhttp=new XMLHttpRequest();
-			} else { // code for IE6, IE5
-				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			xmlhttp.onreadystatechange=function() {
-				if (this.readyState==4 && this.status==200) {
-				document.getElementById("txtHint").innerHTML=this.responseText;
-				}
-			}
-			xmlhttp.open("GET","connection.php?q="+str,true);
-			xmlhttp.send();
-			}
+			var Id = $(this).attr('id');
 			
 			
 			var $li = $('li').click(function(e) {
 				if( !$(e.target).is("input") ) {
 					
-					var Id = $(this).attr('id');
+					/* var Id = $(this).attr('id');
 					
-					/* $.ajax({                    
-					  url: '',     
-					  type: 'post', // performing a POST request
-					  data : {
-						id1 : Id // will be accessible in $_POST['data1']
-					  },                
-					  success: function(data)         
-					  {
+					$.ajax ({
+					url: '',
+					type: 'post', // performing a POST request
+					data : {
+						id1 : Id // will be accessible in $_POST['id1']
+					},
+						success: function(data) {
 						// etc...
-					  }
+						}
 					} */
 
 					
