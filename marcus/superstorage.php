@@ -121,7 +121,7 @@
 			
 		</div>
 		
-		<div class="functions"> 
+		<div class="functions">
 	
 			<button id="addbutt" class="interactive b"> Tilføj </button>
 			
@@ -131,13 +131,13 @@
 			
 			<?php 
 			
-			if (isset($admin)) {
+				if (isset($admin)) {
 				
-				if ($admin == 1) {
+					if ($admin == 1) {
 			
-					echo "<button id='adminbutt' class='interactive b'> Admin </button>";
+						echo "<button id='adminbutt' class='interactive b'> Admin </button>";
+					}
 				}
-			}
 			?>
 				
 			<text id="chosenbutt"> Valgte: </text>
@@ -228,7 +228,14 @@
 				?>
 		</div>
 		
-		<div class="information"> 
+		
+		
+		<div class="information">
+			
+			<div class="adminpower">
+			<button id="history" class="interactive b"> Historik </button>
+			<button id="historycancel" class="interactive b"> Anuller </button>
+			</div>
 			
 			<select size="1" id="addwhat" class="interactive">
 				<option value="0"> Vælg hvad der skal tilføjes </option>
@@ -304,11 +311,10 @@
 			</div>
 		</div>
 		
-	</div>
     <script>
 		
 		 //Viser tekstfelt når checkbox er clicked
-        $(function () {
+		$(function () {
             if($('input[name="ancheck"]').prop('checked')){
                 $('input[name="aninput"]').show();
 				$('#antalsdiv').addClass('samlet');
@@ -329,6 +335,16 @@
         });
 		
     </script>
+		
+	<script>
+		
+		$(function(){
+			if($('#adminbutt').prop('clicked')){
+				$('')
+			}
+		}
+		
+	</script>
 	
 	<script>
 		
@@ -349,12 +365,9 @@
 				}
 			});
 			
-
-			
 			$("#cateopt").change(function(){
 				document.getElementById('cateform').submit();
 			});
-			
 			
 			
 			$("#addbutt").click(function() {
