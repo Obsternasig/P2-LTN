@@ -3,13 +3,8 @@
 	header('Content-type: text/html; charset=utf-8');
 	session_start();
 
-	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
 
-
-		if(!$komp) {
-			die("Could not query the database" .mysqli_error());
-		}
 
 		if(!$users) {
 			die("Could not query the database" .mysqli_error());
@@ -17,22 +12,6 @@
 
 
 	$userassoc = mysqli_fetch_assoc($users);
-
-		function getColorAway($var) {
-				if ($var <= 0)
-					return '#ffffff';
-
-				else if ($var >= 1)
-					return '#334488';
-			}
-
-		function getColorBroken($var) {
-				if ($var <= 0)
-					return '#ffffff';
-
-				else if ($var >= 1)
-					return '#e95522';
-			}
 
 	
 	if(isset($_SESSION['loginid'])){
@@ -80,28 +59,25 @@
 		
   		<div class="search">
 		
-			<form method="POST">
-				<input type="search" id="search" name="search" class="interactive" placeholder="Søg...">
-			</form>
+			<input type="text" id="searchfield" name="search" class="interactive" placeholder="Søg..." autocomplete="off">
 			
-			<form id="cateform" method="POST" action="">
-				<select size="1" id="cateopt" name="cateopt" class="interactive">
-					<option value="null">Alle</option>
+			
+			<select size="1" id="cateopt" name="cateopt" class="interactive">
+				<option value="alle">Alle</option>
 
-						<?php
-								$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
-								
-								while ($kompkat = mysqli_fetch_assoc($kompsort)) {
+					<?php
+							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
 
-									$category = $kompkat['category'];
-									echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
+							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
 
-								}
+								$category = $kompkat['category'];
+								echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
 
-						?>
+							}
 
-				</select>
-			</form>
+					?>
+
+			</select>
 		</div>
 		
   		<div class="end"> 
@@ -143,84 +119,9 @@
 		
 		</div>
 		
-  		<div class="shoppinglist">  </div>
+  		<div class="shoppinglist"></div>
 
-		<div class="list">
-
-				<?php
-
-					if(isset($_POST['cateopt'])) {
-						
-						$cateval = $_POST['cateopt'];
-						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '" . $cateval . "' GROUP BY category, brand, ports");
-
-					} elseif(isset($_POST['search'])) {
-						
-						$search = mysqli_real_escape_string($connection, $_POST['search']);
-						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' GROUP BY category, brand, ports");
-						
-					} elseif(!isset($_POST['cateopt'])&&!isset($_POST['search'])) {
-						
-						$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
-					}
-
-
-					echo "<ul>";
-			
-						while ($row = mysqli_fetch_assoc($listquery)) {
-							
-							$away = $row['SUM(away)'];
-							$broken = $row['SUM(broken)'];
-							
-							$category = $row['category'];
-							
-							switch($category) {
-								case $category == "switch": $midsec = "Porte"; $midcat = $row['ports'];
-									break;
-								case $category == "router": $midsec = "Hastighed"; $midcat = $row['speed'];
-									break;
-								case $category == "sfp-modul": $midsec = "Type"; $midcat = $row['type'];
-									break;
-								case $category == "el-tavle": $midsec = "Type"; $midcat = $row['type'];
-									break;
-								case $category == "ram-blok": $midsec = "Type"; $midcat = $row['type'];
-									break;
-								case $category == "cpu": $midsec = "Socket"; $midcat = $row['socket'];
-									break;
-								case $category == "kabel": $midsec = "Type"; $midcat = $row['type'];
-									break;
-								case $category == "motherboard": $midsec = "Socket"; $midcat = $row['socket'];
-									break;
-								
-								default: $midsec = "?"; $midcat = "?";
-							}
-							
-							
-							echo "<li id=" . $row['ID'] . ">";
-
-								echo "<input type='checkbox'>";
-
-								echo "<div id='kate'>" . $row['category'] . "</div>";
-
-								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " " . $midsec . ": " . $midcat  . "</div>";
-								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
-
-							echo "<br>";
-
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . " Udlånte: " . $row['SUM(away)'] . "</div>";
-							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . " Ødelagte: " . $row['SUM(broken)'] . "</div>";
-
-							
-							echo "</li>";
-							echo "<hr>";
-							
-						}
-					
-					echo "</ul>";
-				?>
-		</div>
+		<div class="list"></div>
 
 		<div class="information"> 
 			
@@ -238,63 +139,53 @@
 
 			<button id="addcancel" class="interactive b"> Annuller </button>
 			
-			<div>
 				
-				<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
-					<div class="naddkomp addhidingclass">
-						<div>
-							<p>Kategori:</p>
-							<input type="text" name="category" id="category" maxlength="30">
-						</div>
+			<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
+				<div class="naddkomp">
 
-						<div>
-							<p>Brand:</p>
-							<input type="text" name="brand" id="brand" maxlength="30">
-						</div>
+					<p>Kategori:</p>
+					<input type="text" name="category" id="category" maxlength="30">
 
-						<div>
-							<p>Serienummer:</p>
-							<input type="text" name="serialnb" id="serialnb" maxlength="30">
-						</div>
+					<p>Brand:</p>
+					<input type="text" name="brand" id="brand" maxlength="30">
 
-						<div>
-							<p>Lokation:</p>
-							<input type="text" name="location" id="location" maxlength="30">
-						</div>
+					<p>Serienummer:</p>
+					<input type="text" name="serialnb" id="serialnb" maxlength="30">
 
-						<div>
-							<p>Kommentar:</p>
-							<input type="text" name="comment" id="comment" maxlength="4">
-						</div>
-					</div>
+					<p>Lokation:</p>
+					<input type="text" name="location" id="location" maxlength="30">
+
+					<p>Kommentar:</p>
+					<input type="text" name="comment" id="comment" maxlength="4">
+
+				</div>
 					
 					
-					<div class="naddporte addhidingclass">
-						<p>Porte:</p>
-						<input type="text" name="ports" id="ports" maxlength="30">
-					</div>
+				<div class="naddporte">
+					<p>Porte:</p>
+					<input type="text" name="ports" id="ports" maxlength="30">
+				</div>
 
-					<div class="naddspeed addhidingclass">
-						<p>Hastighed:</p>
-						<input type="text" name="speed" id="speed" maxlength="30">
-					</div>
+				<div class="naddspeed">
+					<p>Hastighed:</p>
+					<input type="text" name="speed" id="speed" maxlength="30">
+				</div>
 
-					<div class="naddtype addhidingclass">
-						<p>Type:</p>
-						<input type="text" name="type" id="type" maxlength="30">
-					</div>
-					
-					<div class="naddsocket addhidingclass">
-						<p>Socket:</p>
-						<input type="text" name="socket" id="socket" maxlength="4">
-					</div>
-					
-					<div class="naddkomp addhidingclass">
-						<input type="submit" id="ok" value="OK">
-					</div>
-				</form>
-				
-			</div>
+				<div class="naddtype">
+					<p>Type:</p>
+					<input type="text" name="type" id="type" maxlength="30">
+				</div>
+
+				<div class="naddsocket">
+					<p>Socket:</p>
+					<input type="text" name="socket" id="socket" maxlength="4">
+				</div>
+
+				<div class="naddkomp">
+					<input type="submit" id="ok" value="OK">
+				</div>
+			</form>
+
 			
 			<!-- <div id="adduser" class="addhidingclass">
 				
@@ -320,112 +211,134 @@
 				</form>
 				
 			</div> --->
-			
-			<div id="info" class="addhidingclass">
-				
-				<button id="sealle" class="interactive b"> Se Alle </button>
 
-				<p>Kategori:</p>
-				<?php 
-					$id1 = $_POST['id1'];
-					echo "$id1";
-				?>
-
-				<p>Brand:</p>
-
-				<p>Antal</P>
-
-				<p>Udlånt:</p>
-
-				<p>Ødelagte:</p>
-	
-			</div>
+			<div id="info" class="addhidingclass"></div>
 
 		</div>
 		
 	</div>
 
-	
+
 	<script>
-		
-		$("document").ready(function(){
+
+		$(document).ready(function(){
 			
-			var $li = $('li').click(function(e) {
-				if( !$(e.target).is("input") ) {
-					
-					var Id = $(this).attr('id');
-					//alert(Id);
-					
-					$.ajax({                    
-					  url: '',     
-					  type: 'post', // performing a POST request
-					  data : {
-						id1 : Id // will be accessible in $_POST['data1']
-					  },                   
-					  success: function(data)         
-					  {
-						// etc...
-					  } 
+			$.ajax ({
+					url: 'getlist.php',
+					type: 'POST',
+					success: function(response) {
+						$('.list').html(response);
+					}
+			});
+
+
+			$("#cateopt").on('change', function() {
+
+				var option = this.value;
+				$("#searchfield").val('');
+				
+				$.ajax ({
+					url: 'getlist.php',
+					type: 'POST',
+					data: { option : option },
+					success: function(response) {
+						$('.list').html(response);
+					}
+					// value will be accessible in $_POST['option'] inside getlist.php
+				});
+			});
+
+
+			/* var delay = (function() {
+			  var timer = 0;
+			  return function(callback, ms){
+				clearTimeout (timer);
+				timer = setTimeout(callback, ms);
+			  };
+			})(); */
+
+			$("#searchfield").keyup(function () {
+				/* delay(function () { */
+					var search = $("#searchfield").val();
+					$("#cateopt").val('alle');
+				
+					$.ajax({
+						url: 'getlist.php',
+						cache: false,
+						type: 'POST',
+						data: { search : search },
+						success: function(response) {
+							$(".list").html(response);
+						}
 					});
-					
-					$("#addwhat, #addcancel").slideUp("fast");
-					$("#info").slideDown("fast");
+				/* }, 200); */
+			});
+
+
+			var $li = $(document).on("click", 'li', function(e) {
+
+				if( !$(e.target).is("input") ) {
+
+					$(".information *").hide();
+					$("#addwhat").val('0');
 
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
-						$('.addhidingclass').slideUp("fast");
+						$('.information *').hide();
 
 					} else {
-
-						$li.removeClass('selected');
+						$('li').removeClass('selected');
 						$(this).addClass('selected');
+						$("#info, #info *").show();
+						
+						
+						var Id = $(this).attr('id');
+
+						$.ajax ({
+							url: 'getinfo.php',
+							type: 'POST',
+							data : { id1 : Id },
+							success: function(data) {
+								$('#info').html(data);
+							}
+						});
 					}
 				}
 			});
-			
 
-			
-			$("#cateopt").change(function(){
-				document.getElementById('cateform').submit();
-			});
-		
-			
-			
+
 			$("#addbutt").click(function() {
 				
-				$("#info").slideUp("fast");
-				$("#addwhat, #addcancel").slideDown("fast");
-				$li.removeClass('selected');
+				$(".information *").hide();
+				$("#addwhat").val('0');
+				$("#addwhat, #addwhat *, #addcancel").slideDown("fast");
+				$('li').removeClass('selected');
 				
 			});
-			
+
 			$('#addwhat').change(function(){
 				
-            	$('.addhidingclass').slideUp("fast");
+				$('#addkomp, #addkomp *').hide();
 				
-				if (this.selectedIndex==2) {
-					$('.naddkomp').slideDown("fast");
-					$('.naddporte').slideDown("fast");
-				} else if (this.selectedIndex==1) {
-					$('.naddkomp').slideDown("fast");
-					$('.naddspeed').slideDown("fast");
-				} else if (this.selectedIndex==6 || this.selectedIndex==7) {
-					$('.naddkomp').slideDown("fast");
-					$('.naddsocket').slideDown("fast");
-				} else if (this.selectedIndex==3 || this.selectedIndex==4 || this.selectedIndex==5 || this.selectedIndex==8) {
-					$('.naddkomp').slideDown("fast");
-					$('.naddtype').slideDown("fast");
+				if (this.value=='switch') {
+					$('#addkomp, .naddkomp, .naddkomp *, .naddporte, .naddporte *').show();
+					
+				} else if (this.value=='router') {
+					$('#addkomp, .naddkomp, .naddkomp *, .naddspeed, .naddspeed *').show();
+					
+				} else if (this.value == 'processor' || this.value == 'motherboard') {
+					$('#addkomp, .naddkomp, .naddkomp *, .naddsocket, .naddsocket *').show();
+					
+				} else if (this.value=='sfpmodul' || this.value=='eltavle' || this.value=='ramblok' || this.value=='kabel') {
+					$('#addkomp, .naddkomp, .naddkomp *, .naddtype, .naddtype *').show();
 				}
         	});
-			
+
 			$('#addcancel').click(function() {
-				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
-			})
-			
-			$('#addcancel').click(function() {
+				$(".information *").slideUp("fast");
 				$("#addwhat").val('0');
-			})
+			});
 			
 		});
 		
