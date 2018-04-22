@@ -337,12 +337,9 @@
     </script>
 		
 	<script>
-		
-		$(function(){
-			if($('#adminbutt').prop('clicked')){
-				$('')
-			}
-		}
+			$("#adminbutt").click(function() {
+				$("#history, #historycancel").slideDown("fast")
+			});
 		
 	</script>
 	
