@@ -176,6 +176,7 @@ html, body {
 }
 
 .adminpower {
+	display: none;
 	width: 16vw;
 	font-size: 1vw;
 	font-family: 'Source Sans Pro', sans-serif;

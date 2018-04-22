@@ -338,7 +338,7 @@
 		
 	<script>
 			$("#adminbutt").click(function() {
-				$("#history, #historycancel").slideDown("fast")
+				$("#adminpower").slideDown("fast")
 			});
 		
 	</script>
