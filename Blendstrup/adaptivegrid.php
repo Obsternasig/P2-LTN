@@ -3,13 +3,8 @@
 	header('Content-type: text/html; charset=utf-8');
 	session_start();
 
-	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
 
-
-		if(!$komp) {
-			die("Could not query the database" .mysqli_error());
-		}
 
 		if(!$users) {
 			die("Could not query the database" .mysqli_error());
@@ -235,8 +230,8 @@
 						$('.list').html(response);
 					}
 			});
-			
-	
+
+
 			$("#cateopt").on('change', function() {
 
 				var option = this.value;
@@ -252,8 +247,8 @@
 					// value will be accessible in $_POST['option'] inside getlist.php
 				});
 			});
-			
-			
+
+
 			/* var delay = (function() {
 			  var timer = 0;
 			  return function(callback, ms){
@@ -278,9 +273,8 @@
 					});
 				/* }, 200); */
 			});
-			
-			
-			
+
+
 			var $li = $(document).on("click", 'li', function(e) {
 
 				if( !$(e.target).is("input") ) {
@@ -312,9 +306,8 @@
 					}
 				}
 			});
-			
-			
-			
+
+
 			$("#addbutt").click(function() {
 				
 				$(".information *").hide();
