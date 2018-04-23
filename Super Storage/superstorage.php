@@ -53,7 +53,7 @@
 
   		<div class="logo">
 		
-			<a href="adaptivegrid.php"><img id="imglogo" src="images/logo.png"/></a>
+			<a href="superstorage.php"><img id="imglogo" src="images/logo.png"/></a>
 		
 		</div>
 		
