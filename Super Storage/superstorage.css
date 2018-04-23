@@ -6,7 +6,7 @@ html, body {
 	margin: 0;
 }
 
-.grid {
+.grid, .grid #aninput {
 	text-align: center;
 	font-size: 1.5vw;
 	color: white;
@@ -41,6 +41,16 @@ html, body {
 	grid-area: 2/2/3/3;
 	display: inline-block;
     text-align: center;
+}
+
+.loginfail {
+	grid-area: 3/2/4/3;
+	color: red;
+	font-size: 2vw;
+	font-weight: 500;
+	padding-top: 20vh;
+	text-align: center;
+	margin: 0 auto;
 }
 
 .interactive {
@@ -111,7 +121,7 @@ html, body {
 	grid-area: 1/2/2/3;
 }
 
-#search {
+#searchfield {
 	font-size: 1.3vw;
 	font-weight: 300;
 	width: 38vw;
@@ -164,8 +174,7 @@ html, body {
 	width: 10vw;
 }
 
-.information select, #addcancel {
-	display: none;
+.information select, button {
 	width: 16vw;
 	font-size: 1vw;
 	font-family: 'Source Sans Pro', sans-serif;
@@ -175,8 +184,12 @@ html, body {
 	margin: 1vh 1vw;
 }
 
-#addwhat {
-	margin-top: 6vh;
+#addkomp, #addkomp * {
+	display: none;
+}
+
+.information select, #addcancel {
+	display: none;
 }
 
 #addbutt {
@@ -218,6 +231,7 @@ html, body {
 .list li {
 	margin: 0 1vw;
 	padding: 0 0 0 1.5vw;
+	position: relative;
 }
 
 .list div {
@@ -275,37 +289,32 @@ hr {
 
 #ancheck {
 	display: grid;
-	border: 0.1vw solid;
-	position: relative;
-	border-style: none;
-	margin: 0.6vw;
+	margin: 0.6vh 0.6vw;
 }
 
 #antalsdiv {
 	width: 2vw;
 	height: 3vh;
-	position: absolute;
 	overflow: hidden;
+	position: absolute;
 }
 
 #aninput {
-	max-height: 3vh;
-	max-width: 1.6vw;
-	margin: 0.20vw;
-	background-color: #404040;
+	height: 3vh;
+	width: 1.6vw;
+	padding-top: 0.2vh;
+	outline: none;
+	margin: 0.2vh 0.2vw;
 	border-style: none;
 	position: absolute;
-	font-size: 1.2vw;
-	margin-top: 0.2vw;
-	color: white;
-	text-align: center;
 }
 
-.samlet {
+#aninput::placeholder {
+	color: #808080;
+}
+
+.samlet, .samlet input {
 	background-color: #404040;
 	border-radius: 0.8vw;
-	padding: 0 0 2.5vw 0;
-	max-width: 2vw;
-	max-height: 2vw;
+	padding: 0 0 4.5vh 0;
 }
-

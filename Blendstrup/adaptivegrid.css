@@ -6,7 +6,7 @@ html, body {
 	margin: 0;
 }
 
-.grid {
+.grid, .grid #aninput {
 	text-align: center;
 	font-size: 1.5vw;
 	color: white;
@@ -231,6 +231,7 @@ html, body {
 .list li {
 	margin: 0 1vw;
 	padding: 0 0 0 1.5vw;
+	position: relative;
 }
 
 .list div {
@@ -284,4 +285,36 @@ hr {
 	font-size: 1vw;
 	overflow-y: scroll;
 	box-shadow: inset 0 0.7vw 1vw -0.7vw rgba(5,5,5,0.8);
+}
+
+#ancheck {
+	display: grid;
+	margin: 0.6vh 0.6vw;
+}
+
+#antalsdiv {
+	width: 2vw;
+	height: 3vh;
+	overflow: hidden;
+	position: absolute;
+}
+
+#aninput {
+	height: 3vh;
+	width: 1.6vw;
+	padding-top: 0.2vh;
+	outline: none;
+	margin: 0.2vh 0.2vw;
+	border-style: none;
+	position: absolute;
+}
+
+#aninput::placeholder {
+	color: #808080;
+}
+
+.samlet, .samlet input {
+	background-color: #404040;
+	border-radius: 0.8vw;
+	padding: 0 0 4.5vh 0;
 }

@@ -29,13 +29,17 @@
 				
 				if(!empty($id)) {
 					
+					unset($_SESSION['loginfail']);
 					$_SESSION['loginid'] = $id;
 					header("Location: superstorage.php");
 				
-				} else {
-					
-					header("Location: index.php");
 				}
+				
+			} else {
+
+					$loginfail = 1;
+					$_SESSION['loginfail'] = $loginfail;	
+					header("Location: index.php");
 			}
 		}
 	}

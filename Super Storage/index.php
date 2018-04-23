@@ -1,14 +1,20 @@
+<?php
+	session_start();
+?>
+
+
 <!doctype html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="superstorage.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<title> LTN - SS Login </title>
+	<title> Super Storage - Login </title>
 </head>
 
 <body>
 	<div class="pingrid">
+		
 		<form name="pincheck" id="pincheck" method="post" action="loginvalidation.php">
 			<input class="interactive" id="ini1" name="ini1" maxlength="1" autocomplete="off" autofocus>
 			<input class="interactive" id="ini2" name="ini2" maxlength="1" autocomplete="off">
@@ -17,15 +23,37 @@
 			<input class="interactive" id="pin3" name="pin3" maxlength="1" autocomplete="off">
 			<input class="interactive" id="pin4" name="pin4" maxlength="1" autocomplete="off">
 		</form>
-	</div>
+		
+		<div class='loginfail'> 
+			<p>
+				<?php
 
+					if(isset($_SESSION['loginfail'])) {
+
+						$login = $_SESSION['loginfail'];
+
+						if($login == 1){
+							echo "Dine initialer og/eller pinkode var forkert, prøv igen";
+							
+							} else {
+							
+							echo "";
+						}
+					}
+				?>
+			</p> 
+		</div>
+		
+	</div>
+	
+	
     <script>
 		
-		$(function(){
+		$("document").ready(function(){
 			
 			$('input').keydown(function () {
 				
-				if (this.value.length == this.maxLength) {
+				if (this.value.length == 1) {
 					$(this).next('input').focus();
 					
 				} else if (this.value.length == 0) {

@@ -186,32 +186,6 @@
 				</div>
 			</form>
 
-			
-			<!-- <div id="adduser" class="addhidingclass">
-				
-				<form name="adduser" id="adduser" method="post" action="adduser.php">
-					<div>
-						<p>First name:</p>
-						<input type="text" name="addfirstname" id="addfirstname" maxlength="20">
-					</div>
-
-					<div>
-						<p>Last name:</p>
-						<input type="text" name="addlastname" id="addlastname" maxlength="20">
-					</div>
-
-					<div>
-						<p>E-mail:</p>
-						<input type="email" name="addemail" id="addemail" maxlength="50">
-					</div>
-
-					<div>
-						<input type="submit" id="ok" value="OK">
-					</div>
-				</form>
-				
-			</div> --->
-
 			<div id="info" class="addhidingclass"></div>
 
 		</div>
@@ -229,6 +203,17 @@
 					success: function(response) {
 						$('.list').html(response);
 					}
+			});
+			
+			
+			$(document).on('click', '#ancheck', function () {
+				if ($(this).prop('checked')) {
+					$(this).parent().find('#aninput').show();
+					$(this).parent().addClass('samlet');
+				} else {
+					$(this).parent().find('#aninput').hide();
+					$(this).parent().removeClass('samlet');
+				}
 			});
 
 
@@ -249,29 +234,20 @@
 			});
 
 
-			/* var delay = (function() {
-			  var timer = 0;
-			  return function(callback, ms){
-				clearTimeout (timer);
-				timer = setTimeout(callback, ms);
-			  };
-			})(); */
-
 			$("#searchfield").keyup(function () {
-				/* delay(function () { */
-					var search = $("#searchfield").val();
-					$("#cateopt").val('alle');
-				
-					$.ajax({
-						url: 'getlist.php',
-						cache: false,
-						type: 'POST',
-						data: { search : search },
-						success: function(response) {
-							$(".list").html(response);
-						}
-					});
-				/* }, 200); */
+
+				var search = $("#searchfield").val();
+				$("#cateopt").val('alle');
+
+				$.ajax({
+					url: 'getlist.php',
+					cache: false,
+					type: 'POST',
+					data: { search : search },
+					success: function(response) {
+						$(".list").html(response);
+					}
+				});
 			});
 
 
