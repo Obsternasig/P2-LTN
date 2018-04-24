@@ -123,71 +123,8 @@
 
 		<div class="list"></div>
 
-		<div class="information"> 
-			
-			<select size="1" id="addwhat" class="interactive">
-				<option value="0"> Vælg hvad der skal tilføjes </option>
-				<option value="router">Router</option>
-				<option value="switch">Switch</option>
-				<option value="sfpmodul">SFP Modul</option>
-				<option value="eltavle">El tavle</option>
-				<option value="ramblok">Ram blok</option>
-				<option value="processor">Processor</option>
-				<option value="motherboard">Motherboard</option>
-				<option value="kabel">Kabel</option>
-			</select>
-
-			<button id="addcancel" class="interactive b"> Annuller </button>
-			
-				
-			<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
-				<div class="naddkomp">
-
-					<p>Kategori:</p>
-					<input type="text" name="category" id="category" maxlength="30">
-
-					<p>Brand:</p>
-					<input type="text" name="brand" id="brand" maxlength="30">
-
-					<p>Serienummer:</p>
-					<input type="text" name="serialnb" id="serialnb" maxlength="30">
-
-					<p>Lokation:</p>
-					<input type="text" name="location" id="location" maxlength="30">
-
-					<p>Kommentar:</p>
-					<input type="text" name="comment" id="comment" maxlength="4">
-
-				</div>
-					
-					
-				<div class="naddporte">
-					<p>Porte:</p>
-					<input type="text" name="ports" id="ports" maxlength="30">
-				</div>
-
-				<div class="naddspeed">
-					<p>Hastighed:</p>
-					<input type="text" name="speed" id="speed" maxlength="30">
-				</div>
-
-				<div class="naddtype">
-					<p>Type:</p>
-					<input type="text" name="type" id="type" maxlength="30">
-				</div>
-
-				<div class="naddsocket">
-					<p>Socket:</p>
-					<input type="text" name="socket" id="socket" maxlength="4">
-				</div>
-
-				<div class="naddkomp">
-					<input type="submit" id="ok" value="OK">
-				</div>
-			</form>
-
-			<div id="info" class="addhidingclass"></div>
-
+		<div class="information">
+			<div id="formdiv"></div>
 		</div>
 		
 	</div>
@@ -199,14 +136,13 @@
 			
 			$.ajax ({
 					url: 'getlist.php',
-					type: 'POST',
 					success: function(response) {
 						$('.list').html(response);
 					}
 			});
 			
 			
-			$(document).on('click', '#ancheck', function () {
+			/* $(".grid").on('click', '#ancheck', function () {
 				if ($(this).prop('checked')) {
 					$(this).parent().find('#aninput').show();
 					$(this).parent().addClass('samlet');
@@ -214,7 +150,7 @@
 					$(this).parent().find('#aninput').hide();
 					$(this).parent().removeClass('samlet');
 				}
-			});
+			}); */
 
 
 			$("#cateopt").on('change', function() {
@@ -251,32 +187,32 @@
 			});
 
 
-			var $li = $(document).on("click", 'li', function(e) {
+			var $li = $(".grid").on('click', 'li', function(e) {
 
 				if( !$(e.target).is("input") ) {
 
-					$(".information *").hide();
+					$(".information").empty();
 					$("#addwhat").val('0');
+					
+					var Id = $(this).attr('id');
 
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
-						$('.information *').hide();
+						$('.information').empty();
+						$('#testdiv' + Id).slideUp("fast", function() { $(this).empty(); } );
 
 					} else {
-						$('li').removeClass('selected');
+						
 						$(this).addClass('selected');
-						$("#info, #info *").show();
 						
-						
-						var Id = $(this).attr('id');
 
 						$.ajax ({
-							url: 'getinfo.php',
+							url: 'getkomps.php',
 							type: 'POST',
 							data : { id1 : Id },
-							success: function(data) {
-								$('#info').html(data);
+							success: function(response) {
+								$('#testdiv' + Id).hide().html(response).slideDown("fast");
 							}
 						});
 					}
@@ -284,36 +220,51 @@
 			});
 
 
-			$("#addbutt").click(function() {
+			$(".grid").on('click', '#addbutt', function() {
 				
-				$(".information *").hide();
+				$(".information").empty();
 				$("#addwhat").val('0');
-				$("#addwhat, #addwhat *, #addcancel").slideDown("fast");
 				$('li').removeClass('selected');
+				$('.testdivID').slideUp("fast", function() { $(this).empty(); } );
 				
+				var initial = "set";
+				
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { initial : initial },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
 			});
+			
 
-			$('#addwhat').change(function(){
+			$(".grid").on('change', '#addwhat', function() {
 				
-				$('#addkomp, #addkomp *').hide();
-				
-				if (this.value=='switch') {
-					$('#addkomp, .naddkomp, .naddkomp *, .naddporte, .naddporte *').show();
-					
-				} else if (this.value=='router') {
-					$('#addkomp, .naddkomp, .naddkomp *, .naddspeed, .naddspeed *').show();
-					
-				} else if (this.value == 'processor' || this.value == 'motherboard') {
-					$('#addkomp, .naddkomp, .naddkomp *, .naddsocket, .naddsocket *').show();
-					
-				} else if (this.value=='sfpmodul' || this.value=='eltavle' || this.value=='ramblok' || this.value=='kabel') {
-					$('#addkomp, .naddkomp, .naddkomp *, .naddtype, .naddtype *').show();
-				}
+				var value = this.value;
+	
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { value : value },
+					success: function(response) {
+						if($('.naddkomp').length == 0){
+							$('.information').append(response);
+						} else {
+							$('.naddkomp').hide().html(response).slideDown("slow");
+						}
+					}
+				});
         	});
 
-			$('#addcancel').click(function() {
-				$(".information *").slideUp("fast");
-				$("#addwhat").val('0');
+			
+			
+			$(".grid").on('click', '#addcancel', function() {
+				$(".information *").slideUp("fast", function(){
+					$(".information").empty();
+					$("#addwhat").val('0');
+				});
 			});
 			
 		});
