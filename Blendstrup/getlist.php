@@ -25,6 +25,7 @@ require_once "connection.php";
 		$search = $_POST['search'];
 	}
 
+
 	if(isset($option)) {
 		if($option != 'alle') {
 			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '" . $option . "' GROUP BY category, brand, ports");
@@ -51,7 +52,9 @@ require_once "connection.php";
 			$broken = $row['SUM(broken)'];
 
 			$category = $row['category'];
+			$brand = $row['brand'];
 
+			
 			switch($category) {
 				case $category == "switch": $midsec = "Porte"; $midcat = $row['ports'];
 					break;
@@ -72,8 +75,8 @@ require_once "connection.php";
 
 				default: $midsec = "?"; $midcat = "?";
 			}
-
-
+			
+			
 			echo "<li id=" . $row['ID'] . ">";
 
 				echo "<div id='antalsdiv'>";
@@ -87,6 +90,7 @@ require_once "connection.php";
 				echo "<div>" . " " . $midsec . ": " . $midcat  . "</div>";
 				echo "<div>" . " Antal: " . $row['amount'] . "</div>";
 
+			
 			echo "<br>";
 
 				echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . " Udlånte: " . $row['SUM(away)'] . "</div>";

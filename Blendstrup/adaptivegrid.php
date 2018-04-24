@@ -257,6 +257,7 @@
         	});
 
 			
+			
 			$(".grid").on('click', '#addcancel', function() {
 				$(".information *").slideUp("fast", function(){
 					$(".information").empty();
