@@ -184,14 +184,6 @@ html, body {
 	margin: 1vh 1vw;
 }
 
-#addkomp, #addkomp * {
-	display: none;
-}
-
-.information select, #addcancel {
-	display: none;
-}
-
 #addbutt {
 	margin-top: 5vh;
 }
@@ -201,11 +193,6 @@ html, body {
 	left: 0;
 	bottom: 0;
 	padding-left: 1vw;
-}
-
-.addhidingclass {
-	display: none;
-	margin: 0;
 }
 
 .shoppinglist {
