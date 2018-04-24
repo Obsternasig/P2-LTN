@@ -142,7 +142,7 @@
 			});
 			
 			
-			$(".grid").on('click', '#ancheck', function () {
+			/* $(".grid").on('click', '#ancheck', function () {
 				if ($(this).prop('checked')) {
 					$(this).parent().find('#aninput').show();
 					$(this).parent().addClass('samlet');
@@ -150,7 +150,7 @@
 					$(this).parent().find('#aninput').hide();
 					$(this).parent().removeClass('samlet');
 				}
-			});
+			}); */
 
 
 			$("#cateopt").on('change', function() {
@@ -193,25 +193,26 @@
 
 					$(".information").empty();
 					$("#addwhat").val('0');
+					
+					var Id = $(this).attr('id');
 
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
 						$('.information').empty();
+						$('#testdiv' + Id).slideUp("fast", function() { $(this).empty(); } );
 
 					} else {
-						$('li').removeClass('selected');
+						
 						$(this).addClass('selected');
 						
-						
-						var Id = $(this).attr('id');
 
 						$.ajax ({
-							url: 'getinfo.php',
+							url: 'getkomps.php',
 							type: 'POST',
 							data : { id1 : Id },
 							success: function(response) {
-								$('.information').html(response);
+								$('#testdiv' + Id).hide().html(response).slideDown("fast");
 							}
 						});
 					}
@@ -224,6 +225,7 @@
 				$(".information").empty();
 				$("#addwhat").val('0');
 				$('li').removeClass('selected');
+				$('.testdivID').slideUp("fast", function() { $(this).empty(); } );
 				
 				var initial = "set";
 				

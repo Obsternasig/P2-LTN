@@ -99,6 +99,9 @@ require_once "connection.php";
 
 
 			echo "</li>";
+			
+			echo "<div id='testdiv" . $row['ID'] . "' class='testdivID' style='width: 20vw; text-align: center;'></div>";
+			
 			echo "<hr>";
 
 		}
