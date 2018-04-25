@@ -77,12 +77,7 @@ require_once "connection.php";
 			}
 			
 			
-			echo "<li id=" . $row['ID'] . ">";
-
-				echo "<div id='antalsdiv'>";
-					echo "<input type='checkbox' id='ancheck' name='ancheck'>";
-					echo "<input type='text' id='aninput' name='aninput' placeholder='?'>";
-				echo "</div>";
+			echo "<li id=" . $row['ID'] . " class='liclass'>";
 
 				echo "<div id='kate'>" . $row['category'] . "</div>";
 
@@ -99,8 +94,8 @@ require_once "connection.php";
 
 
 			echo "</li>";
-			
-			echo "<div id='testdiv" . $row['ID'] . "' class='testdivID' style='width: 20vw; text-align: center;'></div>";
+
+			echo "<div id='div" . $row['ID'] . "' class='divID' style='display: none;'></div>";
 			
 			echo "<hr>";
 
