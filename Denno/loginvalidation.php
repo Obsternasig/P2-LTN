@@ -31,7 +31,7 @@
 					
 					unset($_SESSION['loginfail']);
 					$_SESSION['loginid'] = $id;
-					header("Location: denno.php");
+					header("Location: adaptivegrid.php");
 				
 				}
 				
