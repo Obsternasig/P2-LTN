@@ -1,15 +1,10 @@
 <?php
 	require_once "connection.php";
 	header('Content-type: text/html; charset=utf-8');
+	session_start();
 
-	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
-	$komps = mysqli_query($connection, "SELECT * FROM komponent");
 
-
-		if(!$komp) {
-			die("Could not query the database" .mysqli_error());
-		}
 
 		if(!$users) {
 			die("Could not query the database" .mysqli_error());
@@ -18,26 +13,10 @@
 
 	$userassoc = mysqli_fetch_assoc($users);
 
-		function getColorAway($var) {
-				if ($var <= 0)
-					return '#ffffff';
-
-				else if ($var >= 1)
-					return '#334488';
-			}
-
-		function getColorBroken($var) {
-				if ($var <= 0)
-					return '#ffffff';
-
-				else if ($var >= 1)
-					return '#e95522';
-			}
-
 	
-	if(isset($_GET['id'])){
+	if(isset($_SESSION['loginid'])){
 		
-		$ID = htmlentities($_GET['id']);
+		$ID = $_SESSION['loginid'];
 
 		$idquery = "SELECT * FROM users WHERE ID =$ID";
 		$idresults = mysqli_query($connection, $idquery);
@@ -56,7 +35,6 @@
 			
 	}
 
-
 ?>
 
 <!doctype html>
@@ -70,40 +48,41 @@
 </head>
 
 <body>
-	
+
 	<div class="grid">
-		
+
   		<div class="logo">
 		
-			<img id="imglogo" src="images/logo.png" />
+			<a href="adaptivegrid.php"><img id="imglogo" src="images/logo.png"/></a>
 		
 		</div>
 		
   		<div class="search">
 		
-			<input type="search" id="searchfield" class="interactive" placeholder="Søg...">
-		
-			<select size="1" id="searchcategories" class="interactive">
-				<option value="0">Alle</option>
-				
+			<input type="text" id="searchfield" name="search" class="interactive" placeholder="Søg..." autocomplete="off">
+			
+			
+			<select size="1" id="cateopt" name="cateopt" class="interactive">
+				<option value="alle">Alle</option>
+
 					<?php
 							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
 
 							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
 
-								$category = ucfirst($kompkat['category']);
-								echo "<option value=" . $category . ">" . $category . "</option>";
+								$category = $kompkat['category'];
+								echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
 
 							}
-					?>
-				
-			</select>
 
+					?>
+
+			</select>
 		</div>
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.replace ('login.php')">Afslut</button>
+			<button id="endbutton" class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
 			<div class="person"> 
 				<?php 
 					
@@ -140,215 +119,174 @@
 		
 		</div>
 		
-  		<div class="shoppinglist">  </div>
+  		<div class="shoppinglist"></div>
 
-		<div class="list">
-			<script>
-				$(document).ready(function() {
-					$('.second-list').hide();
-					$('#next').dblclick(function() {
-						$('.second-list').show();
-						$('.first-list').hide();
-					});
-			});
-			
-				$(document).ready(function() {
-					$('#back').dblclick(function() {
-						$('.first-list').show();
-						$('.second-list').hide();
-					});
-			});
-			</script>
+		<div class="list"></div>
 
-
-				<?php 
-					mysqli_data_seek($komp, 0);
-			
-					echo "<ul class='first-list' id='next'>";
-				
-						while ($row = mysqli_fetch_assoc($komp)) {
-							
-							$away = $row['away'];
-							$broken = $row['broken'];
-							
-							echo "<li>";
-								
-							
-								echo "<input type='checkbox'>";
-
-								echo "<div id='kate'>" . $row['category'] . "</div>";
-
-								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $row['ports']  . "</div>";
-								echo "<div>" . " Antal: " . $row['amount'] . "</div>";
-
-							echo "<br>";
-
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
-							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
-							
-							
-							echo "</li>";
-							echo "<hr>";
-							
-						}
-						echo "</ul>";
-							
-							echo "<ul class='second-list' id='back'>";
-					
-							while ($rows = mysqli_fetch_assoc($komps)) {
-							
-							$loan = $rows['away'];
-							$broke = $rows['broken'];
-							
-							echo "<li>";
-
-								echo "<input type='checkbox'>";
-
-								echo "<div id='kate'>" . $rows['kategori'] . "</div>";
-
-								echo "<div>" . " Mærke: " . $rows['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $rows['porte']  . "</div>";
-								echo "<div>" . " Serial: " . $rows['serial']  . "</div>";
-
-							echo "<br>";
-								
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($loan) . "'>" . "<input type='checkbox'>" . " Udlånt </div>";
-								echo "<div class='status' style='color: " . getColorBroken($broke) . "'>" . "<input type='checkbox'>"  . " Ødelagt </div>";
-								
-							
-							echo "</li>";
-							echo "<hr>";
-							
-						}
-						
-					echo "</ul>";
-					
-					
-				?>
-		</div>
-		
-		<div class="information"> 
-			
-			<select size="1" id="addwhat" class="interactive">
-				<option value="0"> Vælg hvad der skal tilføjes </option>
-				<option value="adduser">Tilføj bruger</option>
-				<option value="addkomp">Tilføj komponent</option>
-			</select>
-			
-			<button id="addcancel" class="interactive b"> Annuller </button>
-			
-			<div id="addkomp" class="addhidingclass">
-				
-				<form name="addkomp" id="addkomp" method="post" action="addkomp.php">
-					<div>
-						<p>Kategori:</p>
-						<input type="text" name="category" id="category" maxlength="30">
-					</div>
-
-					<div>
-						<p>Brand:</p>
-						<input type="text" name="brand" id="brand" maxlength="30">
-					</div>
-
-					<div>
-						<p>Porte:</p>
-						<input type="number" name="ports" id="ports" maxlength="4">
-					</div>
-
-					<div>
-						<p>Antal:</p>
-						<input type="number" name="amount" id="amount" maxlength="4">
-					</div>
-
-					<div>
-						<p>Udlånt:</p>
-						<input type="number" name="away" id="away" maxlength="4">
-					</div>
-
-					<div>
-						<p>Ødelagte:</p>
-						<input type="number" name="broken" id="broken" maxlength="4">
-					</div>
-
-					<div>
-						<input type="submit" id="ok" value="OK">
-					</div>
-				</form>
-				
-			</div>
-			
-			<div id="adduser" class="addhidingclass">
-				
-				<form name="adduser" id="adduser" method="post" action="adduser.php">
-					<div>
-						<p>First name:</p>
-						<input type="text" name="addfirstname" id="addfirstname" maxlength="20">
-					</div>
-
-					<div>
-						<p>Last name:</p>
-						<input type="text" name="addlastname" id="addlastname" maxlength="20">
-					</div>
-
-					<div>
-						<p>E-mail:</p>
-						<input type="email" name="addemail" id="addemail" maxlength="50">
-					</div>
-
-					<div>
-						<input type="submit" id="ok" value="OK">
-					</div>
-				</form>
-				
-			</div>
+		<div class="information">
+			<div id="formdiv"></div>
 		</div>
 		
 	</div>
 
-	
+
 	<script>
-		
-		$("document").ready(function(){
+
+		$(document).ready(function(){
 			
-				var $li = $('li').click(function() {
+			$.ajax ({
+					url: 'getlist.php',
+					success: function(response) {
+						$('.list').html(response);
+					}
+			});
+			
+			
+			/* $(".grid").on('click', '#ancheck', function () {
+				if ($(this).prop('checked')) {
+					$(this).parent().find('#aninput').show();
+					$(this).parent().addClass('samlet');
+				} else {
+					$(this).parent().find('#aninput').hide();
+					$(this).parent().removeClass('samlet');
+				}
+			}); */
+
+
+			$("#cateopt").on('change', function() {
+
+				var option = this.value;
+				$("#searchfield").val('');
 				
+				$.ajax ({
+					url: 'getlist.php',
+					type: 'POST',
+					data: { option : option },
+					success: function(response) {
+						$('.list').html(response);
+					}
+					// value will be accessible in $_POST['option'] inside getlist.php
+				});
+			});
+
+
+			$("#searchfield").keyup(function () {
+
+				var search = $("#searchfield").val();
+				$("#cateopt").val('alle');
+
+				$.ajax({
+					url: 'getlist.php',
+					cache: false,
+					type: 'POST',
+					data: { search : search },
+					success: function(response) {
+						$(".list").html(response);
+					}
+				});
+			});
+
+
+			var $li = $(".grid").on('click', 'li', function(e) {
+
+				if( !$(e.target).is("input") ) {
+
+					$(".information").empty();
+					$("#addwhat").val('0');
+					
+					var Id = $(this).attr('id');
+
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
+						$('.information').empty();
+						$('#testdiv' + Id).slideUp("fast", function() { $(this).empty(); } );
 
 					} else {
-
-						$li.removeClass('selected');
+						
 						$(this).addClass('selected');
+						
+
+						$.ajax ({
+							url: 'getkomps.php',
+							type: 'POST',
+							data : { id1 : Id },
+							success: function(response) {
+								$('#testdiv' + Id).hide().html(response).slideDown("fast");
+							}
+						});
 					}
-				});
-			
-			
-			
-			$("#addbutt").click(function() {
-				
-				$("#addwhat, #addcancel").slideDown("fast");
-				
+				}
 			});
 			
-			$('#addwhat').change(function(){
+			
+			$(".grid").on('click', '#addbutt', function() {
 				
-            	$('.addhidingclass').slideUp();
-            	$('#' + $(this).val()).slideDown();
-        	});
-			
-			$('#addcancel').click(function() {
-				$("#addwhat, #addcancel, .addhidingclass").slideUp("fast");
-			})
-			
-			$('#addcancel').click(function() {
+				$(".information").empty();
 				$("#addwhat").val('0');
-			})
+				$('li').removeClass('selected');
+				$('.testdivID').slideUp("fast", function() { $(this).empty(); } );
+				
+				var initial = "set";
+				
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { initial : initial },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
+			});
+			
 
+			$(".grid").on('change', '#addwhat', function() {
+				
+				var value = this.value;
+	
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { value : value },
+					success: function(response) {
+						if($('.naddkomp').length == 0){
+							$('.information').append(response);
+						} else {
+							$('.naddkomp').hide().html(response).slideDown("slow");
+						}
+					}
+				});
+        	});
+
+			
+			
+			$(".grid").on('click', '#addcancel', function() {
+				$(".information *").slideUp("fast", function(){
+					$(".information").empty();
+					$("#addwhat").val('0');
+				});
+			});
+			
 		});
 		
+			$(".grid").on('click', '#editbutt', function() {
+				
+				$(".information").empty();
+				$("#editkomp").val('0');
+				$('li').removeClass('selected');
+				$('#testdivID').slideUp("fast", function() { $(this).empty(); } );
+				
+				var initial = "set";
+				
+				$.ajax ({
+					url: 'editform.php',
+					type: 'POST',
+					data: { initial : initial },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
+			});
 	</script>
 	
 </body>
