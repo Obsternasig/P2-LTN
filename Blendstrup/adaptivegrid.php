@@ -82,7 +82,6 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
 			<div class="person"> 
 				<?php 
 					
@@ -102,8 +101,6 @@
 			
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
-			<button id="groupbutt" class="interactive b"> Gruppér </button>
-			
 			<?php 
 			
 			if (isset($admin)) {
@@ -114,13 +111,13 @@
 				}
 			}
 			?>
-				
-			<text id="chosenbutt"> Valgte: </text>
 		
 		</div>
-		
-  		<div class="shoppinglist"></div>
 
+		<div class="end2">
+			<button id="endbutton" class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
+		</div>
+		
 		<div class="list"></div>
 
 		<div class="information">
