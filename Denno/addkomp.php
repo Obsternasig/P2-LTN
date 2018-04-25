@@ -51,7 +51,7 @@
 					die("Cannot connect to the database WTF" .mysqli_connect_error());
 				}
 
-			header("Location: denno.php");
+			header("Location: adaptivegrid.php");
 
 
 			} else {

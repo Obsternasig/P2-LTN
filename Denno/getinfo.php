@@ -4,7 +4,7 @@ require_once "connection.php";
 	if(isset($_POST['id1'])) {
 		$id = $_POST['id1'];
 	}
-
+	
 	echo "<h2 class='infotekst'>Information</h2>";
 
 	echo "<button id='sealle' class='interactive b'> Se Alle </button>";
@@ -36,8 +36,6 @@ require_once "connection.php";
 		
 		
 	}
-	
-
 	
 
 mysqli_close($connection);
