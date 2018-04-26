@@ -15,7 +15,7 @@ html, body {
 
 	display: grid;
 	grid-template-columns: 1fr 4fr 2fr;
-	grid-template-rows: 15vh 50vh 35vh;
+	grid-template-rows: 15vh 70vh 15vh;
 }
 
 .pingrid {
@@ -71,15 +71,10 @@ html, body {
 .b {
 	font-family: 'Roboto+Mono', sans-serif;
 	font-weight: 500;
+	cursor: pointer;
 }
 
 .b:active {
-  background-color: #808080;
-  box-shadow: 0.1vw 0.1vw 0.25vw 0vw rgba(00, 00, 00, 0.5);
-  transform: translateY(0.4vh);
-}
-
-.btoggle {
   background-color: #808080;
   box-shadow: 0.1vw 0.1vw 0.25vw 0vw rgba(00, 00, 00, 0.5);
   transform: translateY(0.4vh);
@@ -180,6 +175,15 @@ html, body {
 	width: 10vw;
 }
 
+.end2 button {
+	padding: 1vh 1vw;
+	margin: 2vh 1vw;
+	font-size: 1.5vw;
+	font-weight: 500;
+	text-transform: uppercase;
+	width: 10vw;
+}
+
 .information select, button {
 	width: 15vw;
 	font-size: 1vw;
@@ -201,10 +205,9 @@ html, body {
 	padding-left: 1vw;
 }
 
-.shoppinglist {
-	background-color: #404040;
+.end2 {
+	background-color: #303030;
 	grid-area: 3/1/4/2;
-	overflow-y: scroll;
 }
 
 .list {
@@ -227,28 +230,28 @@ html, body {
 	position: relative;
 }
 
-.list div {
+.liclass div {
 	display: inline-block;
 	overflow: hidden;
 	width: 11.5vw;
 	font-size: 1.3vw;
 }
 
-li.selected {
+li:hover {
+	background-color: #707070;
+	border-radius: 5vh;
+	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(80, 80, 80, 0.5);
+	cursor: pointer;
+}
+
+.selected {
     background-color: #606060;
 	border-radius: 5vh;
 	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(80, 80, 80, 0.5);
 }
 
-li:hover {
-	background-color: #707070;
-	border-radius: 5vh;
-	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(80, 80, 80, 0.5);
-}
-
 .status {
-	border-top: solid;
-	border-top-color: #404040;
+	border-top: #404040 solid 0.15vw;
 	padding-top: 1vh;
 	height: 3.5vh;
 	font-style: italic;
@@ -267,16 +270,15 @@ li:hover {
 	text-transform: uppercase;
 	margin: 0 1vw;
 	padding-right: 1vw;
-	border-right: solid;
-	border-right-color: #404040;
+	border-right: #404040 solid 0.15vw;
 	position: relative;
 	top: 3.5vh;
-}	
+}
 
 hr {
 	border: none;
 	background-color: #404040;
-	height: 0.7vh;
+	height: 0.8vh;
 }
 
 .information {
@@ -327,4 +329,43 @@ hr {
 	background-color: #404040;
 	border-radius: 0.8vw;
 	padding: 0 0 4.5vh 0;
+}
+
+.btoggle {
+  background-color: #808080;
+  box-shadow: 0.1vw 0.1vw 0.25vw 0vw rgba(00, 00, 00, 0.5);
+  transform: translateY(0.4vh);
+}
+
+.komps {
+	font-size: 1.3vw;
+	display: inline-block;
+	overflow: hidden;
+	width: 40vw;
+	margin-left: 8vw;
+	padding: 2vh 0 2vh 2vw;
+	border-top: #404040 solid 0.1vw;
+	cursor: pointer;
+}
+
+.komps:hover {
+	background-color: #707070;
+	border-radius: 5vh;
+	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(80, 80, 80, 0.5);
+	cursor: pointer;
+}
+
+#komps-p {
+	padding-left: 1.5vw;
+	margin-left: 1vw;
+	border-left: #404040 solid 0.1vw;
+}
+
+.komps p {
+	display: inline;
+	font-style: italic;
+}
+
+.komps input {
+	margin-right: 3vw;
 }

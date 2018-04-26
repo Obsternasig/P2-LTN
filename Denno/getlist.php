@@ -77,7 +77,8 @@ require_once "connection.php";
 			}
 			
 			
-			echo "<li id=" . $row['ID'] . ">";
+			echo "<li id=" . $row['ID'] . " class='liclass'>";
+
 				echo "<div id='kate'>" . $row['category'] . "</div>";
 
 				echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
@@ -93,8 +94,8 @@ require_once "connection.php";
 
 
 			echo "</li>";
-			
-			echo "<div id='testdiv" . $row['ID'] . "' class='testdivID' style='width: 20vw; text-align: center;'></div>";
+
+			echo "<div id='div" . $row['ID'] . "' class='divID' style='display: none;'></div>";
 			
 			echo "<hr>";
 

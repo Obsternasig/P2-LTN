@@ -82,7 +82,6 @@
 		
   		<div class="end"> 
 			
-			<a href="logout.php"> <button id="endbutton" class="interactive b">AFSLUT</button> </a>
 			<div class="person"> 
 				<?php 
 					
@@ -102,8 +101,6 @@
 			
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
-			<button id="groupbutt" class="interactive b"> Gruppér </button>
-			
 			<?php 
 			
 			if (isset($admin)) {
@@ -114,13 +111,13 @@
 				}
 			}
 			?>
-				
-			<text id="chosenbutt"> Valgte: </text>
 		
 		</div>
-		
-  		<div class="shoppinglist"></div>
 
+		<div class="end2">
+			<button id="endbutton" class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
+		</div>
+		
 		<div class="list"></div>
 
 		<div class="information">
@@ -140,17 +137,6 @@
 						$('.list').html(response);
 					}
 			});
-			
-			
-			/* $(".grid").on('click', '#ancheck', function () {
-				if ($(this).prop('checked')) {
-					$(this).parent().find('#aninput').show();
-					$(this).parent().addClass('samlet');
-				} else {
-					$(this).parent().find('#aninput').hide();
-					$(this).parent().removeClass('samlet');
-				}
-			}); */
 
 
 			$("#cateopt").on('change', function() {
@@ -185,13 +171,40 @@
 					}
 				});
 			});
+			
+			
+			$(".grid").on('click', '.komps', function(e) {
+				if( !$(e.target).is("input") ) {
+					
+					var Id = $(this).attr('id');
+				
+					if($(this).hasClass('selected')) {
 
+						$(this).removeClass('selected');
+						$('.information').empty();
 
-			var $li = $(".grid").on('click', 'li', function(e) {
+					} else {
+						
+						$('.komps').removeClass('selected');
+						$(this).addClass('selected');
+						
+						$.ajax ({
+							url: 'getinfo.php',
+							type: 'POST',
+							data : { id1 : Id },
+							success: function(response) {
+								$('.information').html(response);
+							}
+						});
+					}
+				}
+			});
+			
+			
+			$(".grid").on('click', 'li', function(e) {
 
 				if( !$(e.target).is("input") ) {
 
-					$(".information").empty();
 					$("#addwhat").val('0');
 					
 					var Id = $(this).attr('id');
@@ -199,20 +212,18 @@
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
-						$('.information').empty();
-						$('#testdiv' + Id).slideUp("fast", function() { $(this).empty(); } );
+						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
 
 					} else {
 						
 						$(this).addClass('selected');
-						
 
 						$.ajax ({
 							url: 'getkomps.php',
 							type: 'POST',
 							data : { id1 : Id },
 							success: function(response) {
-								$('#testdiv' + Id).hide().html(response).slideDown("fast");
+								$('#div' + Id).html(response).slideDown("fast");
 							}
 						});
 					}
@@ -221,11 +232,12 @@
 
 
 			$(".grid").on('click', '#addbutt', function() {
-				$(this).addClass('btoggle');
+				
+				//$(this).addClass('btoggle');
 				$(".information").empty();
 				$("#addwhat").val('0');
 				$('li').removeClass('selected');
-				$('.testdivID').slideUp("fast", function() { $(this).empty(); } );
+				$('.divID').slideUp("fast", function() { $(this).empty(); } );
 				
 				var initial = "set";
 				
@@ -242,7 +254,6 @@
 
 			$(".grid").on('change', '#addwhat', function() {
 				
-				
 				var value = this.value;
 	
 				$.ajax ({
@@ -254,7 +265,6 @@
 							$('.information').append(response);
 						} else {
 							$('.naddkomp').hide().html(response).slideDown("slow");
-							
 						}
 					}
 				});
@@ -269,6 +279,24 @@
 				});
 			});
 			
+			
+			/* $(".grid").on('click', '#editbutt', function() {
+				
+				$(".information").empty();
+				$("#editkomp").val('0');
+				$('li').removeClass('selected');
+				$('#testdivID').slideUp("fast", function() { $(this).empty(); } );
+				
+				var initial = "set";
+				
+				$.ajax ({
+					url: 'editform.php',
+					type: 'POST',
+					data: { initial : initial },
+					success: function(response) {
+						$('.information').html(response);
+					}
+			}); */
 		});
 		
 	</script>

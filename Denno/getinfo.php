@@ -1,13 +1,23 @@
 <?php
 require_once "connection.php";
+		
+		function getColor($var) {
+			if ($var <= 0) {
+				return '#ffffff';
+			} else if ($var == 1) {
+				return '#334488';
+			} else if ($var == 2) {
+				return '#e95522';
+			} else if ($var == 3) {
+				return '#000000';
+			}
+		}
 
 	if(isset($_POST['id1'])) {
 		$id = $_POST['id1'];
 	}
 	
 	echo "<h2 class='infotekst'>Information</h2>";
-
-	echo "<button id='sealle' class='interactive b'> Se Alle </button>";
 
 	echo "<button class='interactive b'> Rediger Enhed </button>";
 
@@ -25,7 +35,8 @@ require_once "connection.php";
 		echo "<h3> Placering: " . "</h3>";
 		echo ucfirst($kompassoc['location']);
 		
-		echo "<h3> Antal: " . "</h3>";
+		echo "<h3> Status: " . "</h3>";
+		
 		echo "Udlånt: " . ucfirst($kompassoc['away']);
 		echo "<br>";
 		echo "Ødelagt: ";
