@@ -3,7 +3,7 @@ require_once "connection.php";
 		
 		function getColor($var) {
 			if ($var <= 0) {
-				return '#ffffff';
+				return '#D7D7D7';
 			} else if ($var == 1) {
 				return '#334488';
 			} else if ($var == 2) {
@@ -26,12 +26,16 @@ require_once "connection.php";
 		
 		if($kompassoc['away'] == '1' && $kompassoc['broken'] == '0') {
 				$value = 1;
+				$status = "Udlånt";
 			} else if($kompassoc['away'] == '0' && $kompassoc['broken'] == '1') {
 				$value = 2;
+				$status = "Ødelagt :(";
 			} else if($kompassoc['away'] == '1' && $kompassoc['broken'] == '1') {
 				$value = 3;
+				$status = "Både udlånt og ødelagt :(";
 			} else {
 				$value = 0;
+				$status = "På lager";
 			}
 		
 		echo "<h3 class='infoover'> Kategori: " . "</h3>";
@@ -42,7 +46,7 @@ require_once "connection.php";
 		
 		echo "<h3 class='infoover'> Status: " . "</h3>";
 		
-		echo "<p class='infotekst' style='" . getColor($value) . "'> Status </p>";
+		echo "<p class='infotekst' style='color: " . getColor($value) . "'>" . $status . "</p>";
 		
 		echo "<h3 class='infoover'> Kommentar: " . "</h3>";
 		echo "<p class='infotekst'>" . ucfirst($kompassoc['comment']) . "</p>";

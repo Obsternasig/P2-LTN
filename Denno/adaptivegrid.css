@@ -388,3 +388,13 @@ li:hover {
 	margin: 1vh 2vw 0 4.5vw;
 }
 
+#infodiv {
+	margin: 0;
+	text-align: center;
+}
+
+#infodiv p {
+	margin: 0 2vw 2vh;
+	text-align: left;
+}
+
