@@ -82,8 +82,8 @@
 		
   		<div class="end"> 
 			
-			<button id="endbutton" class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
-			<div class="person"> 
+			<div class="person">
+				
 				<?php 
 					
 					if (isset($firstname)&&isset($lastname)) { 
@@ -91,7 +91,8 @@
 						echo "<img src='images/mand.png'>" . " ";
 						echo $firstname . " " . $lastname; 
 					} 
-				?> 
+				?>
+				
 			</div>
 			
 		</div>
@@ -101,8 +102,6 @@
 			<button id="addbutt" class="interactive b"> Tilføj </button>
 			
 			<button id="editbutt" class="interactive b"> Rediger </button>
-			
-			<button id="groupbutt" class="interactive b"> Gruppér </button>
 			
 			<?php 
 			
@@ -114,13 +113,13 @@
 				}
 			}
 			?>
-				
-			<text id="chosenbutt"> Valgte: </text>
 		
 		</div>
-		
-  		<div class="shoppinglist"></div>
 
+		<div class="end2">
+			<button id="endbutton" class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
+		</div>
+		
 		<div class="list"></div>
 
 		<div class="information">
@@ -140,17 +139,6 @@
 						$('.list').html(response);
 					}
 			});
-			
-			
-			/* $(".grid").on('click', '#ancheck', function () {
-				if ($(this).prop('checked')) {
-					$(this).parent().find('#aninput').show();
-					$(this).parent().addClass('samlet');
-				} else {
-					$(this).parent().find('#aninput').hide();
-					$(this).parent().removeClass('samlet');
-				}
-			}); */
 
 
 			$("#cateopt").on('change', function() {
@@ -185,34 +173,29 @@
 					}
 				});
 			});
-
-
-			var $li = $(".grid").on('click', 'li', function(e) {
-
+			
+			
+			$(".grid").on('click', '.komps', function(e) {
 				if( !$(e.target).is("input") ) {
-
-					$(".information").empty();
-					$("#addwhat").val('0');
 					
 					var Id = $(this).attr('id');
-
+				
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
 						$('.information').empty();
-						$('#testdiv' + Id).slideUp("fast", function() { $(this).empty(); } );
 
 					} else {
 						
+						$('.komps').removeClass('selected');
 						$(this).addClass('selected');
 						
-
 						$.ajax ({
-							url: 'getkomps.php',
+							url: 'getinfo.php',
 							type: 'POST',
 							data : { id1 : Id },
 							success: function(response) {
-								$('#testdiv' + Id).hide().html(response).slideDown("fast");
+								$('.information').html(response);
 							}
 						});
 					}
@@ -220,12 +203,43 @@
 			});
 			
 			
+			$(".grid").on('click', 'li', function(e) {
+
+				if( !$(e.target).is("input") ) {
+
+					$("#addwhat").val('0');
+					
+					var Id = $(this).attr('id');
+
+					if($(this).hasClass('selected')) {
+
+						$(this).removeClass('selected');
+						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
+
+					} else {
+						
+						$(this).addClass('selected');
+
+						$.ajax ({
+							url: 'getkomps.php',
+							type: 'POST',
+							data : { id1 : Id },
+							success: function(response) {
+								$('#div' + Id).html(response).slideDown("fast");
+							}
+						});
+					}
+				}
+			});
+
+
 			$(".grid").on('click', '#addbutt', function() {
 				
+				//$(this).addClass('btoggle');
 				$(".information").empty();
 				$("#addwhat").val('0');
 				$('li').removeClass('selected');
-				$('.testdivID').slideUp("fast", function() { $(this).empty(); } );
+				$('.divID').slideUp("fast", function() { $(this).empty(); } );
 				
 				var initial = "set";
 				
@@ -267,9 +281,8 @@
 				});
 			});
 			
-		});
-		
-			$(".grid").on('click', '#editbutt', function() {
+			
+			/* $(".grid").on('click', '#editbutt', function() {
 				
 				$(".information").empty();
 				$("#editkomp").val('0');
@@ -285,8 +298,9 @@
 					success: function(response) {
 						$('.information').html(response);
 					}
-				});
-			});
+			}); */
+		});
+		
 	</script>
 	
 </body>
