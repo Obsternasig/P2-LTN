@@ -145,6 +145,7 @@
 				$("#addwhat").val('0');
 				$('li').removeClass('selected');
 				$('.divID').slideUp("fast", function() { $(this).empty(); } );
+				$('.grid *').removeClass('btoggle');
 				
 			}
 			
@@ -185,6 +186,8 @@
 			
 			$(".grid").on('click', '.komps', function(e) {
 				if( !$(e.target).is("input") ) {
+					
+					$('.grid *').removeClass('btoggle');
 					
 					var Id = $(this).attr('id');
 				
@@ -243,8 +246,8 @@
 
 			$(".grid").on('click', '#addbutt', function() {
 				
-				//$(this).addClass('btoggle');
 				cleanallinfo();
+				$(this).addClass('btoggle');
 				
 				var initial = "set";
 				
@@ -283,6 +286,7 @@
 				$(".information *").slideUp("fast", function(){
 					$(".information").empty();
 					$("#addwhat").val('0');
+					$('.grid *').removeClass('btoggle');
 				});
 			});
 			
@@ -290,6 +294,7 @@
 			$(".grid").on('click', '#adminbutt', function() {
 				
 				cleanallinfo();
+				$(this).addClass('btoggle');
 				
 				var admin = "set";
 				
@@ -307,6 +312,7 @@
 			$(".grid").on('click', '#editbutt', function() {
 				
 				cleanallinfo();
+				$(this).addClass('btoggle');
 				
 				var edit = "set";
 				
