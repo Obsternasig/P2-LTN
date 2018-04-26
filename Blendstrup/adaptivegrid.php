@@ -80,9 +80,9 @@
 			</select>
 		</div>
 		
-  		<div class="end"> 
+  		<div class="person"> 
 			
-			<div class="person"> 
+			<div class="personid"> 
 				<?php 
 					
 					if (isset($firstname)&&isset($lastname)) { 
@@ -114,15 +114,13 @@
 		
 		</div>
 
-		<div class="slut">
+		<div class="end">
 			<button class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
 		</div>
 		
 		<div class="list"></div>
 
-		<div class="information">
-			<div id="formdiv"></div>
-		</div>
+		<div class="information"></div>
 		
 	</div>
 
@@ -130,6 +128,10 @@
 	<script>
 
 		$(document).ready(function(){
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////   GENERELT  //////////////////////////////// */
+			
 			
 			$.ajax ({
 					url: 'getlist.php',
@@ -148,6 +150,19 @@
 				$('.grid *').removeClass('btoggle');
 				
 			}
+			
+			
+			$(".grid").on('click', '#addcancel', function() {
+				$(".information *").slideUp("fast", function(){
+					$(".information").empty();
+					$("#addwhat").val('0');
+					$('.grid *').removeClass('btoggle');
+				});
+			});
+			
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////    SEARCH   //////////////////////////////// */
 			
 			
 			$("#cateopt").on('change', function() {
@@ -182,6 +197,10 @@
 					}
 				});
 			});
+			
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////     LIST    //////////////////////////////// */
 			
 			
 			$(".grid").on('click', '.komps', function(e) {
@@ -243,7 +262,11 @@
 				}
 			});
 
-
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
+			
+			
 			$(".grid").on('click', '#addbutt', function() {
 				
 				cleanallinfo();
@@ -258,35 +281,6 @@
 					success: function(response) {
 						$('.information').html(response);
 					}
-				});
-			});
-			
-
-			$(".grid").on('change', '#addwhat', function() {
-				
-				var value = this.value;
-	
-				$.ajax ({
-					url: 'getform.php',
-					type: 'POST',
-					data: { value : value },
-					success: function(response) {
-						if($('.naddkomp').length == 0){
-							$('.information').append(response);
-						} else {
-							$('.naddkomp').hide().html(response).slideDown("slow");
-						}
-					}
-				});
-        	});
-
-			
-			
-			$(".grid").on('click', '#addcancel', function() {
-				$(".information *").slideUp("fast", function(){
-					$(".information").empty();
-					$("#addwhat").val('0');
-					$('.grid *').removeClass('btoggle');
 				});
 			});
 			
@@ -325,6 +319,32 @@
 					}
 				});
 			});
+			
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* //////////////////////////////// INFORMATION //////////////////////////////// */
+			
+			
+			$(".grid").on('change', '#addwhat', function() {
+				
+				var value = this.value;
+	
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { value : value },
+					success: function(response) {
+						if($('.naddkomp').length == 0){
+							$('.information').append(response);
+						} else {
+							$('.naddkomp').hide().html(response).slideDown("slow");
+						}
+					}
+				});
+        	});
+
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
 		});
 		
 	</script>
