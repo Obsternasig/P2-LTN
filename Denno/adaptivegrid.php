@@ -80,9 +80,9 @@
 			</select>
 		</div>
 		
-  		<div class="end"> 
+  		<div class="person"> 
 			
-			<div class="person"> 
+			<div class="personid"> 
 				<?php 
 					
 					if (isset($firstname)&&isset($lastname)) { 
@@ -114,15 +114,13 @@
 		
 		</div>
 
-		<div class="end2">
-			<button id="endbutton" class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
+		<div class="end">
+			<button class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
 		</div>
 		
 		<div class="list"></div>
 
-		<div class="information">
-			<div id="formdiv"></div>
-		</div>
+		<div class="information"></div>
 		
 	</div>
 
@@ -130,6 +128,10 @@
 	<script>
 
 		$(document).ready(function(){
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////   GENERELT  //////////////////////////////// */
+			
 			
 			$.ajax ({
 					url: 'getlist.php',
@@ -139,6 +141,30 @@
 			});
 
 
+			function cleanallinfo() {
+				
+				$(".information").empty();
+				$("#addwhat").val('0');
+				$('li').removeClass('selected');
+				$('.divID').slideUp("fast", function() { $(this).empty(); } );
+				$('.grid *').removeClass('btoggle');
+				
+			}
+			
+			
+			$(".grid").on('click', '#addcancel', function() {
+				$(".information *").slideUp("fast", function(){
+					$(".information").empty();
+					$("#addwhat").val('0');
+					$('.grid *').removeClass('btoggle');
+				});
+			});
+			
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////    SEARCH   //////////////////////////////// */
+			
+			
 			$("#cateopt").on('change', function() {
 
 				var option = this.value;
@@ -173,8 +199,14 @@
 			});
 			
 			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////     LIST    //////////////////////////////// */
+			
+			
 			$(".grid").on('click', '.komps', function(e) {
 				if( !$(e.target).is("input") ) {
+					
+					$('.grid *').removeClass('btoggle');
 					
 					var Id = $(this).attr('id');
 				
@@ -230,14 +262,15 @@
 				}
 			});
 
-
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
+			
+			
 			$(".grid").on('click', '#addbutt', function() {
 				
-				//$(this).addClass('btoggle');
-				$(".information").empty();
-				$("#addwhat").val('0');
-				$('li').removeClass('selected');
-				$('.divID').slideUp("fast", function() { $(this).empty(); } );
+				cleanallinfo();
+				$(this).addClass('btoggle');
 				
 				var initial = "set";
 				
@@ -251,7 +284,47 @@
 				});
 			});
 			
-
+			
+			$(".grid").on('click', '#adminbutt', function() {
+				
+				cleanallinfo();
+				$(this).addClass('btoggle');
+				
+				var admin = "set";
+				
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { admin : admin },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
+			});
+			
+			
+			$(".grid").on('click', '#editbutt', function() {
+				
+				cleanallinfo();
+				$(this).addClass('btoggle');
+				
+				var edit = "set";
+				
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { edit : edit },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
+			});
+			
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* //////////////////////////////// INFORMATION //////////////////////////////// */
+			
+			
 			$(".grid").on('change', '#addwhat', function() {
 				
 				var value = this.value;
@@ -271,32 +344,7 @@
         	});
 
 			
-			
-			$(".grid").on('click', '#addcancel', function() {
-				$(".information *").slideUp("fast", function(){
-					$(".information").empty();
-					$("#addwhat").val('0');
-				});
-			});
-			
-			
-			/* $(".grid").on('click', '#editbutt', function() {
-				
-				$(".information").empty();
-				$("#editkomp").val('0');
-				$('li').removeClass('selected');
-				$('#testdivID').slideUp("fast", function() { $(this).empty(); } );
-				
-				var initial = "set";
-				
-				$.ajax ({
-					url: 'editform.php',
-					type: 'POST',
-					data: { initial : initial },
-					success: function(response) {
-						$('.information').html(response);
-					}
-			}); */
+			/* ///////////////////////////////////////////////////////////////////////////// */
 		});
 		
 	</script>
