@@ -114,8 +114,8 @@
 		
 		</div>
 
-		<div class="end2">
-			<button id="endbutton" class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
+		<div class="slut">
+			<button class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
 		</div>
 		
 		<div class="list"></div>
@@ -139,6 +139,17 @@
 			});
 
 
+			function cleanallinfo() {
+				
+				$(".information").empty();
+				$("#addwhat").val('0');
+				$('li').removeClass('selected');
+				$('.divID').slideUp("fast", function() { $(this).empty(); } );
+				$('.grid *').removeClass('btoggle');
+				
+			}
+			
+			
 			$("#cateopt").on('change', function() {
 
 				var option = this.value;
@@ -175,6 +186,8 @@
 			
 			$(".grid").on('click', '.komps', function(e) {
 				if( !$(e.target).is("input") ) {
+					
+					$('.grid *').removeClass('btoggle');
 					
 					var Id = $(this).attr('id');
 				
@@ -233,11 +246,8 @@
 
 			$(".grid").on('click', '#addbutt', function() {
 				
-				//$(this).addClass('btoggle');
-				$(".information").empty();
-				$("#addwhat").val('0');
-				$('li').removeClass('selected');
-				$('.divID').slideUp("fast", function() { $(this).empty(); } );
+				cleanallinfo();
+				$(this).addClass('btoggle');
 				
 				var initial = "set";
 				
@@ -276,27 +286,45 @@
 				$(".information *").slideUp("fast", function(){
 					$(".information").empty();
 					$("#addwhat").val('0');
+					$('.grid *').removeClass('btoggle');
 				});
 			});
 			
 			
-			/* $(".grid").on('click', '#editbutt', function() {
+			$(".grid").on('click', '#adminbutt', function() {
 				
-				$(".information").empty();
-				$("#editkomp").val('0');
-				$('li').removeClass('selected');
-				$('#testdivID').slideUp("fast", function() { $(this).empty(); } );
+				cleanallinfo();
+				$(this).addClass('btoggle');
 				
-				var initial = "set";
+				var admin = "set";
 				
 				$.ajax ({
-					url: 'editform.php',
+					url: 'getform.php',
 					type: 'POST',
-					data: { initial : initial },
+					data: { admin : admin },
 					success: function(response) {
 						$('.information').html(response);
 					}
-			}); */
+				});
+			});
+			
+			
+			$(".grid").on('click', '#editbutt', function() {
+				
+				cleanallinfo();
+				$(this).addClass('btoggle');
+				
+				var edit = "set";
+				
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { edit : edit },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
+			});
 		});
 		
 	</script>
