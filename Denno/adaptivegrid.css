@@ -299,6 +299,23 @@ hr {
 	margin-bottom: 2vh;
 }
 
+.infoinfo {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	text-align: left;
+	margin-top: 1vh;
+	margin-left: 4.5vw;
+}
+
+.infoover {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 700;
+	font-size: 1.7vw;
+	margin-bottom: 1vh;
+	margin-left: 3vw;
+	text-align: left;
+}
+
 #ancheck {
 	display: grid;
 	margin: 0.6vh 0.6vw;
