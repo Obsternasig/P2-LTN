@@ -143,13 +143,8 @@ html, body {
 	font-weight: 300;
 }
 
-#endbutton {
-	font-size: 1.5vw;
-	padding: 0.5vh 3vw;
-	margin: 2vh auto 0;
-}
-
 .person {
+	padding-top: 3.5vh;
 	margin-top: 2vh;
 	font-size: 1.5vw;
 }
@@ -175,7 +170,7 @@ html, body {
 	width: 10vw;
 }
 
-.end2 button {
+.slut button {
 	padding: 1vh 1vw;
 	margin: 2vh 1vw;
 	font-size: 1.5vw;
@@ -205,7 +200,7 @@ html, body {
 	padding-left: 1vw;
 }
 
-.end2 {
+.slut {
 	background-color: #303030;
 	grid-area: 3/1/4/2;
 }
@@ -297,38 +292,6 @@ hr {
 	display: inline-block;
 	padding: 1vh 2vw;
 	margin-bottom: 2vh;
-}
-
-#ancheck {
-	display: grid;
-	margin: 0.6vh 0.6vw;
-}
-
-#antalsdiv {
-	width: 2vw;
-	height: 3vh;
-	overflow: hidden;
-	position: absolute;
-}
-
-#aninput {
-	height: 3vh;
-	width: 1.6vw;
-	padding-top: 0.2vh;
-	outline: none;
-	margin: 0.2vh 0.2vw;
-	border-style: none;
-	position: absolute;
-}
-
-#aninput::placeholder {
-	color: #808080;
-}
-
-.samlet, .samlet input {
-	background-color: #404040;
-	border-radius: 0.8vw;
-	padding: 0 0 4.5vh 0;
 }
 
 .btoggle {

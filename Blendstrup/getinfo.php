@@ -7,10 +7,6 @@ require_once "connection.php";
 	
 	echo "<h2 class='infotekst'>Information</h2>";
 
-	echo "<button id='sealle' class='interactive b'> Se Alle </button>";
-
-	echo "<button class='interactive b'> Rediger Enhed </button>";
-
 
 	if(isset($id)) {
 		$komp = mysqli_query($connection, "SELECT * FROM komponenter WHERE ID LIKE '" . $id . "' GROUP BY category, brand, ports");
