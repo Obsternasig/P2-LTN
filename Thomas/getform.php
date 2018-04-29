@@ -9,6 +9,15 @@ require_once "connection.php";
 		$initial = $_POST['initial'];
 	}
 
+	if(isset($_POST['admin'])) {
+		$admin = $_POST['admin'];
+	}
+
+	if(isset($_POST['edit'])) {
+		$edit = $_POST['edit'];
+	}
+	
+	
 	/*
 		if (this.value=='switch') {
 			$('#addkomp, .naddkomp, .naddkomp *, .naddporte, .naddporte *').show();
@@ -45,48 +54,86 @@ require_once "connection.php";
 		
 		echo "<div class='naddkomp'>";
 
-			echo "<p>Kategori:</p>";
-			echo "<input type='text' name='category' id='category' maxlength='50'>";
+			echo "<p>Kategori:</p>";	
+			echo "<input type='text' name='category' id='addinfo' maxlength='50'>";
 
 			echo "<p>Brand:</p>";
-			echo "<input type='text' name='brand' id='brand' maxlength='50'>";
+			echo "<input type='text' name='brand' id='addinfo' maxlength='50'>";
 
 			echo "<p>Serienummer:</p>";
-			echo "<input type='text' name='serialnb' id='serialnb' maxlength='50'>";
+			echo "<input type='text' name='serialnb' id='addinfo' maxlength='50'>";
 
 			echo "<p>Lokation:</p>";
-			echo "<input type='text' name='location' id='location' maxlength='50'>";
+			echo "<input type='text' name='location' id='addinfo' maxlength='50'>";
 
 			echo "<p>Kommentar:</p>";
-			echo "<input type='text' name='comment' id='comment' maxlength='250'>";
+			echo "<input type='text' name='comment' id='addinfo' maxlength='250'>";
 
 
 			if($value == 'switch'){
 			echo "<div class='naddporte'>";
 				echo "<p>Porte:</p>";
-				echo "<input type='text' name='ports' id='ports' maxlength='30'>";
+				echo "<input type='text' name='ports' id='addinfo' maxlength='30'>";
 			echo "</div>";
 			} elseif($value == 'router'){
 			echo "<div class='naddspeed'>";
 				echo "<p>Hastighed:</p>";
-				echo "<input type='text' name='speed' id='speed' maxlength='30'>";
+				echo "<input type='text' name='speed' id='addinfo' maxlength='30'>";
 			echo "</div>";
 			} elseif($value == 'processor' or $value == 'motherboard') {
 			echo "<div class='naddtype'>";
 				echo "<p>Socket:</p>";
-				echo "<input type='text' name='socket' id='socket' maxlength='30'>";
+				echo "<input type='text' name='socket' id='addinfo' maxlength='30'>";
 			echo "</div>";
 			} elseif($value == 'sfpmodul' or $value == 'eltavle' or $value == 'ramblok' or $value == 'kabel') {
 			echo "<div class='naddsocket'>";
 				echo "<p>Type:</p>";
-				echo "<input type='text' name='type' id='type' maxlength='30'>";
+				echo "<input type='text' name='type' id='addinfo' maxlength='30'>";
 			echo "</div>";
 			}
 
 		
 			echo "<div class='naddkomp'>";
-				echo "<input type='submit' id='ok' value='OK'>";
+				echo "<input type='submit' id='subok' value='OK'>";
 			echo "</div>";
+		echo "</div>";
+	}
+
+	
+	if(isset($admin)) {
+		echo "<button id='histobutt' class='interactive b'> Historik </button>";
+			
+		echo "<button id='userbutt' class='interactive b'> Brugere </button>";
+	}
+
+	
+	if(isset($edit)) {
+		
+		echo "<button id='addcancel' class='interactive b'> Annuller </button>";
+		
+		echo "<div class='editkomp'>";
+			echo "<form name='editform' id='editform' method='post' action='editData.php' autocomplete='on'>";
+			echo "<p>Kategori:</p>";
+			echo "<input type='text' name='category' id='addinfo' maxlength='50'>";
+
+			echo "<p>Brand:</p>";
+			echo "<input type='text' name='brand' id='addinfo' maxlength='50'>";
+
+			echo "<p>Serienummer:</p>";
+			echo "<input type='text' name='serialnb' id='addinfo' maxlength='50'>";
+
+			echo "<p>Lokation:</p>";
+			echo "<input type='text' name='location' id='addinfo' maxlength='50'>";
+
+			echo "<p>Kommentar:</p>";
+			echo "<input type='text' name='comment' id='addinfo' maxlength='250'>";
+
+
+			echo "<div class='neditkomp'>";
+				echo "<input type='submit' id='subok' value='OK'>";
+				echo "</form>";
+			echo "</div>";
+			
 		echo "</div>";
 	}
 
