@@ -59,7 +59,7 @@
 			
 			<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu.</p> 
 			
-      		<button class="interactive">OK!</button>
+      		<button class="interactive b">OK!</button>
 			</div>
 			
 		</div>
@@ -152,6 +152,8 @@
 	
 
 	<script>
+		
+			$(document).ready(function(){
 		
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////   GENERELT  //////////////////////////////// */
@@ -368,18 +370,17 @@
         	});
 					
 			$(document).ready(function(){
-				//appends an "active" class to .popup and .popup-content when the "Open" button is clicked
+				
 			$("#help").on("click", function(){
 				
   				$(".popupoverlay, .popupcontent").addClass("active");
 				
 			});
 
-				//removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
-			$(".close, .popupoverlay").on("click", function(){
+			$(".popupoverlay").on("click", function(){
 				
   				$(".popupoverlay, .popupcontent").removeClass("active");
-				
+			});
 			});
 			
 
