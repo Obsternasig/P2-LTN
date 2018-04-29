@@ -48,6 +48,21 @@
 </head>
 
 <body>
+	
+		<div class="popupoverlay">
+			
+   		<div class="popupcontent">
+			
+      		<h2>Brug for hjælp?</h2>
+			
+      		<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu. </p>
+			
+			<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu.</p> 
+			
+      		<button class="interactive">OK!</button>
+			</div>
+			
+		</div>
 
 	<div class="grid">
 
@@ -92,7 +107,7 @@
 					} 
 				?> 
 				
-				<button class="interactive b" id="help"> ? </button>
+				<button class="interactive b" id="help"> ? </button>				
 				
 			</div>
 			
@@ -123,22 +138,21 @@
 		
 		<div class="list"></div>
 
-		<div class="information"> <div id="infodiv" class="infotekst">
+		<div class="information"> 
+			<div id="infodiv" class="infotekst">
 			<h2 class='infodo'>Velkommen!</h2>
 			
 			<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu. </p>
 			
 			<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu.</p> 
-			</div> 
+			</div> <!-- Dette kunne jo eventuelt være en eller anden velkomsttekst -->
 		</div>
 		
 	</div>
-
+	
 
 	<script>
-
-		$(document).ready(function(){
-			
+		
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////   GENERELT  //////////////////////////////// */
 			
@@ -352,6 +366,22 @@
 					}
 				});
         	});
+					
+			$(document).ready(function(){
+				//appends an "active" class to .popup and .popup-content when the "Open" button is clicked
+			$("#help").on("click", function(){
+				
+  				$(".popupoverlay, .popupcontent").addClass("active");
+				
+			});
+
+				//removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
+			$(".close, .popupoverlay").on("click", function(){
+				
+  				$(".popupoverlay, .popupcontent").removeClass("active");
+				
+			});
+			
 
 			
 			/* ///////////////////////////////////////////////////////////////////////////// */
