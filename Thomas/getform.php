@@ -94,7 +94,7 @@ require_once "connection.php";
 
 		
 			echo "<div class='naddkomp'>";
-				echo "<input type='submit' id='subok' value='OK'>";
+				echo "<input type='submit' id='ok' value='OK'>";
 			echo "</div>";
 		echo "</div>";
 	}
@@ -130,12 +130,12 @@ require_once "connection.php";
 			echo "<input type='text' name='comment' id='addinfo' maxlength='250'>";
 
 
-			echo "<div class='neditkomp'>";
-				echo "<input type='submit' id='subok' value='OK'>";
-				echo "</form>";
-			echo "</div>";
+				echo "<div class='neditkomp'>";
+					echo "<input type='submit' id='ok' value='OK'>";
+					echo "</form>";
+				echo "</div>";
 			
-		echo "</div>";
+			echo "</div>";
 		echo "</div>";
 	}
 
