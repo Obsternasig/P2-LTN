@@ -398,9 +398,11 @@ li:hover {
 
 
 #addinfo {
-	border-radius: 3vw;
+	border-radius: 13px;
 	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(00, 00, 00, 0.5);
 	margin-bottom: 0.5vw;
+	outline: none;
+	line-height: 1.4;
 }
 
 #subok {
@@ -423,6 +425,12 @@ li:hover {
 }
 
 .naddkomp p {
+	text-align: left;
+	padding-left: 9vw;
+	
+}
+
+.editkomp p {
 	text-align: left;
 	padding-left: 9vw;
 	
