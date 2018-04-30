@@ -109,6 +109,7 @@ require_once "connection.php";
 	
 	if(isset($edit)) {
 		
+		echo "<div id='canceladd'>";
 		echo "<button id='addcancel' class='interactive b'> Annuller </button>";
 		
 		echo "<div class='editkomp'>";
@@ -134,6 +135,7 @@ require_once "connection.php";
 				echo "</form>";
 			echo "</div>";
 			
+		echo "</div>";
 		echo "</div>";
 	}
 
