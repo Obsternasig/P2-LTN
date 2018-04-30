@@ -16,23 +16,7 @@ require_once "connection.php";
 	if(isset($_POST['edit'])) {
 		$edit = $_POST['edit'];
 	}
-	
-	
-	/*
-		if (this.value=='switch') {
-			$('#addkomp, .naddkomp, .naddkomp *, .naddporte, .naddporte *').show();
 
-		} else if (this.value=='router') {
-			$('#addkomp, .naddkomp, .naddkomp *, .naddspeed, .naddspeed *').show();
-
-		} else if (this.value == 'processor' || this.value == 'motherboard') {
-			$('#addkomp, .naddkomp, .naddkomp *, .naddsocket, .naddsocket *').show();
-
-		} else if (this.value=='sfpmodul' || this.value=='eltavle' || this.value=='ramblok' || this.value=='kabel') {
-			$('#addkomp, .naddkomp, .naddkomp *, .naddtype, .naddtype *').show();
-		}
-	
-	*/
 
 	if(isset($initial)) {
 		echo "<select size='1' id='addwhat' class='interactive'>";
@@ -54,7 +38,7 @@ require_once "connection.php";
 		
 		echo "<div class='naddkomp'>";
 
-			echo "<p>Kategori:</p>";	
+			echo "<p>Kategori:</p>";
 			echo "<input type='text' name='category' id='addinfo' maxlength='50'>";
 
 			echo "<p>Brand:</p>";
@@ -130,12 +114,12 @@ require_once "connection.php";
 			echo "<input type='text' name='comment' id='addinfo' maxlength='250'>";
 
 
-				echo "<div class='neditkomp'>";
-					echo "<input type='submit' id='ok' value='OK'>";
-					echo "</form>";
-				echo "</div>";
-			
+			echo "<div class='neditkomp'>";
+				echo "<input type='submit' id='ok' value='OK'>";
+				echo "</form>";
 			echo "</div>";
+			
+		echo "</div>";
 		echo "</div>";
 	}
 
