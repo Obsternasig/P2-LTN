@@ -61,8 +61,8 @@ require_once "connection.php";
 			}
 			
 				echo "<div id='" . $row['ID'] . "' class='komps' style='color: " . getColor($away) . "'>";
-				echo "<input type='checkbox' id='komps-check' name='komps-check'>";
-				echo "<p>Serienummer: </p>" . $row['serialnb'] . " " . "<p id='komps-p'>Lokation: </p>" . $row['location'] . " ";
+				/* echo "<input type='checkbox' id='komps-check' name='komps-check'>"; */
+				echo "<p>Serienummer: </p>" . $row['serialnb'] . " " . "<p id='komps-p'>Placering: </p>" . $row['location'] . " ";
 				echo "</div>";
 			
 			echo "<br>";

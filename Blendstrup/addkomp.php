@@ -39,11 +39,12 @@
 			$speed = "";
 			$type = "";
 			$length = "";
+			$specification = "";
 		
 		
 		if(!empty($category)&&!empty($brand)) {
 
-			$query = "INSERT INTO komponenter VALUES ('', '$category', '$brand', '$serialnb', '$amount', '$away', '$broken', '$location', '$comment', '$ports', '$speed', '$type', '$length')";
+			$query = "INSERT INTO komponenter VALUES ('', '$category', '$brand', '$serialnb', '$amount', '$away', '$broken', '$location', '$comment', '$ports', '$speed', '$type', '$length', '$specification')";
 			$results = mysqli_query($connection, $query);
 
 

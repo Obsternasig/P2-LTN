@@ -1,24 +1,39 @@
 <?php
 require_once "connection.php";
 		
-		function getColor($var) {
-			if ($var <= 0) {
-				return '#D7D7D7';
-			} else if ($var == 1) {
-				return '#334488';
-			} else if ($var == 2) {
-				return '#e95522';
-			} else if ($var == 3) {
-				return '#000000';
-			}
+	function getColor($var) {
+		if ($var <= 0) {
+			return '#D7D7D7';
+		} else if ($var == 1) {
+			return '#334488';
+		} else if ($var == 2) {
+			return '#e95522';
+		} else if ($var == 3) {
+			return '#000000';
 		}
+	}
+
 
 	if(isset($_POST['id1'])) {
 		$id = $_POST['id1'];
 	}
-	
-	echo "<h2 class='infodo'>Information</h2>";
 
+	if(isset($_POST['help'])) {
+		$help = $_POST['help'];
+	}
+
+	
+	if(isset($help)) {
+		echo "<div id='infodiv' class='infotekst'>";
+		
+			echo "<h2 class='infodo'>Velkommen!</h2>";
+
+			echo "<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>";
+
+			echo "<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>";
+		
+		echo "</div>";
+	}
 
 	if(isset($id)) {
 		$komp = mysqli_query($connection, "SELECT * FROM komponenter WHERE ID LIKE '" . $id . "' GROUP BY category, brand, ports");
@@ -37,6 +52,8 @@ require_once "connection.php";
 				$value = 0;
 				$status = "På lager";
 			}
+		
+		echo "<h2 class='infodo'>Information</h2>";
 		
 		echo "<h3 class='infoover'> Kategori: " . "</h3>";
 		echo "<p class='infotekst'>" . ucfirst($kompassoc['category']) . "</p>";
