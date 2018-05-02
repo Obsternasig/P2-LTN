@@ -47,19 +47,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
-<body>
-	<div class="popupoverlay">
-			
-      		<h2>Brug for hjælp?</h2>
-			
-      		<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu. </p>
-			
-			<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu.</p> 
-			
-      		<button class="interactive b">OK!</button>
-			
-	</div>
-	
+<body>	
 	
 	<div class="grid">
 
@@ -104,7 +92,7 @@
 					} 
 				?> 
 				
-				<button class="interactive b" id="help"> ? </button>
+				<a href="help.html" target="_blank"> <button class="interactive b" id="help"> ? </button></a>
 			</div>
 			
 		</div>
@@ -139,9 +127,19 @@
 			<div id="infodiv" class="infotekst">
 				<h2 class='infodo'>Velkommen!</h2>
 
-				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>
+				<h3>Hvordan finder jeg en bestemt komponent?</h3>
+				
+				<p>En komponent findes ved at klikke ind på den kategori komponenten er i, derved kommer der en liste hvor du kan se alle de individuelle komponenter i den valgte kategori.
+				Du kan også søge på komponentens specifikationer, som for eksempel mærke eller serienummer, i toppen af siden. Eller vælge en kategori i drop down menuen lige under søgebjælken.</p>
 
-				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum.</p>
+				<h3>Hvordan låner jeg en komponent?</h3>
+				
+				<p>For at låne en komponent, tryk på komponenten du ønsker at låne, derefter tryk på knappen ”Lån” i venstre side. Derefter ændrer du statussen på komponent til udlånt.</p>
+
+				<h3>Hvordan redigerer jeg en komponent?</h3>
+				
+				<p>Hvis du vil redigere en komponent, skal du blot trykke på komponenten i listen, derefter trykke på knappen ”Rediger” i venstre side. Når redigeringen er fuldført, skal du bare trykke på færdig eller annuller.</p>
+
 			</div>
 			
 		</div>
@@ -252,9 +250,9 @@
 					
 					var Id = $(this).attr('id');
 
-					if($(this).hasClass('selected')) {
+					if($(this).hasClass('liselected')) {
 
-						$(this).removeClass('selected');
+						$(this).removeClass('liselected');
 						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
 						
 						/* if($(this).siblings.hasClass('selected')) {
@@ -266,7 +264,7 @@
 
 					} else {
 						
-						$(this).addClass('selected');
+						$(this).addClass('liselected');
 
 						$.ajax ({
 							url: 'getkomps.php',
@@ -284,17 +282,17 @@
 			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
 			
 			
-			$("#help").on("click", function(){
+			//$("#help").on("click", function(){
 				
-  				$(".popupoverlay").addClass("active");
+  				//$(".popupoverlay").addClass("active");
 				
-			});
+			//});
 
 			
-			$(".popupoverlay").on("click", function(){
+			//$(".popupoverlay").on("click", function(){
 				
-  				$(".popupoverlay").removeClass("active");
-			});
+  				//$(".popupoverlay").removeClass("active");
+			//});
 			
 			
 			$(".grid").on('click', '#addcancel', function() {
@@ -306,7 +304,7 @@
 			});
 			
 			$(".grid").on('click', '#editcancel', function() {
-				$('.grid *').removeClass('btoggle');
+				$('.grid *').removeClass('btoggle fatedit');
 				$('.information button').hide();
 				$('.infotekst').attr("contenteditable", "false");
 				
@@ -352,8 +350,11 @@
 			
 			$(".grid").on('click', '#editbutt', function() {
 				
+				if($('.komps').hasClass('selected')){
+					
 				$(this).addClass('btoggle');
 				$('.infotekst').attr("contenteditable", "true");
+				$('div.infotekst').addClass('fatedit');
 				
 				var edit = "set";
 				
@@ -367,6 +368,8 @@
 						$('.infotekst').attr("contenteditable", "true");
 					}
 				});
+				
+				}
 				
 			});
 			

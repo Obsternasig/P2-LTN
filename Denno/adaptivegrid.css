@@ -42,7 +42,12 @@ hr {
 	background-color: #808080;
 }
 
+.information .b {
+	font-size: 1.1vw;
+}
+
 .b {
+	font-size: 1.4vw;
 	font-weight: 600;
 	cursor: pointer;
 }
@@ -178,22 +183,16 @@ hr {
 }
 
 #help {
+	font-size: 1.1vw;
 	width: 3vw;
 	height: 4vh;
 }
 
 .popupoverlay {
-	visibility: hidden;
-	position: absolute;
+	height: 100vh;
 	background: #303030;
-	border: 0.3vw solid #606060;
-	border-radius: 1vw;
-	width: 50%;
-	height: 50%;
-	left: 25%;
-	margin-top: 10vh;
-	z-index: 10;
-	overflow: auto;
+	padding: 10vh 10vw;
+	overflow: visible;
 }
 
 .active {
@@ -274,9 +273,8 @@ hr {
 }
 
 li:hover {
-	background-color: #707070;
+	box-shadow: 0 0 0 0.15vw #505050;
 	border-radius: 5vh;
-	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(80, 80, 80, 0.5);
 	cursor: pointer;
 }
 
@@ -288,7 +286,13 @@ li:hover {
 }
 
 .selected {
-  background-color: #606060;
+  	background-color: #606060;
+	border-radius: 5vh;
+	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(80, 80, 80, 0.5);
+}
+
+.liselected {
+ 	border: #505050 solid 0.15vw;
 	border-radius: 5vh;
 	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(80, 80, 80, 0.5);
 }
@@ -391,7 +395,8 @@ li:hover {
 	color: #D7D7D7;
 	font-size: 1.2vw;
 	text-align: left;
-	margin: 1vh 2vw 0 4.5vw;
+	margin: 0 2vw 0 3.5vw;
+	padding: 0.5vh 1vw;
 }
 
 #infodiv {
@@ -402,4 +407,8 @@ li:hover {
 #infodiv p {
 	margin: 0 2vw 2vh;
 	text-align: left;
+}
+
+.fatedit {
+	border: solid #303030 0.1vw;
 }
