@@ -252,9 +252,9 @@
 					
 					var Id = $(this).attr('id');
 
-					if($(this).hasClass('selected')) {
+					if($(this).hasClass('liselected')) {
 
-						$(this).removeClass('selected');
+						$(this).removeClass('liselected');
 						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
 						
 						/* if($(this).siblings.hasClass('selected')) {
@@ -266,7 +266,7 @@
 
 					} else {
 						
-						$(this).addClass('selected');
+						$(this).addClass('liselected');
 
 						$.ajax ({
 							url: 'getkomps.php',
@@ -352,6 +352,8 @@
 			
 			$(".grid").on('click', '#editbutt', function() {
 				
+				if($('.komps').hasClass('selected')){
+					
 				$(this).addClass('btoggle');
 				$('.infotekst').attr("contenteditable", "true");
 				
@@ -367,6 +369,8 @@
 						$('.infotekst').attr("contenteditable", "true");
 					}
 				});
+				
+				}
 				
 			});
 			
