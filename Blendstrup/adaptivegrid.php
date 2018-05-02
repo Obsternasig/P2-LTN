@@ -167,6 +167,17 @@
 				
 			}
 			
+			function reloadkomp(id) {
+				$.ajax ({
+					url: 'getinfo.php',
+					type: 'POST',
+					data : { id1 : id },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
+			}
+			
 			
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////    SEARCH   //////////////////////////////// */
@@ -189,8 +200,8 @@
 			});
 
 
-			$("#searchfield").keyup(function () {
-
+			$("#searchfield").keyup(function (e) {
+				
 				var search = $("#searchfield").val();
 				$("#cateopt").val('alle');
 
@@ -273,25 +284,6 @@
 			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
 			
 			
-			$(".grid").on('click', '#addcancel', function() {
-				$(".information *").slideUp("fast", function(){
-					$(".information").empty();
-					$("#addwhat").val('0');
-					$('.grid *').removeClass('btoggle');
-				});
-			});
-			
-			
-			$(".grid").on('click', '#editcancel', function() {
-				$('.grid *').removeClass('btoggle fatedit');
-				$('.information button').hide();
-				$('.infotekst').attr("contenteditable", "false");
-				//$(".komps").trigger("click");
-				//$(".komps").trigger("click");
-				//For at resette tekstfelterne til deres forrige værdi, så skal den bare genindlæses uden at der sker en permanent ændring i db
-			});
-			
-			
 			$(".grid").on('click', '#addbutt', function() {
 				
 				cleanallinfo();
@@ -306,6 +298,15 @@
 					success: function(response) {
 						$('.information').html(response);
 					}
+				});
+			});
+			
+			
+			$(".grid").on('click', '#addcancel', function() {
+				$(".information *").slideUp("fast", function(){
+					$(".information").empty();
+					$("#addwhat").val('0');
+					$('.grid *').removeClass('btoggle');
 				});
 			});
 			
@@ -348,8 +349,8 @@
 					data: { edit : edit },
 					success: function(response) {
 						$('.information').append(response);
-						$('#incatedsel').show();
-						$('#incated').hide();
+						$('#incated, #inplaced, #instated').hide();
+						$('#incatedsel, #inplacedsel, #instatedsel').show();
 						$('#incommed, #inspeced').attr("contenteditable", "true");
 					}
 				});
@@ -358,6 +359,44 @@
 					alert ('Ingen komponent valgt');
 				}
 				
+			});
+			
+			
+			$(".grid").on('click', '#editdone', function() {
+				
+				var catsel = $('#incatedsel').val();
+				var plasel = $('#inplacedsel').val();
+				var stasel = $('#instatedsel').val();
+				
+				var comm = $('#incommed').text();
+				var spec = $('#inspeced').text();
+				
+				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
+				
+				$.ajax ({
+					url: 'update.php',
+					type: 'POST',
+					data : { catsel : catsel, plasel : plasel, stasel : stasel, comm : comm, spec : spec, id : Id },
+					success: function() {
+						
+						alert("Komponent opdateret!");
+						
+						reloadkomp(Id);
+						
+					}
+				});
+				
+			});
+			
+			
+			$(".grid").on('click', '#editcancel', function() {
+				$('.grid *').removeClass('btoggle fatedit');
+				$('.information button').hide();
+				$('.infotekst').attr("contenteditable", "false");
+				
+				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
+				
+				reloadkomp(Id);
 			});
 			
 
