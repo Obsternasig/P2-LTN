@@ -63,19 +63,32 @@ require_once "connection.php";
 
 		
 		echo "<h3 class='infoover'> Kategori: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['category']) . "</div>";
+		echo "<div class='infotekst' id='incated'>" . ucfirst($kompassoc['category']) . "</div>";
+			echo "<select size='1' id='incatedsel' class='interactive' style='display: none;'>";
+				echo "<option value='router'>Router</option>";
+				echo "<option value='switch'>Switch</option>";
+				echo "<option value='sfpmodul'>SFP Modul</option>";
+				echo "<option value='eltavle'>El tavle</option>";
+				echo "<option value='ramblok'>Ram blok</option>";
+				echo "<option value='processor'>Processor</option>";
+				echo "<option value='motherboard'>Motherboard</option>";
+				echo "<option value='kabel'>Kabel</option>";
+			echo "</select>";
+		
+		
+		
 		
 		echo "<h3 class='infoover'> Placering: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['location']) . "</div>";
+		echo "<div class='infotekst' id='inplaced'>" . ucfirst($kompassoc['location']) . "</div>";
 		
 		echo "<h3 class='infoover'> Status: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false' style='color: " . getColor($value) . "'>" . $status . "</div>";
+		echo "<div class='infotekst' id='instated' style='color: " . getColor($value) . "'>" . $status . "</div>";
 		
 		echo "<h3 class='infoover'> Kommentar: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['comment']) . "</div>";
+		echo "<div class='infotekst' id='incommed' contenteditable='false'>" . ucfirst($kompassoc['comment']) . "</div>";
 		
 		echo "<h3 class='infoover'> Specifikationer: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['specifications']) . "</div>";
+		echo "<div class='infotekst' id='inspeced' contenteditable='false'>" . ucfirst($kompassoc['specifications']) . "</div>";
 	}
 
 	

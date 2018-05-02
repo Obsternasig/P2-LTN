@@ -13,7 +13,7 @@
 
 	$userassoc = mysqli_fetch_assoc($users);
 
-	
+
 	if(isset($_SESSION['loginid'])){
 		
 		$ID = $_SESSION['loginid'];
@@ -281,11 +281,13 @@
 				});
 			});
 			
+			
 			$(".grid").on('click', '#editcancel', function() {
 				$('.grid *').removeClass('btoggle fatedit');
 				$('.information button').hide();
 				$('.infotekst').attr("contenteditable", "false");
-				
+				//$(".komps").trigger("click");
+				//$(".komps").trigger("click");
 				//For at resette tekstfelterne til deres forrige værdi, så skal den bare genindlæses uden at der sker en permanent ændring i db
 			});
 			
@@ -334,6 +336,10 @@
 				$('.infotekst').attr("contenteditable", "true");
 				$('div.infotekst').addClass('fatedit');
 				
+				$('#editcancel').show();
+				$('#editdone').show();
+				
+					
 				var edit = "set";
 				
 				$.ajax ({
@@ -341,9 +347,10 @@
 					type: 'POST',
 					data: { edit : edit },
 					success: function(response) {
-						$('.information button').hide();
 						$('.information').append(response);
-						$('.infotekst').attr("contenteditable", "true");
+						$('#incatedsel').show();
+						$('#incated').hide();
+						$('#incommed, #inspeced').attr("contenteditable", "true");
 					}
 				});
 				
