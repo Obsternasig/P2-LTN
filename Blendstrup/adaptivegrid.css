@@ -284,6 +284,7 @@ hr {
 	margin: 0 1vw;
 	padding: 0 0 0 1.5vw;
 	position: relative;
+	color: #ffffff;
 }
 
 li:hover {
@@ -329,6 +330,7 @@ li:hover {
 	border-right: #404040 solid 0.15vw;
 	position: relative;
 	top: 3.5vh;
+	color: #ffffff;
 }
 
 .komps {

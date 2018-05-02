@@ -3,7 +3,7 @@ require_once "connection.php";
 
 		function getColorAway($var) {
 				if ($var <= 0)
-					return '#ffffff';
+					return '#D7D7D7;';
 
 				else if ($var >= 1)
 					return '#334488';
@@ -11,7 +11,7 @@ require_once "connection.php";
 
 		function getColorBroken($var) {
 				if ($var <= 0)
-					return '#ffffff';
+					return '#D7D7D7;';
 
 				else if ($var >= 1)
 					return '#e95522';
