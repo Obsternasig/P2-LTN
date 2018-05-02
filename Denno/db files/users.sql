@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2018 at 01:56 PM
+-- Generation Time: Apr 30, 2018 at 10:35 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -45,10 +45,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`initials`, `pin`, `firstname`, `lastname`, `email`, `adminon`, `ID`) VALUES
 ('AS', 3882, 'Anders', 'Stevns', 'andersstevns@gmail.com', 0, 5),
 ('JB', 6228, 'Jonas', 'Blendstrup', 'jonasblendstrup@gmail.com', 1, 13),
-('DE', 2195, 'Danyos', 'Huynh', 'danyos@gmail.com', 0, 3),
+('DH', 2195, 'Danyos', 'Huynh', 'danyos@gmail.com', 0, 3),
 ('MA', 3560, 'Marcus', 'Andersen', 'marcusandersen@live.dk', 0, 18),
 ('AT', 9338, 'Andreas', 'Troldborg', 'andreastroldborg@gmail.com', 0, 6),
-('&&', 9320, '&Aring;ge', '&AElig;stersen', 'aageaestersen@gmail.com', 0, 17),
+('RE', 1234, 'Rune', 'Ettrup', 'rune@lanteamnord.dk', 1, 17),
 ('DS', 3375, 'Dennis', 'Sk&oslash;dt', 'dennisskoedt@gmail.com', 0, 11),
 ('DA', 7092, 'Dennis', 'Au', 'dennisau@gmail.com', 0, 12);
 

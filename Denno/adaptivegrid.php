@@ -48,10 +48,7 @@
 </head>
 
 <body>
-	
-		<div class="popupoverlay">
-			
-   		<div class="popupcontent">
+	<div class="popupoverlay">
 			
       		<h2>Brug for hjælp?</h2>
 			
@@ -60,10 +57,10 @@
 			<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu.</p> 
 			
       		<button class="interactive b">OK!</button>
-			</div>
 			
-		</div>
-
+	</div>
+	
+	
 	<div class="grid">
 
   		<div class="logo">
@@ -107,8 +104,7 @@
 					} 
 				?> 
 				
-				<button class="interactive b" id="help"> ? </button>				
-				
+				<button class="interactive b" id="help"> ? </button>
 			</div>
 			
 		</div>
@@ -138,25 +134,27 @@
 		
 		<div class="list"></div>
 
-		<div class="information"> 
+		<div class="information">
+			
 			<div id="infodiv" class="infotekst">
-			<h2 class='infodo'>Velkommen!</h2>
+				<h2 class='infodo'>Velkommen!</h2>
+
+				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>
+
+				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum.</p>
+			</div>
 			
-			<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu. </p>
-			
-			<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu.</p> 
-			</div> <!-- Dette kunne jo eventuelt være en eller anden velkomsttekst -->
 		</div>
 		
 	</div>
-	
+
 
 	<script>
-		
-			$(document).ready(function(){
-		
+
+		$(document).ready(function(){
+			
 			/* ///////////////////////////////////////////////////////////////////////////// */
-			/* ////////////////////////////////   GENERELT  //////////////////////////////// */
+			/* ////////////////////////////////    START    //////////////////////////////// */
 			
 			
 			$.ajax ({
@@ -176,15 +174,6 @@
 				$('.grid *').removeClass('btoggle');
 				
 			}
-			
-			
-			$(".grid").on('click', '#addcancel', function() {
-				$(".information *").slideUp("fast", function(){
-					$(".information").empty();
-					$("#addwhat").val('0');
-					$('.grid *').removeClass('btoggle');
-				});
-			});
 			
 			
 			/* ///////////////////////////////////////////////////////////////////////////// */
@@ -229,8 +218,7 @@
 			/* ////////////////////////////////     LIST    //////////////////////////////// */
 			
 			
-			$(".grid").on('click', '.komps', function(e) {
-				if( !$(e.target).is("input") ) {
+			$(".grid").on('click', '.komps', function() {
 					
 					$('.grid *').removeClass('btoggle');
 					
@@ -255,14 +243,11 @@
 							}
 						});
 					}
-				}
 			});
 			
 			
-			$(".grid").on('click', 'li', function(e) {
-
-				if( !$(e.target).is("input") ) {
-
+			$(".grid").on('click', 'li', function() {
+				
 					$("#addwhat").val('0');
 					
 					var Id = $(this).attr('id');
@@ -271,6 +256,13 @@
 
 						$(this).removeClass('selected');
 						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
+						
+						/* if($(this).siblings.hasClass('selected')) {
+							cleanallinfo();
+						} 
+						
+						Sæt komps ind i en div under li elementet således det bliver et child, og check så om li'ens children har classen selected, og hvis ja så clean informations div'en
+						*/
 
 					} else {
 						
@@ -285,12 +277,41 @@
 							}
 						});
 					}
-				}
 			});
 
 			
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
+			
+			
+			$("#help").on("click", function(){
+				
+  				$(".popupoverlay").addClass("active");
+				
+			});
+
+			
+			$(".popupoverlay").on("click", function(){
+				
+  				$(".popupoverlay").removeClass("active");
+			});
+			
+			
+			$(".grid").on('click', '#addcancel', function() {
+				$(".information *").slideUp("fast", function(){
+					$(".information").empty();
+					$("#addwhat").val('0');
+					$('.grid *').removeClass('btoggle');
+				});
+			});
+			
+			$(".grid").on('click', '#editcancel', function() {
+				$('.grid *').removeClass('btoggle');
+				$('.information button').hide();
+				$('.infotekst').attr("contenteditable", "false");
+				
+				//For at resette tekstfelterne til deres forrige værdi, så skal den bare genindlæses uden at der sker en permanent ændring i db
+			});
 			
 			
 			$(".grid").on('click', '#addbutt', function() {
@@ -331,22 +352,25 @@
 			
 			$(".grid").on('click', '#editbutt', function() {
 				
-				cleanallinfo();
 				$(this).addClass('btoggle');
+				$('.infotekst').attr("contenteditable", "true");
 				
 				var edit = "set";
 				
 				$.ajax ({
-					url: 'getform.php',
+					url: 'getinfo.php',
 					type: 'POST',
 					data: { edit : edit },
 					success: function(response) {
-						$('.information').html(response);
+						$('.information button').hide();
+						$('.information').append(response);
+						$('.infotekst').attr("contenteditable", "true");
 					}
 				});
+				
 			});
 			
-			
+
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* //////////////////////////////// INFORMATION //////////////////////////////// */
 			
@@ -368,23 +392,8 @@
 					}
 				});
         	});
-					
-			$(document).ready(function(){
-				
-			$("#help").on("click", function(){
-				
-  				$(".popupoverlay, .popupcontent").addClass("active");
-				
-			});
-
-			$(".popupoverlay").on("click", function(){
-				
-  				$(".popupoverlay, .popupcontent").removeClass("active");
-			});
-			});
 			
-
-			
+	
 			/* ///////////////////////////////////////////////////////////////////////////// */
 		});
 		

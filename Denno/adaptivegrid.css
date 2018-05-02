@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700|Roboto+Mono:300,500&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600&subset=latin-ext');
 /* grid-area: rowStart/columnStart/rowEnd/columnEnd; */
 
 
@@ -8,6 +8,10 @@
 
 html, body {
 	margin: 0;
+	font-size: 1.5vw;
+	color: white;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 300;
 }
 
 hr {
@@ -18,20 +22,15 @@ hr {
 
 .grid {
 	text-align: center;
-	font-size: 1.5vw;
-	color: white;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
-
 	display: grid;
 	grid-template-columns: 1fr 4fr 2fr;
 	grid-template-rows: 15vh 70vh 15vh;
 }
 
 .interactive {
+	color: white;
 	border-radius: 5vw;
 	background-color: #606060;
-	color: white;
 	border-style: none;
 	box-shadow: 0.2vw 0.2vw 0.25vw 0vw rgba(00, 00, 00, 0.5); 
 	outline: none;
@@ -44,8 +43,7 @@ hr {
 }
 
 .b {
-	font-family: 'Roboto+Mono', sans-serif;
-	font-weight: 500;
+	font-weight: 600;
 	cursor: pointer;
 }
 
@@ -53,11 +51,6 @@ hr {
   background-color: #808080;
   box-shadow: 0.1vw 0.1vw 0.25vw 0vw rgba(00, 00, 00, 0.5);
   transform: translateY(0.4vh);
-}
-
-#help {
-	width: 3vw;
-	height: 4vh;
 }
 
 ::placeholder {
@@ -70,12 +63,10 @@ hr {
 
 ::-webkit-scrollbar-track {
   background: #505050;
-  border-radius: 0.5vw;
 }
 
 ::-webkit-scrollbar-track-piece {
 	width: 30px;
-	
 }
 
 ::-webkit-scrollbar-thumb {
@@ -86,7 +77,6 @@ hr {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #757575; 
-	
 }
 
 
@@ -99,8 +89,6 @@ hr {
 	grid-template-columns: 1fr 9fr 1fr;
 	grid-template-rows: 30vh 5vh 65vh;
 	background-color: #303030;
-	font-family: 'Roboto+Mono', sans-serif;
-	font-weight: 300;
 }
 
 .pingrid input {
@@ -123,7 +111,7 @@ hr {
 	grid-area: 3/2/4/3;
 	color: red;
 	font-size: 2vw;
-	font-weight: 500;
+	font-weight: 600;
 	padding-top: 20vh;
 	text-align: center;
 	margin: 0 auto;
@@ -157,7 +145,6 @@ hr {
 
 #searchfield {
 	font-size: 1.3vw;
-	font-weight: 300;
 	width: 38vw;
 	margin: 2vh 0 1.2vh 0;
 	padding: 0.8vh 1vw 0.8vh 2vw;
@@ -166,7 +153,6 @@ hr {
 #cateopt {
 	width: 32vw;
 	font-size: 1.3vw;
-	font-weight: 300;
 	text-align-last: center;
 }
 
@@ -178,19 +164,40 @@ hr {
 .person {
 	background-color: #303030;
 	grid-area: 1/3/2/4;
-	font-weight: 300;
 }
 
 .personid {
 	padding-top: 3.5vh;
 	margin-top: 2vh;
-	font-size: 1.5vw;
 }
 
 .personid img {
 	width: 4%;
-  height: auto;
+    height: auto;
 	margin-right: 0.5vw;
+}
+
+#help {
+	width: 3vw;
+	height: 4vh;
+}
+
+.popupoverlay {
+	visibility: hidden;
+	position: absolute;
+	background: #303030;
+	border: 0.3vw solid #606060;
+	border-radius: 1vw;
+	width: 50%;
+	height: 50%;
+	left: 25%;
+	margin-top: 10vh;
+	z-index: 10;
+	overflow: auto;
+}
+
+.active {
+	visibility: visible;
 }
 
 
@@ -206,8 +213,7 @@ hr {
 .end button {
 	padding: 1vh 1vw;
 	margin: 2vh 1vw;
-	font-size: 1.5vw;
-	font-weight: 500;
+	font-weight: 600;
 	text-transform: uppercase;
 	width: 10vw;
 }
@@ -226,8 +232,7 @@ hr {
 .functions button {
 	padding: 1vh 1vw;
 	margin: 2vh 1vw;
-	font-size: 1.5vw;
-	font-weight: 500;
+	font-weight: 600;
 	text-transform: uppercase;
 	width: 10vw;
 }
@@ -265,6 +270,7 @@ hr {
 	margin: 0 1vw;
 	padding: 0 0 0 1.5vw;
 	position: relative;
+	color: #ffffff;
 }
 
 li:hover {
@@ -291,7 +297,6 @@ li:hover {
 	border-top: #404040 solid 0.15vw;
 	padding-top: 1vh;
 	height: 3.5vh;
-	font-style: italic;
 }
 
 #firststatus {
@@ -300,8 +305,7 @@ li:hover {
 }
 
 #kate {
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 700;
+	font-weight: 600;
 	font-size: 1.6vw;
 	text-align: right;
 	text-transform: uppercase;
@@ -310,15 +314,16 @@ li:hover {
 	border-right: #404040 solid 0.15vw;
 	position: relative;
 	top: 3.5vh;
+	color: #ffffff;
 }
 
 .komps {
 	font-size: 1.3vw;
 	display: inline-block;
 	overflow: hidden;
-	width: 40vw;
-	margin-left: 8vw;
-	padding: 2vh 0 2vh 2vw;
+	width: 37vw;
+	margin-left: 10vw;
+	padding: 2vh 0 2vh 3vw;
 	border-top: #404040 solid 0.1vw;
 	cursor: pointer;
 }
@@ -332,7 +337,6 @@ li:hover {
 
 .komps p {
 	display: inline;
-	font-style: italic;
 }
 
 .komps input {
@@ -349,38 +353,6 @@ li:hover {
 /* ///////////////////////////////////////////////////////////////////////////// */
 /* /////////////////////////////     INFORMATION   //////////////////////////// */
 
-.popupoverlay {
-	visibility: hidden;
-	position: absolute;
-	background: #303030;
-	border: 0.3vw solid #606060;
-	border-radius: 1vw;
-	width: 50%;
-	height: 50%;
-	left: 25%;
-	margin-top: 1vh;
-	z-index: 10;
-	text-align: center;
-	font-size: 1.5vw;
-	color: white;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
-	overflow: auto;
-		
-	
-}
-.popupoverlay.active {
-	visibility: visible;
-	text-align: center;
-}
-
-.popupcontent {
-	visibility: hidden;
-}
-
-.popupcontent.active {
-	visibility: visible;
-}
 
 .information {
 	background-color: dimgrey;
@@ -388,32 +360,27 @@ li:hover {
 	font-size: 1vw;
 	overflow-y: scroll;
 	box-shadow: inset 0 0.7vw 1vw -0.7vw rgba(5,5,5,0.8);
+	padding: 4vh 0;
 }
 
 .information select, button {
 	width: 15vw;
 	font-size: 1vw;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
 	text-align-last: center;
 	padding: 1vh 1vw;
 	margin: 1vh 1vw;
 }
 
 .infodo {
-	font-family: 'Roboto+Mono', sans-serif;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 2.5vw;
-	color: white;
 	border-bottom: #303030 0.1vw solid;
 	display: inline-block;
-	padding: 1vh 2vw;
-	margin-bottom: 2vh;
+	padding: 0 2vw 1vh 2vw;
+	margin: 0 0 2vh 0;
 }
 
 .infoover {
-	font-family: 'Roboto+Mono', sans-serif;
-	font-weight: 300;
 	font-size: 1.6vw;
 	margin-bottom: 1vh;
 	margin-left: 3vw;
@@ -421,9 +388,7 @@ li:hover {
 }
 
 .infotekst {
-	font-family: 'Source Sans Pro', sans-serif;
 	color: #D7D7D7;
-	font-weight: 400;
 	font-size: 1.2vw;
 	text-align: left;
 	margin: 1vh 2vw 0 4.5vw;
@@ -438,4 +403,3 @@ li:hover {
 	margin: 0 2vw 2vh;
 	text-align: left;
 }
-

@@ -14,12 +14,17 @@ require_once "connection.php";
 	}
 
 
+
 	if(isset($_POST['id1'])) {
 		$id = $_POST['id1'];
 	}
 
 	if(isset($_POST['help'])) {
 		$help = $_POST['help'];
+	}
+
+	if(isset($_POST['edit'])) {
+		$edit = $_POST['edit'];
 	}
 
 	
@@ -34,6 +39,7 @@ require_once "connection.php";
 		
 		echo "</div>";
 	}
+
 
 	if(isset($id)) {
 		$komp = mysqli_query($connection, "SELECT * FROM komponenter WHERE ID LIKE '" . $id . "' GROUP BY category, brand, ports");
@@ -52,24 +58,30 @@ require_once "connection.php";
 				$value = 0;
 				$status = "På lager";
 			}
-		
+
 		echo "<h2 class='infodo'>Information</h2>";
+
 		
 		echo "<h3 class='infoover'> Kategori: " . "</h3>";
-		echo "<p class='infotekst'>" . ucfirst($kompassoc['category']) . "</p>";
+		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['category']) . "</div>";
 		
 		echo "<h3 class='infoover'> Placering: " . "</h3>";
-		echo "<p class='infotekst'>" . ucfirst($kompassoc['location']) . "</p>";
+		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['location']) . "</div>";
 		
 		echo "<h3 class='infoover'> Status: " . "</h3>";
-		
-		echo "<p class='infotekst' style='color: " . getColor($value) . "'>" . $status . "</p>";
+		echo "<div class='infotekst' contenteditable='false' style='color: " . getColor($value) . "'>" . $status . "</div>";
 		
 		echo "<h3 class='infoover'> Kommentar: " . "</h3>";
-		echo "<p class='infotekst'>" . ucfirst($kompassoc['comment']) . "</p>";
+		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['comment']) . "</div>";
 		
 		echo "<h3 class='infoover'> Specifikationer: " . "</h3>";
-		echo "<p class='infotekst'>" . ucfirst($kompassoc['specifications']) . "</p>";
+		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['specifications']) . "</div>";
+	}
+
+	
+	if(isset($edit)) {
+			echo "<button class='interactive b'> Færdig </button>";
+			echo "<button id='editcancel' class='interactive b'> Annuller </button>";
 	}
 	
 

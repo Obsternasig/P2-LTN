@@ -3,7 +3,7 @@ require_once "connection.php";
 
 		function getColorAway($var) {
 				if ($var <= 0)
-					return '#ffffff';
+					return '#D7D7D7;';
 
 				else if ($var >= 1)
 					return '#334488';
@@ -11,7 +11,7 @@ require_once "connection.php";
 
 		function getColorBroken($var) {
 				if ($var <= 0)
-					return '#ffffff';
+					return '#D7D7D7;';
 
 				else if ($var >= 1)
 					return '#e95522';
@@ -30,7 +30,7 @@ require_once "connection.php";
 		if($option != 'alle') {
 			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '" . $option . "' GROUP BY category, brand, ports");
 		} elseif($option == 'alle') {
-			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
+			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports ORDER BY category ASC");
 		}
 		
 	} elseif(isset($search)) {
@@ -40,7 +40,7 @@ require_once "connection.php";
 
 	} elseif(!isset($option)&&!isset($search)) {
 
-		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports ORDER BY RAND()");
+		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports ORDER BY category ASC");
 		
 	}
 
