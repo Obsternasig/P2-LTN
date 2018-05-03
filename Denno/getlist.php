@@ -76,7 +76,7 @@ require_once "connection.php";
 				default: $midsec = "?"; $midcat = "?";
 			}
 			
-			
+			echo "<div id='lidiv'>";
 			echo "<li id=" . $row['ID'] . " class='liclass'>";
 
 				echo "<div id='kate'>" . $row['category'] . "</div>";
@@ -96,6 +96,8 @@ require_once "connection.php";
 			echo "</li>";
 
 			echo "<div id='div" . $row['ID'] . "' class='divID' style='display: none;'></div>";
+			
+			echo "</div>";
 			
 			echo "<hr>";
 

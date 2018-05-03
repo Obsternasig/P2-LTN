@@ -9,7 +9,7 @@ require_once "connection.php";
 		} else if ($var == 2) {
 			return '#e95522';
 		} else if ($var == 3) {
-			return '#000000';
+			return '#303030';
 		}
 	}
 
@@ -59,28 +59,96 @@ require_once "connection.php";
 				$status = "På lager";
 			}
 
+		
+		if($kompassoc['category'] == 'router') {
+				$catrou = "selected='selected'";
+			} else {
+				$catrou = "";
+			}
+		if($kompassoc['category'] == 'switch') {
+				$catswi = "selected='selected'";
+			} else {
+				$catswi = "";
+			}
+		if($kompassoc['category'] == 'sfp-modul') {
+				$catsfp = "selected='selected'";
+			} else {
+				$catsfp = "";
+			}
+		if($kompassoc['category'] == 'el-tavle') {
+				$catelt = "selected='selected'";
+			} else {
+				$catelt = "";
+			}
+		if($kompassoc['category'] == 'ram-blok') {
+				$catram = "selected='selected'";
+			} else {
+				$catram = "";
+			}
+		if($kompassoc['category'] == 'cpu') {
+				$catpro = "selected='selected'";
+			} else {
+				$catpro = "";
+			}
+		if($kompassoc['category'] == 'motherboard') {
+				$catmot = "selected='selected'";
+			} else {
+				$catmot = "";
+			}
+		if($kompassoc['category'] == 'kabel') {
+				$catkab = "selected='selected'";
+			} else {
+				$catkab = "";
+			}
+		
+		
+		
 		echo "<h2 class='infodo'>Information</h2>";
 
 		
 		echo "<h3 class='infoover'> Kategori: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['category']) . "</div>";
+		echo "<div class='infotekst' id='incated'>" . ucfirst($kompassoc['category']) . "</div>";
+			echo "<select size='1' id='incatedsel' class='editdrop' style='display: none;'>";
+				echo "<option value='router'" . $catrou . ">Router</option>";
+				echo "<option value='switch'" . $catswi . ">Switch</option>";
+				echo "<option value='sfp-modul'" . $catsfp . ">SFP Modul</option>";
+				echo "<option value='el-tavle'" . $catelt . ">El tavle</option>";
+				echo "<option value='ram-blok'" . $catram . ">Ram blok</option>";
+				echo "<option value='cpu'" . $catpro . ">Processor</option>";
+				echo "<option value='motherboard'" . $catmot . ">Motherboard</option>";
+				echo "<option value='kabel'" . $catkab . ">Kabel</option>";
+			echo "</select>";
+		
 		
 		echo "<h3 class='infoover'> Placering: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['location']) . "</div>";
+		echo "<div class='infotekst' id='inplaced'>" . ucfirst($kompassoc['location']) . "</div>";
+			echo "<select size='1' id='inplacedsel' class='editdrop' style='display: none;'>";
+				echo "<option value='myrdal'>Myrdalstræde 34</option>";
+				echo "<option value='ltnvej'>Ltnvej 69</option>";
+				echo "<option value='aalborgvej'>Aalborgvej 42</option>";
+			echo "</select>";
+		
 		
 		echo "<h3 class='infoover'> Status: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false' style='color: " . getColor($value) . "'>" . $status . "</div>";
+		echo "<div class='infotekst' id='instated' style='color: " . getColor($value) . "'>" . $status . "</div>";
+			echo "<select size='1' id='instatedsel' class='editdrop' style='display: none;'>";
+				echo "<option value='lager'>På lager</option>";
+				echo "<option value='broken'>Ødelagt</option>";
+				echo "<option value='away'>Udlånt</option>";
+				echo "<option value='broken_away'>Både udlånt og ødelagt</option>";
+			echo "</select>";
+		
 		
 		echo "<h3 class='infoover'> Kommentar: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['comment']) . "</div>";
+		echo "<div class='infotekst' id='incommed' contenteditable='false'>" . ucfirst($kompassoc['comment']) . "</div>";
 		
 		echo "<h3 class='infoover'> Specifikationer: " . "</h3>";
-		echo "<div class='infotekst' contenteditable='false'>" . ucfirst($kompassoc['specifications']) . "</div>";
+		echo "<div class='infotekst' id='inspeced' contenteditable='false'>" . ucfirst($kompassoc['specifications']) . "</div>";
 	}
 
 	
 	if(isset($edit)) {
-			echo "<button class='interactive b'> Færdig </button>";
+			echo "<button id='editdone' class='interactive b'> Færdig </button>";
 			echo "<button id='editcancel' class='interactive b'> Annuller </button>";
 	}
 	

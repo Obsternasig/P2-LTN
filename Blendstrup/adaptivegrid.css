@@ -189,17 +189,10 @@ hr {
 }
 
 .popupoverlay {
-	visibility: hidden;
-	position: absolute;
+	height: 120vh;
 	background: #303030;
-	border: 0.3vw solid #606060;
-	border-radius: 1vw;
-	width: 50%;
-	height: 50%;
-	left: 25%;
-	margin-top: 10vh;
-	z-index: 10;
-	overflow: auto;
+	padding: 10vh 10vw;
+	overflow: visible;
 }
 
 .active {
@@ -389,6 +382,7 @@ li:hover {
 	display: inline-block;
 	padding: 0 2vw 1vh 2vw;
 	margin: 0 0 2vh 0;
+	color: white;
 }
 
 .infoover {
@@ -402,7 +396,8 @@ li:hover {
 	color: #D7D7D7;
 	font-size: 1.2vw;
 	text-align: left;
-	margin: 1vh 2vw 0 4.5vw;
+	margin: 0 2vw 0 3.5vw;
+	padding: 0.5vh 1vw;
 }
 
 #infodiv {
@@ -413,4 +408,8 @@ li:hover {
 #infodiv p {
 	margin: 0 2vw 2vh;
 	text-align: left;
+}
+
+.fatedit {
+	border: solid #303030 0.1vw;
 }

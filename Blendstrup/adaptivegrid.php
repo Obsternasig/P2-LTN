@@ -13,7 +13,7 @@
 
 	$userassoc = mysqli_fetch_assoc($users);
 
-	
+
 	if(isset($_SESSION['loginid'])){
 		
 		$ID = $_SESSION['loginid'];
@@ -48,18 +48,6 @@
 </head>
 
 <body>
-	<div class="popupoverlay">
-			
-      		<h2>Brug for hjælp?</h2>
-			
-      		<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu. </p>
-			
-			<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu.</p> 
-			
-      		<button class="interactive b">OK!</button>
-			
-	</div>
-	
 	
 	<div class="grid">
 
@@ -104,7 +92,7 @@
 					} 
 				?> 
 				
-				<button class="interactive b" id="help"> ? </button>
+				<a href="help.html" target="_blank"> <button class="interactive b" id="help"> ? </button></a>
 			</div>
 			
 		</div>
@@ -139,9 +127,13 @@
 			<div id="infodiv" class="infotekst">
 				<h2 class='infodo'>Velkommen!</h2>
 
-				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>
+				<p>Lan Team Nord er en frivillig computerforening som råder over en stor mængde af forskellige IT-komponenter, der blandt andet udlånes til store LAN-events. Systemet du befinder dig på, er et lagersystem over de forskellige komponenter foreningen stiller til rådighed for dets medlemmer og andre. </p>
+				
+				<p>Foreningen har adresse på C. H. Ryders Vej 24, 9210 Aalborg, og har åbent hver torsdag mellem 19-22. </p>
 
-				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum.</p>
+				<p>Mere information omkring foreningen kan findes på hjemmesiden: <a href="https://www.lanteamnord.dk/"> https://www.lanteamnord.dk/ </a> </p>
+				
+				<p>For yderligere hjælp i forhold til brug af systemet kan der trykkes på ”?” ikonet i højre hjørne af systemet.</p>
 			</div>
 			
 		</div>
@@ -176,6 +168,18 @@
 			}
 			
 			
+			function reloadkomp(id) {
+				$.ajax ({
+					url: 'getinfo.php',
+					type: 'POST',
+					data : { id1 : id },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
+			}
+			
+			
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////    SEARCH   //////////////////////////////// */
 			
@@ -197,8 +201,8 @@
 			});
 
 
-			$("#searchfield").keyup(function () {
-
+			$("#searchfield").keyup(function (e) {
+				
 				var search = $("#searchfield").val();
 				$("#cateopt").val('alle');
 
@@ -257,12 +261,9 @@
 						$(this).removeClass('liselected');
 						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
 						
-						/* if($(this).siblings.hasClass('selected')) {
-							cleanallinfo();
-						} 
-						
-						Sæt komps ind i en div under li elementet således det bliver et child, og check så om li'ens children har classen selected, og hvis ja så clean informations div'en
-						*/
+						if($(this).siblings(".divID").children(".komps").hasClass('selected')) {
+							$(".information").empty();
+						}
 
 					} else {
 						
@@ -284,36 +285,6 @@
 			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
 			
 			
-			$("#help").on("click", function(){
-				
-  				$(".popupoverlay").addClass("active");
-				
-			});
-
-			
-			$(".popupoverlay").on("click", function(){
-				
-  				$(".popupoverlay").removeClass("active");
-			});
-			
-			
-			$(".grid").on('click', '#addcancel', function() {
-				$(".information *").slideUp("fast", function(){
-					$(".information").empty();
-					$("#addwhat").val('0');
-					$('.grid *').removeClass('btoggle');
-				});
-			});
-			
-			$(".grid").on('click', '#editcancel', function() {
-				$('.grid *').removeClass('btoggle');
-				$('.information button').hide();
-				$('.infotekst').attr("contenteditable", "false");
-				
-				//For at resette tekstfelterne til deres forrige værdi, så skal den bare genindlæses uden at der sker en permanent ændring i db
-			});
-			
-			
 			$(".grid").on('click', '#addbutt', function() {
 				
 				cleanallinfo();
@@ -328,6 +299,15 @@
 					success: function(response) {
 						$('.information').html(response);
 					}
+				});
+			});
+			
+			
+			$(".grid").on('click', '#addcancel', function() {
+				$(".information *").slideUp("fast", function(){
+					$(".information").empty();
+					$("#addwhat").val('0');
+					$('.grid *').removeClass('btoggle');
 				});
 			});
 			
@@ -356,7 +336,12 @@
 					
 				$(this).addClass('btoggle');
 				$('.infotekst').attr("contenteditable", "true");
+				$('div.infotekst').addClass('fatedit');
 				
+				$('#editcancel').show();
+				$('#editdone').show();
+				
+					
 				var edit = "set";
 				
 				$.ajax ({
@@ -364,14 +349,55 @@
 					type: 'POST',
 					data: { edit : edit },
 					success: function(response) {
-						$('.information button').hide();
 						$('.information').append(response);
-						$('.infotekst').attr("contenteditable", "true");
+						$('#incated, #inplaced, #instated').hide();
+						$('#incatedsel, #inplacedsel, #instatedsel').show();
+						$('#incommed, #inspeced').attr("contenteditable", "true");
 					}
 				});
 				
+				} else {
+					alert ('Ingen komponent valgt');
 				}
 				
+			});
+			
+			
+			$(".grid").on('click', '#editdone', function() {
+				
+				var catsel = $('#incatedsel').val();
+				var plasel = $('#inplacedsel').val();
+				var stasel = $('#instatedsel').val();
+				
+				var comm = $('#incommed').text();
+				var spec = $('#inspeced').text();
+				
+				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
+				
+				$.ajax ({
+					url: 'update.php',
+					type: 'POST',
+					data : { catsel : catsel, plasel : plasel, stasel : stasel, comm : comm, spec : spec, id : Id },
+					success: function() {
+						
+						alert("Komponent opdateret!");
+						
+						reloadkomp(Id);
+						
+					}
+				});
+				
+			});
+			
+			
+			$(".grid").on('click', '#editcancel', function() {
+				$('.grid *').removeClass('btoggle fatedit');
+				$('.information button').hide();
+				$('.infotekst').attr("contenteditable", "false");
+				
+				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
+				
+				reloadkomp(Id);
 			});
 			
 
