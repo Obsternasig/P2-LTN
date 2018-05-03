@@ -82,16 +82,21 @@ require_once "connection.php";
 				default: $catover = "?"; $catspec = "?";
 			}
 		
-		/* if($kompassoc['category'] == 'router') {
-				$catrou = "selected='selected'";
+		if($kompassoc['location'] == 'Myrdalstræde 34 C') {
+				$plamyr = "selected='selected'";
 			} else {
-				$catrou = "";
+				$plamyr = "";
 			}
-		if($kompassoc['category'] == 'switch') {
-				$catswi = "selected='selected'";
+		if($kompassoc['location'] == 'C. H. Ryders Vej 24') {
+				$plach = "selected='selected'";
 			} else {
-				$catswi = "";
-			} */
+				$plach = "";
+			}
+		if($kompassoc['location'] == 'Anden adresse') {
+				$plaand = "selected='selected'";
+			} else {
+				$plaand = "";
+			}
 		
 		
 		
@@ -104,9 +109,9 @@ require_once "connection.php";
 		echo "<h3 class='infoover'> Placering: </h3>";
 		echo "<div class='infotekst' id='inplaced'>" . ucfirst($kompassoc['location']) . "</div>";
 			echo "<select size='1' id='inplacedsel' class='editdrop' style='display: none;'>";
-				echo "<option value='Myrdalstræde 34 C'> Myrdalstræde 34 C </option>";
-				echo "<option value='C. H. Ryders Vej 24'> C. H. Ryders Vej 24 </option>";
-				echo "<option value='Lejers adresse'> Lejers adresse </option>";
+				echo "<option value='Myrdalstræde 34 C' $plamyr> Myrdalstræde 34 C </option>";
+				echo "<option value='C. H. Ryders Vej 24' $plach> C. H. Ryders Vej 24 </option>";
+				echo "<option value='Anden adresse' $plaand> Anden adresse </option>";
 			echo "</select>";
 		
 		
