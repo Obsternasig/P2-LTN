@@ -189,7 +189,7 @@ hr {
 }
 
 .popupoverlay {
-	height: 100vh;
+	height: 140vh;
 	background: #303030;
 	padding: 10vh 10vw;
 	overflow: visible;
@@ -382,6 +382,7 @@ li:hover {
 	display: inline-block;
 	padding: 0 2vw 1vh 2vw;
 	margin: 0 0 2vh 0;
+	color: white;
 }
 
 .infoover {
@@ -411,4 +412,15 @@ li:hover {
 
 .fatedit {
 	border: solid #303030 0.1vw;
+}
+
+.editdrop {
+	background-color: dimgray;
+	color: white;
+	border: solid #303030 0.1vw;
+}
+
+#incatedsel, #inplacedsel, #instatedsel {
+	width: 22vw;
+	margin-left: 2.5vw;
 }

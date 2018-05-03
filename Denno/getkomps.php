@@ -9,7 +9,7 @@ require_once "connection.php";
 			} else if ($var == 2) {
 				return '#e95522';
 			} else if ($var == 3) {
-				return '#000000';
+				return '#303030';
 			}
 		}
 
