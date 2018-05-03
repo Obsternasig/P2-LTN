@@ -66,7 +66,7 @@ require_once "connection.php";
 					break;
 				case $category == "ram-blok": $midsec = "Type"; $midcat = $row['type'];
 					break;
-				case $category == "cpu": $midsec = "Socket"; $midcat = $row['socket'];
+				case $category == "processor": $midsec = "Socket"; $midcat = $row['socket'];
 					break;
 				case $category == "kabel": $midsec = "Type"; $midcat = $row['type'];
 					break;

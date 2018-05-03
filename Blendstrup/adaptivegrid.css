@@ -410,6 +410,21 @@ li:hover {
 	text-align: left;
 }
 
+#editdone {
+	margin-top: 5vh;
+}
+
 .fatedit {
 	border: solid #303030 0.1vw;
+}
+
+.editdrop {
+	background-color: dimgray;
+	color: white;
+	border: solid #303030 0.1vw;
+}
+
+#incatedsel, #inplacedsel, #instatedsel {
+	width: 22vw;
+	margin-left: 2.5vw;
 }

@@ -42,7 +42,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title> Adaptive Grid </title>
+	<title> Super Storage </title>
 	<link rel="stylesheet" href="adaptivegrid.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -57,28 +57,7 @@
 		
 		</div>
 		
-  		<div class="search">
-		
-			<input type="text" id="searchfield" name="search" class="interactive" placeholder="Søg..." autocomplete="off">
-			
-			
-			<select size="1" id="cateopt" name="cateopt" class="interactive">
-				<option value="alle">Alle</option>
-
-					<?php
-							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
-
-							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
-
-								$category = $kompkat['category'];
-								echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
-
-							}
-
-					?>
-
-			</select>
-		</div>
+  		<div class="search"></div>
 		
   		<div class="person"> 
 			
@@ -149,25 +128,16 @@
 			/* ////////////////////////////////    START    //////////////////////////////// */
 			
 			
-			$.ajax ({
-					url: 'getlist.php',
-					success: function(response) {
-						$('.list').html(response);
-					}
-			});
-
-
-			function cleanallinfo() {
-				
-				$(".information").empty();
-				$("#addwhat").val('0');
-				$('li').removeClass('selected');
-				$('.divID').slideUp("fast", function() { $(this).empty(); } );
-				$('.grid *').removeClass('btoggle');
-				
+			function reloadlist() {
+				$.ajax ({
+						url: 'getlist.php',
+						success: function(response) {
+							$('.list').html(response);
+						}
+				});
 			}
 			
-			
+
 			function reloadkomp(id) {
 				$.ajax ({
 					url: 'getinfo.php',
@@ -180,11 +150,36 @@
 			}
 			
 			
+			function reloadsearch() {
+				$.ajax ({
+						url: 'getsearch.php',
+						success: function(response) {
+							$('.search').html(response);
+						}
+				});
+			}
+			
+			
+			function cleanallinfo() {
+				
+				$(".information").empty();
+				$("#addwhat").val('0');
+				$('li').removeClass('selected');
+				$('.divID').slideUp("fast", function() { $(this).empty(); } );
+				$('.grid *').removeClass('btoggle');
+				
+			}
+			
+			
+			reloadlist();
+			reloadsearch();
+			
+			
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////    SEARCH   //////////////////////////////// */
 			
 			
-			$("#cateopt").on('change', function() {
+			$(".search").on('change', '#cateopt', function() {
 
 				var option = this.value;
 				$("#searchfield").val('');
@@ -201,7 +196,7 @@
 			});
 
 
-			$("#searchfield").keyup(function (e) {
+			$(".search").on('keyup', '#searchfield', function (e) {
 				
 				var search = $("#searchfield").val();
 				$("#cateopt").val('alle');
@@ -222,7 +217,7 @@
 			/* ////////////////////////////////     LIST    //////////////////////////////// */
 			
 			
-			$(".grid").on('click', '.komps', function() {
+			$(".list").on('click', '.komps', function() {
 					
 					$('.grid *').removeClass('btoggle');
 					
@@ -250,7 +245,7 @@
 			});
 			
 			
-			$(".grid").on('click', 'li', function() {
+			$(".list").on('click', 'li', function() {
 				
 					$("#addwhat").val('0');
 					
@@ -260,6 +255,7 @@
 
 						$(this).removeClass('liselected');
 						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
+						$('.grid *').removeClass('btoggle');
 						
 						if($(this).siblings(".divID").children(".komps").hasClass('selected')) {
 							$(".information").empty();
@@ -332,57 +328,73 @@
 			
 			$(".grid").on('click', '#editbutt', function() {
 				
-				if($('.komps').hasClass('selected')){
-					
-				$(this).addClass('btoggle');
-				$('.infotekst').attr("contenteditable", "true");
-				$('div.infotekst').addClass('fatedit');
-				
-				$('#editcancel').show();
-				$('#editdone').show();
-				
-					
-				var edit = "set";
-				
-				$.ajax ({
-					url: 'getinfo.php',
-					type: 'POST',
-					data: { edit : edit },
-					success: function(response) {
-						$('.information').append(response);
-						$('#incated, #inplaced, #instated').hide();
-						$('#incatedsel, #inplacedsel, #instatedsel').show();
-						$('#incommed, #inspeced').attr("contenteditable", "true");
+				if(!$(this).hasClass('btoggle')) {
+					if($('.komps').hasClass('selected')){
+
+					$(this).addClass('btoggle');
+					$('.infotekst').attr("contenteditable", "true");
+					$('div.infotekst').addClass('fatedit');
+
+
+					$('#editcancel').show();
+					$('#editdone').show();
+
+
+					var edit = "set";
+
+					$.ajax ({
+						url: 'getinfo.php',
+						type: 'POST',
+						data: { edit : edit },
+						success: function(response) {
+							$('.information').append(response);
+							$('#inplaced, #instated').hide();
+							$('#inplacedsel, #instatedsel').show();
+							$('#incated, #incommed, #inspeced').attr("contenteditable", "true");
+						}
+					});
+
+					} else {
+						alert ('Ingen komponent valgt');
 					}
-				});
-				
 				} else {
-					alert ('Ingen komponent valgt');
-				}
+					
+					var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
 				
+					reloadkomp(Id);
+					
+					$('.grid *').removeClass('btoggle fatedit');
+					$('.information button').hide();
+					$('.infotekst').attr("contenteditable", "false");
+				}
 			});
 			
 			
 			$(".grid").on('click', '#editdone', function() {
 				
-				var catsel = $('#incatedsel').val();
 				var plasel = $('#inplacedsel').val();
 				var stasel = $('#instatedsel').val();
 				
 				var comm = $('#incommed').text();
 				var spec = $('#inspeced').text();
 				
-				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
+				var catspec = $('#incated').text();
+				var catover = $('#catover').text();
 				
+				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
+			
 				$.ajax ({
 					url: 'update.php',
 					type: 'POST',
-					data : { catsel : catsel, plasel : plasel, stasel : stasel, comm : comm, spec : spec, id : Id },
+					data : { catover : catover, catspec : catspec, plasel : plasel, stasel : stasel, comm : comm, spec : spec, id : Id },
 					success: function() {
 						
-						alert("Komponent opdateret!");
+						$('.grid *').removeClass('btoggle fatedit');
+						$(".information").empty();
+						reloadlist();
+						reloadsearch();
 						
-						reloadkomp(Id);
+						alert("Komponent opdateret!");
 						
 					}
 				});
@@ -405,7 +417,7 @@
 			/* //////////////////////////////// INFORMATION //////////////////////////////// */
 			
 			
-			$(".grid").on('change', '#addwhat', function() {
+			$(".information").on('change', '#addwhat', function() {
 				
 				var value = this.value;
 	
