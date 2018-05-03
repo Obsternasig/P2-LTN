@@ -9,7 +9,7 @@ require_once "connection.php";
 		} else if ($var == 2) {
 			return '#e95522';
 		} else if ($var == 3) {
-			return '#000000';
+			return '#333333';
 		}
 	}
 
@@ -53,7 +53,7 @@ require_once "connection.php";
 				$status = "Ødelagt :(";
 			} else if($kompassoc['away'] == '1' && $kompassoc['broken'] == '1') {
 				$value = 3;
-				$status = "Både udlånt og ødelagt :(";
+				$status = "Både udlånt og ødelagt :'(";
 			} else {
 				$value = 0;
 				$status = "På lager";

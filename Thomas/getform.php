@@ -17,9 +17,12 @@ require_once "connection.php";
 		$edit = $_POST['edit'];
 	}
 
-
+		
 	if(isset($initial)) {
-		echo "<select size='1' id='addwhat' class='interactive'>";
+		echo "<button id='addcancel' class='interactive b'> Annuller </button>";
+		
+		echo "<form action='addkomp.php' method='post'>";
+		echo "<select size='1' id='addwhat' class='interactive' name='category'>";
 			echo "<option value='0'> Vælg hvad der skal tilføjes </option>";
 			echo "<option value='router'>Router</option>";
 			echo "<option value='switch'>Switch</option>";
@@ -30,25 +33,33 @@ require_once "connection.php";
 			echo "<option value='motherboard'>Motherboard</option>";
 			echo "<option value='kabel'>Kabel</option>";
 		echo "</select>";
-
-		echo "<button id='addcancel' class='interactive b'> Annuller </button>";
+			
+		
 	}
 
 	if(isset($value) && $value != '0') {
 		
-		echo "<div class='naddkomp'>";
-
-			echo "<p>Kategori:</p>";
-			echo "<input type='text' name='category' id='addinfo' maxlength='50'>";
 
 			echo "<p>Brand:</p>";
-			echo "<input type='text' name='brand' id='addinfo' maxlength='50'>";
+			echo "<select size='1' id='addinfo' name='brand'>";
+				echo "<option value='0'> Vælg Brand </option>";
+				echo "<option value='HP'>HP</option>";
+				echo "<option value='Cisco'>Cisco</option>";
+				echo "<option value='Intel'>Intel Modul</option>";
+				echo "<option value='Corsair'>Corsair tavle</option>";
+				echo "<option value='LTN'>LTN</option>";
+			echo "</select>";
 
 			echo "<p>Serienummer:</p>";
 			echo "<input type='text' name='serialnb' id='addinfo' maxlength='50'>";
 
 			echo "<p>Lokation:</p>";
-			echo "<input type='text' name='location' id='addinfo' maxlength='50'>";
+			echo "<select size='1' id='addinfo' name='location'>";
+				echo "<option value='0'> Vælg Lokation </option>";
+				echo "<option value='Klubhuset'>Klubhuset</option>";
+				echo "<option value='42G Myredalstræde'>42G Myredalstræde</option>";
+				echo "<option value='42B Myredalstræde'>42B Myredalstræde</option>";
+			echo "</select>";
 
 			echo "<p>Kommentar:</p>";
 			echo "<input type='text' name='comment' id='addinfo' maxlength='250'>";
@@ -76,11 +87,10 @@ require_once "connection.php";
 			echo "</div>";
 			}
 
-		
-			echo "<div class='naddkomp'>";
 				echo "<input type='submit' id='ok' value='OK'>";
-			echo "</div>";
-		echo "</div>";
+				
+		echo "</form>";
+		
 	}
 
 	
@@ -93,25 +103,24 @@ require_once "connection.php";
 	
 	if(isset($edit)) {
 		
-		echo "<div id='canceladd'>";
 		echo "<button id='addcancel' class='interactive b'> Annuller </button>";
 		
 		echo "<div class='editkomp'>";
 			echo "<form name='editform' id='editform' method='post' action='editData.php' autocomplete='on'>";
 			echo "<p>Kategori:</p>";
-			echo "<input type='text' name='category' id='addinfo' maxlength='50'>";
+			echo "<input type='text' name='category' id='category' maxlength='50'>";
 
 			echo "<p>Brand:</p>";
-			echo "<input type='text' name='brand' id='addinfo' maxlength='50'>";
+			echo "<input type='text' name='brand' id='brand' maxlength='50'>";
 
 			echo "<p>Serienummer:</p>";
-			echo "<input type='text' name='serialnb' id='addinfo' maxlength='50'>";
+			echo "<input type='text' name='serialnb' id='serialnb' maxlength='50'>";
 
 			echo "<p>Lokation:</p>";
-			echo "<input type='text' name='location' id='addinfo' maxlength='50'>";
+			echo "<input type='text' name='location' id='location' maxlength='50'>";
 
 			echo "<p>Kommentar:</p>";
-			echo "<input type='text' name='comment' id='addinfo' maxlength='250'>";
+			echo "<input type='text' name='comment' id='comment' maxlength='250'>";
 
 
 			echo "<div class='neditkomp'>";
@@ -119,7 +128,6 @@ require_once "connection.php";
 				echo "</form>";
 			echo "</div>";
 			
-		echo "</div>";
 		echo "</div>";
 	}
 

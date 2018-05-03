@@ -218,8 +218,7 @@
 			/* ////////////////////////////////     LIST    //////////////////////////////// */
 			
 			
-			$(".grid").on('click', '.komps', function(e) {
-				if( !$(e.target).is("input") ) {
+			$(".grid").on('click', '.komps', function() {
 					
 					$('.grid *').removeClass('btoggle');
 					
@@ -244,26 +243,30 @@
 							}
 						});
 					}
-				}
 			});
 			
 			
-			$(".grid").on('click', 'li', function(e) {
-
-				if( !$(e.target).is("input") ) {
-
+			$(".grid").on('click', 'li', function() {
+				
 					$("#addwhat").val('0');
 					
 					var Id = $(this).attr('id');
 
-					if($(this).hasClass('selected')) {
+					if($(this).hasClass('liselected')) {
 
-						$(this).removeClass('selected');
+						$(this).removeClass('liselected');
 						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
+						
+						/* if($(this).siblings.hasClass('selected')) {
+							cleanallinfo();
+						} 
+						
+						Sæt komps ind i en div under li elementet således det bliver et child, og check så om li'ens children har classen selected, og hvis ja så clean informations div'en
+						*/
 
 					} else {
 						
-						$(this).addClass('selected');
+						$(this).addClass('liselected');
 
 						$.ajax ({
 							url: 'getkomps.php',
@@ -274,7 +277,6 @@
 							}
 						});
 					}
-				}
 			});
 
 			
@@ -350,6 +352,8 @@
 			
 			$(".grid").on('click', '#editbutt', function() {
 				
+				if($('.komps').hasClass('selected')){
+					
 				$(this).addClass('btoggle');
 				$('.infotekst').attr("contenteditable", "true");
 				
@@ -366,9 +370,11 @@
 					}
 				});
 				
+				}
+				
 			});
 			
-			
+
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* //////////////////////////////// INFORMATION //////////////////////////////// */
 			
@@ -391,7 +397,7 @@
 				});
         	});
 			
-			
+	
 			/* ///////////////////////////////////////////////////////////////////////////// */
 		});
 		
