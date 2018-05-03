@@ -188,8 +188,8 @@ hr {
 	height: 4vh;
 }
 
-.popupoverlay {
-	height: 120vh;
+.helpme {
+	height: 140vh;
 	background: #303030;
 	padding: 10vh 10vw;
 	overflow: visible;
