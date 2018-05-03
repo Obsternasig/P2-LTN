@@ -23,9 +23,9 @@ require_once "connection.php";
 			echo "<option value='0'> Vælg hvad der skal tilføjes </option>";
 			echo "<option value='router'>Router</option>";
 			echo "<option value='switch'>Switch</option>";
-			echo "<option value='sfpmodul'>SFP Modul</option>";
-			echo "<option value='eltavle'>El tavle</option>";
-			echo "<option value='ramblok'>Ram blok</option>";
+			echo "<option value='sfp-modul'>SFP Modul</option>";
+			echo "<option value='el-tavle'>El tavle</option>";
+			echo "<option value='ram-blok'>Ram blok</option>";
 			echo "<option value='processor'>Processor</option>";
 			echo "<option value='motherboard'>Motherboard</option>";
 			echo "<option value='kabel'>Kabel</option>";
@@ -38,22 +38,14 @@ require_once "connection.php";
 		
 		echo "<div class='naddkomp'>";
 
-			echo "<p class='infoover'>Brand:</p>";
+			echo "<p class='infoover'>Mærke:</p>";
 			echo "<input type='text' name='addbrand' id='addbrand' maxlength='50'>";
 
+		
 			echo "<p class='infoover'>Serienummer:</p>";
 			echo "<input type='text' name='addserialnb' id='addserialnb' maxlength='50'>";
 
-			echo "<p class='infoover'>Placering:</p>";
-			echo "<input type='text' name='addlocation' id='addlocation' maxlength='50'>";
-
-			echo "<p class='infoover'>Kommentar:</p>";
-			echo "<input type='text' name='addcomment' id='addcomment' maxlength='250'>";
 		
-			echo "<p class='infoover'>Specifikation:</p>";
-			echo "<input type='text' name='addspeci' id='addspeci' maxlength='250'>";
-
-
 			if($value == 'switch') {
 				
 				echo "<div class='naddporte'>";
@@ -75,7 +67,7 @@ require_once "connection.php";
 					echo "<input type='text' name='addsocket' id='addsocket' maxlength='30'>";
 				echo "</div>";
 				
-			} elseif($value == 'sfpmodul' or $value == 'eltavle' or $value == 'ramblok' or $value == 'kabel') {
+			} elseif($value == 'sfp-modul' or $value == 'el-tavle' or $value == 'ram-blok' or $value == 'kabel') {
 				
 				echo "<div class='naddsocket'>";
 					echo "<p class='infoover'>Type:</p>";
@@ -83,6 +75,18 @@ require_once "connection.php";
 				echo "</div>";
 				
 			}
+		
+		
+			echo "<p class='infoover'>Placering:</p>";
+			echo "<input type='text' name='addlocation' id='addlocation' maxlength='50'>";
+
+		
+			echo "<p class='infoover'>Kommentar:</p>";
+			echo "<input type='text' name='addcomment' id='addcomment' maxlength='250'>";
+		
+		
+			echo "<p class='infoover'>Specifikation:</p>";
+			echo "<input type='text' name='addspeci' id='addspeci' maxlength='250'>";
 
 		
 			echo "<div class='naddkomp'>";

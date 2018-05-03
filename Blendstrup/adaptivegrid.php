@@ -82,17 +82,17 @@
 			
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
-			<?php 
+				<?php 
+
+					if (isset($admin)) {
+
+						if ($admin == 1) {
+
+							echo "<button id='adminbutt' class='interactive b'> Admin </button>";
+						}
+					}
+				?>	
 			
-			if (isset($admin)) {
-				
-				if ($admin == 1) {
-			
-					echo "<button id='adminbutt' class='interactive b'> Admin </button>";
-				}
-			}
-			?>
-		
 		</div>
 
 		<div class="end">
@@ -281,21 +281,36 @@
 			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
 			
 			
+			$(".grid").on('click', '#histobutt, #userbutt', function() {
+				
+				alert("Ikke implementeret endnu :(");
+				
+			});
+			
+			
 			$(".grid").on('click', '#addbutt', function() {
 				
-				cleanallinfo();
-				$(this).addClass('btoggle');
+				if(!$(this).hasClass('btoggle')) {
 				
-				var initial = "set";
+					cleanallinfo();
+					$(this).addClass('btoggle');
+
+					var initial = "set";
+
+					$.ajax ({
+						url: 'getform.php',
+						type: 'POST',
+						data: { initial : initial },
+						success: function(response) {
+							$('.information').html(response);
+						}
+					});
 				
-				$.ajax ({
-					url: 'getform.php',
-					type: 'POST',
-					data: { initial : initial },
-					success: function(response) {
-						$('.information').html(response);
-					}
-				});
+				} else {
+					
+					cleanallinfo();
+					
+				}
 			});
 			
 			
@@ -308,9 +323,48 @@
 				var comment = $('#addcomment').val();
 				var speci = $('#addspeci').val();
 				
-				var porte = $('#addporte').val();
-				var speed = $('#addspeed').val();
-				var socket = $('#addsocket').val();
+					if($('#addporte').val() == undefined){
+						var porte = "";
+					} else {
+						var porte = $('#addporte').val();
+					}
+
+					if($('#addspeed').val() == undefined){
+						var speed = "";
+					} else {
+						var speed = $('#addspeed').val();
+					}
+
+					if($('#addsocket').val() == undefined){
+						var socket = "";
+					} else {
+						var socket = $('#addsocket').val();
+					}
+
+					if($('#addtype').val() == undefined){
+						var type = "";
+					} else {
+						var type = $('#addtype').val();
+					}
+				
+				
+				//alert(cate + brand + serialnb + location + comment + speci + porte + speed + socket + type);
+				
+				$.ajax ({
+					url: 'addkomp.php',
+					type: 'POST',
+					data : { cate : cate, brand : brand, serialnb : serialnb, location : location, comment : comment, speci : speci, porte : porte, speed : speed, socket : socket, type : type },
+					success: function() {
+						
+						$('.grid *').removeClass('btoggle');
+						$(".information").empty();
+						reloadlist();
+						reloadsearch();
+						
+						alert("Komponent tilføjet!");
+						
+					}
+				});
 				
 			});
 			
@@ -325,20 +379,25 @@
 			
 			
 			$(".grid").on('click', '#adminbutt', function() {
-				
-				cleanallinfo();
-				$(this).addClass('btoggle');
-				
-				var admin = "set";
-				
-				$.ajax ({
-					url: 'getform.php',
-					type: 'POST',
-					data: { admin : admin },
-					success: function(response) {
-						$('.information').html(response);
-					}
-				});
+				if(!$(this).hasClass('btoggle')) {
+					cleanallinfo();
+					$(this).addClass('btoggle');
+
+					var admin = "set";
+
+					$.ajax ({
+						url: 'getform.php',
+						type: 'POST',
+						data: { admin : admin },
+						success: function(response) {
+							$('.information').html(response);
+						}
+					});
+				} else {
+					
+					cleanallinfo();
+					
+				}
 			});
 			
 			
@@ -399,6 +458,7 @@
 				
 				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
 			
+				
 				$.ajax ({
 					url: 'update.php',
 					type: 'POST',

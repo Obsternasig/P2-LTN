@@ -27,19 +27,6 @@ require_once "connection.php";
 		$edit = $_POST['edit'];
 	}
 
-	
-	if(isset($help)) {
-		echo "<div id='infodiv' class='infotekst'>";
-		
-			echo "<h2 class='infodo'>Velkommen!</h2>";
-
-			echo "<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>";
-
-			echo "<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>";
-		
-		echo "</div>";
-	}
-
 
 	if(isset($id)) {
 		$komp = mysqli_query($connection, "SELECT * FROM komponenter WHERE ID LIKE '" . $id . "'");
@@ -62,21 +49,21 @@ require_once "connection.php";
 		
 		$category = $kompassoc['category'];
 		switch($category) {
-				case $category == "switch": $catover = "Porte"; $catspec = $kompassoc['ports'];
+			case $category == "switch": $catover = "Porte:"; $catspec = $kompassoc['ports'];
 					break;
-				case $category == "router": $catover = "Hastighed"; $catspec = $kompassoc['speed'];
+			case $category == "router": $catover = "Hastighed:"; $catspec = $kompassoc['speed'];
 					break;
-				case $category == "sfp-modul": $catover = "Type"; $catspec = $kompassoc['type'];
+			case $category == "sfp-modul": $catover = "Type:"; $catspec = $kompassoc['type'];
 					break;
-				case $category == "el-tavle": $catover = "Type"; $catspec = $kompassoc['type'];
+			case $category == "el-tavle": $catover = "Type:"; $catspec = $kompassoc['type'];
 					break;
-				case $category == "ram-blok": $catover = "Type"; $catspec = $kompassoc['type'];
+			case $category == "ram-blok": $catover = "Type:"; $catspec = $kompassoc['type'];
 					break;
-				case $category == "processor": $catover = "Socket"; $catspec = $kompassoc['socket'];
+			case $category == "processor": $catover = "Socket:"; $catspec = $kompassoc['socket'];
 					break;
-				case $category == "kabel": $catover = "Type"; $catspec = $kompassoc['type'];
+			case $category == "kabel": $catover = "Type:"; $catspec = $kompassoc['type'];
 					break;
-				case $category == "motherboard": $catover = "Socket"; $catspec = $kompassoc['socket'];
+			case $category == "motherboard": $catover = "Socket:"; $catspec = $kompassoc['socket'];
 					break;
 
 				default: $catover = "?"; $catspec = "?";
@@ -102,7 +89,7 @@ require_once "connection.php";
 		
 		echo "<h2 class='infodo'>Information</h2>";
 
-		echo "<h3 class='infoover' id='catover'>" . $catover . ": </h3>";
+		echo "<h3 class='infoover' id='catover'>" . $catover . "</h3>";
 		echo "<div class='infotekst' id='incated' contenteditable='false'>" . ucfirst($catspec) . "</div>";
 		
 		
