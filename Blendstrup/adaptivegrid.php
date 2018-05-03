@@ -167,6 +167,7 @@
 				
 			}
 			
+			
 			function reloadkomp(id) {
 				$.ajax ({
 					url: 'getinfo.php',

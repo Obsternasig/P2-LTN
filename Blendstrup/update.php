@@ -1,41 +1,32 @@
 <?php
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////// FRA JONAS' KONTAKTBOG, IKKE TILPASSET ////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////
-
-
 	require_once 'connection.php';
+		
 
-	if(isset($_POST['editfirstname'])&&isset($_POST['editlastname'])&&isset($_POST['ID'])){
-				
-				$name = htmlentities($_POST['editfirstname']);
-				$lastname = htmlentities($_POST['editlastname']);
-				$ID = htmlentities($_POST['ID']);
-				
-				if(isset($_POST['editdescription'])){
-					$description = $_POST['editdescription'];
-				} else {
-					$description="";
-				}
-				
-				if(isset($_POST['editemail'])){
-					$email = $_POST['editemail'];
-				} else {
-					$email="";
-				}
-				
-				if(isset($_POST['editphone'])){
-					$phone = $_POST['editphone'];
-				} else {
-					$phone="";
-				}
-				
+
+		$id = htmlentities($_POST['id']);
+
+		$chocateg = $_POST['catsel'];
+		$choplace = $_POST['plasel'];
+		$chostatu = htmlentities($_POST['stasel']);
+
+
+		if(isset($_POST['comm'])){
+			$chocomme = htmlentities($_POST['comm']);
+		} else {
+			$chocomme = "Ingen kommentar vedlagt";
+		}
+
+		if(isset($_POST['spec'])){
+			$chospeci = htmlentities($_POST['spec']);
+		} else {
+			$chospeci = "Ingen specifikationer angivet";
+		}
+
 				
 				if(!empty($name)&&!empty($lastname)&&!empty($ID)){
 					
-					$query = "UPDATE contacts SET Name='$name', Surname='$lastname', 
+					$query = "UPDATE komponenter SET Name='$name', Surname='$lastname', 
 					Description='$description', Email='$email', Phone='$phone' WHERE ID = '$ID';";
 					
    					echo $query;
@@ -46,11 +37,6 @@
 							die("Could not query the database" .mysqli_error());
 					 }
 
-				
-				header('Location: viewcontacts.php');
-
-			
-				}
 			}else{
 				echo "Ups, something went wrong";
 			}
