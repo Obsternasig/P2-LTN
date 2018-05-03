@@ -11,7 +11,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="adaptivegrid.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<title> Login - Super Storage </title>
+	<title> Login </title>
 </head>
 
 <body>

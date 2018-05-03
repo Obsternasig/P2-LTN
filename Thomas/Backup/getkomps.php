@@ -35,7 +35,7 @@ require_once "connection.php";
 					break;
 				case $category == "ram-blok": $speci = 'type';
 					break;
-				case $category == "processor": $speci = 'socket';
+				case $category == "cpu": $speci = 'socket';
 					break;
 				case $category == "kabel": $speci = 'type';
 					break;

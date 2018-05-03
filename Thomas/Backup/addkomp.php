@@ -1,22 +1,23 @@
 <?php
-	require_once '../projekt/connection.php';
-	
 
-	if(isset($_POST['kategori'])&&isset($_POST['brand'])){
+	require_once 'connection.php';
+	header('Content-type: text/html; charset=utf-8');
+
+	if(isset($_POST['category'])&&isset($_POST['brand'])){
 			
-			$kategori = htmlentities($_POST['kategori']);
+			$category = htmlentities($_POST['category']);
 			$brand = htmlentities($_POST['brand']);
 				
-				if(isset($_POST['porte'])){
-					$porte = $_POST['porte'];
+				if(isset($_POST['ports'])){
+					$ports = $_POST['ports'];
 				}else{
-					$porte = "";
+					$ports = "";
 				}
 
-				if(isset($_POST['antal'])){
-					$antal = $_POST['antal'];
+				if(isset($_POST['amount'])){
+					$amount = $_POST['amount'];
 				}else{
-					$antal = "";
+					$amount = "";
 				}
 
 				if(isset($_POST['away'])){
@@ -30,16 +31,62 @@
 				}else{
 					$broken = "";
 				}
-	
+				
+			if(isset($_POST['serialnb'])){
+					$serialnb = $_POST['serialnb'];
+				}else{
+					$serialnb = "";
+				}
+			
+			if(isset($_POST['location'])){
+					$location = $_POST['location'];
+				}else{
+					$location = "";
+				}
+				
+				if(isset($_POST['comment'])){
+					$comment = $_POST['comment'];
+				}else{
+					$comment ="";
+				}
+				
+				if(isset($_POST['speed'])){
+					$speed = $_POST['speed'];
+				}else{
+					$speed = "";
+				}
+			
+				if(isset($_POST['specification'])){
+					$specification = $_POST['specification'];
+				}else{
+					$specification = "";
+				}
+				
+				if(isset($_POST['length'])){
+					$length = $_POST['length'];
+				}else{
+					$length = "";
+				}
+				
+				if(isset($_POST['type'])){
+					$type = $_POST['type'];
+				}else{
+					$type = "";
+				}
+			
+			
+			
+			
 		
-		if(!empty($kategori)&&!empty($brand)) {
+		
+		if(!empty($category)&&!empty($brand)) {
 
-			$query = "INSERT INTO komponenter VALUES ('$kategori', '$brand', '$porte', '$antal', '$away', '$broken', '')";
+			$query = "INSERT INTO komponenter VALUES ('', '$category', '$brand', '$serialnb', '$amount', '$away', '$broken', '$location', '$comment', '$ports', '$speed', '$type', '$length', '$specification')";
 			$results = mysqli_query($connection, $query);
 
 
 				if(!$results){
-					die("Cannot connect to the database" .mysqli_connect_error());
+					die("Cannot connect to the database WTF" .mysqli_connect_error());
 				}
 
 			header("Location: adaptivegrid.php");

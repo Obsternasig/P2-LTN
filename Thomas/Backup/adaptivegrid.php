@@ -1,36 +1,40 @@
 <?php
-	require_once "../projekt/connection.php";
+	require_once "connection.php";
+	header('Content-type: text/html; charset=utf-8');
+	session_start();
 
-	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
 	$users = mysqli_query($connection, "SELECT * FROM users");
-		
-		$userrows = mysqli_fetch_assoc($users);
 
 
-	if(!$komp) {
-		die("Could not query the database" .mysqli_error());
-	}
-
-	if(!$users) {
-		die("Could not query the database" .mysqli_error());
-	}
-
-
-	function getColorAway($var) {
-    		if ($var <= 0)
-        		return '#ffffff';
-		
-    		else if ($var >= 1)
-				return '#334488';
+		if(!$users) {
+			die("Could not query the database" .mysqli_error());
 		}
+
+
+	$userassoc = mysqli_fetch_assoc($users);
+
 	
-	function getColorBroken($var) {
-    		if ($var <= 0)
-  				return '#ffffff';
+	if(isset($_SESSION['loginid'])){
 		
-   			else if ($var >= 1)
-				return '#e95522';
-		}
+		$ID = $_SESSION['loginid'];
+
+		$idquery = "SELECT * FROM users WHERE ID =$ID";
+		$idresults = mysqli_query($connection, $idquery);
+
+			if(!$idresults){
+				
+				 die("Could not query the database" .mysqli_error());
+			} else {
+				
+				$idrow = mysqli_fetch_assoc($idresults);
+	
+					$firstname = $idrow['firstname'];
+					$lastname = $idrow['lastname'];
+					$admin = $idrow['adminon'];
+			}
+			
+	}
+
 ?>
 
 <!doctype html>
@@ -44,139 +48,359 @@
 </head>
 
 <body>
+	<div class="popupoverlay">
+			
+      		<h2>Brug for hjælp?</h2>
+			
+      		<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu. </p>
+			
+			<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu.</p> 
+			
+      		<button class="interactive b">OK!</button>
+			
+	</div>
+	
 	
 	<div class="grid">
-		
+
   		<div class="logo">
 		
-			<img id="imglogo" src="images/logo.png" />
-			
+			<a href="adaptivegrid.php"><img id="imglogo" src="images/logo.png"/></a>
+		
 		</div>
 		
   		<div class="search">
 		
-			<input type="search" id="searchfield" class="roundedborders dropshadow" placeholder="Søg...">
+			<input type="text" id="searchfield" name="search" class="interactive" placeholder="Søg..." autocomplete="off">
+			
+			
+			<select size="1" id="cateopt" name="cateopt" class="interactive">
+				<option value="alle">Alle</option>
+
+					<?php
+							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
+
+							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
+
+								$category = $kompkat['category'];
+								echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
+
+							}
+
+					?>
+
+			</select>
+		</div>
 		
-				<select size="1" id="categories" class="roundedborders dropshadow">
-					<option>Alle</option>
-					<option value="1">Switches</option>
-					<option value="2">Ramblokke</option>
-					<option value="3">Kategori 3</option>
-				</select>
-
-		</div>
-  		<div class="end"> 
+  		<div class="person"> 
 			
-			<button id="endbutton" class="roundedborders dropshadow">Afslut</button>
-			<div class="person"> <img src="images/mand.png"> <?php echo $userrows['user_first'] . " " . $userrows['user_last']; ?> </div>
-			
-		</div>
-		<div class="functions">  </div>
-  		<div class="shoppinglist">  </div>
-
-		<div class="list">
-
+			<div class="personid"> 
 				<?php 
-	
-					echo "<ul>";
-				
-						while ($row = mysqli_fetch_assoc($komp)) {
-							
-							$away = $row['away'];
-							$broken = $row['broken'];
-							
-							echo "<li>";
-							
-							
-								echo "<a href='items.php?id=".$row['kategori']."'>";
-								echo "<input type='checkbox'>";
-								
-								
-								
-
-								echo "<div id='kate'>" . $row['kategori'] . "</div>";
-
-								echo "<div>" . " Mærke: " . $row['brand'] . "</div>";
-								echo "<div>" . " Porte: " . $row['porte']  . "</div>";
-								echo "<div>" . " Antal: " . $row['antal'] . "</div>";
-								
-
-							echo "<br>";
-
-								echo "<div class='status' id='firststatus' style='color: " . getColorAway($away) . "'>" . "<input type='checkbox'>" . " Udlånte: " . $row['away'] . "</div>";
-							
-								echo "<div class='status' style='color: " . getColorBroken($broken) . "'>" . "<input type='checkbox'>"  . " Ødelagte: " . $row['broken'] . "</div>";
-
-							
-							echo "</li>";
-							echo "</a>";
-							echo "<hr>";
-							
-						}
 					
-					echo "</ul>";
-			?>
+					if (isset($firstname)&&isset($lastname)) { 
+						
+						echo "<img src='images/mand.png'>" . " ";
+						echo $firstname . " " . $lastname; 
+					} 
+				?> 
+				
+				<button class="interactive b" id="help"> ? </button>
+			</div>
+			
 		</div>
 		
-		<div class="information"> 
+		<div class="functions"> 
+	
+			<button id="addbutt" class="interactive b"> Tilføj </button>
 			
-			<form name="addkomp" id="addkomp" method="post" action="../projekt/addkomp.php">
-				<div>
-					<p>Kategori:</p>
-					<input type="text" name="kategori" id="kategori" maxlength="30">
-				</div>
+			<button id="editbutt" class="interactive b"> Rediger </button>
+			
+			<?php 
+			
+			if (isset($admin)) {
+				
+				if ($admin == 1) {
+			
+					echo "<button id='adminbutt' class='interactive b'> Admin </button>";
+				}
+			}
+			?>
+		
+		</div>
 
-				<div>
-					<p>Brand:</p>
-					<input type="text" name="brand" id="brand" maxlength="30">
-				</div>
+		<div class="end">
+			<button class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
+		</div>
+		
+		<div class="list"></div>
 
-				<div>
-					<p>Porte:</p>
-					<input type="number" name="porte" id="porte" maxlength="4">
-				</div>
+		<div class="information">
+			
+			<div id="infodiv" class="infotekst">
+				<h2 class='infodo'>Velkommen!</h2>
 
-				<div>
-					<p>Antal:</p>
-					<input type="number" name="antal" id="antal" maxlength="4">
-				</div>
+				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>
 
-				<div>
-					<p>Udlånt:</p>
-					<input type="number" name="away" id="away" maxlength="4">
-				</div>
-
-				<div>
-					<p>Ødelagte:</p>
-					<input type="number" name="broken" id="broken" maxlength="4">
-				</div>
-
-				<div>
-					<input type="submit" id="ok" value="OK">
-				</div>
-			</form>
+				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum.</p>
+			</div>
+			
 		</div>
 		
 	</div>
 
-	
+
 	<script>
-		$("document").ready(function(){
+
+		$(document).ready(function(){
 			
-			var $li = $('li').click(function() {
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////    START    //////////////////////////////// */
+			
+			
+			$.ajax ({
+					url: 'getlist.php',
+					success: function(response) {
+						$('.list').html(response);
+					}
+			});
+
+
+			function cleanallinfo() {
+				
+				$(".information").empty();
+				$("#addwhat").val('0');
+				$('li').removeClass('selected');
+				$('.divID').slideUp("fast", function() { $(this).empty(); } );
+				$('.grid *').removeClass('btoggle');
+				
+			}
+			
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////    SEARCH   //////////////////////////////// */
+			
+			
+			$("#cateopt").on('change', function() {
+
+				var option = this.value;
+				$("#searchfield").val('');
+				
+				$.ajax ({
+					url: 'getlist.php',
+					type: 'POST',
+					data: { option : option },
+					success: function(response) {
+						$('.list').html(response);
+					}
+					// value will be accessible in $_POST['option'] inside getlist.php
+				});
+			});
+
+
+			$("#searchfield").keyup(function () {
+
+				var search = $("#searchfield").val();
+				$("#cateopt").val('alle');
+
+				$.ajax({
+					url: 'getlist.php',
+					cache: false,
+					type: 'POST',
+					data: { search : search },
+					success: function(response) {
+						$(".list").html(response);
+					}
+				});
+			});
+			
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////     LIST    //////////////////////////////// */
+			
+			
+			$(".grid").on('click', '.komps', function() {
+					
+					$('.grid *').removeClass('btoggle');
+					
+					var Id = $(this).attr('id');
 				
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
+						$('.information').empty();
 
 					} else {
-
-					$li.removeClass('selected');
-					$(this).addClass('selected');
-				}
+						
+						$('.komps').removeClass('selected');
+						$(this).addClass('selected');
+						
+						$.ajax ({
+							url: 'getinfo.php',
+							type: 'POST',
+							data : { id1 : Id },
+							success: function(response) {
+								$('.information').html(response);
+							}
+						});
+					}
 			});
 			
+			
+			$(".grid").on('click', 'li', function() {
+				
+					$("#addwhat").val('0');
+					
+					var Id = $(this).attr('id');
+
+					if($(this).hasClass('liselected')) {
+
+						$(this).removeClass('liselected');
+						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
+						
+						/* if($(this).siblings.hasClass('selected')) {
+							cleanallinfo();
+						} 
+						
+						Sæt komps ind i en div under li elementet således det bliver et child, og check så om li'ens children har classen selected, og hvis ja så clean informations div'en
+						*/
+
+					} else {
+						
+						$(this).addClass('liselected');
+
+						$.ajax ({
+							url: 'getkomps.php',
+							type: 'POST',
+							data : { id1 : Id },
+							success: function(response) {
+								$('#div' + Id).html(response).slideDown("fast");
+							}
+						});
+					}
+			});
+
+			
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
+			
+			
+			$("#help").on("click", function(){
+				
+  				$(".popupoverlay").addClass("active");
+				
+			});
+
+			
+			$(".popupoverlay").on("click", function(){
+				
+  				$(".popupoverlay").removeClass("active");
+			});
+			
+			
+			$(".grid").on('click', '#addcancel', function() {
+				$(".information *").slideUp("fast", function(){
+					$(".information").empty();
+					$("#addwhat").val('0');
+					$('.grid *').removeClass('btoggle');
+				});
+			});
+			
+			$(".grid").on('click', '#editcancel', function() {
+				$('.grid *').removeClass('btoggle');
+				$('.information button').hide();
+				$('.infotekst').attr("contenteditable", "false");
+				
+				//For at resette tekstfelterne til deres forrige værdi, så skal den bare genindlæses uden at der sker en permanent ændring i db
+			});
+			
+			
+			$(".grid").on('click', '#addbutt', function() {
+				
+				cleanallinfo();
+				$(this).addClass('btoggle');
+				
+				var initial = "set";
+				
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { initial : initial },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
+			});
+			
+			
+			$(".grid").on('click', '#adminbutt', function() {
+				
+				cleanallinfo();
+				$(this).addClass('btoggle');
+				
+				var admin = "set";
+				
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { admin : admin },
+					success: function(response) {
+						$('.information').html(response);
+					}
+				});
+			});
+			
+			
+			$(".grid").on('click', '#editbutt', function() {
+				
+				if($('.komps').hasClass('selected')){
+					
+				$(this).addClass('btoggle');
+				$('.infotekst').attr("contenteditable", "true");
+				
+				var edit = "set";
+				
+				$.ajax ({
+					url: 'getinfo.php',
+					type: 'POST',
+					data: { edit : edit },
+					success: function(response) {
+						$('.information button').hide();
+						$('.information').append(response);
+						$('.infotekst').attr("contenteditable", "true");
+					}
+				});
+				
+				}
+				
+			});
+			
+
+			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* //////////////////////////////// INFORMATION //////////////////////////////// */
+			
+			
+			$(".grid").on('change', '#addwhat', function() {
+				
+				var value = this.value;
+	
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { value : value },
+					success: function(response) {
+						if($('.naddkomp').length == 0){
+							$('.information').append(response);
+						} else {
+							$('.naddkomp').hide().html(response).slideDown("slow");
+						}
+					}
+				});
+        	});
+			
+	
+			/* ///////////////////////////////////////////////////////////////////////////// */
 		});
+		
 	</script>
 	
 </body>
