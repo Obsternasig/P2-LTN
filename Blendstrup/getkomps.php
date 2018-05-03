@@ -17,11 +17,20 @@ require_once "connection.php";
 		$id = $_POST['id1'];
 	}
 
+	if(isset($_POST['searched'])) {
+		$searched = $_POST['searched'];
+	}
+
 
 	if(isset($id)) {
-		$komp = mysqli_query($connection, "SELECT * FROM komponenter WHERE ID LIKE '" . $id . "'");
-		$kompassoc = mysqli_fetch_assoc($komp);
 		
+		$komp = mysqli_query($connection, "SELECT * FROM komponenter WHERE ID LIKE '" . $id . "'");
+		
+	}
+
+		$kompassoc = mysqli_fetch_assoc($komp);
+
+
 		$category = $kompassoc['category'];
 		switch($category) {
 			case $category == "switch": $speci = 'ports'; $chospec = $kompassoc['ports'];
@@ -44,9 +53,22 @@ require_once "connection.php";
 				default: $speci = ""; $chospec = "";
 			}
 		
-		$komps = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE'" . $category . "' AND brand LIKE '" . $kompassoc['brand'] . "' AND " . $speci . " LIKE '" . $chospec . "'");
+		//OR category OR brand
+
+		if(isset($searched)&&!empty($searched)&&is_numeric($searched)) {
 		
+			$komps = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE'" . $category . "' AND brand LIKE '" . $kompassoc['brand'] . "' AND " . $speci . " LIKE '" . $chospec . "' AND serialnb LIKE '%$searched%'");
+			
+		} elseif(isset($searched)&&!empty($searched)) {
+
+			$komps = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE'" . $category . "' AND brand LIKE '" . $kompassoc['brand'] . "' AND " . $speci . " LIKE '" . $chospec . "' OR category OR brand LIKE '%$searched%'");
+			
+		} else {
+			
+			$komps = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE'" . $category . "' AND brand LIKE '" . $kompassoc['brand'] . "' AND " . $speci . " LIKE '" . $chospec . "'");
+		}
 		
+
 		while ($row = mysqli_fetch_assoc($komps)) {
 			
 			if($row['away'] == '1' && $row['broken'] == '0') {
@@ -66,8 +88,6 @@ require_once "connection.php";
 			
 			echo "<br>";
 		}
-		
-	}
 	
 
 mysqli_close($connection);

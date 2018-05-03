@@ -196,9 +196,10 @@
 			});
 
 
+			var search = null;
 			$(".search").on('keyup', '#searchfield', function (e) {
 				
-				var search = $("#searchfield").val();
+				search = $("#searchfield").val();
 				$("#cateopt").val('alle');
 
 				$.ajax({
@@ -222,7 +223,7 @@
 					$('.grid *').removeClass('btoggle');
 					
 					var Id = $(this).attr('id');
-				
+							
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
@@ -250,7 +251,15 @@
 					$("#addwhat").val('0');
 					
 					var Id = $(this).attr('id');
-
+				
+					if(search != null){
+						var searched = search;
+					} else {
+						var searched = "";
+					}
+				
+					//alert(searched);
+				
 					if($(this).hasClass('liselected')) {
 
 						$(this).removeClass('liselected');
@@ -268,7 +277,7 @@
 						$.ajax ({
 							url: 'getkomps.php',
 							type: 'POST',
-							data : { id1 : Id },
+							data : { id1 : Id, searched : searched },
 							success: function(response) {
 								$('#div' + Id).html(response).slideDown("fast");
 							}
