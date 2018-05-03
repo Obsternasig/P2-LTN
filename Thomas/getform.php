@@ -21,7 +21,7 @@ require_once "connection.php";
 	if(isset($initial)) {
 		echo "<button id='addcancel' class='interactive b'> Annuller </button>";
 		
-		echo "<form action='addkomp.php' method='post'>";
+		
 		echo "<select size='1' id='addwhat' class='interactive' name='category'>";
 			echo "<option value='0'> Vælg hvad der skal tilføjes </option>";
 			echo "<option value='router'>Router</option>";
@@ -33,12 +33,13 @@ require_once "connection.php";
 			echo "<option value='motherboard'>Motherboard</option>";
 			echo "<option value='kabel'>Kabel</option>";
 		echo "</select>";
-			
+
 		
 	}
 
 	if(isset($value) && $value != '0') {
-		
+		echo "<form action='addkomp.php' method='post'>";
+		echo "<div class='naddkomp'>";
 
 			echo "<p>Brand:</p>";
 			echo "<select size='1' id='addinfo' name='brand'>";
@@ -87,8 +88,11 @@ require_once "connection.php";
 			echo "</div>";
 			}
 
+		
+			echo "<div class='naddkomp'>";
 				echo "<input type='submit' id='ok' value='OK'>";
-				
+			echo "</div>";
+		echo "</div>";
 		echo "</form>";
 		
 	}
