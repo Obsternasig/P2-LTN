@@ -13,10 +13,6 @@ require_once "connection.php";
 		$admin = $_POST['admin'];
 	}
 
-	if(isset($_POST['edit'])) {
-		$edit = $_POST['edit'];
-	}
-
 
 	if(isset($initial)) {
 		echo "<select size='1' id='addwhat' class='interactive'>";

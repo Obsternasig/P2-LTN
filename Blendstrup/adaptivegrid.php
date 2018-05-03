@@ -323,10 +323,10 @@
 				var comment = $('#addcomment').val();
 				var speci = $('#addspeci').val();
 				
-					if($('#addporte').val() == undefined){
+					if($('#addports').val() == undefined){
 						var porte = "";
 					} else {
-						var porte = $('#addporte').val();
+						var porte = $('#addports').val();
 					}
 
 					if($('#addspeed').val() == undefined){
@@ -423,9 +423,9 @@
 						data: { edit : edit },
 						success: function(response) {
 							$('.information').append(response);
-							$('#inplaced, #instated').hide();
-							$('#inplacedsel, #instatedsel').show();
-							$('#incated, #incommed, #inspeced').attr("contenteditable", "true");
+							$('#instated').hide();
+							$('#instatedsel').show();
+							$('#incated, #incommed, #inspeced, #inplaced').attr("contenteditable", "true");
 						}
 					});
 
@@ -447,7 +447,7 @@
 			
 			$(".grid").on('click', '#editdone', function() {
 				
-				var plasel = $('#inplacedsel').val();
+				var plasel = $('#inplaced').text();
 				var stasel = $('#instatedsel').val();
 				
 				var comm = $('#incommed').text();

@@ -23,30 +23,29 @@ require_once "connection.php";
 		$kompassoc = mysqli_fetch_assoc($komp);
 		
 		$category = $kompassoc['category'];
-		
 		switch($category) {
-				case $category == "switch": $speci = 'ports';
+			case $category == "switch": $speci = 'ports'; $chospec = $kompassoc['ports'];
 					break;
-				case $category == "router": $speci = 'speed';
+			case $category == "router": $speci = 'speed'; $chospec = $kompassoc['speed'];
 					break;
-				case $category == "sfp-modul": $speci = 'type';
+			case $category == "sfp-modul": $speci = 'type'; $chospec = $kompassoc['type'];
 					break;
-				case $category == "el-tavle": $speci = 'type';
+			case $category == "el-tavle": $speci = 'type'; $chospec = $kompassoc['type'];
 					break;
-				case $category == "ram-blok": $speci = 'type';
+			case $category == "ram-blok": $speci = 'type'; $chospec = $kompassoc['type'];
 					break;
-				case $category == "processor": $speci = 'socket';
+			case $category == "processor": $speci = 'socket'; $chospec = $kompassoc['socket'];
 					break;
-				case $category == "kabel": $speci = 'type';
+			case $category == "kabel": $speci = 'type'; $chospec = $kompassoc['type'];
 					break;
-				case $category == "motherboard": $speci = 'socket';
+			case $category == "motherboard": $speci = 'socket'; $chospec = $kompassoc['socket'];
 					break;
 
-				default: $speci = "";
+				default: $speci = ""; $chospec = "";
 			}
 		
+		$komps = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE'" . $category . "' AND brand LIKE '" . $kompassoc['brand'] . "' AND " . $speci . " LIKE '" . $chospec . "'");
 		
-		$komps = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE'" . $category . "' AND brand LIKE '" . $kompassoc['brand'] . "'");
 		
 		while ($row = mysqli_fetch_assoc($komps)) {
 			
