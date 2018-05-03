@@ -195,6 +195,10 @@ hr {
 	overflow: visible;
 }
 
+.helpme p {
+	color: #D7D7D7;
+}
+
 .active {
 	visibility: visible;
 }
@@ -427,4 +431,29 @@ li:hover {
 #incatedsel, #inplacedsel, #instatedsel {
 	width: 22vw;
 	margin-left: 2.5vw;
+}
+
+
+/* ///////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////     Tilføj Form   //////////////////////////// */
+
+
+.naddkomp input {
+	padding: 0.75vh 1.5vw;
+	margin-bottom: 0.5vw;
+	width: 16vw;
+	color: #D7D7D7;
+	border: solid #303030 0.1vw;
+	background-color: dimgrey;
+}
+
+#addok {
+	margin-top: 0.8vw;
+	width: 5vw;
+	border: none;
+}
+
+.naddkomp p {
+	font-size: 1.3vw;
+	padding-left: 1vw;	
 }

@@ -38,48 +38,59 @@ require_once "connection.php";
 		
 		echo "<div class='naddkomp'>";
 
-			echo "<p>Kategori:</p>";
-			echo "<input type='text' name='category' id='category' maxlength='50'>";
+			echo "<p class='infoover'>Brand:</p>";
+			echo "<input type='text' name='addbrand' id='addbrand' maxlength='50'>";
 
-			echo "<p>Brand:</p>";
-			echo "<input type='text' name='brand' id='brand' maxlength='50'>";
+			echo "<p class='infoover'>Serienummer:</p>";
+			echo "<input type='text' name='addserialnb' id='addserialnb' maxlength='50'>";
 
-			echo "<p>Serienummer:</p>";
-			echo "<input type='text' name='serialnb' id='serialnb' maxlength='50'>";
+			echo "<p class='infoover'>Placering:</p>";
+			echo "<input type='text' name='addlocation' id='addlocation' maxlength='50'>";
 
-			echo "<p>Lokation:</p>";
-			echo "<input type='text' name='location' id='location' maxlength='50'>";
+			echo "<p class='infoover'>Kommentar:</p>";
+			echo "<input type='text' name='addcomment' id='addcomment' maxlength='250'>";
+		
+			echo "<p class='infoover'>Specifikation:</p>";
+			echo "<input type='text' name='addspeci' id='addspeci' maxlength='250'>";
 
-			echo "<p>Kommentar:</p>";
-			echo "<input type='text' name='comment' id='comment' maxlength='250'>";
 
-
-			if($value == 'switch'){
-			echo "<div class='naddporte'>";
-				echo "<p>Porte:</p>";
-				echo "<input type='text' name='ports' id='ports' maxlength='30'>";
-			echo "</div>";
-			} elseif($value == 'router'){
-			echo "<div class='naddspeed'>";
-				echo "<p>Hastighed:</p>";
-				echo "<input type='text' name='speed' id='speed' maxlength='30'>";
-			echo "</div>";
+			if($value == 'switch') {
+				
+				echo "<div class='naddporte'>";
+					echo "<p class='infoover'>Porte:</p>";
+					echo "<input type='text' name='addports' id='addports' maxlength='30'>";
+				echo "</div>";
+				
+			} elseif($value == 'router') {
+				
+				echo "<div class='naddspeed'>";
+					echo "<p class='infoover'>Hastighed:</p>";
+					echo "<input type='text' name='addspeed' id='addspeed' maxlength='30'>";
+				echo "</div>";
+				
 			} elseif($value == 'processor' or $value == 'motherboard') {
-			echo "<div class='naddtype'>";
-				echo "<p>Socket:</p>";
-				echo "<input type='text' name='socket' id='socket' maxlength='30'>";
-			echo "</div>";
+				
+				echo "<div class='naddtype'>";
+					echo "<p class='infoover'>Socket:</p>";
+					echo "<input type='text' name='addsocket' id='addsocket' maxlength='30'>";
+				echo "</div>";
+				
 			} elseif($value == 'sfpmodul' or $value == 'eltavle' or $value == 'ramblok' or $value == 'kabel') {
-			echo "<div class='naddsocket'>";
-				echo "<p>Type:</p>";
-				echo "<input type='text' name='type' id='type' maxlength='30'>";
-			echo "</div>";
+				
+				echo "<div class='naddsocket'>";
+					echo "<p class='infoover'>Type:</p>";
+					echo "<input type='text' name='addtype' id='addtype' maxlength='30'>";
+				echo "</div>";
+				
 			}
 
 		
 			echo "<div class='naddkomp'>";
-				echo "<input type='submit' id='ok' value='OK'>";
+		
+				echo "<input type='submit' id='addok' class='interactive b' value='OK'>";
+		
 			echo "</div>";
+		
 		echo "</div>";
 	}
 

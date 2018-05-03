@@ -96,7 +96,7 @@
 		</div>
 
 		<div class="end">
-			<button class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
+			<button class="interactive b" onclick="window.location.replace ('logout.php');">Log ud</button>
 		</div>
 		
 		<div class="list"></div>
@@ -164,7 +164,7 @@
 				
 				$(".information").empty();
 				$("#addwhat").val('0');
-				$('li').removeClass('selected');
+				$('li').removeClass('liselected');
 				$('.divID').slideUp("fast", function() { $(this).empty(); } );
 				$('.grid *').removeClass('btoggle');
 				
@@ -296,6 +296,22 @@
 						$('.information').html(response);
 					}
 				});
+			});
+			
+			
+			$(".grid").on('click', '#addok', function() {
+				
+				var cate = $('#addwhat').val();
+				var brand = $('#addbrand').val();
+				var serialnb = $('#addserialnb').val();
+				var location = $('#addlocation').val();
+				var comment = $('#addcomment').val();
+				var speci = $('#addspeci').val();
+				
+				var porte = $('#addporte').val();
+				var speed = $('#addspeed').val();
+				var socket = $('#addsocket').val();
+				
 			});
 			
 			

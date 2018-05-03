@@ -42,7 +42,7 @@
 			$specification = "";
 		
 		
-		if(!empty($category)&&!empty($brand)) {
+		if(!empty($category)&&!empty($brand)&&!empty($serialnb)) {
 
 			$query = "INSERT INTO komponenter VALUES ('', '$category', '$brand', '$serialnb', '$amount', '$away', '$broken', '$location', '$comment', '$ports', '$speed', '$type', '$length', '$specification')";
 			$results = mysqli_query($connection, $query);
@@ -51,9 +51,8 @@
 				if(!$results){
 					die("Cannot connect to the database WTF" .mysqli_connect_error());
 				}
-
-			header("Location: adaptivegrid.php");
-
+			
+			//header("Location: adaptivegrid.php");
 
 			} else {
 
