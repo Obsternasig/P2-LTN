@@ -290,13 +290,6 @@
 			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
 			
 			
-			$(".grid").on('click', '#histobutt, #userbutt', function() {
-				
-				alert("Ikke implementeret endnu :(");
-				
-			});
-			
-			
 			$(".grid").on('click', '#addbutt', function() {
 				
 				if(!$(this).hasClass('btoggle')) {
@@ -384,29 +377,6 @@
 					$("#addwhat").val('0');
 					$('.grid *').removeClass('btoggle');
 				});
-			});
-			
-			
-			$(".grid").on('click', '#adminbutt', function() {
-				if(!$(this).hasClass('btoggle')) {
-					cleanallinfo();
-					$(this).addClass('btoggle');
-
-					var admin = "set";
-
-					$.ajax ({
-						url: 'getform.php',
-						type: 'POST',
-						data: { admin : admin },
-						success: function(response) {
-							$('.information').html(response);
-						}
-					});
-				} else {
-					
-					cleanallinfo();
-					
-				}
 			});
 			
 			
@@ -520,8 +490,77 @@
 				});
         	});
 			
+			
+			$('.information').on('keyup keydown paste', '.fiddy', function() {
+				
+				
+				var add = $(this).text().length;
+				var Id = $(this).attr('id');	
+				
+				if(Id == "addcomment" || Id == "addspeci") {
+					
+					var max = 500;
+					
+				} else {
+					
+					var max = 50;
+				}
+				
+				
+				if(add > max){
+					
+					var toomuch = add - max;
+					
+					$(this).prevAll("div.addam:first").text( "-" + toomuch );
+					$(this).css({'border-color': 'red'});
+					
+				} else if((add <= max) && (add != 0)){
+
+					$(this).css({'border-color': '#303030', 'color': '#D7D7D7'});
+					$(this).prevAll("div.addam:first").text( add );
+				
+				} else if(add == 0) {
+					
+					$(this).prevAll("div.addam:first").html("");
+					$(this).css({'border-color': '#303030'});
+				}
+			});
+			
 	
 			/* ///////////////////////////////////////////////////////////////////////////// */
+			/* /////////////////////////////////// ADMIN /////////////////////////////////// */
+			
+			
+			$(".grid").on('click', '#adminbutt', function() {
+				if(!$(this).hasClass('btoggle')) {
+					cleanallinfo();
+					$(this).addClass('btoggle');
+
+					var admin = "set";
+
+					$.ajax ({
+						url: 'getform.php',
+						type: 'POST',
+						data: { admin : admin },
+						success: function(response) {
+							$('.information').html(response);
+						}
+					});
+				} else {
+					
+					cleanallinfo();
+					
+				}
+			});
+			
+			
+			$(".grid").on('click', '#histobutt, #userbutt', function() {
+				
+				alert("Ikke implementeret endnu :(");
+				
+			});
+			
+			
 		});
 		
 	</script>

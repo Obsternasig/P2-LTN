@@ -53,22 +53,24 @@
 		
 		$("document").ready(function(){
 			
-			$('input').keydown(function () {
+			$('input').on('keyup', function () {
 				
-				if (this.value.length == this.maxLength) {
+				if (this.value.length == 1) {
 					$(this).next('input').focus();
 					
 				} else if (this.value.length == 0) {
 					
+					$(this).prev('input').val("");
 					$(this).prev('input').focus();
 				}
 			});
 
 			
-			$(document).on('keyup', '#pin4', function() {
-   				
-				$("#pincheck").submit();
-				
+			$(document).on('keyup', '#pin4', function(e) {
+   				if(e.which != 8) {
+					
+					$("#pincheck").submit();
+				}
 			});
 		});
 		
