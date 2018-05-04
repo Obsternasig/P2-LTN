@@ -8,8 +8,6 @@ require_once "connection.php";
 			return '#334488';
 		} else if ($var == 2) {
 			return '#e95522';
-		} else if ($var == 3) {
-			return '#303030';
 		}
 	}
 
@@ -40,10 +38,6 @@ require_once "connection.php";
 				$value = 2;
 				$status = "Ødelagt :(";
 				$stabro = "selected='selected'";
-			} else if($kompassoc['away'] == '1' && $kompassoc['broken'] == '1') {
-				$value = 3;
-				$status = "Både udlånt og ødelagt :(";
-				$stabroway = "selected='selected'";
 			} elseif($kompassoc['away'] == '0' && $kompassoc['broken'] == '0') {
 				$value = 0;
 				$status = "På lager";
@@ -52,7 +46,6 @@ require_once "connection.php";
 				$sta = "";
 				$staway = "";
 				$stabro = "";
-				$stabroway = "";
 			}
 		
 		
@@ -96,7 +89,6 @@ require_once "connection.php";
 				echo "<option value='lager' $sta>På lager</option>";
 				echo "<option value='broken' $stabro>Ødelagt</option>";
 				echo "<option value='away' $staway>Udlånt</option>";
-				echo "<option value='broken_away' $stabroway>Både udlånt og ødelagt</option>";
 			echo "</select>";
 		
 		

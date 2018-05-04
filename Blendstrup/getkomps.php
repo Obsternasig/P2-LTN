@@ -8,8 +8,6 @@ require_once "connection.php";
 				return '#334488';
 			} else if ($var == 2) {
 				return '#e95522';
-			} else if ($var == 3) {
-				return '#303030';
 			}
 		}
 
@@ -75,8 +73,6 @@ require_once "connection.php";
 				$away = 1;
 			} else if($row['away'] == '0' && $row['broken'] == '1') {
 				$away = 2;
-			} else if($row['away'] == '1' && $row['broken'] == '1') {
-				$away = 3;
 			} else {
 				$away = 0;
 			}

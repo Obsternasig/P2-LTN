@@ -326,34 +326,34 @@
 			$(".grid").on('click', '#addok', function() {
 				
 				var cate = $('#addwhat').val();
-				var brand = $('#addbrand').val();
-				var serialnb = $('#addserialnb').val();
-				var location = $('#addlocation').val();
-				var comment = $('#addcomment').val();
-				var speci = $('#addspeci').val();
+				var brand = $('#addbrand').text();
+				var serialnb = $('#addserialnb').text();
+				var location = $('#addlocation').text();
+				var comment = $('#addcomment').text();
+				var speci = $('#addspeci').text();
 				
-					if($('#addports').val() == undefined){
+					if($('#addporte').text() == undefined){
 						var porte = "";
 					} else {
-						var porte = $('#addports').val();
+						var porte = $('#addporte').text();
 					}
 
-					if($('#addspeed').val() == undefined){
+					if($('#addspeed').text() == undefined){
 						var speed = "";
 					} else {
-						var speed = $('#addspeed').val();
+						var speed = $('#addspeed').text();
 					}
 
-					if($('#addsocket').val() == undefined){
+					if($('#addsocket').text() == undefined){
 						var socket = "";
 					} else {
-						var socket = $('#addsocket').val();
+						var socket = $('#addsocket').text();
 					}
 
-					if($('#addtype').val() == undefined){
+					if($('#addtype').text() == undefined){
 						var type = "";
 					} else {
-						var type = $('#addtype').val();
+						var type = $('#addtype').text();
 					}
 				
 				
