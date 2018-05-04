@@ -42,7 +42,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title> Adaptive Grid </title>
+	<title> Super Storage </title>
 	<link rel="stylesheet" href="adaptivegrid.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -57,28 +57,7 @@
 		
 		</div>
 		
-  		<div class="search">
-		
-			<input type="text" id="searchfield" name="search" class="interactive" placeholder="Søg..." autocomplete="off">
-			
-			
-			<select size="1" id="cateopt" name="cateopt" class="interactive">
-				<option value="alle">Alle</option>
-
-					<?php
-							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
-
-							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
-
-								$category = $kompkat['category'];
-								echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
-
-							}
-
-					?>
-
-			</select>
-		</div>
+  		<div class="search"></div>
 		
   		<div class="person"> 
 			
@@ -103,21 +82,21 @@
 			
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
-			<?php 
+				<?php 
+
+					if (isset($admin)) {
+
+						if ($admin == 1) {
+
+							echo "<button id='adminbutt' class='interactive b'> Admin </button>";
+						}
+					}
+				?>	
 			
-			if (isset($admin)) {
-				
-				if ($admin == 1) {
-			
-					echo "<button id='adminbutt' class='interactive b'> Admin </button>";
-				}
-			}
-			?>
-		
 		</div>
 
 		<div class="end">
-			<button class="interactive b" onclick="window.location.replace ('logout.php');">Afslut</button>
+			<button class="interactive b" onclick="window.location.replace ('logout.php');">Log ud</button>
 		</div>
 		
 		<div class="list"></div>
@@ -149,25 +128,16 @@
 			/* ////////////////////////////////    START    //////////////////////////////// */
 			
 			
-			$.ajax ({
-					url: 'getlist.php',
-					success: function(response) {
-						$('.list').html(response);
-					}
-			});
-
-
-			function cleanallinfo() {
-				
-				$(".information").empty();
-				$("#addwhat").val('0');
-				$('li').removeClass('selected');
-				$('.divID').slideUp("fast", function() { $(this).empty(); } );
-				$('.grid *').removeClass('btoggle');
-				
+			function reloadlist() {
+				$.ajax ({
+						url: 'getlist.php',
+						success: function(response) {
+							$('.list').html(response);
+						}
+				});
 			}
 			
-			
+
 			function reloadkomp(id) {
 				$.ajax ({
 					url: 'getinfo.php',
@@ -180,11 +150,36 @@
 			}
 			
 			
+			function reloadsearch() {
+				$.ajax ({
+						url: 'getsearch.php',
+						success: function(response) {
+							$('.search').html(response);
+						}
+				});
+			}
+			
+			
+			function cleanallinfo() {
+				
+				$(".information").empty();
+				$("#addwhat").val('0');
+				$('li').removeClass('liselected');
+				$('.divID').slideUp("fast", function() { $(this).empty(); } );
+				$('.grid *').removeClass('btoggle');
+				
+			}
+			
+			
+			reloadlist();
+			reloadsearch();
+			
+			
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////    SEARCH   //////////////////////////////// */
 			
 			
-			$("#cateopt").on('change', function() {
+			$(".search").on('change', '#cateopt', function() {
 
 				var option = this.value;
 				$("#searchfield").val('');
@@ -201,7 +196,7 @@
 			});
 
 
-			$("#searchfield").keyup(function (e) {
+			$(".search").on('keyup', '#searchfield', function (e) {
 				
 				var search = $("#searchfield").val();
 				$("#cateopt").val('alle');
@@ -222,7 +217,7 @@
 			/* ////////////////////////////////     LIST    //////////////////////////////// */
 			
 			
-			$(".grid").on('click', '.komps', function() {
+			$(".list").on('click', '.komps', function() {
 					
 					$('.grid *').removeClass('btoggle');
 					
@@ -250,7 +245,7 @@
 			});
 			
 			
-			$(".grid").on('click', 'li', function() {
+			$(".list").on('click', 'li', function() {
 				
 					$("#addwhat").val('0');
 					
@@ -260,6 +255,7 @@
 
 						$(this).removeClass('liselected');
 						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
+						$('.grid *').removeClass('btoggle');
 						
 						if($(this).siblings(".divID").children(".komps").hasClass('selected')) {
 							$(".information").empty();
@@ -285,21 +281,91 @@
 			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
 			
 			
+			$(".grid").on('click', '#histobutt, #userbutt', function() {
+				
+				alert("Ikke implementeret endnu :(");
+				
+			});
+			
+			
 			$(".grid").on('click', '#addbutt', function() {
 				
-				cleanallinfo();
-				$(this).addClass('btoggle');
+				if(!$(this).hasClass('btoggle')) {
 				
-				var initial = "set";
+					cleanallinfo();
+					$(this).addClass('btoggle');
+
+					var initial = "set";
+
+					$.ajax ({
+						url: 'getform.php',
+						type: 'POST',
+						data: { initial : initial },
+						success: function(response) {
+							$('.information').html(response);
+						}
+					});
+				
+				} else {
+					
+					cleanallinfo();
+					
+				}
+			});
+			
+			
+			$(".grid").on('click', '#addok', function() {
+				
+				var cate = $('#addwhat').val();
+				var brand = $('#addbrand').text();
+				var serialnb = $('#addserialnb').text();
+				var location = $('#addlocation').text();
+				var comment = $('#addcomment').text();
+				var speci = $('#addspeci').text();
+				
+					if($('#addporte').text() == undefined){
+						var porte = "";
+					} else {
+						var porte = $('#addporte').text();
+					}
+
+					if($('#addspeed').text() == undefined){
+						var speed = "";
+					} else {
+						var speed = $('#addspeed').text();
+					}
+
+					if($('#addsocket').text() == undefined){
+						var socket = "";
+					} else {
+						var socket = $('#addsocket').text();
+					}
+
+					if($('#addtype').text() == undefined){
+						var type = "";
+					} else {
+						var type = $('#addtype').text();
+					}
+				
+				
+				//alert(cate + brand + serialnb + location + comment + speci + porte + speed + socket + type);
 				
 				$.ajax ({
-					url: 'getform.php',
+					url: 'addkomp.php',
 					type: 'POST',
-					data: { initial : initial },
-					success: function(response) {
-						$('.information').html(response);
+					data : { cate : cate, brand : brand, serialnb : serialnb, location : location, comment : comment, speci : speci, porte : porte, speed : speed, socket : socket, type : type },
+					success: function() {
+						
+						$('.grid *').removeClass('btoggle');
+						$(".information").empty();
+						reloadlist();
+						reloadsearch();
+						
+						alert("Komponent tilføjet!");
+						
 					}
 				});
+				
 			});
 			
 			
@@ -313,76 +379,98 @@
 			
 			
 			$(".grid").on('click', '#adminbutt', function() {
-				
-				cleanallinfo();
-				$(this).addClass('btoggle');
-				
-				var admin = "set";
-				
-				$.ajax ({
-					url: 'getform.php',
-					type: 'POST',
-					data: { admin : admin },
-					success: function(response) {
-						$('.information').html(response);
-					}
-				});
+				if(!$(this).hasClass('btoggle')) {
+					cleanallinfo();
+					$(this).addClass('btoggle');
+
+					var admin = "set";
+
+					$.ajax ({
+						url: 'getform.php',
+						type: 'POST',
+						data: { admin : admin },
+						success: function(response) {
+							$('.information').html(response);
+						}
+					});
+				} else {
+					
+					cleanallinfo();
+					
+				}
 			});
 			
 			
 			$(".grid").on('click', '#editbutt', function() {
 				
-				if($('.komps').hasClass('selected')){
-					
-				$(this).addClass('btoggle');
-				$('.infotekst').attr("contenteditable", "true");
-				$('div.infotekst').addClass('fatedit');
-				
-				$('#editcancel').show();
-				$('#editdone').show();
-				
-					
-				var edit = "set";
-				
-				$.ajax ({
-					url: 'getinfo.php',
-					type: 'POST',
-					data: { edit : edit },
-					success: function(response) {
-						$('.information').append(response);
-						$('#incated, #inplaced, #instated').hide();
-						$('#incatedsel, #inplacedsel, #instatedsel').show();
-						$('#incommed, #inspeced').attr("contenteditable", "true");
+				if(!$(this).hasClass('btoggle')) {
+					if($('.komps').hasClass('selected')){
+
+					$(this).addClass('btoggle');
+					$('.infotekst').attr("contenteditable", "true");
+					$('div.infotekst').addClass('fatedit');
+
+
+					$('#editcancel').show();
+					$('#editdone').show();
+
+
+					var edit = "set";
+
+					$.ajax ({
+						url: 'getinfo.php',
+						type: 'POST',
+						data: { edit : edit },
+						success: function(response) {
+							$('.information').append(response);
+							$('#inplaced, #instated').hide();
+							$('#inplacedsel, #instatedsel').show();
+							$('#incated, #incommed, #inspeced').attr("contenteditable", "true");
+						}
+					});
+
+					} else {
+						alert ('Ingen komponent valgt');
 					}
-				});
-				
 				} else {
-					alert ('Ingen komponent valgt');
-				}
+					
+					var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
 				
+					reloadkomp(Id);
+					
+					$('.grid *').removeClass('btoggle fatedit');
+					$('.information button').hide();
+					$('.infotekst').attr("contenteditable", "false");
+				}
 			});
 			
 			
 			$(".grid").on('click', '#editdone', function() {
 				
-				var catsel = $('#incatedsel').val();
 				var plasel = $('#inplacedsel').val();
 				var stasel = $('#instatedsel').val();
 				
 				var comm = $('#incommed').text();
 				var spec = $('#inspeced').text();
 				
+				var catspec = $('#incated').text();
+				var catover = $('#catover').text();
+				
 				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
+			
 				
 				$.ajax ({
 					url: 'update.php',
 					type: 'POST',
-					data : { catsel : catsel, plasel : plasel, stasel : stasel, comm : comm, spec : spec, id : Id },
+					data : { catover : catover, catspec : catspec, plasel : plasel, stasel : stasel, comm : comm, spec : spec, id : Id },
 					success: function() {
 						
-						alert("Komponent opdateret!");
+						$('.grid *').removeClass('btoggle fatedit');
+						$(".information").empty();
+						reloadlist();
+						reloadsearch();
 						
-						reloadkomp(Id);
+						alert("Komponent opdateret!");
 						
 					}
 				});
@@ -405,7 +493,7 @@
 			/* //////////////////////////////// INFORMATION //////////////////////////////// */
 			
 			
-			$(".grid").on('change', '#addwhat', function() {
+			$(".information").on('change', '#addwhat', function() {
 				
 				var value = this.value;
 	

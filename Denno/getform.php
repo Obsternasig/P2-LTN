@@ -23,9 +23,9 @@ require_once "connection.php";
 			echo "<option value='0'> Vælg hvad der skal tilføjes </option>";
 			echo "<option value='router'>Router</option>";
 			echo "<option value='switch'>Switch</option>";
-			echo "<option value='sfpmodul'>SFP Modul</option>";
-			echo "<option value='eltavle'>El tavle</option>";
-			echo "<option value='ramblok'>Ram blok</option>";
+			echo "<option value='sfp-modul'>SFP Modul</option>";
+			echo "<option value='el-tavle'>El tavle</option>";
+			echo "<option value='ram-blok'>Ram blok</option>";
 			echo "<option value='processor'>Processor</option>";
 			echo "<option value='motherboard'>Motherboard</option>";
 			echo "<option value='kabel'>Kabel</option>";
@@ -38,48 +38,55 @@ require_once "connection.php";
 		
 		echo "<div class='naddkomp'>";
 
-			echo "<p>Kategori:</p>";
-			echo "<input type='text' name='category' id='category' maxlength='50'>";
+			echo "<p class='infoover'>Mærke:</p>";
+			echo "<div class='fatadd' id='addbrand' contenteditable='true'></div>";
 
-			echo "<p>Brand:</p>";
-			echo "<input type='text' name='brand' id='brand' maxlength='50'>";
+		
+			echo "<p class='infoover'>Serienummer:</p>";
+			echo "<div class='fatadd' id='addserialnb' contenteditable='true'></div>";
 
-			echo "<p>Serienummer:</p>";
-			echo "<input type='text' name='serialnb' id='serialnb' maxlength='50'>";
-
-			echo "<p>Lokation:</p>";
-			echo "<input type='text' name='location' id='location' maxlength='50'>";
-
-			echo "<p>Kommentar:</p>";
-			echo "<input type='text' name='comment' id='comment' maxlength='250'>";
-
-
-			if($value == 'switch'){
-			echo "<div class='naddporte'>";
-				echo "<p>Porte:</p>";
-				echo "<input type='text' name='ports' id='ports' maxlength='30'>";
-			echo "</div>";
-			} elseif($value == 'router'){
-			echo "<div class='naddspeed'>";
-				echo "<p>Hastighed:</p>";
-				echo "<input type='text' name='speed' id='speed' maxlength='30'>";
-			echo "</div>";
+		
+			if($value == 'switch') {
+				
+					echo "<p class='infoover'>Porte:</p>";
+					echo "<div class='fatadd' id='addports' contenteditable='true'></div>";
+				
+			} elseif($value == 'router') {
+				
+					echo "<p class='infoover'>Hastighed:</p>";
+					echo "<div class='fatadd' id='addspeed' contenteditable='true'></div>";
+				
 			} elseif($value == 'processor' or $value == 'motherboard') {
-			echo "<div class='naddtype'>";
-				echo "<p>Socket:</p>";
-				echo "<input type='text' name='socket' id='socket' maxlength='30'>";
-			echo "</div>";
-			} elseif($value == 'sfpmodul' or $value == 'eltavle' or $value == 'ramblok' or $value == 'kabel') {
-			echo "<div class='naddsocket'>";
-				echo "<p>Type:</p>";
-				echo "<input type='text' name='type' id='type' maxlength='30'>";
-			echo "</div>";
+				
+					echo "<p class='infoover'>Socket:</p>";
+					echo "<div class='fatadd' id='addsocket' contenteditable='true'></div>";
+				
+			} elseif($value == 'sfp-modul' or $value == 'el-tavle' or $value == 'ram-blok' or $value == 'kabel') {
+				
+					echo "<p class='infoover'>Type:</p>";
+					echo "<div class='fatadd' id='addtype' contenteditable='true'></div>";
+				
 			}
+		
+		
+			echo "<p class='infoover'>Placering:</p>";
+			echo "<div class='fatadd' id='addlocation' contenteditable='true'></div>";
+
+		
+			echo "<p class='infoover'>Kommentar:</p>";
+			echo "<div class='fatadd' id='addcomment' contenteditable='true'></div>";
+		
+		
+			echo "<p class='infoover'>Specifikation:</p>";
+			echo "<div class='fatadd' id='addspeci' contenteditable='true'></div>";
 
 		
 			echo "<div class='naddkomp'>";
-				echo "<input type='submit' id='ok' value='OK'>";
+		
+				echo "<input type='submit' id='addok' class='interactive b' value='OK'>";
+		
 			echo "</div>";
+		
 		echo "</div>";
 	}
 
