@@ -520,20 +520,48 @@
 				});
         	});
 			
-			$('.information').on('keyup', '.fiddy', function() {
+			$('.information').on('keyup keydown paste', '.fiddy', function() {
 				var add = $(this).text().length;
 				
-				$( "addam" ).html(add);
-				
 				if(add>=51){
-					$(this).css("border-color", "red");
+					$(this).css({'border-color': 'red'});
+					
+					var toomuch = add - 50;
+					
+					$(this).prevAll("div.addam:first").text( "-" + toomuch );
+					
+				} else if((add<=50) && (add != 0)){
+					//$(".addam").show();
+					$(this).css({'border-color': '#303030', 'color': '#D7D7D7'});
+					
+					$(this).prevAll("div.addam:first").text( add );
 				
-				} else if(add<=50){
-					$(this).css("border-color", "#303030");
-				
+				} else if(add==0) {
+					$(this).prevAll("div.addam:first").html("");
+					$(this).css({'border-color': '#303030'});
 				}
+			});
+			
+			$('.information').on('keyup keydown paste', '.fatfiddy', function() {
+				var add = $(this).text().length;
 				
+				if(add>=501){
+					$(this).css({'border-color': 'red'});
+					
+					var toomuch = add - 500;
+					
+					$(this).prevAll("div.addam:first").text( "-" + toomuch );
+					
+				} else if((add<=500) && (add != 0)){
+					//$(".addam").show();
+					$(this).css({'border-color': '#303030', 'color': '#D7D7D7'});
+					
+					$(this).prevAll("div.addam:first").text( add );
 				
+				} else if(add==0) {
+					$(this).prevAll("div.addam:first").html("");
+					$(this).css({'border-color': '#303030'});
+				}
 			});
 			
 	

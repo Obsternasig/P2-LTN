@@ -39,47 +39,55 @@ require_once "connection.php";
 		echo "<div class='naddkomp'>";
 
 			echo "<p class='infoover'>Mærke:</p>";
+			echo "<div class='addam'></div>";
 			echo "<div class='fatadd fiddy' id='addbrand' contenteditable='true'></div>";
 
 		
 			echo "<p class='infoover'>Serienummer:</p>";
+			echo "<div class='addam'></div>";
 			echo "<div class='fatadd fiddy' id='addserialnb' contenteditable='true'></div>";
 
 		
 			if($value == 'switch') {
 				
 					echo "<p class='infoover'>Porte:</p>";
+					echo "<div class='addam'></div>";
 					echo "<div class='fatadd fiddy' id='addports' contenteditable='true'></div>";
 				
 			} elseif($value == 'router') {
 				
 					echo "<p class='infoover'>Hastighed:</p>";
+					echo "<div class='addam'></div>";
 					echo "<div class='fatadd fiddy' id='addspeed' contenteditable='true'></div>";
 				
 			} elseif($value == 'processor' or $value == 'motherboard') {
 				
 					echo "<p class='infoover'>Socket:</p>";
+					echo "<div class='addam'></div>";
 					echo "<div class='fatadd fiddy' id='addsocket' contenteditable='true'></div>";
 				
 			} elseif($value == 'sfp-modul' or $value == 'el-tavle' or $value == 'ram-blok' or $value == 'kabel') {
 				
 					echo "<p class='infoover'>Type:</p>";
+					echo "<div class='addam'></div>";
 					echo "<div class='fatadd fiddy' id='addtype' contenteditable='true'></div>";
 				
 			}
 		
 		
 			echo "<p class='infoover'>Placering:</p>";
-			echo "<div class='fatadd fiddy' id='addlocation' contenteditable='true'></div>";
 			echo "<div class='addam'></div>";
+			echo "<div class='fatadd fiddy' id='addlocation' contenteditable='true'></div>";
 
 		
 			echo "<p class='infoover'>Kommentar:</p>";
-			echo "<div class='fatadd' id='addcomment' contenteditable='true'></div>";
+			echo "<div class='addam'></div>";
+			echo "<div class='fatadd fatfiddy' id='addcomment' contenteditable='true'></div>";
 		
 		
 			echo "<p class='infoover'>Specifikation:</p>";
-			echo "<div class='fatadd' id='addspeci' contenteditable='true'></div>";
+			echo "<div class='addam'></div>";
+			echo "<div class='fatadd fatfiddy' id='addspeci' contenteditable='true'></div>";
 
 		
 			echo "<div class='naddkomp'>";

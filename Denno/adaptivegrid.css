@@ -400,8 +400,10 @@ li:hover {
 .infoover {
 	font-size: 1.6vw;
 	margin-bottom: 1vh;
-	margin-left: 3vw;
+	width: 5vw;
 	text-align: left;
+	display: inline-block;
+	
 }
 
 .infotekst {
@@ -449,12 +451,18 @@ li:hover {
 	padding: 0.5vh 1vw;
 	margin: 0 auto;
 	outline: none;
+	color: #D7D7D7;
 }
 
 
 /* ///////////////////////////////////////////////////////////////////////////// */
 /* /////////////////////////////     Tilføj Form   //////////////////////////// */
 
+.addam {
+	padding: 0 1vw 0 12vw;
+	display: inline-block;
+	width: 0.5vw;
+}
 
 .naddkomp input {
 	padding: 0.75vh 1.5vw;
