@@ -8,8 +8,6 @@ require_once "connection.php";
 			return '#334488';
 		} else if ($var == 2) {
 			return '#e95522';
-		} else if ($var == 3) {
-			return '#303030';
 		}
 	}
 
@@ -35,21 +33,25 @@ require_once "connection.php";
 		if($kompassoc['away'] == '1' && $kompassoc['broken'] == '0') {
 				$value = 1;
 				$status = "Udlånt";
+				$staway = "selected='selected'";
 			} else if($kompassoc['away'] == '0' && $kompassoc['broken'] == '1') {
 				$value = 2;
 				$status = "Ødelagt :(";
-			} else if($kompassoc['away'] == '1' && $kompassoc['broken'] == '1') {
-				$value = 3;
-				$status = "Både udlånt og ødelagt :(";
-			} else {
+				$stabro = "selected='selected'";
+			} elseif($kompassoc['away'] == '0' && $kompassoc['broken'] == '0') {
 				$value = 0;
 				$status = "På lager";
+				$sta = "selected='selected'";
+			} else {
+				$sta = "";
+				$staway = "";
+				$stabro = "";
 			}
 		
 		
 		$category = $kompassoc['category'];
 		switch($category) {
-			case $category == "switch": $catover = "Porte:"; $catspec = $kompassoc['ports'];
+			case $category == "switch": $catover = "Ports:"; $catspec = $kompassoc['ports'];
 					break;
 			case $category == "router": $catover = "Hastighed:"; $catspec = $kompassoc['speed'];
 					break;
@@ -69,22 +71,6 @@ require_once "connection.php";
 				default: $catover = "?"; $catspec = "?";
 			}
 		
-		if($kompassoc['location'] == 'Myrdalstræde 34 C') {
-				$plamyr = "selected='selected'";
-			} else {
-				$plamyr = "";
-			}
-		if($kompassoc['location'] == 'C. H. Ryders Vej 24') {
-				$plach = "selected='selected'";
-			} else {
-				$plach = "";
-			}
-		if($kompassoc['location'] == 'Anden adresse') {
-				$plaand = "selected='selected'";
-			} else {
-				$plaand = "";
-			}
-		
 		
 		
 		echo "<h2 class='infodo'>Information</h2>";
@@ -94,21 +80,15 @@ require_once "connection.php";
 		
 		
 		echo "<h3 class='infoover'> Placering: </h3>";
-		echo "<div class='infotekst' id='inplaced'>" . ucfirst($kompassoc['location']) . "</div>";
-			echo "<select size='1' id='inplacedsel' class='editdrop' style='display: none;'>";
-				echo "<option value='Myrdalstræde 34 C' $plamyr> Myrdalstræde 34 C </option>";
-				echo "<option value='C. H. Ryders Vej 24' $plach> C. H. Ryders Vej 24 </option>";
-				echo "<option value='Anden adresse' $plaand> Anden adresse </option>";
-			echo "</select>";
+		echo "<div class='infotekst' id='inplaced' contenteditable='false'>" . ucfirst($kompassoc['location']) . "</div>";
 		
 		
 		echo "<h3 class='infoover'> Status: </h3>";
 		echo "<div class='infotekst' id='instated' style='color: " . getColor($value) . "'>" . $status . "</div>";
 			echo "<select size='1' id='instatedsel' class='editdrop' style='display: none;'>";
-				echo "<option value='lager'>På lager</option>";
-				echo "<option value='broken'>Ødelagt</option>";
-				echo "<option value='away'>Udlånt</option>";
-				echo "<option value='broken_away'>Både udlånt og ødelagt</option>";
+				echo "<option value='lager' $sta>På lager</option>";
+				echo "<option value='broken' $stabro>Ødelagt</option>";
+				echo "<option value='away' $staway>Udlånt</option>";
 			echo "</select>";
 		
 		

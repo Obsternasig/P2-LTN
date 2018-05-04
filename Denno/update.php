@@ -14,11 +14,6 @@
 				$broken = '0';
 				$away = '0';
 
-			} elseif($chostatu == 'broken_away') {
-
-				$broken = '1';
-				$away = '1';
-
 			} elseif($chostatu == 'broken') {
 
 				$broken = '1';

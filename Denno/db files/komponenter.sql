@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2018 at 10:35 AM
+-- Generation Time: May 03, 2018 at 03:53 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -49,19 +49,19 @@ CREATE TABLE `komponenter` (
 --
 
 INSERT INTO `komponenter` (`ID`, `category`, `brand`, `serialnb`, `away`, `broken`, `location`, `comment`, `ports`, `speed`, `type`, `socket`, `specifications`) VALUES
-(24, 'switch', 'HP', '542314', 0, 0, 'Hylde 3, Myrdalstrædet 38', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius.', '48', '', '', '', ''),
-(26, 'el-tavle', 'LTN', '576872', 0, 1, 'Hylde 4, Myrdalstrædet 38', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut.', '', '', '16 AMP', '', ''),
-(27, 'kabel', 'LTN', '894341', 1, 0, 'Hylde 5, Myrdalstrædet 38', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '', '', 'Fiber', '', ''),
-(29, 'ram-blok', 'Corsair', '116577', 0, 0, 'Hylde 6, Myrdalstrædet 38', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '', '', 'DDR3', '', ''),
-(32, 'switch', 'TP-link', '009537', 0, 1, '67B, Myrdalstrædet', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '48', '', '', '', ''),
-(33, 'cpu', 'Intel', '174296', 0, 0, '67C, Myrdalstrædet', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '', '', '', 'LGA-1150', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetu.'),
-(41, 'switch', 'HP', '241242', 1, 0, '42J, Myrdalstrædet', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis', '48', '', '', '', ''),
-(42, 'switch', 'HP', '962564', 0, 0, '42K, Myrdalstrædet', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '48', '', '', '', ''),
-(43, 'switch', 'HP', '274895', 0, 0, '42A, Myrdalstrædet', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '48', '', '', '', ''),
-(44, 'el-tavle', 'LTN', '685856', 0, 0, '42B, Myrdalstrædet', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '', '', '16 AMP', '', ''),
-(45, 'el-tavle', 'LTN', '163146', 1, 1, '42G, Myrdalstrædet', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '', '', '16 AMP', '', ''),
-(48, 'switch', 'TP-link', '996433', 0, 0, '42D, Myrdalstrædet', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '48', '', '', '', ''),
-(49, 'kabel', 'LTN', '475635', 0, 0, '42E, Myrdalstrædet', 'Lorem ipsum dolor sit amet, et laoreet laoreet suscipit massa. Sit fermentum eu porta eget interdum varius. Nec ut pulvinar egestas, sed suspendisse eu vestibulum ut ut, cum pede rutrum nonummy, nunc quam parturient consectetuer posuere, quis deserunt nullam senectus. Elit senectus potenti sed cursus pede sapien, suspendisse aliquet malesuada a amet, leo morbi, vel condimentum velit. Vel sem tellus malesuada sit interdum, aenean tempor gravida. Eu rhoncus, sed semper blanditiis vivamus nunc, mollis turpis.', '', '', 'Fiber', '', '');
+(24, 'switch', 'HP', '542314', 0, 0, 'Myrdalstræde 34 C', 'Ingen kommentar angivet', '48', '', '', '', 'Ingen specifikationer angivet'),
+(26, 'el-tavle', 'LTN', '576872', 1, 1, '', 'Ingen kommentar angivet', '', '', '16 AMP', '', 'Ingen specifikationer angivet'),
+(27, 'kabel', 'LTN', '894341', 0, 0, 'Myrdalstræde 34 C', 'Ingen kommentar angivet', '', '', 'Fiber', '', 'Ingen specifikationer angivet'),
+(29, 'ram-blok', 'Corsair', '116577', 0, 1, 'Myrdalstræde 34 C', 'Ingen kommentar angivet', '', '', 'DDR3', '', 'Ingen specifikationer angivet'),
+(32, 'switch', 'TP-link', '009537', 0, 1, '67B, Myrdalstrædet', 'Ingen kommentar angivet', '48', '', '', '', 'Ingen specifikationer angivet'),
+(33, 'processor', 'Intel', '174296', 0, 0, 'Myrdalstræde 34 C', 'Ingen kommentar angivet', '', '', '', 'LGA-1150', 'Ingen specifikationer angivet'),
+(41, 'switch', 'HP', '241242', 0, 0, '42J, Myrdalstræde', 'Ingen kommentar angivet', '48', '', '', '', 'Ingen specifikationer angivet'),
+(42, 'switch', 'HP', '962564', 1, 0, 'Anden adresse', 'Ingen kommentar angivet', '48', '', '', '', 'Ingen specifikationer angivet'),
+(43, 'switch', 'HP', '274895', 0, 0, '42A, Myrdalstrædet', 'Ingen kommentar angivet', '48', '', '', '', 'Ingen specifikationer angivet'),
+(45, 'el-tavle', 'LTN', '163146', 0, 0, 'Anden adresse', 'Ingen kommentar angivet', '', '', '16 AMP', '', 'Ingen specifikationer angivet'),
+(48, 'switch', 'TP-link', '996433', 0, 0, '42D, Myrdalstrædet', 'Ingen kommentar angivet', '48', '', '', '', 'Ingen specifikationer angivet'),
+(49, 'kabel', 'LTN', '475635', 0, 0, '', 'Ingen kommentar angivet', '', '', 'Fiber', '', 'Ingen specifikationer angivet'),
+(52, 'sfp-modul', 'LTN', '123321', 0, 0, 'Myrdalstræde 34 C', 'Ingen kommentar angivet', '', '', 'SFP', '', 'Ingen specifikationer angivet');
 
 --
 -- Indexes for dumped tables
@@ -81,7 +81,7 @@ ALTER TABLE `komponenter`
 -- AUTO_INCREMENT for table `komponenter`
 --
 ALTER TABLE `komponenter`
-  MODIFY `ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

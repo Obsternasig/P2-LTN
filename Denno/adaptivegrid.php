@@ -196,9 +196,10 @@
 			});
 
 
+			var search = null;
 			$(".search").on('keyup', '#searchfield', function (e) {
 				
-				var search = $("#searchfield").val();
+				search = $("#searchfield").val();
 				$("#cateopt").val('alle');
 
 				$.ajax({
@@ -222,7 +223,7 @@
 					$('.grid *').removeClass('btoggle');
 					
 					var Id = $(this).attr('id');
-				
+							
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
@@ -250,7 +251,15 @@
 					$("#addwhat").val('0');
 					
 					var Id = $(this).attr('id');
-
+				
+					if(search != null){
+						var searched = search;
+					} else {
+						var searched = "";
+					}
+				
+					//alert(searched);
+				
 					if($(this).hasClass('liselected')) {
 
 						$(this).removeClass('liselected');
@@ -268,7 +277,7 @@
 						$.ajax ({
 							url: 'getkomps.php',
 							type: 'POST',
-							data : { id1 : Id },
+							data : { id1 : Id, searched : searched },
 							success: function(response) {
 								$('#div' + Id).html(response).slideDown("fast");
 							}
@@ -423,9 +432,9 @@
 						data: { edit : edit },
 						success: function(response) {
 							$('.information').append(response);
-							$('#inplaced, #instated').hide();
-							$('#inplacedsel, #instatedsel').show();
-							$('#incated, #incommed, #inspeced').attr("contenteditable", "true");
+							$('#instated').hide();
+							$('#instatedsel').show();
+							$('#incated, #incommed, #inspeced, #inplaced').attr("contenteditable", "true");
 						}
 					});
 
@@ -447,7 +456,7 @@
 			
 			$(".grid").on('click', '#editdone', function() {
 				
-				var plasel = $('#inplacedsel').val();
+				var plasel = $('#inplaced').text();
 				var stasel = $('#instatedsel').val();
 				
 				var comm = $('#incommed').text();
@@ -510,6 +519,22 @@
 					}
 				});
         	});
+			
+			$('.information').on('keyup', '.fiddy', function() {
+				var add = $(this).text().length;
+				
+				$( "addam" ).html(add);
+				
+				if(add>=51){
+					$(this).css("border-color", "red");
+				
+				} else if(add<=50){
+					$(this).css("border-color", "#303030");
+				
+				}
+				
+				
+			});
 			
 	
 			/* ///////////////////////////////////////////////////////////////////////////// */
