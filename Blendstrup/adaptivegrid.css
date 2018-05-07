@@ -340,7 +340,7 @@ li:hover {
 	width: 37vw;
 	margin-left: 10vw;
 	padding: 2vh 0 2vh 3vw;
-	border-bottom: #404040 solid 0.1vw;
+	/*border-bottom: #404040 solid 0.1vw;*/
 	cursor: pointer;
 }
 
@@ -363,6 +363,14 @@ li:hover {
 	padding-left: 1.5vw;
 	margin-left: 1vw;
 	border-left: #404040 solid 0.1vw;
+}
+
+.hrkomps {
+	border: none;
+	background-color: #404040;
+	height: 0.2vh;
+	width: 37vw;
+	margin: 0.2vw auto;
 }
 
 

@@ -82,7 +82,7 @@ require_once "connection.php";
 				echo "<p>Serienummer: </p>" . $row['serialnb'] . " " . "<p id='komps-p'>Placering: </p>" . $row['location'] . " ";
 				echo "</div>";
 			
-			echo "<br>";
+			echo "<hr class='hrkomps'>";
 		}
 	
 

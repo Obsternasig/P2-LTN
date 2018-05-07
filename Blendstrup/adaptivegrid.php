@@ -204,7 +204,6 @@
 
 				$.ajax({
 					url: 'getlist.php',
-					cache: false,
 					type: 'POST',
 					data: { search : search },
 					success: function(response) {
