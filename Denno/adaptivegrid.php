@@ -526,7 +526,7 @@
 				if(add>=51){
 					$(this).css({'border-color': 'red'});
 					
-					var toomuch = add - 50;
+					var toomuch = add - 50; 
 					
 					$(this).prevAll("div.addam:first").text( "-" + toomuch );
 					
