@@ -402,8 +402,16 @@ li:hover {
 	margin-bottom: 1vh;
 	width: 5vw;
 	text-align: left;
-	display: inline-block;
+	padding-left: 3vw;
 	
+}
+
+.tilover {
+	font-size: 1.6vw;
+	margin-bottom: 1vh;
+	width: 5vw;
+	text-align: left;
+	display: inline-block;
 }
 
 .infotekst {
