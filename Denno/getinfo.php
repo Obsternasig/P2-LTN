@@ -75,12 +75,12 @@ require_once "connection.php";
 		
 		echo "<h2 class='infodo'>Information</h2>";
 
-		echo "<h3 class='infoover' id='catover'>" . $catover . "</h3>";
-		echo "<div class='infotekst' id='incated' contenteditable='false'>" . ucfirst($catspec) . "</div>";
+		echo "<h3 class='infoover' id='catover'>" . nl2br($catover) . "</h3>";
+		echo "<div class='infotekst' id='incated' contenteditable='false'>" . nl2br(ucfirst($catspec)) . "</div>";
 		
 		
 		echo "<h3 class='infoover'> Placering: </h3>";
-		echo "<div class='infotekst' id='inplaced' contenteditable='false'>" . ucfirst($kompassoc['location']) . "</div>";
+		echo "<div class='infotekst' id='inplaced' contenteditable='false'>" . nl2br(ucfirst($kompassoc['location'])) . "</div>";
 		
 		
 		echo "<h3 class='infoover'> Status: </h3>";
@@ -93,10 +93,10 @@ require_once "connection.php";
 		
 		
 		echo "<h3 class='infoover'> Kommentar: </h3>";
-		echo "<div class='infotekst' id='incommed' contenteditable='false'>" . ucfirst($kompassoc['comment']) . "</div>";
+		echo "<div class='infotekst' id='incommed' contenteditable='false'>" . nl2br(ucfirst($kompassoc['comment'])) . "</div>";
 		
 		echo "<h3 class='infoover'> Specifikationer: </h3>";
-		echo "<div class='infotekst' id='inspeced' contenteditable='false'>" . ucfirst($kompassoc['specifications']) . "</div>";
+		echo "<div class='infotekst' id='inspeced' contenteditable='false'>" . nl2br(ucfirst($kompassoc['specifications'])) . "</div>";
 	}
 
 	

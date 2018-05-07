@@ -1,6 +1,7 @@
 <?php
 require_once "connection.php";
 
+
 		function getColorAway($var) {
 				if ($var <= 0)
 					return '#D7D7D7;';
@@ -16,6 +17,7 @@ require_once "connection.php";
 				else if ($var >= 1)
 					return '#e95522';
 			}
+
 
 	if(isset($_POST['option'])){
 		$option = $_POST['option'];

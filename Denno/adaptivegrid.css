@@ -262,6 +262,13 @@ a:visited {
 /* ///////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////     LIST   //////////////////////////////// */
 
+.hrkomps {
+	border: none;
+	background-color: #404040;
+	height: 0.2vh;
+	width: 37vw;
+	margin: 0.2vw auto;
+}
 
 .list {
 	background-color: #909090;
@@ -340,7 +347,6 @@ li:hover {
 	width: 37vw;
 	margin-left: 10vw;
 	padding: 2vh 0 2vh 3vw;
-	border-top: #404040 solid 0.1vw;
 	cursor: pointer;
 }
 
@@ -403,15 +409,6 @@ li:hover {
 	width: 5vw;
 	text-align: left;
 	padding-left: 3vw;
-	
-}
-
-.tilover {
-	font-size: 1.6vw;
-	margin-bottom: 1vh;
-	width: 5vw;
-	text-align: left;
-	display: inline-block;
 }
 
 .infotekst {
@@ -459,12 +456,20 @@ li:hover {
 	padding: 0.5vh 1vw;
 	margin: 0 auto;
 	outline: none;
-	color: #D7D7D7;
+}
+
+.tilover {
+	font-size: 1.6vw;
+	margin-bottom: 1vh;
+	width: 5vw;
+	text-align: left;
+	display: inline-block;
 }
 
 
 /* ///////////////////////////////////////////////////////////////////////////// */
 /* /////////////////////////////     Tilføj Form   //////////////////////////// */
+
 
 .addam {
 	padding: 0 2vw 0 12vw;
@@ -472,17 +477,9 @@ li:hover {
 	width: 0.5vw;
 }
 
-.naddkomp input {
-	padding: 0.75vh 1.5vw;
-	margin-bottom: 0.5vw;
-	width: 16vw;
-	color: #D7D7D7;
-	border: solid #303030 0.1vw;
-	background-color: dimgrey;
-}
-
 #addok {
 	margin-top: 0.8vw;
+	padding: 0.5vh 0.5vw;
 	width: 5vw;
 	border: none;
 }
