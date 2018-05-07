@@ -51,9 +51,9 @@ require_once "connection.php";
 		
 		$category = $kompassoc['category'];
 		switch($category) {
-			case $category == "switch": $catover = "Ports:"; $catspec = $kompassoc['ports'];
+			case $category == "switch": $catover = "Porte:"; $catspec = $kompassoc['porte'];
 					break;
-			case $category == "router": $catover = "Hastighed:"; $catspec = $kompassoc['speed'];
+			case $category == "router": $catover = "Hastighed:"; $catspec = $kompassoc['hastighed'];
 					break;
 			case $category == "sfp-modul": $catover = "Type:"; $catspec = $kompassoc['type'];
 					break;
@@ -97,6 +97,8 @@ require_once "connection.php";
 		
 		echo "<h3 class='infoover'> Specifikationer: </h3>";
 		echo "<div class='infotekst' id='inspeced' contenteditable='false'>" . nl2br(ucfirst($kompassoc['specifications'])) . "</div>";
+		
+		echo "<input type='hidden' id='hiddenserialnb' value='" . $kompassoc['serialnb'] . "'>";
 	}
 
 	

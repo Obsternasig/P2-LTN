@@ -33,9 +33,9 @@ require_once "connection.php";
 
 	$category = $kompassoc['category'];
 	switch($category) {
-		case $category == "switch": $spect = "ports";
+		case $category == "switch": $spect = "porte";
 				break;
-		case $category == "router": $spect = "speed";
+		case $category == "router": $spect = "hastighed";
 				break;
 		case $category == "sfp-modul": $spect = "type";
 				break;
@@ -55,23 +55,27 @@ require_once "connection.php";
 
 
 
-	if(isset($option)) {
+	/* if(isset($option)) {
 		if($option != 'alle') {
-			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '" . $option . "' GROUP BY category, brand, ports, speed, type, socket");
+			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, porte, hastighed, type, socket FROM komponenter WHERE category LIKE '" . $option . "' GROUP BY category, brand, porte, hastighed, type, socket");
 		} elseif($option == 'alle') {
-			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports, speed, type, socket ORDER BY category ASC");
+			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, porte, hastighed, type, socket FROM komponenter GROUP BY category, brand, porte, hastighed, type, socket ORDER BY category ASC");
 		}
 		
 	} elseif(isset($search)) {
 
 		$search = mysqli_real_escape_string($connection, $search);
-		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' OR serialnb LIKE '%$search%' GROUP BY category, brand, ports, speed, type, socket");
+		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, porte, hastighed, type, socket FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' OR serialnb LIKE '%$search%' GROUP BY category, brand, porte, hastighed, type, socket");
 
 	} elseif(!isset($option)&&!isset($search)) {
 
-		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports, speed, type, socket ORDER BY category ASC");
+		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, porte, hastighed, type, socket FROM komponenter GROUP BY category, brand, porte, hastighed, type, socket ORDER BY category ASC");
 		
-	}
+	} */
+
+	
+	$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, porte, hastighed, type, socket FROM komponenter GROUP BY category, brand, porte, hastighed, type, socket ORDER BY category ASC");
+
 
 	echo "<ul>";
 
@@ -85,9 +89,9 @@ require_once "connection.php";
 
 			
 			switch($category) {
-				case $category == "switch": $midsec = "Porte"; $midcat = $row['ports'];
+				case $category == "switch": $midsec = "Porte"; $midcat = $row['porte'];
 					break;
-				case $category == "router": $midsec = "Hastighed"; $midcat = $row['speed'];
+				case $category == "router": $midsec = "Hastighed"; $midcat = $row['hastighed'];
 					break;
 				case $category == "sfp-modul": $midsec = "Type"; $midcat = $row['type'];
 					break;
