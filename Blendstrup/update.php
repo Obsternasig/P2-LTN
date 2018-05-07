@@ -50,7 +50,7 @@
 
 
 			if(!empty($id)){
-
+				
 				$query = "UPDATE komponenter SET " . $category . " = '$catspec', location = '$choplace', away = '$away', broken = '$broken', comment = '$chocomme', specifications = '$chospeci' WHERE ID = '$id';";
 
 				$results = mysqli_query($connection, $query);
