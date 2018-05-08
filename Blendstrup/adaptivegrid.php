@@ -319,6 +319,7 @@
 				if(!$(this).hasClass('btoggle')) {
 				
 					cleanallinfo();
+					reloadlist();
 					$(this).addClass('btoggle');
 
 					var initial = "set";

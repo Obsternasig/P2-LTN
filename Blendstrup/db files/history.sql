@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2018 at 02:48 PM
+-- Generation Time: May 08, 2018 at 03:19 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -37,6 +37,27 @@ CREATE TABLE `history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `history`
+--
+
+INSERT INTO `history` (`ID`, `time`, `name`, `event`, `serialnb`) VALUES
+(1, '2018-05-07', 'Jonas Blendstrup', 'edit', '576872'),
+(2, '2018-05-07', 'Jonas Blendstrup', 'add', '555674'),
+(3, '2018-05-07', 'Danyos Huynh', 'edit', '163146'),
+(4, '2018-05-07', 'Ukendt', 'edit', '163146'),
+(5, '2018-05-07', 'Ukendt', 'edit', '576872'),
+(6, '2018-05-08', 'Ukendt', 'edit', '576872'),
+(7, '2018-05-08', 'Jonas Blendstrup', 'edit', '576872'),
+(8, '2018-05-08', 'Jonas Blendstrup', 'add', '867352'),
+(9, '2018-05-08', 'Jonas Blendstrup', 'edit', '444525'),
+(10, '2018-05-08', 'Jonas Blendstrup', 'edit', '444525'),
+(11, '2018-05-08', 'Jonas Blendstrup', 'edit', '444525'),
+(12, '2018-05-08', 'Jonas Blendstrup', 'edit', '444525'),
+(13, '2018-05-08', 'Jonas Blendstrup', 'edit', '163146'),
+(14, '2018-05-08', 'Jonas Blendstrup', 'edit', '163146'),
+(15, '2018-05-08', 'Anders Stevns', 'edit', '576872');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -54,7 +75,7 @@ ALTER TABLE `history`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `ID` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
