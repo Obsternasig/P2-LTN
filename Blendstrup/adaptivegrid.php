@@ -48,7 +48,7 @@
 </head>
 
 <body>
-	
+
 	<div class="grid">
 
   		<div class="logo">
@@ -194,7 +194,7 @@
 			$(".search").on('change', '#cateopt', function() {
 
 				var option = this.value;
-				$("#searchfield").val('');
+				$("#searchfield").val('');	
 				
 				$.ajax ({
 					url: 'getlist.php',
@@ -213,7 +213,7 @@
 				
 				search = $("#searchfield").val();
 				$("#cateopt").val('alle');
-
+				
 				$.ajax({
 					url: 'getlist.php',
 					type: 'POST',
@@ -576,7 +576,7 @@
 				
 			});
 			
-			
+
 		});
 		
 	</script>

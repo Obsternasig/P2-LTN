@@ -73,8 +73,6 @@ require_once "connection.php";
 		
 	}
 
-	
-	$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, porte, hastighed, type, socket FROM komponenter GROUP BY category, brand, porte, hastighed, type, socket ORDER BY category ASC");
 
 
 	echo "<ul>";
