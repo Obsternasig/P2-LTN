@@ -31,9 +31,9 @@ require_once "connection.php";
 
 		$category = $kompassoc['category'];
 		switch($category) {
-			case $category == "switch": $speci = 'ports'; $chospec = $kompassoc['ports'];
+			case $category == "switch": $speci = 'porte'; $chospec = $kompassoc['porte'];
 					break;
-			case $category == "router": $speci = 'speed'; $chospec = $kompassoc['speed'];
+			case $category == "router": $speci = 'hastighed'; $chospec = $kompassoc['hastighed'];
 					break;
 			case $category == "sfp-modul": $speci = 'type'; $chospec = $kompassoc['type'];
 					break;
@@ -82,7 +82,7 @@ require_once "connection.php";
 				echo "<p>Serienummer: </p>" . $row['serialnb'] . " " . "<p id='komps-p'>Placering: </p>" . $row['location'] . " ";
 				echo "</div>";
 			
-			echo "<br>";
+			echo "<hr class='hrkomps'>";
 		}
 	
 

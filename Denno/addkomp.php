@@ -31,10 +31,10 @@
 					$porte = "";
 				}
 		
-				if(isset($_POST['speed'])){
-					$speed = $_POST['speed'];
+				if(isset($_POST['hastighed'])){
+					$hastighed = $_POST['hastighed'];
 				}else{
-					$speed = "";
+					$hastighed = "";
 				}
 				
 				if(isset($_POST['socket'])){
@@ -53,7 +53,7 @@
 		
 		if(!empty($category)&&!empty($brand)&&!empty($serialnb)) {
 
-			$query = "INSERT INTO komponenter VALUES ('', '$category', '$brand', '$serialnb', '', '', '$location', '$comment', '$porte', '$speed', '$type', '$socket', '$speci')";
+			$query = "INSERT INTO komponenter VALUES ('', '$category', '$brand', '$serialnb', '', '', '$location', '$comment', '$porte', '$hastighed', '$type', '$socket', '$speci')";
 			$results = mysqli_query($connection, $query);
 
 				if(!$results){

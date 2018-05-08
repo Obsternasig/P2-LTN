@@ -52,13 +52,13 @@ require_once "connection.php";
 				
 					echo "<p class='tilover'>Porte:</p>";
 					echo "<div class='addam'></div>";
-					echo "<div class='fatadd fiddy' id='addports' contenteditable='true'></div>";
+					echo "<div class='fatadd fiddy' id='addporte' contenteditable='true'></div>";
 				
 			} elseif($value == 'router') {
 				
 					echo "<p class='tilover'>Hastighed:</p>";
 					echo "<div class='addam'></div>";
-					echo "<div class='fatadd fiddy' id='addspeed' contenteditable='true'></div>";
+					echo "<div class='fatadd fiddy' id='addhastighed' contenteditable='true'></div>";
 				
 			} elseif($value == 'processor' or $value == 'motherboard') {
 				

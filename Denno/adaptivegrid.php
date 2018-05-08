@@ -48,7 +48,7 @@
 </head>
 
 <body>
-	
+
 	<div class="grid">
 
   		<div class="logo">
@@ -66,8 +66,9 @@
 					
 					if (isset($firstname)&&isset($lastname)) { 
 						
+						$name = $firstname . " " . $lastname;
 						echo "<img src='images/mand.png'>" . " ";
-						echo $firstname . " " . $lastname; 
+						echo $name; 
 					} 
 				?> 
 				
@@ -171,6 +172,17 @@
 			}
 			
 			
+			function history(serialnb, event) {
+				
+				var name = '<?php if(isset($name)) { echo $name; } else { echo "Ukendt"; } ?>';
+				var serialnb = serialnb;
+				var event = event;
+				
+				$.post("addhisto.php", { name : name, serialnb : serialnb, event : event });
+				
+			}
+			
+			
 			reloadlist();
 			reloadsearch();
 			
@@ -182,7 +194,7 @@
 			$(".search").on('change', '#cateopt', function() {
 
 				var option = this.value;
-				$("#searchfield").val('');
+				$("#searchfield").val('');	
 				
 				$.ajax ({
 					url: 'getlist.php',
@@ -201,10 +213,9 @@
 				
 				search = $("#searchfield").val();
 				$("#cateopt").val('alle');
-
+				
 				$.ajax({
 					url: 'getlist.php',
-					cache: false,
 					type: 'POST',
 					data: { search : search },
 					success: function(response) {
@@ -325,16 +336,18 @@
 				var comment = $('#addcomment').text();
 				var speci = $('#addspeci').text();
 				
+				var event = "add";
+				
 					if($('#addporte').text() == undefined){
 						var porte = "";
 					} else {
 						var porte = $('#addporte').text();
 					}
 
-					if($('#addspeed').text() == undefined){
-						var speed = "";
+					if($('#addhastighed').text() == undefined){
+						var hastighed = "";
 					} else {
-						var speed = $('#addspeed').text();
+						var hastighed = $('#addhastighed').text();
 					}
 
 					if($('#addsocket').text() == undefined){
@@ -350,12 +363,10 @@
 					}
 				
 				
-				//alert(cate + brand + serialnb + location + comment + speci + porte + speed + socket + type);
-				
 				$.ajax ({
 					url: 'addkomp.php',
 					type: 'POST',
-					data : { cate : cate, brand : brand, serialnb : serialnb, location : location, comment : comment, speci : speci, porte : porte, speed : speed, socket : socket, type : type },
+					data : { cate : cate, brand : brand, serialnb : serialnb, location : location, comment : comment, speci : speci, porte : porte, hastighed : hastighed, socket : socket, type : type },
 					success: function() {
 						
 						$('.grid *').removeClass('btoggle');
@@ -364,7 +375,8 @@
 						reloadsearch();
 						
 						alert("Komponent tilføjet!");
-						
+					
+						history(serialnb, event);
 					}
 				});
 				
@@ -435,9 +447,11 @@
 				var catspec = $('#incated').text();
 				var catover = $('#catover').text();
 				
+				var serialnb = $('#hiddenserialnb').val();
+				var event = "edit";
+				
 				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
 			
-				
 				$.ajax ({
 					url: 'update.php',
 					type: 'POST',
@@ -450,6 +464,8 @@
 						reloadsearch();
 						
 						alert("Komponent opdateret!");
+						
+						history(serialnb, event);
 						
 					}
 				});
@@ -554,13 +570,38 @@
 			});
 			
 			
-			$(".grid").on('click', '#histobutt, #userbutt', function() {
+			$(".grid").on('click', '#userbutt', function() {
 				
-				alert("Ikke implementeret endnu :(");
+				var user = "set";
+				
+				$.ajax ({
+					url: 'admin.php',
+					type: 'POST',
+					data: { user : user },
+					success: function(response) {
+						$('.list').html(response);
+					}
+				});
 				
 			});
 			
 			
+			$(".grid").on('click', '#histobutt', function() {
+				
+				var history = "set";
+				
+				$.ajax ({
+					url: 'admin.php',
+					type: 'POST',
+					data: { history : history },
+					success: function(response) {
+						$('.list').html(response);
+					}
+				});
+				
+			});
+			
+
 		});
 		
 	</script>
