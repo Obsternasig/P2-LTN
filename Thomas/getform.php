@@ -137,18 +137,13 @@ require_once "connection.php";
 		
 		
 		echo "<div id='delform' class='hideform'>";
+		echo "<form method='post' action='delete.php' id='deleform'>";
 		
-		echo "<p class='infotekst'> Fornavn: </p>";
-		echo "<input type='text' id='delfirstname' class='fatadd fiddy' name='delfirstname'>";
-		
-		echo "<p class='infotekst'> Efternavn: </p>";
-		echo "<input type='text' id='dellastname' class='fatadd fiddy' name='dellastname'>";
-		
-		echo "<p class='infotekst'> Email: </p>";
+		echo "<p class='infotekst'> Brugers Email: </p>";
 		echo "<input type='email' id='delemail' class='fatadd fiddy' name='delemail'>";
 		
 		echo "<input type='submit' id='userdel' class='interactive b okdu' value='Slet'>";
-		
+		echo "</form>";
 		echo "</div>";
 		
 }
