@@ -572,17 +572,25 @@
 			
 			
 			$(".grid").on('click', '#userbutt', function() {
-				
-				var users = "set";
-				
-				$.ajax ({
-					url: 'admin.php',
-					type: 'POST',
-					data: { users : users },
-					success: function(response) {
-						$('.list').html(response);
-					}
-				});
+				if(!$(this).hasClass('btoggle')) {
+					$(this).addClass('btoggle');
+					$("#histobutt").removeClass('btoggle');
+					
+					var users = "set";
+
+					$.ajax ({
+						url: 'admin.php',
+						type: 'POST',
+						data: { users : users },
+						success: function(response) {
+							$('.list').html(response);
+						}
+					});
+				} else {
+					
+					$(this).removeClass('btoggle');
+					reloadlist();
+				}
 				
 			});
 			
@@ -590,6 +598,7 @@
 			$(".grid").on('click', '#histobutt', function() {
 				if(!$(this).hasClass('btoggle')) {
 					$(this).addClass('btoggle');
+					$("#userbutt").removeClass('btoggle');
 					
 					var history = "set";
 				
