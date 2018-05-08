@@ -277,14 +277,14 @@ a:visited {
     list-style-type: none;
 }
 
-.list li {
+.lilist {
 	margin: 0 1vw;
 	padding: 0 0 0 1.5vw;
 	position: relative;
 	color: #ffffff;
 }
 
-li:hover {
+.lilist:hover {
 	box-shadow: 0 0 0 0.15vw #505050;
 	border-radius: 5vh;
 	cursor: pointer;
@@ -340,7 +340,7 @@ li:hover {
 	width: 37vw;
 	margin-left: 10vw;
 	padding: 2vh 0 2vh 3vw;
-	/*border-bottom: #404040 solid 0.1vw;*/
+	border-bottom: #404040 solid 0.1vw;
 	cursor: pointer;
 }
 
@@ -470,8 +470,35 @@ li:hover {
 
 
 /* ///////////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////     Tilføj Form   //////////////////////////// */
+/* ////////////////////////////////     ADMIN   /////////////////////////////// */
 
+
+.adminhisto {
+	padding: 1vh 0 1vh 5vw;
+	height: 2vh;
+}
+
+.adminbutton {
+	display: inline-block;
+	width: 5vw;
+	font-size: 1vw;
+	height: 4vh;
+	margin: 2vh 0;
+}
+
+#adminnavn {
+	width: 15vw;
+	border-right: #404040 solid 0.15vw;
+	margin-left: 2vw;
+}
+
+.adminbrug {
+	display: inline-block;
+	width: 25vw;
+	overflow: hidden;
+	margin: 2vh 0;
+	padding-left: 2vw;
+}
 
 .addam {
 	padding: 0 2vw 0 12vw;

@@ -257,7 +257,7 @@
 			});
 			
 			
-			$(".list").on('click', 'li', function() {
+			$(".list").on('click', '.lilist', function() {
 				
 					$("#addwhat").val('0');
 					
@@ -565,6 +565,7 @@
 				} else {
 					
 					cleanallinfo();
+					reloadlist();
 					
 				}
 			});
@@ -572,12 +573,12 @@
 			
 			$(".grid").on('click', '#userbutt', function() {
 				
-				var user = "set";
+				var users = "set";
 				
 				$.ajax ({
 					url: 'admin.php',
 					type: 'POST',
-					data: { user : user },
+					data: { users : users },
 					success: function(response) {
 						$('.list').html(response);
 					}
@@ -587,17 +588,24 @@
 			
 			
 			$(".grid").on('click', '#histobutt', function() {
+				if(!$(this).hasClass('btoggle')) {
+					$(this).addClass('btoggle');
+					
+					var history = "set";
 				
-				var history = "set";
-				
-				$.ajax ({
-					url: 'admin.php',
-					type: 'POST',
-					data: { history : history },
-					success: function(response) {
-						$('.list').html(response);
-					}
-				});
+					$.ajax ({
+						url: 'admin.php',
+						type: 'POST',
+						data: { history : history },
+						success: function(response) {
+							$('.list').html(response);
+						}
+					});
+				} else {
+					
+					$(this).removeClass('btoggle');
+					reloadlist();
+				}
 				
 			});
 			

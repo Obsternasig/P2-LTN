@@ -19,11 +19,15 @@ require_once "connection.php";
 
 			while ($row = mysqli_fetch_assoc($adminquery)) {
 
-				$category = $row['category'];
-				$brand = $row['brand'];
+				$firstname = $row['firstname'];
+				$lastname = $row['lastname'];
+				$email = $row['email'];
 
-				echo "<li id=" . $row['ID'] . ">";
-
+				echo "<li>";
+				
+					echo "<div id='adminnavn' class='adminbrug'>" . $firstname . " " . $lastname . "</div>" . "<div class='adminbrug'>" . "Email: " . $email . " </div>";
+				
+					echo "<button class='interactive b adminbutton' id='" . $row['ID'] . "'> Slet </button>";
 
 				echo "</li>";
 
@@ -39,17 +43,30 @@ require_once "connection.php";
 
 	if(isset($history)) {
 
-		$adminquery = mysqli_query($connection, "SELECT * FROM history");
+		$adminquery = mysqli_query($connection, "SELECT * FROM history ORDER BY time DESC");
 
 
 		echo "<ul>";
 
 			while ($row = mysqli_fetch_assoc($adminquery)) {
 
-				$category = $row['category'];
-				$brand = $row['brand'];
+				$time = $row['time'];
+				$name = $row['name'];
+				$event = $row['event'];
+				$serialnb = $row['serialnb'];
+				
+				if($event == 'add'){
+					$action = "tilføjet";
+				} elseif($event == 'edit'){
+					$action = "redigeret i";
+				}
+				
+				echo "<li>";
 
-				echo "<li id=" . $row['ID'] . ">";
+				echo "<div class='adminhisto'>$time | $name har $action $serialnb</div>";
+
+			
+			echo "<br>";
 
 
 				echo "</li>";

@@ -108,7 +108,7 @@ require_once "connection.php";
 			}
 			
 			echo "<div id='lidiv'>";
-			echo "<li id=" . $row['ID'] . " class='liclass'>";
+			echo "<li id=" . $row['ID'] . " class='liclass lilist'>";
 
 				echo "<div id='kate'>" . $row['category'] . "</div>";
 

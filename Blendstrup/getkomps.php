@@ -81,8 +81,7 @@ require_once "connection.php";
 				/* echo "<input type='checkbox' id='komps-check' name='komps-check'>"; */
 				echo "<p>Serienummer: </p>" . $row['serialnb'] . " " . "<p id='komps-p'>Placering: </p>" . $row['location'] . " ";
 				echo "</div>";
-			
-			echo "<hr class='hrkomps'>";
+
 		}
 	
 
