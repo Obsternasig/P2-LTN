@@ -570,9 +570,34 @@
 			});
 			
 			
-			$(".grid").on('click', '#histobutt, #userbutt', function() {
+			$(".grid").on('click', '#userbutt', function() {
 				
-				alert("Ikke implementeret endnu :(");
+				var user = "set";
+				
+				$.ajax ({
+					url: 'admin.php',
+					type: 'POST',
+					data: { user : user },
+					success: function(response) {
+						$('.list').html(response);
+					}
+				});
+				
+			});
+			
+			
+			$(".grid").on('click', '#histobutt', function() {
+				
+				var history = "set";
+				
+				$.ajax ({
+					url: 'admin.php',
+					type: 'POST',
+					data: { history : history },
+					success: function(response) {
+						$('.list').html(response);
+					}
+				});
 				
 			});
 			
