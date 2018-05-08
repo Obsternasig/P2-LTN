@@ -10,7 +10,6 @@ require_once "connection.php";
 		$history = $_POST['history'];
 	}
 
-
 	if(isset($users)) {
 
 		$adminquery = mysqli_query($connection, "SELECT * FROM users");
@@ -26,8 +25,6 @@ require_once "connection.php";
 				echo "<li>";
 				
 					echo "<div id='adminnavn' class='adminbrug'>" . $firstname . " " . $lastname . "</div>" . "<div class='adminbrug'>" . "Email: " . $email . " </div>";
-				
-					echo "<button class='interactive b adminbutton' id='" . $row['ID'] . "'> Slet </button>";
 
 				echo "</li>";
 

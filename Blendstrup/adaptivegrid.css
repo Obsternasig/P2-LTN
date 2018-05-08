@@ -478,14 +478,6 @@ a:visited {
 	height: 2vh;
 }
 
-.adminbutton {
-	display: inline-block;
-	width: 5vw;
-	font-size: 1vw;
-	height: 4vh;
-	margin: 2vh 0;
-}
-
 #adminnavn {
 	width: 15vw;
 	border-right: #404040 solid 0.15vw;
@@ -498,6 +490,8 @@ a:visited {
 	overflow: hidden;
 	margin: 2vh 0;
 	padding-left: 2vw;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .addam {
@@ -513,7 +507,7 @@ a:visited {
 	border: none;
 }
 
-.naddkomp p {
+.naddkomp p, .admincho p {
 	font-size: 1.3vw;
 	padding-left: 1vw;	
 }

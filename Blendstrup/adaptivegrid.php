@@ -586,13 +586,38 @@
 							$('.list').html(response);
 						}
 					});
+					
+					$("#adminadel").slideDown("fast");
+					
 				} else {
 					
+					$("#adminadel").slideUp("fast");
+					$("#adminadel").val("0");
+					$(".admincho").hide();
 					$(this).removeClass('btoggle');
 					reloadlist();
 				}
 				
 			});
+			
+			
+			$(".information").on('change', '#adminadel', function() {
+				
+				var advalue = this.value;
+	
+				$.ajax ({
+					url: 'getform.php',
+					type: 'POST',
+					data: { advalue : advalue },
+					success: function(response) {
+						if($('.admincho').length == 0){
+							$('.information').append(response);
+						} else {
+							$('.admincho').hide().html(response).slideDown("slow");
+						}
+					}
+				});
+        	});
 			
 			
 			$(".grid").on('click', '#histobutt', function() {

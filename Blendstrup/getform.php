@@ -4,6 +4,10 @@ require_once "connection.php";
 	if(isset($_POST['value'])) {
 		$value = $_POST['value'];
 	}
+
+	if(isset($_POST['advalue'])) {
+		$advalue = $_POST['advalue'];
+	}
 	
 	if(isset($_POST['initial'])) {
 		$initial = $_POST['initial'];
@@ -104,6 +108,50 @@ require_once "connection.php";
 		echo "<button id='histobutt' class='interactive b'> Historik </button>";
 			
 		echo "<button id='userbutt' class='interactive b'> Brugere </button>";
+			echo "<select size='1' id='adminadel' class='interactive' style='display: none;'>";
+				echo "<option value='0'> Tilføj eller slet bruger</option>";
+				echo "<option value='adduser'>Tilføj Bruger</option>";
+				echo "<option value='deluser'>Slet Bruger</option>";
+			echo "</select>";
+	}
+
+	if(isset($advalue) && $advalue != '0') {
+		
+		echo "<div class='admincho'>";
+			
+		if($advalue == 'adduser') {
+			
+			echo "<p class='tilover'>Fornavn:</p>";
+			echo "<div class='addam'></div>";
+			echo "<div class='fatadd fiddy' id='addfirstname' contenteditable='true'></div>";
+
+		
+			echo "<p class='tilover'>Efternavn:</p>";
+			echo "<div class='addam'></div>";
+			echo "<div class='fatadd fiddy' id='addlastname' contenteditable='true'></div>";
+		
+		
+			echo "<p class='tilover'>E-mail:</p>";
+			echo "<div class='addam'></div>";
+			echo "<div class='fatadd fiddy' id='addemail' contenteditable='true'></div>";
+			
+		
+			echo "<input type='submit' id='adminchook' class='interactive b' value='OK'>";
+
+			
+		} elseif($advalue = 'deluser') {
+			
+			echo "<p class='infotekst'> Slet en bruger ved, at indtaste brugerens email </p>";
+
+			echo "<p class='tilover'>E-mail:</p>";
+			echo "<div class='addam'></div>";
+			echo "<div class='fatadd fiddy' id='delemail' contenteditable='true'></div>";
+
+			echo "<input type='submit' id='adminchook' class='interactive b' value='OK'>";
+			
+			
+		}
+		echo "</div>";
 	}
 
 
