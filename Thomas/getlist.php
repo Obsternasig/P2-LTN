@@ -25,22 +25,49 @@ require_once "connection.php";
 		$search = $_POST['search'];
 	}
 
+	
+	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
+	$kompassoc = mysqli_fetch_assoc($komp);
+
+	$category = $kompassoc['category'];
+	switch($category) {
+		case $category == "switch": $spect = "ports";
+				break;
+		case $category == "router": $spect = "speed";
+				break;
+		case $category == "sfp-modul": $spect = "type";
+				break;
+		case $category == "el-tavle": $spect = "type";
+				break;
+		case $category == "ram-blok": $spect = "type";
+				break;
+		case $category == "processor": $spect = "socket";
+				break;
+		case $category == "kabel": $spect = "type";
+				break;
+		case $category == "motherboard": $spect = "socket";
+				break;
+
+			default: $catspec = "";
+		}
+
+
 
 	if(isset($option)) {
 		if($option != 'alle') {
-			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '" . $option . "' GROUP BY category, brand, ports");
+			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '" . $option . "' GROUP BY category, brand, ports, speed, type, socket");
 		} elseif($option == 'alle') {
-			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports ORDER BY category ASC");
+			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports, speed, type, socket ORDER BY category ASC");
 		}
 		
 	} elseif(isset($search)) {
 
 		$search = mysqli_real_escape_string($connection, $search);
-		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' OR serialnb LIKE '%$search%' GROUP BY category, brand, ports");
+		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter WHERE category LIKE '%$search%' OR brand LIKE '%$search%' OR serialnb LIKE '%$search%' GROUP BY category, brand, ports, speed, type, socket");
 
 	} elseif(!isset($option)&&!isset($search)) {
 
-		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports ORDER BY category ASC");
+		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, ports, speed, type, socket FROM komponenter GROUP BY category, brand, ports, speed, type, socket ORDER BY category ASC");
 		
 	}
 

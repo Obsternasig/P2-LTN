@@ -14,6 +14,11 @@
 				$broken = '0';
 				$away = '0';
 
+			} elseif($chostatu == 'broken_away') {
+
+				$broken = '1';
+				$away = '1';
+
 			} elseif($chostatu == 'broken') {
 
 				$broken = '1';
@@ -50,7 +55,7 @@
 
 
 			if(!empty($id)){
-				
+
 				$query = "UPDATE komponenter SET " . $category . " = '$catspec', location = '$choplace', away = '$away', broken = '$broken', comment = '$chocomme', specifications = '$chospeci' WHERE ID = '$id';";
 
 				$results = mysqli_query($connection, $query);

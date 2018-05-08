@@ -13,7 +13,7 @@
 
 	$userassoc = mysqli_fetch_assoc($users);
 
-	
+
 	if(isset($_SESSION['loginid'])){
 		
 		$ID = $_SESSION['loginid'];
@@ -42,24 +42,12 @@
 
 <head>
 	<meta charset="utf-8">
-	<title> Adaptive Grid </title>
+	<title> Super Storage </title>
 	<link rel="stylesheet" href="adaptivegrid.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
-	<div class="popupoverlay">
-			
-      		<h2>Brug for hjælp?</h2>
-			
-      		<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu. </p>
-			
-			<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum nunc arcu.</p> 
-			
-      		<button class="interactive b">OK!</button>
-			
-	</div>
-	
 	
 	<div class="grid">
 
@@ -69,28 +57,7 @@
 		
 		</div>
 		
-  		<div class="search">
-		
-			<input type="text" id="searchfield" name="search" class="interactive" placeholder="Søg..." autocomplete="off">
-			
-			
-			<select size="1" id="cateopt" name="cateopt" class="interactive">
-				<option value="alle">Alle</option>
-
-					<?php
-							$kompsort = mysqli_query($connection, "SELECT DISTINCT category FROM komponenter ORDER BY category ASC");
-
-							while ($kompkat = mysqli_fetch_assoc($kompsort)) {
-
-								$category = $kompkat['category'];
-								echo "<option value=" . $category . ">" . ucfirst($category) . "</option>";
-
-							}
-
-					?>
-
-			</select>
-		</div>
+  		<div class="search"></div>
 		
   		<div class="person"> 
 			
@@ -104,7 +71,7 @@
 					} 
 				?> 
 				
-				<button class="interactive b" id="help"> ? </button>
+				<a href="help.html" target="_blank"> <button class="interactive b" id="help"> ? </button></a>
 			</div>
 			
 		</div>
@@ -115,6 +82,26 @@
 			
 			<button id="editbutt" class="interactive b"> Rediger </button>
 			
+			<button id="udbutt" class="interactive b"> Lån </button>
+			
+			
+			
+			<div id="popup" class="modal">
+				
+				<div class="modal-content">
+					
+					<h3 class='infoover'> Skriv en kommentar til dit lån. </h3>
+					<input type="text" contenteditable="false">
+					
+					
+					<input type="submit" id="subcom" value="OK">
+					<span class="close"></span>
+					
+				</div>
+
+			</div>
+
+
 			<?php 
 			
 			if (isset($admin)) {
@@ -139,9 +126,13 @@
 			<div id="infodiv" class="infotekst">
 				<h2 class='infodo'>Velkommen!</h2>
 
-				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>
+				<p>Lan Team Nord er en frivillig computerforening som råder over en stor mængde af forskellige IT-komponenter, der blandt andet udlånes til store LAN-events. Systemet du befinder dig på, er et lagersystem over de forskellige komponenter foreningen stiller til rådighed for dets medlemmer og andre. </p>
+				
+				<p>Foreningen har adresse på C. H. Ryders Vej 24, 9210 Aalborg, og har åbent hver torsdag mellem 19-22. </p>
 
-				<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum.</p>
+				<p>Mere information omkring foreningen kan findes på hjemmesiden: <a href="https://www.lanteamnord.dk/" target="_blank"> https://www.lanteamnord.dk/ </a> </p>
+				
+				<p>For yderligere hjælp i forhold til brug af systemet kan der trykkes på ”?” ikonet i højre hjørne af systemet.</p>
 			</div>
 			
 		</div>
@@ -157,14 +148,38 @@
 			/* ////////////////////////////////    START    //////////////////////////////// */
 			
 			
-			$.ajax ({
-					url: 'getlist.php',
+			function reloadlist() {
+				$.ajax ({
+						url: 'getlist.php',
+						success: function(response) {
+							$('.list').html(response);
+						}
+				});
+			}
+			
+
+			function reloadkomp(id) {
+				$.ajax ({
+					url: 'getinfo.php',
+					type: 'POST',
+					data : { id1 : id },
 					success: function(response) {
-						$('.list').html(response);
+						$('.information').html(response);
 					}
-			});
-
-
+				});
+			}
+			
+			
+			function reloadsearch() {
+				$.ajax ({
+						url: 'getsearch.php',
+						success: function(response) {
+							$('.search').html(response);
+						}
+				});
+			}
+			
+			
 			function cleanallinfo() {
 				
 				$(".information").empty();
@@ -176,11 +191,15 @@
 			}
 			
 			
+			reloadlist();
+			reloadsearch();
+			
+			
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////    SEARCH   //////////////////////////////// */
 			
 			
-			$("#cateopt").on('change', function() {
+			$(".search").on('change', '#cateopt', function() {
 
 				var option = this.value;
 				$("#searchfield").val('');
@@ -197,8 +216,8 @@
 			});
 
 
-			$("#searchfield").keyup(function () {
-
+			$(".search").on('keyup', '#searchfield', function (e) {
+				
 				var search = $("#searchfield").val();
 				$("#cateopt").val('alle');
 
@@ -218,7 +237,7 @@
 			/* ////////////////////////////////     LIST    //////////////////////////////// */
 			
 			
-			$(".grid").on('click', '.komps', function() {
+			$(".list").on('click', '.komps', function() {
 					
 					$('.grid *').removeClass('btoggle');
 					
@@ -246,7 +265,7 @@
 			});
 			
 			
-			$(".grid").on('click', 'li', function() {
+			$(".list").on('click', 'li', function() {
 				
 					$("#addwhat").val('0');
 					
@@ -256,13 +275,11 @@
 
 						$(this).removeClass('liselected');
 						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
+						$('.grid *').removeClass('btoggle');
 						
-						/* if($(this).siblings.hasClass('selected')) {
-							cleanallinfo();
-						} 
-						
-						Sæt komps ind i en div under li elementet således det bliver et child, og check så om li'ens children har classen selected, og hvis ja så clean informations div'en
-						*/
+						if($(this).siblings(".divID").children(".komps").hasClass('selected')) {
+							$(".information").empty();
+						}
 
 					} else {
 						
@@ -284,36 +301,6 @@
 			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
 			
 			
-			$("#help").on("click", function(){
-				
-  				$(".popupoverlay").addClass("active");
-				
-			});
-
-			
-			$(".popupoverlay").on("click", function(){
-				
-  				$(".popupoverlay").removeClass("active");
-			});
-			
-			
-			$(".grid").on('click', '#addcancel', function() {
-				$(".information *").slideUp("fast", function(){
-					$(".information").empty();
-					$("#addwhat").val('0');
-					$('.grid *').removeClass('btoggle');
-				});
-			});
-			
-			$(".grid").on('click', '#editcancel', function() {
-				$('.grid *').removeClass('btoggle');
-				$('.information button').hide();
-				$('.infotekst').attr("contenteditable", "false");
-				
-				//For at resette tekstfelterne til deres forrige værdi, så skal den bare genindlæses uden at der sker en permanent ændring i db
-			});
-			
-			
 			$(".grid").on('click', '#addbutt', function() {
 				
 				cleanallinfo();
@@ -328,6 +315,15 @@
 					success: function(response) {
 						$('.information').html(response);
 					}
+				});
+			});
+			
+			
+			$(".grid").on('click', '#addcancel', function() {
+				$(".information *").slideUp("fast", function(){
+					$(".information").empty();
+					$("#addwhat").val('0');
+					$('.grid *').removeClass('btoggle');
 				});
 			});
 			
@@ -352,34 +348,123 @@
 			
 			$(".grid").on('click', '#editbutt', function() {
 				
-				if($('.komps').hasClass('selected')){
+				if(!$(this).hasClass('btoggle')) {
+					if($('.komps').hasClass('selected')){
+
+					$(this).addClass('btoggle');
+					$('.infotekst').attr("contenteditable", "true");
+					$('div.infotekst').addClass('fatedit');
+
+
+					$('#editcancel').show();
+					$('#editdone').show();
+
+
+					var edit = "set";
+
+					$.ajax ({
+						url: 'getinfo.php',
+						type: 'POST',
+						data: { edit : edit },
+						success: function(response) {
+							$('.information').append(response);
+							$('#inplaced, #instated').hide();
+							$('#inplacedsel, #instatedsel').show();
+							$('#incated, #incommed, #inspeced').attr("contenteditable", "true");
+						}
+					});
+
+					} else {
+						alert ('Ingen komponent valgt');
+					}
+				} else {
 					
-				$(this).addClass('btoggle');
-				$('.infotekst').attr("contenteditable", "true");
+					var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
 				
-				var edit = "set";
+					reloadkomp(Id);
+					
+					$('.grid *').removeClass('btoggle fatedit');
+					$('.information button').hide();
+					$('.infotekst').attr("contenteditable", "false");
+				}
+			});
+			
+			
+			$(".grid").on('click', '#editdone', function() {
 				
+				var plasel = $('#inplacedsel').val();
+				var stasel = $('#instatedsel').val();
+				
+				var comm = $('#incommed').text();
+				var spec = $('#inspeced').text();
+				
+				var catspec = $('#incated').text();
+				var catover = $('#catover').text();
+				
+				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
+			
 				$.ajax ({
-					url: 'getinfo.php',
+					url: 'update.php',
 					type: 'POST',
-					data: { edit : edit },
-					success: function(response) {
-						$('.information button').hide();
-						$('.information').append(response);
-						$('.infotekst').attr("contenteditable", "true");
+					data : { catover : catover, catspec : catspec, plasel : plasel, stasel : stasel, comm : comm, spec : spec, id : Id },
+					success: function() {
+						
+						$('.grid *').removeClass('btoggle fatedit');
+						$(".information").empty();
+						reloadlist();
+						reloadsearch();
+						
+						alert("Komponent opdateret!");
+						
 					}
 				});
 				
-				}
-				
 			});
 			
+			
+			$(".grid").on('click', '#editcancel', function() {
+				$('.grid *').removeClass('btoggle fatedit');
+				$('.information button').hide();
+				$('.infotekst').attr("contenteditable", "false");
+				
+				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
+				
+				reloadkomp(Id);
+			});
+			
+			
+				
+			//		PopUp		//
+			var modal = document.getElementById('popup');
 
+			var btn = document.getElementById("udbutt");
+
+			var span = document.getElementsByClassName("close")[0];
+ 
+			btn.onclick = function() {
+				modal.style.display = "block";
+			};
+
+			span.onclick = function() {
+				modal.style.display = "none";
+		};
+
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+			}
+			};
+			
+			
+			$(".grid").on('click', '#subcom', function() {
+				alert("Under Development - Denne funktion er ikke lavet endnu.");
+				});
+			
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* //////////////////////////////// INFORMATION //////////////////////////////// */
 			
 			
-			$(".grid").on('change', '#addwhat', function() {
+			$(".information").on('change', '#addwhat', function() {
 				
 				var value = this.value;
 	

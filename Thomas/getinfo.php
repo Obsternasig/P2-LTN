@@ -8,8 +8,6 @@ require_once "connection.php";
 			return '#334488';
 		} else if ($var == 2) {
 			return '#e95522';
-		} else if ($var == 3) {
-			return '#303030';
 		}
 	}
 
@@ -27,19 +25,6 @@ require_once "connection.php";
 		$edit = $_POST['edit'];
 	}
 
-	
-	if(isset($help)) {
-		echo "<div id='infodiv' class='infotekst'>";
-		
-			echo "<h2 class='infodo'>Velkommen!</h2>";
-
-			echo "<p>Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>";
-
-			echo "<p> Lorem ipsum dolor sit amet, nullam sed vestibulum ullamcorper ut, ante viverra vitae, velit in dignissim sed dui. Imperdiet metus integer ridiculus phasellus. Sem porttitor sed nunc, eros suspendisse netus lobortis lorem. Dignissim non convallis auctor maecenas blandit, amet at vulputate mollis id fermentum a, vestibulum pharetra, amet vivamus similique nullam bibendum. </p>";
-		
-		echo "</div>";
-	}
-
 
 	if(isset($id)) {
 		$komp = mysqli_query($connection, "SELECT * FROM komponenter WHERE ID LIKE '" . $id . "'");
@@ -48,83 +33,70 @@ require_once "connection.php";
 		if($kompassoc['away'] == '1' && $kompassoc['broken'] == '0') {
 				$value = 1;
 				$status = "Udlånt";
+				$staway = "selected='selected'";
 			} else if($kompassoc['away'] == '0' && $kompassoc['broken'] == '1') {
 				$value = 2;
 				$status = "Ødelagt :(";
-			} else if($kompassoc['away'] == '1' && $kompassoc['broken'] == '1') {
-				$value = 3;
-				$status = "Både udlånt og ødelagt :(";
-			} else {
+				$stabro = "selected='selected'";
+			} elseif($kompassoc['away'] == '0' && $kompassoc['broken'] == '0') {
 				$value = 0;
 				$status = "På lager";
+				$sta = "selected='selected'";
+			} else {
+				$sta = "";
+				$staway = "";
+				$stabro = "";
 			}
 		
 		
 		$category = $kompassoc['category'];
 		switch($category) {
-				case $category == "switch": $catover = "Porte"; $catspec = $kompassoc['ports'];
+			case $category == "switch": $catover = "Ports:"; $catspec = $kompassoc['ports'];
 					break;
-				case $category == "router": $catover = "Hastighed"; $catspec = $kompassoc['speed'];
+			case $category == "router": $catover = "Hastighed:"; $catspec = $kompassoc['speed'];
 					break;
-				case $category == "sfp-modul": $catover = "Type"; $catspec = $kompassoc['type'];
+			case $category == "sfp-modul": $catover = "Type:"; $catspec = $kompassoc['type'];
 					break;
-				case $category == "el-tavle": $catover = "Type"; $catspec = $kompassoc['type'];
+			case $category == "el-tavle": $catover = "Type:"; $catspec = $kompassoc['type'];
 					break;
-				case $category == "ram-blok": $catover = "Type"; $catspec = $kompassoc['type'];
+			case $category == "ram-blok": $catover = "Type:"; $catspec = $kompassoc['type'];
 					break;
-				case $category == "processor": $catover = "Socket"; $catspec = $kompassoc['socket'];
+			case $category == "processor": $catover = "Socket:"; $catspec = $kompassoc['socket'];
 					break;
-				case $category == "kabel": $catover = "Type"; $catspec = $kompassoc['type'];
+			case $category == "kabel": $catover = "Type:"; $catspec = $kompassoc['type'];
 					break;
-				case $category == "motherboard": $catover = "Socket"; $catspec = $kompassoc['socket'];
+			case $category == "motherboard": $catover = "Socket:"; $catspec = $kompassoc['socket'];
 					break;
 
 				default: $catover = "?"; $catspec = "?";
 			}
 		
-		/* if($kompassoc['category'] == 'router') {
-				$catrou = "selected='selected'";
-			} else {
-				$catrou = "";
-			}
-		if($kompassoc['category'] == 'switch') {
-				$catswi = "selected='selected'";
-			} else {
-				$catswi = "";
-			} */
-		
 		
 		
 		echo "<h2 class='infodo'>Information</h2>";
 
-		echo "<h3 class='infoover' id='catover'>" . $catover . ": </h3>";
-		echo "<div class='infotekst' id='incated' contenteditable='false'>" . ucfirst($catspec) . "</div>";
+		echo "<h3 class='infoover' id='catover'>" . nl2br($catover) . "</h3>";
+		echo "<div class='infotekst' id='incated' contenteditable='false'>" . nl2br(ucfirst($catspec)) . "</div>";
 		
 		
 		echo "<h3 class='infoover'> Placering: </h3>";
-		echo "<div class='infotekst' id='inplaced'>" . ucfirst($kompassoc['location']) . "</div>";
-			echo "<select size='1' id='inplacedsel' class='editdrop' style='display: none;'>";
-				echo "<option value='Myrdalstræde 34 C'> Myrdalstræde 34 C </option>";
-				echo "<option value='C. H. Ryders Vej 24'> C. H. Ryders Vej 24 </option>";
-				echo "<option value='Lejers adresse'> Lejers adresse </option>";
-			echo "</select>";
+		echo "<div class='infotekst' id='inplaced' contenteditable='false'>" . nl2br(ucfirst($kompassoc['location'])) . "</div>";
 		
 		
 		echo "<h3 class='infoover'> Status: </h3>";
 		echo "<div class='infotekst' id='instated' style='color: " . getColor($value) . "'>" . $status . "</div>";
 			echo "<select size='1' id='instatedsel' class='editdrop' style='display: none;'>";
-				echo "<option value='lager'>På lager</option>";
-				echo "<option value='broken'>Ødelagt</option>";
-				echo "<option value='away'>Udlånt</option>";
-				echo "<option value='broken_away'>Både udlånt og ødelagt</option>";
+				echo "<option value='lager' $sta>På lager</option>";
+				echo "<option value='broken' $stabro>Ødelagt</option>";
+				echo "<option value='away' $staway>Udlånt</option>";
 			echo "</select>";
 		
 		
 		echo "<h3 class='infoover'> Kommentar: </h3>";
-		echo "<div class='infotekst' id='incommed' contenteditable='false'>" . ucfirst($kompassoc['comment']) . "</div>";
+		echo "<div class='infotekst' id='incommed' contenteditable='false'>" . nl2br(ucfirst($kompassoc['comment'])) . "</div>";
 		
 		echo "<h3 class='infoover'> Specifikationer: </h3>";
-		echo "<div class='infotekst' id='inspeced' contenteditable='false'>" . ucfirst($kompassoc['specifications']) . "</div>";
+		echo "<div class='infotekst' id='inspeced' contenteditable='false'>" . nl2br(ucfirst($kompassoc['specifications'])) . "</div>";
 	}
 
 	

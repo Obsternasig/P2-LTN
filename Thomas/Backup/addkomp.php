@@ -32,51 +32,14 @@
 					$broken = "";
 				}
 				
-			if(isset($_POST['serialnb'])){
-					$serialnb = $_POST['serialnb'];
-				}else{
-					$serialnb = "";
-				}
 			
-			if(isset($_POST['location'])){
-					$location = $_POST['location'];
-				}else{
-					$location = "";
-				}
-				
-				if(isset($_POST['comment'])){
-					$comment = $_POST['comment'];
-				}else{
-					$comment ="";
-				}
-				
-				if(isset($_POST['speed'])){
-					$speed = $_POST['speed'];
-				}else{
-					$speed = "";
-				}
-			
-				if(isset($_POST['specification'])){
-					$specification = $_POST['specification'];
-				}else{
-					$specification = "";
-				}
-				
-				if(isset($_POST['length'])){
-					$length = $_POST['length'];
-				}else{
-					$length = "";
-				}
-				
-				if(isset($_POST['type'])){
-					$type = $_POST['type'];
-				}else{
-					$type = "";
-				}
-			
-			
-			
-			
+			$serialnb = "";
+			$location = "";
+			$comment ="";
+			$speed = "";
+			$type = "";
+			$length = "";
+			$specification = "";
 		
 		
 		if(!empty($category)&&!empty($brand)) {

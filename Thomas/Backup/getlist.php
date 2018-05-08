@@ -66,7 +66,7 @@ require_once "connection.php";
 					break;
 				case $category == "ram-blok": $midsec = "Type"; $midcat = $row['type'];
 					break;
-				case $category == "cpu": $midsec = "Socket"; $midcat = $row['socket'];
+				case $category == "processor": $midsec = "Socket"; $midcat = $row['socket'];
 					break;
 				case $category == "kabel": $midsec = "Type"; $midcat = $row['type'];
 					break;
@@ -76,7 +76,7 @@ require_once "connection.php";
 				default: $midsec = "?"; $midcat = "?";
 			}
 			
-			
+			echo "<div id='lidiv'>";
 			echo "<li id=" . $row['ID'] . " class='liclass'>";
 
 				echo "<div id='kate'>" . $row['category'] . "</div>";
@@ -96,6 +96,8 @@ require_once "connection.php";
 			echo "</li>";
 
 			echo "<div id='div" . $row['ID'] . "' class='divID' style='display: none;'></div>";
+			
+			echo "</div>";
 			
 			echo "<hr>";
 
