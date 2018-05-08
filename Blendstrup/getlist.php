@@ -55,7 +55,7 @@ require_once "connection.php";
 
 
 
-	/* if(isset($option)) {
+	if(isset($option)) {
 		if($option != 'alle') {
 			$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, porte, hastighed, type, socket FROM komponenter WHERE category LIKE '" . $option . "' GROUP BY category, brand, porte, hastighed, type, socket");
 		} elseif($option == 'alle') {
@@ -71,7 +71,7 @@ require_once "connection.php";
 
 		$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, porte, hastighed, type, socket FROM komponenter GROUP BY category, brand, porte, hastighed, type, socket ORDER BY category ASC");
 		
-	} */
+	}
 
 	
 	$listquery = mysqli_query($connection, "SELECT COUNT(*) AS amount, ID, category, brand, serialnb, SUM(away), SUM(broken), location, comment, porte, hastighed, type, socket FROM komponenter GROUP BY category, brand, porte, hastighed, type, socket ORDER BY category ASC");
