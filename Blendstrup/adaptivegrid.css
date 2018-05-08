@@ -500,7 +500,7 @@ a:visited {
 	width: 0.5vw;
 }
 
-#addok {
+.formok {
 	margin-top: 0.8vw;
 	padding: 0.5vh 0.5vw;
 	width: 5vw;

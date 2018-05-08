@@ -96,7 +96,7 @@ require_once "connection.php";
 		
 			echo "<div class='naddkomp'>";
 		
-				echo "<input type='submit' id='addok' class='interactive b' value='OK'>";
+				echo "<input type='submit' id='addok' class='interactive b formok' value='OK'>";
 		
 			echo "</div>";
 		
@@ -136,7 +136,7 @@ require_once "connection.php";
 			echo "<div class='fatadd fiddy' id='addemail' contenteditable='true'></div>";
 			
 		
-			echo "<input type='submit' id='adminchook' class='interactive b' value='OK'>";
+			echo "<input type='submit' id='adminaddok' class='interactive b formok' value='OK'>";
 
 			
 		} elseif($advalue = 'deluser') {
@@ -147,7 +147,7 @@ require_once "connection.php";
 			echo "<div class='addam'></div>";
 			echo "<div class='fatadd fiddy' id='delemail' contenteditable='true'></div>";
 
-			echo "<input type='submit' id='adminchook' class='interactive b' value='OK'>";
+			echo "<input type='submit' id='admindelok' class='interactive b formok' value='OK'>";
 			
 			
 		}

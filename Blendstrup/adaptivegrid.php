@@ -81,8 +81,6 @@
 	
 			<button id="addbutt" class="interactive b"> Tilføj </button>
 			
-			<button id="editbutt" class="interactive b"> Rediger </button>
-			
 				<?php 
 
 					if (isset($admin)) {
@@ -158,6 +156,21 @@
 							$('.search').html(response);
 						}
 				});
+			}
+			
+			
+			function reloaduserlist() {
+				
+				var users = "set";
+
+					$.ajax ({
+						url: 'admin.php',
+						type: 'POST',
+						data: { users : users },
+						success: function(response) {
+							$('.list').html(response);
+						}
+					});
 			}
 			
 			
@@ -620,10 +633,65 @@
         	});
 			
 			
+			$(".grid").on('click', '#adminaddok', function() {
+				
+				var addfirstname = $('#addfirstname').text();
+				var addlastname = $('#addlastname').text();
+				var addemail = $('#addemail').text();
+				
+				$.ajax ({
+					url: 'adduser.php',
+					type: 'POST',
+					data : { addemail : addemail, addfirstname : addfirstname, addlastname : addlastname },
+					success: function() {
+						
+						$("#userbutt").removeClass('btoggle');
+						$("#adminadel").slideUp("fast");
+						$("#adminadel").val("0");
+						$(".admincho").hide();
+						
+						alert("Bruger tilføjet!");
+						
+						reloaduserlist()
+
+					}
+				});
+				
+			});
+			
+			
+			$(".grid").on('click', '#admindelok', function() {
+				
+				var delemail = $('#delemail').text();
+				
+				$.ajax ({
+					url: 'deluser.php',
+					type: 'POST',
+					data : { delemail : delemail },
+					success: function() {
+						
+						$("#userbutt").removeClass('btoggle');
+						$("#adminadel").slideUp("fast");
+						$("#adminadel").val("0");
+						$(".admincho").hide();
+						
+						alert("Bruger fjernet!");
+						
+						reloaduserlist()
+
+					}
+				});
+				
+			});
+			
+			
 			$(".grid").on('click', '#histobutt', function() {
 				if(!$(this).hasClass('btoggle')) {
 					$(this).addClass('btoggle');
 					$("#userbutt").removeClass('btoggle');
+					$("#adminadel").slideUp("fast");
+					$("#adminadel").val("0");
+					$(".admincho").hide();
 					
 					var history = "set";
 				

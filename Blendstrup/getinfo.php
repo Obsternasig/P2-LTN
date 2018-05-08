@@ -75,6 +75,8 @@ require_once "connection.php";
 		
 		echo "<h2 class='infodo'>Information</h2>";
 
+		echo "<button id='editbutt' class='interactive b'> Rediger enhed </button>";
+		
 		echo "<h3 class='infoover' id='catover'>" . nl2br($catover) . "</h3>";
 		echo "<div class='infotekst' id='incated' contenteditable='false'>" . nl2br(ucfirst($catspec)) . "</div>";
 		

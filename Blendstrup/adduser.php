@@ -24,7 +24,6 @@
 		}
 
 
-	
 
 	if(isset($_POST['addfirstname'])&&isset($_POST['addlastname'])&&isset($_POST['addemail'])) {
 			
@@ -38,7 +37,7 @@
 		
 		if(!empty($firstname)&&!empty($lastname)&&!empty($email)) {
 
-			$query = "INSERT INTO users VALUES ('$initials', '$pin', '$firstname', '$lastname', '$email', '')";
+			$query = "INSERT INTO users VALUES ('$initials', '$pin', '$firstname', '$lastname', '$email', '', '')";
 			$results = mysqli_query($connection, $query);
 
 
@@ -46,14 +45,7 @@
 					die("Cannot connect to the database" .mysqli_connect_error());
 				}
 
-			header("Location: adaptivegrid.php");
-
-
-			} else {
-
-			echo "Something went wrong...";
-
-			}
+			} 
 		}
 
 mysqli_close($connection);
