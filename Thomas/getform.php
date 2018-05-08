@@ -137,6 +137,7 @@ require_once "connection.php";
 		
 		
 		echo "<div id='delform' class='hideform'>";
+		echo "<p class='infotekst'> Slet en bruger ved, at indtaste brugerens email. </p>";
 		echo "<form method='post' action='delete.php' id='deleform'>";
 		
 		echo "<p class='infotekst'> Brugers Email: </p>";
