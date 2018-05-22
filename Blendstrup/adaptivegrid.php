@@ -15,24 +15,24 @@
 
 
 	if(isset($_SESSION['loginid'])){
-		
+
 		$ID = $_SESSION['loginid'];
 
 		$idquery = "SELECT * FROM users WHERE ID =$ID";
 		$idresults = mysqli_query($connection, $idquery);
 
 			if(!$idresults){
-				
+
 				 die("Could not query the database" .mysqli_error());
 			} else {
-				
+
 				$idrow = mysqli_fetch_assoc($idresults);
-	
+
 					$firstname = $idrow['firstname'];
 					$lastname = $idrow['lastname'];
 					$admin = $idrow['adminon'];
 			}
-			
+
 	}
 
 ?>
@@ -52,36 +52,36 @@
 	<div class="grid">
 
   		<div class="logo">
-		
+
 			<a href="adaptivegrid.php"><img id="imglogo" src="images/logo.png"/></a>
-		
+
 		</div>
-		
+
   		<div class="search"></div>
-		
-  		<div class="person"> 
-			
-			<div class="personid"> 
-				<?php 
-					
-					if (isset($firstname)&&isset($lastname)) { 
-						
+
+  		<div class="person">
+
+			<div class="personid">
+				<?php
+
+					if (isset($firstname)&&isset($lastname)) {
+
 						$name = $firstname . " " . $lastname;
 						echo "<img src='images/mand.png'>" . " ";
-						echo $name; 
-					} 
-				?> 
-				
+						echo $name;
+					}
+				?>
+
 				<a href="help.html" target="_blank"> <button class="interactive b" id="help"> ? </button></a>
 			</div>
-			
+
 		</div>
-		
-		<div class="functions"> 
-	
+
+		<div class="functions">
+
 			<button id="addbutt" class="interactive b"> Tilføj </button>
-			
-				<?php 
+
+				<?php
 
 					if (isset($admin)) {
 
@@ -90,43 +90,43 @@
 							echo "<button id='adminbutt' class='interactive b'> Admin </button>";
 						}
 					}
-				?>	
-			
+				?>
+
 		</div>
 
 		<div class="end">
 			<button class="interactive b" onclick="window.location.replace ('logout.php');">Log ud</button>
 		</div>
-		
+
 		<div class="list"></div>
 
 		<div class="information">
-			
+
 			<div id="infodiv" class="infotekst">
 				<h2 class='infodo'>Velkommen!</h2>
 
 				<p>Lan Team Nord er en frivillig computerforening som råder over en stor mængde af forskellige IT-komponenter, der blandt andet udlånes til store LAN-events. Systemet du befinder dig på, er et lagersystem over de forskellige komponenter foreningen stiller til rådighed for dets medlemmer og andre. </p>
-				
+
 				<p>Foreningen har adresse på C. H. Ryders Vej 24, 9210 Aalborg, og har åbent hver torsdag mellem 19-22. </p>
 
 				<p>Mere information omkring foreningen kan findes på hjemmesiden: <a href="https://www.lanteamnord.dk/"> https://www.lanteamnord.dk/ </a> </p>
-				
+
 				<p>For yderligere hjælp i forhold til brug af systemet kan der trykkes på ”?” ikonet i højre hjørne af systemet.</p>
 			</div>
-			
+
 		</div>
-		
+
 	</div>
 
 
 	<script>
 
 		$(document).ready(function(){
-			
+
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////    START    //////////////////////////////// */
-			
-			
+
+
 			function reloadlist() {
 				$.ajax ({
 						url: 'getlist.php',
@@ -135,7 +135,7 @@
 						}
 				});
 			}
-			
+
 
 			function reloadkomp(id) {
 				$.ajax ({
@@ -147,8 +147,8 @@
 					}
 				});
 			}
-			
-			
+
+
 			function reloadsearch() {
 				$.ajax ({
 						url: 'getsearch.php',
@@ -157,10 +157,10 @@
 						}
 				});
 			}
-			
-			
+
+
 			function reloaduserlist() {
-				
+
 				var users = "set";
 
 					$.ajax ({
@@ -172,43 +172,43 @@
 						}
 					});
 			}
-			
-			
+
+
 			function cleanallinfo() {
-				
+
 				$(".information").empty();
 				$("#addwhat").val('0');
 				$('li').removeClass('liselected');
 				$('.divID').slideUp("fast", function() { $(this).empty(); } );
 				$('.grid *').removeClass('btoggle');
-				
+
 			}
-			
-			
+
+
 			function history(serialnb, event) {
-				
+
 				var name = '<?php if(isset($name)) { echo $name; } else { echo "Ukendt"; } ?>';
 				var serialnb = serialnb;
 				var event = event;
-				
+
 				$.post("addhisto.php", { name : name, serialnb : serialnb, event : event });
-				
+
 			}
-			
-			
+
+
 			reloadlist();
 			reloadsearch();
-			
-			
+
+
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////    SEARCH   //////////////////////////////// */
-			
-			
+
+
 			$(".search").on('change', '#cateopt', function() {
 
 				var option = this.value;
-				$("#searchfield").val('');	
-				
+				$("#searchfield").val('');
+
 				$.ajax ({
 					url: 'getlist.php',
 					type: 'POST',
@@ -223,10 +223,10 @@
 
 			var search = null;
 			$(".search").on('keyup', '#searchfield', function (e) {
-				
+
 				search = $("#searchfield").val();
 				$("#cateopt").val('alle');
-				
+
 				$.ajax({
 					url: 'getlist.php',
 					type: 'POST',
@@ -236,28 +236,28 @@
 					}
 				});
 			});
-			
-			
+
+
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////     LIST    //////////////////////////////// */
-			
-			
+
+
 			$(".list").on('click', '.komps', function() {
-					
+
 					$('.grid *').removeClass('btoggle');
-					
+
 					var Id = $(this).attr('id');
-							
+
 					if($(this).hasClass('selected')) {
 
 						$(this).removeClass('selected');
 						$('.information').empty();
 
 					} else {
-						
+
 						$('.komps').removeClass('selected');
 						$(this).addClass('selected');
-						
+
 						$.ajax ({
 							url: 'getinfo.php',
 							type: 'POST',
@@ -268,34 +268,34 @@
 						});
 					}
 			});
-			
-			
+
+
 			$(".list").on('click', '.lilist', function() {
-				
+
 					$("#addwhat").val('0');
-					
+
 					var Id = $(this).attr('id');
-				
+
 					if(search != null){
 						var searched = search;
 					} else {
 						var searched = "";
 					}
-				
+
 					//alert(searched);
-				
+
 					if($(this).hasClass('liselected')) {
 
 						$(this).removeClass('liselected');
 						$('#div' + Id).slideUp("fast", function() { $(this).empty(); } );
 						$('.grid *').removeClass('btoggle');
-						
+
 						if($(this).siblings(".divID").children(".komps").hasClass('selected')) {
 							$(".information").empty();
 						}
 
 					} else {
-						
+
 						$(this).addClass('liselected');
 
 						$.ajax ({
@@ -309,15 +309,15 @@
 					}
 			});
 
-			
+
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* ////////////////////////////////   BUTTONS   //////////////////////////////// */
-			
-			
+
+
 			$(".grid").on('click', '#addbutt', function() {
-				
+
 				if(!$(this).hasClass('btoggle')) {
-				
+
 					cleanallinfo();
 					reloadlist();
 					$(this).addClass('btoggle');
@@ -332,26 +332,26 @@
 							$('.information').html(response);
 						}
 					});
-				
+
 				} else {
-					
+
 					cleanallinfo();
-					
+
 				}
 			});
-			
-			
+
+
 			$(".grid").on('click', '#addok', function() {
-				
+
 				var cate = $('#addwhat').val();
 				var brand = $('#addbrand').text();
 				var serialnb = $('#addserialnb').text();
 				var location = $('#addlocation').text();
 				var comment = $('#addcomment').text();
 				var speci = $('#addspeci').text();
-				
+
 				var event = "add";
-				
+
 					if($('#addporte').text() == undefined){
 						var porte = "";
 					} else {
@@ -375,28 +375,28 @@
 					} else {
 						var type = $('#addtype').text();
 					}
-				
-				
+
+
 				$.ajax ({
 					url: 'addkomp.php',
 					type: 'POST',
 					data : { cate : cate, brand : brand, serialnb : serialnb, location : location, comment : comment, speci : speci, porte : porte, hastighed : hastighed, socket : socket, type : type },
 					success: function() {
-						
+
 						$('.grid *').removeClass('btoggle');
 						$(".information").empty();
 						reloadlist();
 						reloadsearch();
-						
+
 						alert("Komponent tilføjet!");
-					
+
 						history(serialnb, event);
 					}
 				});
-				
+
 			});
-			
-			
+
+
 			$(".grid").on('click', '#addcancel', function() {
 				$(".information *").slideUp("fast", function(){
 					$(".information").empty();
@@ -404,10 +404,10 @@
 					$('.grid *').removeClass('btoggle');
 				});
 			});
-			
-			
+
+
 			$(".grid").on('click', '#editbutt', function() {
-				
+
 				if(!$(this).hasClass('btoggle')) {
 					if($('.komps').hasClass('selected')){
 
@@ -438,74 +438,74 @@
 						alert ('Ingen komponent valgt');
 					}
 				} else {
-					
+
 					var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
-				
+
 					reloadkomp(Id);
-					
+
 					$('.grid *').removeClass('btoggle fatedit');
 					$('.information button').hide();
 					$('.infotekst').attr("contenteditable", "false");
 				}
 			});
-			
-			
+
+
 			$(".grid").on('click', '#editdone', function() {
-				
+
 				var plasel = $('#inplaced').text();
 				var stasel = $('#instatedsel').val();
-				
+
 				var comm = $('#incommed').text();
 				var spec = $('#inspeced').text();
-				
+
 				var catspec = $('#incated').text();
 				var catover = $('#catover').text();
-				
+
 				var serialnb = $('#hiddenserialnb').val();
 				var event = "edit";
-				
+
 				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
-			
+
 				$.ajax ({
 					url: 'update.php',
 					type: 'POST',
 					data : { catover : catover, catspec : catspec, plasel : plasel, stasel : stasel, comm : comm, spec : spec, id : Id },
 					success: function() {
-						
+
 						$('.grid *').removeClass('btoggle fatedit');
 						$(".information").empty();
 						reloadlist();
 						reloadsearch();
-						
+
 						alert("Komponent opdateret!");
-						
+
 						history(serialnb, event);
-						
+
 					}
 				});
-				
+
 			});
-			
-			
+
+
 			$(".grid").on('click', '#editcancel', function() {
 				$('.grid *').removeClass('btoggle fatedit');
 				$('.information button').hide();
 				$('.infotekst').attr("contenteditable", "false");
-				
+
 				var Id = $(this).parent().siblings('.list').find('.selected').attr('id');
-				
+
 				reloadkomp(Id);
 			});
-			
+
 
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* //////////////////////////////// INFORMATION //////////////////////////////// */
-			
-			
+
+
 			$(".information").on('change', '#addwhat', function() {
-				
+
 				var value = this.value;
-	
+
 				$.ajax ({
 					url: 'getform.php',
 					type: 'POST',
@@ -519,48 +519,48 @@
 					}
 				});
         	});
-			
-			
+
+
 			$('.information').on('keyup keydown paste', '.fiddy', function() {
-				
-				
+
+
 				var add = $(this).text().length;
-				var Id = $(this).attr('id');	
-				
+				var Id = $(this).attr('id');
+
 				if(Id == "addcomment" || Id == "addspeci") {
-					
+
 					var max = 500;
-					
+
 				} else {
-					
+
 					var max = 50;
 				}
-				
-				
+
+
 				if(add > max){
-					
+
 					var toomuch = add - max;
-					
+
 					$(this).prevAll("div.addam:first").text( "-" + toomuch );
 					$(this).css({'border-color': 'red'});
-					
+
 				} else if((add <= max) && (add != 0)){
 
 					$(this).css({'border-color': '#303030', 'color': '#D7D7D7'});
 					$(this).prevAll("div.addam:first").text( add );
-				
+
 				} else if(add == 0) {
-					
+
 					$(this).prevAll("div.addam:first").html("");
 					$(this).css({'border-color': '#303030'});
 				}
 			});
-			
-	
+
+
 			/* ///////////////////////////////////////////////////////////////////////////// */
 			/* /////////////////////////////////// ADMIN /////////////////////////////////// */
-			
-			
+
+
 			$(".grid").on('click', '#adminbutt', function() {
 				if(!$(this).hasClass('btoggle')) {
 					cleanallinfo();
@@ -577,19 +577,19 @@
 						}
 					});
 				} else {
-					
+
 					cleanallinfo();
 					reloadlist();
-					
+
 				}
 			});
-			
-			
+
+
 			$(".grid").on('click', '#userbutt', function() {
 				if(!$(this).hasClass('btoggle')) {
 					$(this).addClass('btoggle');
 					$("#histobutt").removeClass('btoggle');
-					
+
 					var users = "set";
 
 					$.ajax ({
@@ -600,25 +600,25 @@
 							$('.list').html(response);
 						}
 					});
-					
+
 					$("#adminadel").slideDown("fast");
-					
+
 				} else {
-					
+
 					$("#adminadel").slideUp("fast");
 					$("#adminadel").val("0");
 					$(".admincho").hide();
 					$(this).removeClass('btoggle');
 					reloadlist();
 				}
-				
+
 			});
-			
-			
+
+
 			$(".information").on('change', '#adminadel', function() {
-				
+
 				var advalue = this.value;
-	
+
 				$.ajax ({
 					url: 'getform.php',
 					type: 'POST',
@@ -632,60 +632,60 @@
 					}
 				});
         	});
-			
-			
+
+
 			$(".grid").on('click', '#adminaddok', function() {
-				
+
 				var addfirstname = $('#addfirstname').text();
 				var addlastname = $('#addlastname').text();
 				var addemail = $('#addemail').text();
-				
+
 				$.ajax ({
 					url: 'adduser.php',
 					type: 'POST',
 					data : { addemail : addemail, addfirstname : addfirstname, addlastname : addlastname },
 					success: function() {
-						
+
 						$("#userbutt").removeClass('btoggle');
 						$("#adminadel").slideUp("fast");
 						$("#adminadel").val("0");
 						$(".admincho").hide();
-						
+
 						alert("Bruger tilføjet!");
-						
+
 						reloaduserlist()
 
 					}
 				});
-				
+
 			});
-			
-			
+
+
 			$(".grid").on('click', '#admindelok', function() {
-				
+
 				var delemail = $('#delemail').text();
-				
+
 				$.ajax ({
 					url: 'deluser.php',
 					type: 'POST',
 					data : { delemail : delemail },
 					success: function() {
-						
+
 						$("#userbutt").removeClass('btoggle');
 						$("#adminadel").slideUp("fast");
 						$("#adminadel").val("0");
 						$(".admincho").hide();
-						
+
 						alert("Bruger fjernet!");
-						
+
 						reloaduserlist()
 
 					}
 				});
-				
+
 			});
-			
-			
+
+
 			$(".grid").on('click', '#histobutt', function() {
 				if(!$(this).hasClass('btoggle')) {
 					$(this).addClass('btoggle');
@@ -693,9 +693,9 @@
 					$("#adminadel").slideUp("fast");
 					$("#adminadel").val("0");
 					$(".admincho").hide();
-					
+
 					var history = "set";
-				
+
 					$.ajax ({
 						url: 'admin.php',
 						type: 'POST',
@@ -705,18 +705,18 @@
 						}
 					});
 				} else {
-					
+
 					$(this).removeClass('btoggle');
 					reloadlist();
 				}
-				
+
 			});
-			
+
 
 		});
-		
+
 	</script>
-	
+
 </body>
 </html>
 

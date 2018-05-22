@@ -27,32 +27,6 @@ require_once "connection.php";
 		$search = $_POST['search'];
 	}
 
-	
-	$komp = mysqli_query($connection, "SELECT * FROM komponenter");
-	$kompassoc = mysqli_fetch_assoc($komp);
-
-	$category = $kompassoc['category'];
-	switch($category) {
-		case $category == "switch": $spect = "porte";
-				break;
-		case $category == "router": $spect = "hastighed";
-				break;
-		case $category == "sfp-modul": $spect = "type";
-				break;
-		case $category == "el-tavle": $spect = "type";
-				break;
-		case $category == "ram-blok": $spect = "type";
-				break;
-		case $category == "processor": $spect = "socket";
-				break;
-		case $category == "kabel": $spect = "type";
-				break;
-		case $category == "motherboard": $spect = "socket";
-				break;
-
-			default: $catspec = "";
-		}
-
 
 
 	if(isset($option)) {
@@ -83,7 +57,6 @@ require_once "connection.php";
 			$broken = $row['SUM(broken)'];
 
 			$category = $row['category'];
-			$brand = $row['brand'];
 
 			
 			switch($category) {

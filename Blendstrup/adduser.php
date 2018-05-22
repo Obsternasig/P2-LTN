@@ -44,8 +44,15 @@
 				if(!$results){
 					die("Cannot connect to the database" .mysqli_connect_error());
 				}
+			
+			$pinkode = $initials . $pin;
+			$subject = "Din pinkode til Lan Team Nord's lagersystem";
+			$txt = "Hej " . $firstname . " " . $lastname . "\n\nDin pinkode til Lan Team Nord\'s lagersystem lyder: " . $pinkode . "\n\nMed venlig hilsen,\nLan Team Nord";
+			$headers = 'From: webmaster@4ndy.dk' . "\r\n" . 'Reply-To: webmaster@4ndy.dk' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
 
-			} 
+				mail($email, $subject, $txt, $headers);
+			
+			}
 		}
 
 mysqli_close($connection);

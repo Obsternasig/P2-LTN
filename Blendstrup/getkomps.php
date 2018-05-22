@@ -57,10 +57,6 @@ require_once "connection.php";
 		
 			$komps = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE'" . $category . "' AND brand LIKE '" . $kompassoc['brand'] . "' AND " . $speci . " LIKE '" . $chospec . "' AND serialnb LIKE '%$searched%'");
 			
-		} elseif(isset($searched)&&!empty($searched)) {
-
-			$komps = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE'" . $category . "' AND brand LIKE '" . $kompassoc['brand'] . "' AND " . $speci . " LIKE '" . $chospec . "' OR category OR brand LIKE '%$searched%'");
-			
 		} else {
 			
 			$komps = mysqli_query($connection, "SELECT * FROM komponenter WHERE category LIKE'" . $category . "' AND brand LIKE '" . $kompassoc['brand'] . "' AND " . $speci . " LIKE '" . $chospec . "'");
