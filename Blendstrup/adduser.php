@@ -29,7 +29,7 @@
 			
 			$firstname = htmlentities($_POST['addfirstname']);
 			$lastname = htmlentities($_POST['addlastname']);
-			$email = htmlentities($_POST['addemail']);
+			$email = $_POST['addemail'];
 		
 			$pin = generatePIN(4);
 			$initials = initials($firstname, $lastname);
@@ -47,8 +47,8 @@
 			
 			$pinkode = $initials . $pin;
 			$subject = "Din pinkode til Lan Team Nord's lagersystem";
-			$txt = "Hej " . $firstname . " " . $lastname . "\n\nDin pinkode til Lan Team Nord\'s lagersystem lyder: " . $pinkode . "\n\nMed venlig hilsen,\nLan Team Nord";
-			$headers = 'From: webmaster@4ndy.dk' . "\r\n" . 'Reply-To: webmaster@4ndy.dk' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+			$txt = "Hej " . $firstname . " " . $lastname . "\n\nDin pinkode til Lan Team Nord's lagersystem lyder: " . $pinkode . "\n\nMed venlig hilsen,\nLan Team Nord";
+			$headers = 'From: webmaster@4ndy.dk' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
 
 				mail($email, $subject, $txt, $headers);
 			
